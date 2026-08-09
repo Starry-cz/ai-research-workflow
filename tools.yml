@@ -1,24 +1,28 @@
 # AI 科研工具库的机器可读目录。
 # README.md 面向人类阅读；本文件便于后续生成网页、筛选器或统计页面。
-version: 3
+version: 4
 last_verified: "2026-08-09"
 tools:
   - id: ars
     name: Academic Research Skills
     name_zh: 学术研究技能（ARS）
     stage: [选题, 调研, 写作, 审稿, 修改, 投稿]
+    level: [L1, L2, L3]
     type: github-skill
     url: https://github.com/Imbad0202/academic-research-skills
     summary: 覆盖 research、write、review、revise、finalize 的完整学术研究流程。
+    recommended_output: 按当前阶段选择一项技能，留下可核验的调研、写作、审查或投稿记录。
     caveat: 原项目主要面向 Claude Code，跨客户端使用前需核对兼容性。
 
   - id: supervisor-skills
     name: Supervisor-Skills
     name_zh: AI 科研副导师
     stage: [选题, 研究设计, 写作, 评估, 审稿, 投稿]
+    level: [L1, L2, L3]
     type: github-skill
     url: https://github.com/HKUSTDial/Supervisor-Skills
     summary: 将导师式科研经验整理为可调用的 AI 技能。
+    recommended_output: 形成研究简报、假设评估、风险清单或带证据位置的修改意见。
     caveat: 输出应结合领域知识、真实证据和导师意见复核。
 
   - id: learning-research
@@ -47,138 +51,168 @@ tools:
     name: CCF-Figure
     name_zh: CCF 科研配图技能
     stage: [作图]
+    level: [L2, L3]
     type: github-skill
     url: https://github.com/Deepshare-Official/CCF-Figure
     summary: 根据论文类型规划 AI / CS 论文的科研配图结构和提示词。
+    recommended_output: 形成变量关系明确、来源可追踪且保留可编辑源文件的论文图。
     caveat: 生成结果需要人工检查并建议使用矢量工具精修。
 
   - id: cosmos-paper
     name: CosmosPaper
     name_zh: CosmosPaper
     stage: [论文发现]
+    level: [L1, L2, L3]
     type: web
     url: https://www.cosmospapers.com/
     summary: 论文发现 / 论文知识入口。
+    recommended_output: 建立带原文链接、筛选理由和待核验项的小型候选论文集合。
     caveat: 功能和维护状态待使用者访问原站核验。
 
   - id: arxiv-insight
     name: Arxiv Insight
     name_zh: Arxiv Insight
     stage: [论文发现, 阅读]
+    level: [L1, L2, L3]
     type: web
     url: https://axsight.top/
     summary: 多 LLM 驱动的 arXiv 语义检索、翻译、热榜和推荐入口。
+    recommended_output: 保存查询、候选论文、正式版本核验结果和阅读优先级。
     caveat: 推荐功能可能需要登录。
 
   - id: cool-papers
     name: Cool Papers
     name_zh: Cool Papers
     stage: [论文发现, 会议检索]
+    level: [L1, L2, L3]
     type: web
     url: https://papers.cool/
     summary: 支持 arXiv 和 venue 搜索的 AI / CS 论文发现入口。
+    recommended_output: 形成按任务筛选并回到原文核验的会议或 arXiv 论文清单。
     caveat: 收录范围和数据完整性需与官方来源交叉验证。
 
   - id: ccfddl
     name: CCFDDL
     name_zh: CCF 会议截止日期导航
     stage: [投稿计划, 会议检索]
+    level: [L1, L2, L3]
     type: web
     url: https://ccfddl.com/
     summary: 提供会议 deadline、会议主页、论文集和相关入口导航。
+    recommended_output: 建立含官方 CFP、时区、截止时间和最后核验日期的投稿规则卡。
     caveat: 截止时间以目标会议官网 CFP 为准，站点数据仅供参考。
 
   - id: cv-paper-portal
     name: CV Paper Portal
     name_zh: 计算机视觉与 AI 顶会论文门户
     stage: [论文发现, 顶会检索]
+    level: [L1, L2, L3]
     type: github-and-web
     url: https://github.com/hongsong-wang/CV_Paper_Portal
     web_url: https://hongsong-wang.github.io/CV_Paper_Portal/
     summary: 按关键词检索计算机视觉、机器学习和 AI 顶会历年论文摘要。
+    recommended_output: 形成与当前视觉任务相关且已回到正式论文版本的候选表。
     caveat: 方向覆盖有限，使用时核验论文原始来源。
 
   - id: ai-arxiv-portal
     name: AI arXiv Paper Portal
     name_zh: AI arXiv 论文主题门户
     stage: [论文发现, 主题跟踪]
+    level: [L1, L2, L3]
     type: github-and-web
     url: https://github.com/hongsong-wang/AI_arXiv_Portal
     web_url: https://hongsong-wang.github.io/AI_arXiv_Portal/
     summary: 按主题聚合 AI、机器学习和计算机视觉方向的 arXiv 摘要。
+    recommended_output: 形成带主题、版本日期、原文与代码状态的近期论文跟踪表。
     caveat: 具体版本、作者和结论以 arXiv 原文为准。
 
   - id: paper-copilot
     name: Paper Copilot
     name_zh: Paper Copilot
     stage: [论文发现, 会议检索, 评审信息]
+    level: [L1, L2, L3]
     type: web
     url: https://papercopilot.com/
     summary: 提供 AI / ML 会议和期刊导航、论文检索及 OpenReview 相关评审信息。
+    recommended_output: 建立经会议官网或 OpenReview 交叉核验的论文与评审信息记录。
     caveat: 聚合数据可能不完整，录用状态和评审信息应回到官方来源核验。
 
   - id: ai-conferences-info
     name: AI Conferences Info
     name_zh: AI 顶会论文信息库
     stage: [论文发现, 数据检索]
+    level: [L1, L2, L3]
     type: github-and-web
     url: https://github.com/george-gca/ai_conferences_info
     web_url: https://georgegca.pythonanywhere.com/
     summary: 整理部分 AI 顶会和期刊的标题、摘要、作者与链接。
+    recommended_output: 形成按会议、年份和任务筛选，并回到原始页面核验的论文表。
     caveat: 会议和年份覆盖会变化，使用前查看仓库最新说明与许可证。
 
   - id: best-papers-top-venues
     name: Best Papers of Top Venues
     name_zh: 顶会最佳论文汇总
     stage: [经典论文, 样本文献]
+    level: [L1, L2, L3]
     type: github-list
     url: https://github.com/SarahRastegar/Best-Papers-Top-Venues
     summary: 汇总 CVPR、NeurIPS、ICLR、ICML、ICCV、ECCV、AAAI 等 venue 的获奖论文。
+    recommended_output: 选择与当前问题相关的获奖论文，完成阅读卡并说明为何可借鉴。
     caveat: 获奖不等于对当前课题直接适用，需结合问题和证据阅读。
 
   - id: arxiv
     name: arXiv
     name_zh: arXiv 预印本库
     stage: [论文发现, 原文获取, 版本跟踪]
+    level: [L1, L2, L3]
     type: web
     url: https://arxiv.org/
     summary: 获取计算机科学和其他学科预印本、论文版本与原文入口。
+    recommended_output: 保存 arXiv ID、版本日期、PDF 和正式发表版本之间的关系。
     caveat: 预印本不等同于同行评审后的最终版本，需记录版本日期。
 
   - id: google-scholar
     name: Google Scholar
     name_zh: Google 学术
     stage: [论文发现, 引用追踪, 作者检索]
+    level: [L1, L2, L3]
     type: web
     url: https://scholar.google.com/
     summary: 按标题、作者、关键词和引用关系发现学术文献。
+    recommended_output: 记录完整查询式、筛选结果、引用追踪路径和原文核验状态。
     caveat: 检索结果、全文可得性和版本信息需要回到正式出版页或原文核验。
 
   - id: dblp
     name: DBLP
     name_zh: DBLP 计算机书目库
     stage: [计算机论文检索, 作者检索, 会议检索]
+    level: [L1, L2, L3]
     type: web
     url: https://dblp.org/
     summary: 提供计算机科学论文、作者和会议书目信息。
+    recommended_output: 建立作者、论文、会议和正式书目版本的可核验主记录。
     caveat: 适合书目定位，不替代论文全文、录用状态和实验结论核验。
 
   - id: openreview
     name: OpenReview
     name_zh: OpenReview 评审平台
     stage: [投稿信息, 论文检索, 评审学习]
+    level: [L1, L2, L3]
     type: web
     url: https://openreview.net/
     summary: 查看部分会议的投稿、评审、回复和讨论信息。
+    recommended_output: 保存论文版本、公开评审、作者回复和最终决定的来源链接。
     caveat: 不同 venue 的公开范围和流程不同，页面信息不代表全部评审事实。
 
   - id: github
     name: GitHub
     name_zh: GitHub 代码与版本平台
     stage: [代码检索, 复现, 版本管理]
+    level: [L0, L1, L2, L3]
     type: web
     url: https://github.com/
     summary: 定位论文官方代码、issue、commit、release、环境文件和许可证。
+    recommended_output: 锁定作者仓库、commit、release、许可证和可重新运行的命令。
     caveat: README 不一定反映当前实现，复现时应锁定 commit 并记录环境。
 
   - id: git-lfs
@@ -207,45 +241,55 @@ tools:
     name: GitHub Copilot
     name_zh: GitHub Copilot
     stage: [代码阅读, 代码实现, 调试]
+    level: [L1, L2, L3]
     type: web-and-editor
     url: https://github.com/features/copilot
     summary: 在编辑器中辅助代码补全、解释、重构和 Agent 式开发。
+    recommended_output: 保存 AI 建议、实际代码 diff、测试结果和未采纳理由。
     caveat: 生成代码必须经过测试、代码审查和许可证检查，不能替代研究者理解。
 
   - id: google-ai-studio
     name: Google AI Studio
     name_zh: Google AI Studio
     stage: [文献解释, 提示词实验, 多模态草图]
+    level: [L1, L2, L3]
     type: web
     url: https://aistudio.google.com/
     summary: 用于比较模型输出、测试提示词和辅助多模态研究任务。
+    recommended_output: 保存模型版本、提示词、参数、输入样本、输出和人工核验结果。
     caveat: 模型能力、额度、数据保留与服务条款会变化，敏感材料不要直接上传。
 
   - id: papers-with-code
     name: Papers with Code
     name_zh: 论文—代码—基准关联入口
     stage: [基线检索, 数据集检索, 复现]
+    level: [L1, L2, L3]
     type: web
     url: https://paperswithcode.com/
     summary: 按任务、数据集和指标定位相关论文与开源实现。
+    recommended_output: 形成任务、数据、指标、论文与官方代码之间的候选映射。
     caveat: 指标可比性取决于数据划分、评测协议和代码版本，不能只比较榜单数字。
 
   - id: huggingface-datasets
     name: Hugging Face Datasets
     name_zh: Hugging Face 数据集平台
     stage: [数据集检索, 数据准备, 复现]
+    level: [L1, L2, L3]
     type: web
     url: https://huggingface.co/datasets
     summary: 发现、查看和使用公开数据集及其数据卡。
+    recommended_output: 建立数据卡，记录来源、许可证、revision、schema、划分与风险。
     caveat: 使用前核对许可证、版本、来源、预处理和隐私限制。
 
   - id: kaggle
     name: Kaggle Datasets
     name_zh: Kaggle 数据集
     stage: [数据集检索, 原型验证, 竞赛数据]
+    level: [L1, L2]
     type: web
     url: https://www.kaggle.com/datasets
     summary: 发现公开数据集并用于快速原型和基线验证。
+    recommended_output: 完成数据来源和许可证核验，并留下一个可运行的原型与数据卡。
     caveat: 下载前核对数据来源、许可证、版本、标签质量和使用限制。
 
   - id: zotero
@@ -422,97 +466,119 @@ tools:
     name: Generative AI for Beginners
     name_zh: 生成式 AI 入门课程
     stage: [基础学习, LLM 应用, RAG, Agent, 评估]
+    level: [L1, L2]
     type: github-course
     url: https://github.com/microsoft/generative-ai-for-beginners
     summary: 以课程和代码示例覆盖生成式 AI、Prompt、RAG、Agent、微调、生命周期和负责任 AI。
+    recommended_output: 完成一课对应的可运行示例，并记录模型、数据、成本和安全边界。
     caveat: 课程示例面向入门和应用开发，科研结论仍需阅读论文和完成独立实验。
 
   - id: llms-from-scratch
     name: LLMs from Scratch
     name_zh: 从零实现大语言模型
     stage: [基础学习, 模型理解, 预训练, 微调]
+    level: [L1, L2, L3]
     type: github-course
     url: https://github.com/rasbt/LLMs-from-scratch
     summary: 逐步实现文本处理、注意力机制、GPT、预训练和微调流程。
+    recommended_output: 实现并解释一个从 tokenizer、注意力到训练或微调的最小模块。
     caveat: 适合机制学习和小规模实验，不代表大规模训练的完整工程方案。
 
   - id: llm-course
     name: LLM Course
     name_zh: LLM 学习路线
     stage: [基础学习, LLM 研究, LLM 工程]
+    level: [L1, L2, L3]
     type: github-course
     url: https://github.com/mlabonne/llm-course
     summary: 按基础、LLM Scientist 和 LLM Engineer 组织学习路线与 Colab 实验。
+    recommended_output: 按当前目标完成一条路线中的实验，并留下配置、日志与评估。
     caveat: 内容和外部链接会更新，学习路线需要结合目标方向重新取舍。
 
   - id: prompt-engineering-guide
     name: Prompt Engineering Guide
     name_zh: Prompt 工程指南
     stage: [LLM 应用, Prompt, RAG, Agent, 评估]
+    level: [L1, L2, L3]
     type: github-guide
     url: https://github.com/dair-ai/Prompt-Engineering-Guide
     summary: 汇总 Prompt、Context Engineering、RAG、Agent、论文、课程和工具资料。
+    recommended_output: 建立版本化 prompt、测试集、指标和失败案例，而不是只保存技巧列表。
     caveat: 方法需要在具体模型、数据和任务上重新评估，不能把经验性技巧当作普适定律。
 
   - id: openai-cookbook
     name: OpenAI Cookbook
     name_zh: OpenAI 应用案例库
     stage: [LLM 应用, 检索, 结构化输出, 评估]
+    level: [L1, L2, L3]
     type: github-examples
     url: https://github.com/openai/openai-cookbook
     summary: 提供 API、检索、结构化输出、评估和应用开发示例。
+    recommended_output: 运行一个与当前任务对应的最小示例，并改写为可测试、可替换模块。
     caveat: 示例依赖具体 API 和服务配置，使用前核对当前文档、价格和数据处理条款。
 
   - id: annotated-deep-learning-paper-implementations
     name: Annotated Deep Learning Paper Implementations
     name_zh: 带注释的深度学习论文实现
     stage: [论文阅读, 代码复现, 模型理解]
+    level: [L2, L3]
     type: github-implementations
     url: https://github.com/labmlai/annotated_deep_learning_paper_implementations
     summary: 提供带并排解释的深度学习论文实现，覆盖 Transformer、扩散模型、优化器和强化学习等主题。
+    recommended_output: 完成一张论文公式、PyTorch 代码、shape 和实验设置的映射表。
     caveat: 实现用于学习和理解，复现论文结果时仍需对照原始论文和官方代码。
 
   - id: ai-agents-for-beginners
     name: AI Agents for Beginners
     name_zh: AI Agent 入门课程
     stage: [Agent, 工具调用, RAG, 多 Agent, Agent 评估]
+    level: [L1, L2, L3]
     type: github-course
     url: https://github.com/microsoft/ai-agents-for-beginners
     summary: 通过课程和代码讲解 Agent 设计模式、工具调用、规划、RAG、记忆、评估与安全。
+    recommended_output: 实现一个工具边界明确的 Agent 小任务，并记录轨迹、成本、失败和安全检查。
     caveat: 部分示例依赖特定云服务和框架，迁移到科研代码库前需要重构和审计。
 
   - id: nanochat
     name: nanochat
     name_zh: 简洁 LLM 实验框架
     stage: [LLM 训练, 微调, 评估, 推理]
+    level: [L2, L3]
     type: github-experiment
     url: https://github.com/karpathy/nanochat
     summary: 以简洁、可修改的代码覆盖 LLM 的分词、预训练、微调、评估、推理和交互流程。
+    recommended_output: 完成一次小规模训练或评估实验，保存数据、配置、日志、资源和结果。
     caveat: 适合学习和小规模实验，不应直接视为生产级训练基础设施。
 
   - id: tuning-playbook
     name: Deep Learning Tuning Playbook
     name_zh: 深度学习调参方法手册
     stage: [实验设计, 超参数搜索, 实验追踪]
+    level: [L2, L3]
     type: github-methodology
     url: https://github.com/google-research/tuning_playbook
     summary: 讨论增量调参、实验目标、超参数分类、训练曲线、资源预算和实验追踪。
+    recommended_output: 建立科学变量、干扰变量、固定变量、调参预算和实验决策记录。
     caveat: 主要面向已有可运行训练管线的监督学习任务，需要根据任务类型调整。
 
   - id: datawhale-llm-cookbook
     name: Datawhale LLM Cookbook
     name_zh: Datawhale 大模型手册
     stage: [中文学习, Prompt, RAG, 微调]
+    level: [L1, L2]
     type: github-course
     url: https://github.com/datawhalechina/llm-cookbook
     summary: 面向中文学习者整理 LLM 入门、Prompt、RAG 和微调实践。
+    recommended_output: 完成一个中文 LLM 实践，并记录来源、配置、评估和适用边界。
     caveat: 属于课程和实践资料，关键技术判断应回到原始论文和官方文档。
 
   - id: openai-evals
     name: OpenAI Evals
     name_zh: LLM 评估框架
     stage: [LLM 评估, Agent 评估, 基准构建]
+    level: [L2, L3]
     type: github-framework
     url: https://github.com/openai/evals
     summary: 提供 LLM 与 LLM 系统的评估框架和基准注册表。
+    recommended_output: 建立任务特定的测试集、评分规则、基线、运行配置和误差分类。
     caveat: 评估数据和逻辑必须具备合法使用权，指标设计不能脱离实际任务目标。

@@ -144,7 +144,18 @@ def validate_tools_catalog() -> int:
     if current is not None:
         entries.append(current)
 
-    require_fields = {"id", "name", "name_zh", "stage", "type", "url", "summary", "caveat"}
+    require_fields = {
+        "id",
+        "name",
+        "name_zh",
+        "stage",
+        "level",
+        "type",
+        "url",
+        "summary",
+        "recommended_output",
+        "caveat",
+    }
     ids: set[str] = set()
     urls: set[str] = set()
     for entry in entries:
@@ -157,6 +168,9 @@ def validate_tools_catalog() -> int:
             raise ValidationError(f"tools.yml 出现重复 url：{entry['url']}")
         if not entry["url"].startswith("https://"):
             raise ValidationError(f"tools.yml 条目 {entry['id']} 的 url 不是 HTTPS")
+        levels = re.findall(r"L[0-3]", entry["level"])
+        if not levels or entry["level"] != f"[{', '.join(levels)}]":
+            raise ValidationError(f"tools.yml 条目 {entry['id']} 的 level 格式无效")
         ids.add(entry["id"])
         urls.add(entry["url"])
     if not entries:
