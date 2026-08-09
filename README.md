@@ -65,7 +65,7 @@
 不需要从头读完整份 README。先选择最接近自己的状态：
 
 - **L0：不会终端、Git 或 Python 环境** → 先做[零基础准备检查表](templates/00-readiness-checklist.md)，按[L0 工具链最小起步指南](docs/L0_TOOLCHAIN_START.md)留下环境记录和第一次 commit，再完成[第一次工作流演练](examples/first-workflow-drill/README.md)和里程碑 M1–M3；
-- **L1：能运行 Notebook，但没有复现过论文** → 先完成[第一个机器学习闭环](docs/ML_FIRST_LOOP.md)和[第一次工作流演练](examples/first-workflow-drill/README.md)，再建立[研究简报](templates/01-research-brief.md)和[文献检索账本](templates/07-literature-search-log.md)，从[首篇 baseline 筛选表](docs/CORE_RESEARCH_WORKFLOW.md#首篇-baseline-筛选表)进入第 4–6 周；
+- **L1：能运行 Notebook，但没有复现过论文** → 先完成[第一个机器学习闭环](docs/ML_FIRST_LOOP.md)和[第一次工作流演练](examples/first-workflow-drill/README.md)，再按[方向选择决策树](docs/DIRECTION_FIRST_CHOICE.md)建立[研究简报](templates/01-research-brief.md)和[文献检索账本](templates/07-literature-search-log.md)，从[首篇 baseline 筛选表](docs/CORE_RESEARCH_WORKFLOW.md#首篇-baseline-筛选表)进入 M4–M6；
 - **L2：已经跑通代码，但实验不可解释或不可复现** → 直接使用[复现规划](templates/03-reproduction-plan.md)与[实验卡](templates/04-experiment-card.md)，重点执行质量门控、单变量实验和失败分析；
 - **正在投稿、回复评审或转投** → 使用[投稿、评审与版本归档卡](templates/09-submission-review-archive.md)，先核验当前 venue 规则并冻结实际送审版本。
 
@@ -204,7 +204,7 @@ research-project/
 | **M1 工具与环境**<br>终端、Git、Python 环境、Jupyter | **产物**：环境文件、运行日志、第一次 commit。<br>**完成**：能独立重建环境并运行脚本。 |
 | **M2 数据与机器学习**<br>Python 数据处理与机器学习基本概念 | **产物**：小数据集训练与评价 Notebook。<br>**完成**：能解释数据划分、loss 和指标。 |
 | **M3 深度学习基础**<br>PyTorch、张量、梯度与训练循环 | **产物**：一个可过拟合小样本的模型。<br>**完成**：能解释输入输出 shape 和梯度来源。 |
-| **M4 方向与 baseline**<br>扫描方向并筛选代表论文 | **产物**：研究简报、候选论文表、资源预算。<br>**完成**：选出一篇适合复现的 baseline。 |
+| **M4 方向与 baseline**<br>按[方向选择决策树](docs/DIRECTION_FIRST_CHOICE.md)扫描候选并筛选论文 | **产物**：任务句、非目标、研究简报、候选表和资源预算。<br>**完成**：选出一篇适合复现的 baseline，并保留备选。 |
 | **M5 论文与代码**<br>精读论文并阅读官方代码 | **产物**：阅读卡、模块映射、风险登记表。<br>**完成**：能画出数据流并定位代码入口。 |
 | **M6 复现与评测**<br>预训练评测、单批次测试、完整复现 | **产物**：复现日志、配置、指标差异表。<br>**完成**：baseline 达到预设容差或差异可解释。 |
 | **M7 改进与失败分析**<br>失败案例与单变量改进 | **产物**：假设卡、实验矩阵、消融结果。<br>**完成**：改动的效果能被独立检验。 |
@@ -379,7 +379,7 @@ research-project/
 | **学深度学习与 PyTorch** | [动手学深度学习](https://github.com/d2l-ai/d2l-zh) / [PyTorch Deep Learning](https://github.com/mrdbourke/pytorch-deep-learning)<br>可修改的训练循环和小项目。 |
 | **从零理解神经网络** | [Neural Networks: Zero to Hero](https://github.com/karpathy/nn-zero-to-hero)<br>手写反向传播、MLP 或小型语言模型。 |
 | **按当前任务补数学** | [按任务触发的数学补课指南](docs/MATH_ON_DEMAND.md) / [Mathematics for Machine Learning](https://github.com/mml-book/mml-book.github.io) / [Pumpkin Book](https://github.com/datawhalechina/pumpkin-book)<br>一张含符号、shape、假设、玩具数值与代码位置的数学概念卡。 |
-| **确定研究问题** | [Supervisor-Skills](https://github.com/HKUSTDial/Supervisor-Skills)<br>研究简报、假设、风险与资源约束。 |
+| **选择方向与研究问题** | [方向选择决策树](docs/DIRECTION_FIRST_CHOICE.md) / [Supervisor-Skills](https://github.com/HKUSTDial/Supervisor-Skills)<br>任务句、非目标、候选比较、研究简报、假设、风险与资源约束。 |
 | **规划科研成长与项目训练** | [Learning Research](https://github.com/pengsida/learning_research)<br>把广度学习、深度复现、独立项目和每周交流组织成个人路线。 |
 | **组织完整科研流程** | [Academic Research Skills](https://github.com/Imbad0202/academic-research-skills)<br>调研、写作、审稿和投稿清单。 |
 | **参考阶段化科研编排** | [AutoResearchClaw](https://github.com/aiming-lab/AutoResearchClaw)<br>学习阶段产物、人工门控、预算约束、证据核验和版本化归档；新手应优先理解流程，不把自动输出视为已验证研究。 |
