@@ -43,8 +43,10 @@
 - `scripts/validate_repository.py`：通过，检查 77 个 Markdown 文件；相对链接、锚点、代码块、README 约束、两类索引和 51 个工具条目均通过；
 - 完整教学演练：通过，debug、baseline、candidate 三组计划运行全部完成，`verify.py` 确认正式比较只改变 `learning_rate`；
 - `git diff --check`：通过；仅出现 Windows 工作区的 LF / CRLF 转换提示，没有空白错误；
-- Git 提交、远端推送与 GitHub Actions：等待完成后回填。
+- 实现提交：`ed89004`（`docs: add reusable research knowledge workflow`），已推送到 `main`；
+- [Repository quality](https://github.com/Starry-cz/ai-research-workflow/actions/runs/31314669088)：通过；
+- [First workflow drill](https://github.com/Starry-cz/ai-research-workflow/actions/runs/31314669089)：通过。
 
 ## 状态
 
-实现与本地验证完成，等待远端 CI。
+已完成。

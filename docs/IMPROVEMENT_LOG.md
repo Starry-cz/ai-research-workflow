@@ -756,7 +756,7 @@
   - [FAIR Principles](https://www.gofair.foundation/fair-principles)强调持久标识、丰富元数据、可检索索引、合格引用和来源信息；本仓库借鉴可查找与 provenance 原则，但一个 Markdown 索引不等于达到 FAIR 合规或长期保存认证。
 - **适用边界**：知识条目是原证据的检索入口和带范围的解释，不是第二份实验事实、自动 SOP 或论文结论。一次临时报错如果不会跨运行复用，可以只留在调试卡；涉及个人信息、受限数据、安全缺陷、商业秘密或匿名审稿时，只记录允许公开的元数据和受控入口。旧条目被替代时保留状态链，不静默改写历史。AI 可以建议标题、标签和候选相似项，但不得在未核对身份、证据与权限时自动合并或推广经验。
 - **采取行动**：新增[从实验记录到可检索研究知识](RESEARCH_KNOWLEDGE_CAPTURE.md)、[教学知识索引](../examples/first-workflow-drill/knowledge-index.md)、[已填写知识条目](../examples/first-workflow-drill/knowledge-entry.md)和[带日期审计](../reports/RESEARCH_KNOWLEDGE_AUDIT_2026-08-09.md)；定义六类条目、五种状态、五项复用检查、五种复用决定和写回机制。以仓库中真实的非空输出目录 `FileExistsError` 为例，将防覆盖行为提炼为带适用范围的诊断知识，并把提炼触发器、原证据链接、状态与替代关系接入实验卡、周复盘、项目结构、接管流程、核心工作流、README 与索引；没有重复需要时不新增空白模板或强制专用平台。
-- **状态**：实现与本地回归完成，等待远端 CI。
+- **状态**：已完成；实现提交 `ed89004` 的 Repository quality 与 First workflow drill 均通过。
 
 ## 下一轮优先审计
 
