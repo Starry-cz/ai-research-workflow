@@ -10,6 +10,7 @@
 - 预计 GPU、时间与费用：
 - 本地 / 实验室服务器 / 云端选择及理由：
 - 算力与迁移清单：[08-compute-data-environment-checklist.md](08-compute-data-environment-checklist.md)
+- 数据集卡：[13-dataset-card.md](13-dataset-card.md)
 
 ## 2. 模块级映射
 
@@ -30,6 +31,7 @@
 - 下载命令、版本与校验值：
 - `DATA_ROOT` / `CACHE_ROOT` / `OUTPUT_ROOT`：
 - 训练 / 验证 / 测试划分：
+- 划分单位与防泄漏检查：
 - 预处理与增强：
 - 颜色空间、归一化和尺寸：
 - 主指标与实现：

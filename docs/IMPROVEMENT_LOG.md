@@ -252,7 +252,24 @@
 - **采取行动**：新增 `docs/MATH_ON_DEMAND.md`，建立“阻塞—定位—符号与 shape—假设—玩具数值—代码核对—返回任务”的闭环，并区分可暂缓内容与不能跳过的场景；新增 `12-math-concept-card.md`，把公式位置、变量、数据流、假设、边界、数值例子、代码 commit 和验收写入同一张卡；同步更新 README 的最低产物、论文阅读、工具导航、模板索引、项目结构和准备检查表。
 - **状态**：已完成。
 
+## 2026-08-09：数据准入、版本与泄漏审计
+
+### I-018：数据记录分散，无法证明使用权、具体版本和测试独立性
+
+- **当前问题**：README 和复现模板会记录数据来源、许可证、版本与划分，但缺少一张贯穿下载、内容、处理和评价的数据卡。读者仍可能把“文件能下载”理解为“允许训练和上传”，使用同名但不同版本的数据，逐行随机切分同一主体的相关样本，先对全量数据做插补或特征选择，再用测试集反复选择方案。现有 `data/README.md` 一行说明无法让协作者重建数据，也不能证明测试指标来自真正未见数据。
+- **经验对照**：
+  - [跑 baseline 常见的坑](https://www.xiaohongshu.com/explore/6925b658000000001d03acfb)和[研 0 第一次复现实验问题实录](https://www.xiaohongshu.com/explore/6a4f6056000000001603ed70)把数据目录、预处理、训练 / 测试入口混入同一类“代码跑不起来”问题，说明新手常在环境排错时忽略数据协议；这些笔记访问可能需要登录，本仓库只用其确认真实困惑，不据此制定数据规范；
+  - 知乎的[训练 / 验证 / 测试集划分](https://www.zhihu.com/tardis/bd/art/486396145)给出多个固定比例，并建议结果差异较大时重新划分；关于[缺失值处理](https://www.zhihu.com/question/268540071)的讨论甚至把训练集和测试集共同拟合变换描述为某些条件下近似可用。这些观点表明固定比例、重划分和预处理泄漏的误解真实存在，但它们不能作为执行依据，本仓库用官方文档明确更保守的评价边界。
+- **规范与项目对照**：
+  - [Datasheets for Datasets](https://arxiv.org/abs/1803.09010)要求从动机、组成、收集、处理、用途、分发和维护记录数据生命周期，避免数据使用者只看到文件而看不到形成背景；
+  - [Hugging Face Dataset Card Guide](https://github.com/huggingface/datasets/blob/main/templates/README_guide.md)覆盖结构、字段、split、来源、标注、个人敏感信息、偏差、限制、许可证和引用，并允许对未知项明确写待补信息；
+  - [scikit-learn Common Pitfalls](https://scikit-learn.org/stable/common_pitfalls.html)要求先划分数据，只在训练集上拟合预处理和特征选择；[grouped cross-validation](https://scikit-learn.org/stable/modules/cross_validation.html#cross-validation-iterators-for-grouped-data)要求同一主体或 group 不跨训练与评价集合；[TimeSeriesSplit](https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.TimeSeriesSplit.html)避免用未来数据训练后评价过去；
+  - [NeurIPS Paper Checklist](https://neurips.cc/public/guides/PaperChecklist)要求说明外部资产版本、许可证和条款，并在涉及人的数据时讨论同意、可识别信息和风险。
+- **适用边界**：本仓库提供的是通用最低审计，不能替代医疗、教育、生物、金融、未成年人或机构内部数据的伦理、法律和安全流程。校验值只证明文件身份，不证明数据正确、合法、无偏或无泄漏；随机划分、group 划分和时间划分都不是普遍最优，必须与真实泛化目标对应。引用上游数据卡时应区分“上游声明”和“本地已验证”。
+- **采取行动**：新增 `docs/DATASET_FIRST_AUDIT.md`，建立 D0–D4 数据准入门，说明数据身份、样本单位、group / 时间划分、重复与处理泄漏、质量报告、原始与处理数据分离以及特殊数据追加规则；新增 `13-dataset-card.md`，统一记录来源与权利、revision、manifest、schema、采样、标注、split、质量、泄漏、处理版本链和准入决定；为仓库内合成演练新增真实填写的数据卡和本地核验统计；同步更新 README 的复现流程、工具导航、模板索引、项目结构、误区、准备检查表、研究简报与复现规划。
+- **状态**：已完成。
+
 ## 下一轮优先审计
 
 - 等待作者确认许可证、引用署名和首个版本号，再完成 `LICENSE`、`CITATION.cff` 与首个 GitHub Release。
-- 审计数据集来源、许可证、采样、划分、去重、泄漏、缺失值、个人信息和版本记录，避免仅用 `data/README.md` 一行说明代替可复核的数据证据。
+- 审计“指标选了就开始跑”的问题：明确任务单位、主指标、实现版本、方向、聚合、阈值、置信区间、统计单位、人工评价和最低可检测效应，避免只追一个平均分。

@@ -502,6 +502,32 @@ Git 管理：代码、配置、环境说明、数据清单、运行命令和结�
 
 “冒烟测试”只回答代码链路能否运行，不等于复现论文结果。数据很大时可以先用一个 batch 或小子集验证下载、目录、预处理和训练入口，但正式复现必须回到完整协议。
 
+#### 数据进入 baseline 前先过准入门
+
+不要把“文件已经下载”和“数据可以用于当前研究”视为同一件事。使用[零基础数据集审计指南](docs/DATASET_FIRST_AUDIT.md)和[数据集卡](templates/13-dataset-card.md)，按顺序固定：
+
+```text
+官方来源与使用权
+  → 版本、日期、文件清单与校验值
+  → 样本单位、字段、标签和质量统计
+  → 按真实泛化目标确定划分单位
+  → 检查重复、群组、时间与预处理泄漏
+  → 冻结划分和处理脚本
+  → 决定 PROCEED / REFINE / STOP
+```
+
+| 门控 | 最低通过条件 |
+| --- | --- |
+| **D0 来源与权利** | 能定位原始发布者、许可证或使用条款、访问限制、引用方式和再分发边界；公开可下载不等于可以任意训练、上传或再发布。 |
+| **D1 身份与内容** | 记录版本或 revision、获取日期、文件清单、校验值、样本定义、字段、标签、规模和已知缺陷。 |
+| **D2 划分与泄漏** | 根据真实泛化目标选择样本、主体、场景或时间作为划分单位；检查跨 split 的精确重复、近重复和派生样本。 |
+| **D3 处理与冻结** | 原始数据保持只读；处理由脚本和配置生成；只在训练集上拟合归一化、插补、词表、特征选择和其他有状态变换。 |
+| **D4 隐私与风险** | 个人、敏感、受限或未公开数据已经获得必要授权，并且不会进入 Git、公开日志、第三方 AI 服务或无权限存储。 |
+
+不存在适用于所有项目的 `8:1:1` 或 `7:2:1`。同一受试者的多条记录不能因随机逐行切分进入不同集合；时间任务不能用未来样本帮助过去；测试集不能用于选择特征、阈值、超参数、checkpoint 或数据处理方案。授权、来源或泄漏状态无法确认时标记 `REFINE`；确认无权使用、无法隔离测试证据或含不可处理敏感信息时标记 `STOP`。
+
+**数据验收**：另一位协作者能够根据数据卡取得同一版本、核对校验值、重建划分和处理结果，并解释当前测试集代表哪一种未见数据。
+
 #### 关卡 A：环境与官方结果
 
 ```text
@@ -864,6 +890,7 @@ P2：表达、排版、补充解释和其他局部问题
 | **管理文献与重复版本** | [Zotero](https://www.zotero.org/) / [重复项说明](https://www.zotero.org/support/duplicate_detection)<br>主记录、来源标签、版本链、阅读状态和可核验元数据。 |
 | **查截止时间** | [CCFDDL](https://ccfddl.com/)<br>带时区的时间表，最终以官网为准。 |
 | **查代码与数据** | [GitHub](https://github.com/) / [Papers with Code](https://paperswithcode.com/)<br>官方仓库、commit、数据版本和评测协议。 |
+| **审计数据集** | [零基础数据集审计指南](docs/DATASET_FIRST_AUDIT.md) / [Hugging Face Dataset Cards](https://github.com/huggingface/datasets/blob/main/templates/README_guide.md)<br>来源、许可证、revision、schema、划分、泄漏、隐私与可重建证据。 |
 | **管理大文件与数据版本** | [Git LFS](https://git-lfs.com/) / [DVC](https://github.com/iterative/dvc)<br>大文件指针、数据版本与外部存储位置；首个小实验只需先用 `.gitignore`、数据清单和校验值，规模增长后再引入。 |
 | **分层搜索与阅读论文** | [How to Search and Read a Paper](https://github.com/qiyuangong/How_to_Search_and_Read_a_Paper)<br>为检索结果分层，只对核心论文完成精读、讨论和可复用笔记。 |
 | **学论文到代码映射** | [Annotated Deep Learning](https://github.com/labmlai/annotated_deep_learning_paper_implementations)<br>公式—代码—shape 对照表。 |
@@ -947,6 +974,7 @@ Missing Semester 的终端与 Git
 | [调试与求助卡](templates/10-debug-help-request.md) | 把环境、命令、报错和最小复现整理成可回答的问题 |
 | [首篇真实 baseline 准入卡](templates/11-first-baseline-gate.md) | 比较两到三个候选，完成资料、数据、命令、算力与最小链路预检，并保留退出和备选路径 |
 | [数学概念卡](templates/12-math-concept-card.md) | 围绕当前阻塞公式完成符号、shape、假设、数值与代码验收 |
+| [数据集卡](templates/13-dataset-card.md) | 固定数据来源、使用权、版本、内容、划分、泄漏和处理证据 |
 
 第一次不知道如何填写时，先看[第一次可审计实验演练](examples/first-workflow-drill/README.md)。示例中的数值来自仓库内脚本和配置，只用于说明记录方法，不是论文结果。
 
@@ -966,7 +994,8 @@ research-project/
 │   ├── reading_cards/         # 结构化阅读卡
 │   └── math_cards/            # 被任务触发的数学概念卡
 ├── data/
-│   ├── README.md              # 来源、许可证、版本和划分
+│   ├── README.md              # 数据集卡：来源、使用权、版本、内容、划分与风险
+│   ├── manifests/             # 文件清单、校验值与 split ID
 │   ├── raw/                   # 原始数据，通常不提交 Git
 │   └── processed/             # 处理后数据，通常不提交 Git
 ├── src/
@@ -1001,7 +1030,8 @@ research-project/
 | 误区 | 更可靠的做法 |
 | --- | --- |
 | 先收藏几十个课程 | 每次只选一个主资源，并留下可运行产物 |
-| 数学没学完就不能科研 | 围绕当前论文按需补数学，再用代码验证 |
+| 数学没学完就不能科研 | 围绕当前任务按需补数学，再用数值和代码核对 |
+| 数据能下载就能直接使用 | 先核对发布者、许可证、版本、隐私、划分和再分发边界 |
 | 代码跑起来就是复现成功 | 区分官方评测、单批次测试、完整训练和结果容差 |
 | 越新的论文越适合当 baseline | 首个 baseline 更看重代码、训练、评测、算力和可理解性 |
 | 看不懂就让 AI 全部解释 | 先形成自己的问题清单，再核对原文、公式和代码 |
