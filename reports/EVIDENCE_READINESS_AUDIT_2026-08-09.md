@@ -42,8 +42,9 @@ V0–V4 是本仓库的入门分流，不是期刊、会议、机构或统计学
 - 教学演练验收通过：debug、baseline 与 candidate 三组冻结产物完整，全部计划运行完成，正式比较只改变 `learning_rate`；baseline 与 candidate 测试 accuracy 均值分别重算为 `0.840000` 与 `0.966667`；
 - 仓库质量检查通过：共检查 70 个 Markdown 文件，相对链接、锚点、代码块、README 排版约束、两类索引与 51 个工具条目均通过；
 - 术语一致性检查完成：验证成熟度统一使用 V0–V4，避免与产物生命周期的 `E2_EVIDENCE` 混淆；共享权限统一使用 S0–S3，六种用途状态在指南、模板和示例中一致；
-- `git diff --check` 通过；远端提交与 GitHub Actions 状态将在推送后回填。
+- `git diff --check` 通过；提交 `71ea5f5` 已推送至远端 `main`；
+- [Repository quality](https://github.com/Starry-cz/ai-research-workflow/actions/runs/31313362508)与[First workflow drill](https://github.com/Starry-cz/ai-research-workflow/actions/runs/31313362465)均通过。
 
 ## 状态
 
-文档实现与本地验证已完成，等待远端验证。
+已完成：问题对照、指南、模板、教学示例、本地回归与远端 GitHub Actions 均已验证。

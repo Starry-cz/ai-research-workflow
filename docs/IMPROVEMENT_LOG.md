@@ -714,7 +714,7 @@
   - [ACM Artifact Evaluation 示例](https://sigsim.acm.org/conf/pads/2024/blog/artifact-evaluation/)区分 artifact 可得、功能 / 可复用与结果被复现；[JMLR NeurIPS 可复现性报告](https://www.jmlr.org/papers/v22/20-303.html)指出选择性报告、适应性过拟合和过度主张风险。
 - **适用边界**：V0–V4 和 S0–S3 是本仓库的入门分流，不是跨学科认证或论文评分；机构、作者团队、数据条款和 venue 规则优先。V4 不保证录用或独立复现，S3 不授予复用权，高证据也可能因隐私、匿名或合同保持 S0。理论、定性、临床和安全关键研究仍需领域规范。
 - **采取行动**：新增[实验结果证据等级与表达边界](EVIDENCE_READINESS_AND_SHARING.md)、[已填写教学示例](../examples/first-workflow-drill/evidence-readiness.md)和[带日期审计](../reports/EVIDENCE_READINESS_AUDIT_2026-08-09.md)；定义 V0–V4、S0–S3、六种用途状态及升级 / 降级规则；升级结果—主张审计、周会、真实项目接入、核心流程、首页与索引。教学示例被判为 V2 + S3 + `SHAREABLE_ARTIFACT_ONLY`，明确公开可见且可重算仍不构成真实方法主张。
-- **状态**：实现与本地验证完成，等待远端验证。
+- **状态**：已完成。
 
 ## 下一轮优先审计
 
