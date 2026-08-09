@@ -1,0 +1,81 @@
+name: 文档、路线或模板问题
+description: 反馈失效链接、表述错误、步骤不清或可执行性问题
+title: "[文档] "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        感谢反馈。请只提交本仓库内容问题；第三方代码报错请先阅读 SUPPORT.md，并向对应上游项目求助。
+
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: 提交前检查
+      options:
+        - label: 我已搜索现有 Issue，没有找到相同问题。
+          required: true
+        - label: 我已阅读 SUPPORT.md，并确认问题属于本仓库范围。
+          required: true
+        - label: 内容中不包含密钥、个人信息、受限数据或匿名审稿材料。
+          required: true
+
+  - type: dropdown
+    id: category
+    attributes:
+      label: 问题类型
+      options:
+        - 失效或错误链接
+        - 表述或事实错误
+        - 步骤不清或难以执行
+        - 模板字段缺失
+        - 资源或流程改进建议
+    validations:
+      required: true
+
+  - type: dropdown
+    id: level
+    attributes:
+      label: 当前阶段
+      options:
+        - L0：工具零基础
+        - L1：AI 基础入门
+        - L2：论文复现入门
+        - L3：研究实践入门
+        - 投稿、评审或归档阶段
+        - 不确定
+    validations:
+      required: true
+
+  - type: textarea
+    id: location
+    attributes:
+      label: 问题位置
+      description: 请提供文件、章节、模板字段或链接。
+      placeholder: 例如：README.md 的“代码复现”章节，或 templates/03-reproduction-plan.md。
+    validations:
+      required: true
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: 当前问题
+      description: 说明你实际看到什么、在哪一步卡住，以及为什么现有内容不足。
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: 预期改进
+      description: 说明修改后新手应能完成什么可验证动作或产物。
+    validations:
+      required: true
+
+  - type: textarea
+    id: evidence
+    attributes:
+      label: 对照依据
+      description: 优先提供官方文档、原始仓库、正式规则或可访问的经验材料链接，并说明适用边界。
+      placeholder: 每行一个链接，并简要说明它支持什么。
+    validations:
+      required: true

@@ -139,6 +139,20 @@
 - **采取行动**：在首次使用章节顶部新增“30 秒选择入口”，分别为 L0、L1、L2 和投稿阶段提供直达模板、章节与周次；明确无法判断时从检查表开始，已掌握内容可以跳过但必须提供对应产物；在贡献指南中加入一分钟找到起点的首屏验收规则。
 - **状态**：已完成。
 
+## 2026-08-09：调试与求助路径审计
+
+### I-011：复现流程记录了报错，但缺少最小复现、求助路由和仓库 Issue 入口
+
+- **当前问题**：复现规划已经记录原始报错和 AI 修改，但 README 没有告诉新手如何把问题缩成别人能够运行的样例，也没有区分“本仓库文档问题、第三方项目 bug、自己的代码问题和研究协议问题”。仓库还没有 SUPPORT 文件或 Issue 表单，求助时容易遗漏完整命令、commit、配置、环境、预期行为和首个关键报错。
+- **经验对照**：
+  - [Python 环境要配死了](https://www.xiaohongshu.com/explore/68a2ff42000000001b01e5b5)与[跑 baseline 常见的坑](https://www.xiaohongshu.com/explore/6925b658000000001d03acfb)显示，新手的“代码跑不起来”往往混合了环境、CUDA、预处理、显存和 I/O 等多类原因；只给最后一行报错无法判断问题边界（访问可能需要登录）。
+  - Transformers 的一个[实际 Issue #33405](https://github.com/huggingface/transformers/issues/33405)提供了 traceback，却没有清楚说明具体模型和上游集成边界，维护者因此无法判断模型并将问题指向 LangChain。该案例说明完整报错仍不能替代最小复现和正确路由。
+  - [Stack Overflow 最小可复现样例指南](https://stackoverflow.com/help/minimal-reproducible-example)把可回答的问题概括为最小、完整、可复现，并要求说明预期、实际和精确错误；代码应使用可复制文本而不是截图。
+- **规范与项目对照**：[PyTorch Bug Report](https://github.com/pytorch/pytorch/blob/main/.github/ISSUE_TEMPLATE/bug-report.yml)要求自包含的精简代码、实际与预期结果、完整 traceback 和环境采集；[Transformers Bug Report](https://github.com/huggingface/transformers/blob/main/.github/ISSUE_TEMPLATE/bug-report.yml)要求系统信息、问题来源、配置、复现代码和预期行为，并提示模型仓库问题应联系模型作者。[GitHub Issue Forms](https://docs.github.com/en/communities/using-templates-to-encourage-useful-issues-and-pull-requests)用于引导贡献者提交高质量问题。
+- **适用边界**：最小复现适合调试可公开的技术问题，不能要求用户泄露私有数据、密钥、内网信息、未公开论文或匿名评审材料。研究假设、实验公平性和结论边界不能仅靠上游软件 Issue 解决；如果问题只在私有数据上出现，应使用合成或脱敏数据尝试复现，并在获授权的私密渠道继续排查。
+- **采取行动**：新增 README“卡住时如何求助”章节、`10-debug-help-request.md`、`SUPPORT.md` 和仓库 Issue Form；统一记录目标、预期、实际、完整命令、commit、配置、环境、最小复现、已尝试排查和具体请求，并明确本仓库、第三方上游、导师协作与私密渠道的分工。
+- **状态**：已完成。
+
 ## 下一轮优先审计
 
-- 卡住时的求助路径是否足够明确，能否让新手提交包含环境、命令、日志和最小复现的信息，而不是只说“跑不起来”。
+- 仓库的许可证、引用、版本发布和长期维护信息是否完整，能否让他人合法复用并准确引用本仓库。
