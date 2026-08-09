@@ -125,6 +125,20 @@
 - **采取行动**：把能力分级、八周路线和变量分类三处表格改为两列，用“当前 / 下一步”“产物 / 完成”标签在单元格内分层；在贡献指南中新增两列表格上限、窄列合并、禁止依赖自定义 CSS 和 375 px 窄屏检查规则。
 - **状态**：已完成。
 
+## 2026-08-09：首次访问路径审计
+
+### I-010：首屏有统一起步清单，但不同能力层缺少直接分流
+
+- **当前问题**：README 已经说明目标读者、完整闭环和第一次使用的五件事，但 L0、L1、L2 以及正在投稿的读者仍共用一条线性入口。已经会 Python 的读者可能重复补基础，完全零基础的读者也可能过早进入论文复现；长目录不能替代“我现在应该点哪里”的明确选择。
+- **经验对照**：
+  - [Learning Research](https://github.com/pengsida/learning_research)明确面向实验室新人，并把科研入门、能力培养、项目执行和论文写作拆为不同入口，同时提醒经验需要在实践和交流中学习、未必适用于所有实验室。这支持按状态导航，而不是假定所有读者从同一章节开始。
+  - [ML for Beginners](https://github.com/microsoft/ML-For-Beginners)在长课程目录之前提供 Getting Started 和面向学生的逐步使用方式，要求 fork、clone、完成活动与作业并留下产物；课程允许整体或按需使用，说明大型入门资源需要明确起点和可跳过边界。
+  - [本科生 0 基础 DIY 一篇 CCF-C（读论文工作流篇）](https://www.xiaohongshu.com/explore/69ecdfa30000000036003779)按阅读目的区分投入深度；[入门 MLLM Day 4](https://www.xiaohongshu.com/explore/6a3cd57f0000000011019ccd)把一天任务缩成 demo、检查和结果总结。两类经验共同表明，新手更需要与当前状态匹配的下一步，而不是先消化完整资料库（访问可能需要登录）。
+- **规范对照**：[GitHub 的 README 说明](https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-readmes)将“项目做什么、为什么有用、如何开始、在哪里获得帮助”列为典型 README 信息，并建议主 README 保留开始使用和贡献所需内容。Microsoft 的一份[入门仓库升级计划](https://github.com/microsoft/Generative-AI-for-beginners-dotnet/blob/main/MAF-V1-UPGRADE-PLAN.md)也把面向绝对新手的 Start Here 与多条学习路线列为根 README 的改进项。
+- **适用边界**：L0–L2 是本仓库用于选择入口的操作性分级，不是对研究能力的正式评价。读者可以跳过已掌握章节，但不能跳过环境文件、实验日志等阶段产物；正在选题或投稿者仍需遵循所在课题组和目标 venue 的具体要求。
+- **采取行动**：在首次使用章节顶部新增“30 秒选择入口”，分别为 L0、L1、L2 和投稿阶段提供直达模板、章节与周次；明确无法判断时从检查表开始，已掌握内容可以跳过但必须提供对应产物；在贡献指南中加入一分钟找到起点的首屏验收规则。
+- **状态**：已完成。
+
 ## 下一轮优先审计
 
-- 首次访问者能否在一分钟内找到与自身阶段匹配的起点，而不必先通读整个 README。
+- 卡住时的求助路径是否足够明确，能否让新手提交包含环境、命令、日志和最小复现的信息，而不是只说“跑不起来”。
