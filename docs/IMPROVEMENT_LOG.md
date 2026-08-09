@@ -758,8 +758,30 @@
 - **采取行动**：新增[从实验记录到可检索研究知识](RESEARCH_KNOWLEDGE_CAPTURE.md)、[教学知识索引](../examples/first-workflow-drill/knowledge-index.md)、[已填写知识条目](../examples/first-workflow-drill/knowledge-entry.md)和[带日期审计](../reports/RESEARCH_KNOWLEDGE_AUDIT_2026-08-09.md)；定义六类条目、五种状态、五项复用检查、五种复用决定和写回机制。以仓库中真实的非空输出目录 `FileExistsError` 为例，将防覆盖行为提炼为带适用范围的诊断知识，并把提炼触发器、原证据链接、状态与替代关系接入实验卡、周复盘、项目结构、接管流程、核心工作流、README 与索引；没有重复需要时不新增空白模板或强制专用平台。
 - **状态**：已完成；实现提交 `ed89004` 的 Repository quality 与 First workflow drill 均通过。
 
+## 2026-08-09：第一次知识检索与安全复用演练审计
+
+### I-047：索引给出了正确答案，但没有训练新手召回、排除和验证候选
+
+- **当前问题**：I-046 已建立症状标题、薄索引、适用范围、状态和复用回写，但教学页直接给出 `FileExistsError`、正确文件和最终决定。读者不需要从自己看到的模糊症状生成查询，也不会遇到相似但原因不同、没有来源、已经替代或具有破坏性建议的候选。仓库的链接和内容检查只能证明文档存在，不能证明零基础读者会安全复用。
+- **经验对照**：
+  - [逻辑排错能力如何执行呢？](https://www.xiaohongshu.com/explore/6a5de291000000000c015350)描述新手在实验失败后重复运行、同时更换很多因素却长期无法定位原因，并担忧逐项排除的时间成本；本仓库据此训练按原始症状检索、候选区分和最小信息实验，不把个人经历外推成固定排错次数或预算；
+  - [最近带了几个研一新生，谈谈感受](https://www.xiaohongshu.com/explore/674a942c0000000007035d9d)强调明确任务、针对性检索、按问题类型选择求助对象，并用具体环境与现象降低求助成本；其中学历比较、工具偏好和个人管理方式不作为能力评价规则；
+  - [我把 AI 翻车记录做成了一张清单](https://www.xiaohongshu.com/explore/6a7546dd0000000033011d5f)提出在采用 AI 内容前核对原文、条件、研究对象和作者表述；其医学科研场景只用于确认流畅输出仍需回源，不作为计算实验协议；
+  - [知乎：如何正确地在 GitHub 上提 Issue](https://www.zhihu.com/question/21235917/answer/203370582)建议说明环境、复现、预期和实际；回答年代较早且属个人经验，上游当前模板与政策优先；
+  - [知乎：初学者如何使用 GitHub](https://www.zhihu.com/en/answer/961953665)建议用精确关键词搜索已有 Issue；个人回答只支持“先检索”，不能证明排名第一的结果适用。
+- **规范与项目对照**：
+  - [GitHub Code Search syntax](https://docs.github.com/en/search-github/github-code-search/understanding-github-code-search-syntax)提供精确短语、布尔表达式、`repo:`、`path:`、`language:` 和正则查询；本仓库用其改善召回和缩小范围，不把搜索排序当作根因证据；
+  - [GitHub Debugging tutor](https://docs.github.com/en/copilot/tutorials/customization-library/custom-instructions/debugging-tutor)建议稳定复现、阅读错误、检查最近变化、最小样例和单变量测试，并用引导问题培养独立能力；它是可适配的 Copilot 指令示例，不是科研方法学标准；
+  - [obra/superpowers 的 systematic-debugging](https://github.com/obra/superpowers/blob/main/skills/systematic-debugging/SKILL.md)把根因调查、模式比较、单一假设、最小测试与验证分阶段；本仓库吸收证据顺序，不采用绝对措辞、固定失败次数或 agent 行为作为所有研究项目规则；
+  - [KCS Searching is Creating](https://library.serviceinnovation.org/KCS/KCS_v6/KCS_v6_Practices_Guide/030/030/010/030)要求保存请求者原始搜索词、环境和区分相似条目的特征；[Track Reuse](https://library.serviceinnovation.org/KCS/Knowledge-Centered_Success_Practices_Guide/201-Solve_Loop/Practice_1_Reuse/Technique_1.3)要求把知识与实际事件关联；[Reuse is Review](https://library.serviceinnovation.org/KCS/KCS_v6/KCS_v6_Practices_Guide/030/030/040/020)要求在使用中改进有价值条目。这些规则来自服务支持知识管理，不决定科研证据等级；
+  - [Diátaxis Tutorials](https://diataxis.fr/tutorials/)把教程定义为通过具体行动、可见结果和重复形成能力，并要求用实际用户观察发现缺口；[How-to guides](https://diataxis.fr/how-to-guides/)面向已具备基本能力的使用者，说明参考说明不能替代首次演练。
+- **适用边界**：教学任务只覆盖当前公开脚本的一条防覆盖路由，不覆盖模型不收敛、指标异常、数据泄漏、分布式系统或安全事件。两个干扰项明确标记为 `TEACHING_FIXTURE`，不是历史实验或项目知识，不得进入正式索引。自动验证只能证明查询材料、CLI 与运行证据一致，不能证明陌生新手的理解、速度或跨团队效果；后者必须观察未参与编写的人完成预定义任务。
+- **采取行动**：新增[第一次检索并安全复用研究知识](FIRST_KNOWLEDGE_REUSE_DRILL.md)、[闭卷式练习](../examples/first-workflow-drill/knowledge-retrieval-drill.md)、[教学候选夹具](../examples/first-workflow-drill/knowledge-retrieval-fixtures.md)、[已填写结果](../examples/first-workflow-drill/knowledge-retrieval-result.md)和[带日期审计](../reports/KNOWLEDGE_REUSE_DRILL_AUDIT_2026-08-09.md)；定义“原始症状—Q0 至 Q4 查询—多个候选—身份 / 状态 / 来源 / 权限—最小验证—决定—写回”闭环。新增自动校验，实际确认当前 CLI 无 overwrite 选项、非空记录目录拒绝覆盖、新临时目录运行成功；同步升级首次工作流 CI、调试求助卡、知识提炼指南、核心流程、README、索引和变更记录。
+- **状态**：实现与本地回归完成，等待远端 CI。
+
 ## 下一轮优先审计
 
 - 等待作者确认许可证、引用署名和首个版本号，再完成 `LICENSE`、`CITATION.cff` 与首个 GitHub Release。
 - 使用固定查询和抽样原文继续测试聚合论文平台的重复、遗漏、版本冲突与代码链接准确性；未形成对照样本前不发布覆盖度评分。
-- 审计“知识已经可检索但陌生读者仍不会用”的问题：为新成员设计按症状检索、适用性判断、失效条目识别和复用写回演练，验证知识条目能否真正缩短第二次排查，而不是只增加文档数量。
+- 审计“检索无命中或候选无法区分时出现死路”的问题：让原始查询、已开候选、最小观察和权限边界无损进入同伴 / 导师 / 上游求助，并验证求助后的答案能否回流到原问题而不产生另一份事实。
+- 设计一次真正的陌生读者可用性观察：在不提示正确文件的条件下记录任务成功、误用、求助点和卡住位置；没有真人证据前，不把自动脚本通过表述为“零基础用户已验证”。

@@ -135,6 +135,8 @@ CUDA 版本一致仍可能因编译架构不匹配而加载失败
 
 ## 6. 复用前五项检查
 
+第一次进行检索和复用时，先完成[知识检索与安全复用演练](FIRST_KNOWLEDGE_REUSE_DRILL.md)。演练要求保留自己的原始查询、比较多个候选并排除明确标记的过期 / 近似建议；本节列表是执行参考，不能替代首次实践。
+
 找到条目后不能直接照做，依次检查：
 
 1. **身份**：代码 commit、数据版本、模型、框架、平台和错误签名是否一致？
@@ -155,11 +157,17 @@ CUDA 版本一致仍可能因编译架构不匹配而加载失败
 
 ## 7. 回写复用结果
 
-每次复用至少追加一行：
+每次复用至少追加一条紧凑记录。避免使用六列宽表，防止 GitHub 窄窗口和手机端把字段拆成逐字换行：
 
-| 日期 / 复用 ID | 当前身份与症状 | 决定与动作 | 结果 | 对条目状态的影响 | 证据位置 |
-| --- | --- | --- | --- | --- | --- |
-|  |  |  |  | 保持 / 升级 / supersede / retire |  |
+```markdown
+### YYYY-MM-DD / REUSE-ID
+
+- 当前身份与症状：
+- 决定与动作：
+- 结果：
+- 对条目状态的影响：保持 / 升级 / supersede / retire
+- 证据位置：
+```
 
 一次成功复用只能说明它在新的明确范围内再次有效。失败复用同样重要：它可能揭示范围过宽、版本变化或错误原因不同。不要删除失败回写，也不要为了让条目“看起来正确”修改旧证据。
 
@@ -222,4 +230,4 @@ AI 不能：
 - 复用前要核对哪些身份、证据、时效和权限？
 - 复用后如何回写，何时 supersede、retire 或升级状态？
 
-第一次填写时，查看[教学知识索引](../examples/first-workflow-drill/knowledge-index.md)和[已填写知识条目](../examples/first-workflow-drill/knowledge-entry.md)。
+第一次提炼时，查看[教学知识索引](../examples/first-workflow-drill/knowledge-index.md)和[已填写知识条目](../examples/first-workflow-drill/knowledge-entry.md)；第一次复用时，完成[知识检索练习](../examples/first-workflow-drill/knowledge-retrieval-drill.md)，不要直接跳到答案。

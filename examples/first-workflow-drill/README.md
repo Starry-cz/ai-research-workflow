@@ -92,11 +92,13 @@ macOS / Linux：
 2. 打开两组 `config.snapshot.json`，确认只有 `experiment_id` 与 `learning_rate` 不同；
 3. 打开 `metrics.json`，确认 `runs` 中没有只保留最高分；
 4. 核对 `environment.json` 中的命令、Python 与平台；
-5. 将结果填回[实验卡](experiment-card.md)，使用[已填写结果—主张审计](result-claim-audit.md)检查反例和结论边界，查看[证据等级与共享判断](evidence-readiness.md)区分公开教学 artifact 与科研主张，再参考[已填写停止决定](stopping-decision.md)选择 `PROCEED / REFINE / PIVOT / STOP` 及原因码；最后用[教学知识索引](knowledge-index.md)查看一条真实失败路由如何被提炼而不复制原证据。
+5. 将结果填回[实验卡](experiment-card.md)，使用[已填写结果—主张审计](result-claim-audit.md)检查反例和结论边界，查看[证据等级与共享判断](evidence-readiness.md)区分公开教学 artifact 与科研主张，再参考[已填写停止决定](stopping-decision.md)选择 `PROCEED / REFINE / PIVOT / STOP` 及原因码；最后先完成[知识检索练习](knowledge-retrieval-drill.md)，再用[教学知识索引](knowledge-index.md)核对一条真实失败路由如何被提炼、找到和安全复用。
 
 如果运行失败，不要删除目录。保留首个关键报错，并使用[调试与求助卡](../../templates/10-debug-help-request.md)记录完整命令、环境、预期和实际行为。
 
 [已填写上游路由示例](upstream-routing.md)进一步演示：把输出写到已有 `debug-recorded` 目录会触发文档明确的防覆盖异常，因此应修正个人命令，不应仅因出现 traceback 就提交上游 Issue。
+
+[知识检索练习](knowledge-retrieval-drill.md)不会先给出正确条目，而是要求从模糊症状召回正式记录和明确标记的教学干扰项，核对当前 CLI、状态、来源和副作用后再作决定。完成后可查看[已填写结果](knowledge-retrieval-result.md)；自动校验只保证夹具没有与当前脚本漂移，不证明陌生新手已经掌握。
 
 ### 成功标志
 

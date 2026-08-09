@@ -41,3 +41,6 @@ jobs:
             --debug-dir results/ci-debug \
             --baseline-dir results/ci-baseline \
             --candidate-dir results/ci-candidate
+
+      - name: 验收知识检索与安全复用夹具
+        run: python verify_knowledge_retrieval.py

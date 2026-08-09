@@ -49,8 +49,20 @@
 
 ## 复用记录
 
-| 日期 / 复用 ID | 当前身份与症状 | 决定与动作 | 结果 | 状态影响 | 证据位置 |
-| --- | --- | --- | --- | --- | --- |
-| 2026-08-09 / `REUSE-DEMO-001` | 当前教学脚本；非空 `debug-recorded`；`FileExistsError` | `APPLY_WITHIN_SCOPE`；保留旧目录并使用新个人目录 | 路由结论与代码、README 一致 | `ACTIVE_LOCAL`；尚未形成跨环境 `CONFIRMED_REUSE` | [上游路由记录](upstream-routing.md) |
+### 2026-08-09 / `REUSE-DEMO-001`
+
+- 当前身份与症状：当前教学脚本；非空 `debug-recorded`；`FileExistsError`；
+- 决定与动作：`APPLY_WITHIN_SCOPE`；保留旧目录并使用新个人目录；
+- 结果：路由结论与代码、README 一致；
+- 状态影响：`ACTIVE_LOCAL`；尚未形成跨环境 `CONFIRMED_REUSE`；
+- 证据：[上游路由记录](upstream-routing.md)。
+
+### 2026-08-09 / `REUSE-DEMO-002`
+
+- 当前身份与症状：当前教学脚本；从“输出目录非空”和错误签名检索；含两个教学干扰项；
+- 决定与动作：`APPLY_WITHIN_SCOPE`；核对 CLI、来源和新临时目录运行；
+- 结果：正式条目适用；过期 / 权限候选被排除；
+- 状态影响：保持 `ACTIVE_LOCAL`；这是维护者复核，不是陌生成员验证；
+- 证据：[知识检索结果](knowledge-retrieval-result.md)。
 
 本条目只提供检索和限定诊断入口。实际命令、异常、代码与目录状态以原始来源为准。
