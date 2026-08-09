@@ -73,9 +73,24 @@
 
 无法判断等级时，从 L0 检查表开始；已经掌握的项目直接跳过，但对应的最低产物必须能够拿出来验证。
 
+### 只启用当前阶段的最小模板包
+
+仓库提供的是工具箱，不是要求一次填完的表格作业。任何时候只打开当前阶段需要的模板；完成后归档，再进入下一包。
+
+| 当前阶段 | 最小模板包与升级条件 |
+| --- | --- |
+| **L0 工具起步** | 只填[准备检查表](templates/00-readiness-checklist.md)，其余先看[已填写演练](examples/first-workflow-drill/README.md)，不要复制全部空模板。<br>**升级**：能独立运行脚本并找到日志、配置和指标。 |
+| **L1 选方向** | [研究简报](templates/01-research-brief.md) + [文献检索账本](templates/07-literature-search-log.md) + [baseline 准入卡](templates/11-first-baseline-gate.md)。<br>**升级**：候选通过低成本预检并有备选。 |
+| **L2 做复现** | [论文阅读卡](templates/02-paper-reading-card.md) + [复现规划](templates/03-reproduction-plan.md)；取得数据后启用[数据集卡](templates/13-dataset-card.md)。<br>**升级**：官方评测或目标复现达到预设判定。 |
+| **L3 做实验** | 运行前用[实验卡](templates/04-experiment-card.md)和[评价协议卡](templates/14-evaluation-spec.md)，运行后用[结果—主张审计](templates/15-result-claim-audit.md)。<br>**升级**：主张、反证、图表和结论均可回到证据。 |
+
+其他模板只在事件发生时启用：任务过大用[原子任务卡](templates/06-daily-task-card.md)，需要组会用[每周复盘](templates/05-weekly-review.md)，迁移算力用[迁移清单](templates/08-compute-data-environment-checklist.md)，卡住求助用[调试卡](templates/10-debug-help-request.md)，公式阻塞用[数学概念卡](templates/12-math-concept-card.md)，进入投稿再用[投稿归档卡](templates/09-submission-review-archive.md)。
+
+同一时间建议只维护一个阶段门控、一个当前任务 / 实验记录，以及一个确有阻塞才启用的按需卡。导师或实验室已有等价记录时直接复用，不为匹配本仓库重复填写。
+
 ### 第一次执行的五件事
 
-不要先下载几十个项目。第一次使用本仓库，只完成下面五件事：
+不要先下载几十个项目。下面五件事描述完整起步阶段，不要求同一天完成：
 
 1. 用[零基础准备检查表](templates/00-readiness-checklist.md)判断自己目前在哪一层；
 2. 按[L0 工具链最小起步指南](docs/L0_TOOLCHAIN_START.md)安装并核验 Git、Python 和独立环境，不混用不同系统的命令；
@@ -997,6 +1012,8 @@ Missing Semester 的终端与 Git
 优先选择小数据、小模型、参数高效方法、训练免费方法、模型压缩、推理效率、迁移、鲁棒性或可解释性问题。无论选择什么方向，都报告 GPU、训练时间、数据规模、参数量、吞吐量、延迟、显存和资源限制对结论的影响。
 
 ## 可直接复用的模板
+
+不要按编号顺序填写，也不要一次复制全部模板。先按[最小模板包](#只启用当前阶段的最小模板包)选择当前阶段，再在事件发生时启用按需模板。
 
 | 模板 | 用途 |
 | --- | --- |
