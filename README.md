@@ -25,6 +25,7 @@
 - [八个能力里程碑](#八个能力里程碑)
 - [把阶段目标变成今天的任务](#把阶段目标变成今天的任务)
 - [完整科研工作流](#完整科研工作流)
+- [全部执行指南](docs/README.md)
 - [卡住时如何求助](#卡住时如何求助)
 - [周会、导师与协作沟通](#周会导师与协作沟通)
 - [AI 在科研中的正确位置](#ai-在科研中的正确位置)
@@ -282,6 +283,7 @@ research-project/
 第一次只需要完成“一份研究简报 → 一个可运行 baseline → 一次单变量实验 → 一份有边界的结果报告”。完整规范请在用到对应阶段时再打开：
 
 - [核心工作流手册](docs/CORE_RESEARCH_WORKFLOW.md)
+- [全部执行指南索引](docs/README.md)
 - [数据集审计](docs/DATASET_FIRST_AUDIT.md)
 - [评价协议](docs/EVALUATION_FIRST_SPEC.md)
 - [结果到主张](docs/RESULT_TO_CLAIM.md)
