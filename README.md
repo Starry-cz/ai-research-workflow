@@ -67,7 +67,7 @@
 不需要从头读完整份 README。先选择最接近自己的状态：
 
 - **L0：不会终端、Git 或 Python 环境** → 先做[零基础准备检查表](templates/00-readiness-checklist.md)，按[L0 工具链最小起步指南](docs/L0_TOOLCHAIN_START.md)留下环境记录和第一次 commit，再完成[第一次工作流演练](examples/first-workflow-drill/README.md)和八周路线第 1–3 周；
-- **L1：能运行 Notebook，但没有复现过论文** → 先完成[第一次工作流演练](examples/first-workflow-drill/README.md)，再建立[研究简报](templates/01-research-brief.md)和[文献检索账本](templates/07-literature-search-log.md)，从[首篇 baseline 筛选表](#首篇-baseline-筛选表)进入第 4–6 周；
+- **L1：能运行 Notebook，但没有复现过论文** → 先完成[第一个机器学习闭环](docs/ML_FIRST_LOOP.md)和[第一次工作流演练](examples/first-workflow-drill/README.md)，再建立[研究简报](templates/01-research-brief.md)和[文献检索账本](templates/07-literature-search-log.md)，从[首篇 baseline 筛选表](#首篇-baseline-筛选表)进入第 4–6 周；
 - **L2：已经跑通代码，但实验不可解释或不可复现** → 直接使用[复现规划](templates/03-reproduction-plan.md)与[实验卡](templates/04-experiment-card.md)，重点执行质量门控、单变量实验和失败分析；
 - **正在投稿、回复评审或转投** → 使用[投稿、评审与版本归档卡](templates/09-submission-review-archive.md)，先核验当前 venue 规则并冻结实际送审版本。
 
@@ -114,6 +114,8 @@ research-project/
 这个演练的目的不是取得高准确率，而是让你第一次看见 `question → config → run_id → log → metrics → decision` 如何连成证据链。它不是论文复现，也不能作为算法创新、模型优越性或真实数据泛化能力的证据。
 
 完成后再进入真实 baseline。此时至少应该能够回答：哪个文件固定了变量，哪条命令生成结果，哪个指标来自哪个 `run_id`，失败运行放在哪里，以及为什么不能只挑最好的一次。
+
+如果还不能解释样本、特征、标签、loss、指标以及训练 / 验证 / 测试集的不同职责，先完成[第一个机器学习训练—验证—测试闭环](docs/ML_FIRST_LOOP.md)，再进入论文代码。
 
 ## 零基础能力地图
 
@@ -848,6 +850,7 @@ P2：表达、排版、补充解释和其他局部问题
 | **第一次配置工具链** | [L0 工具链最小起步指南](docs/L0_TOOLCHAIN_START.md)<br>解释器路径、独立环境、仓库历史、环境快照和第一次 commit。 |
 | **继续学终端、Git 与调试** | [Missing Semester](https://missing.csail.mit.edu/)<br>命令记录、Git 提交和调试练习。 |
 | **学经典机器学习** | [ML for Beginners](https://github.com/microsoft/ML-For-Beginners)<br>一个完整的训练—验证—测试 Notebook。 |
+| **理解第一个 ML 闭环** | [第一个机器学习训练—验证—测试闭环](docs/ML_FIRST_LOOP.md)<br>用仓库内已运行示例解释样本、loss、数据划分、泄漏和结论边界。 |
 | **学深度学习与 PyTorch** | [动手学深度学习](https://github.com/d2l-ai/d2l-zh) / [PyTorch Deep Learning](https://github.com/mrdbourke/pytorch-deep-learning)<br>可修改的训练循环和小项目。 |
 | **从零理解神经网络** | [Neural Networks: Zero to Hero](https://github.com/karpathy/nn-zero-to-hero)<br>手写反向传播、MLP 或小型语言模型。 |
 | **确定研究问题** | [Supervisor-Skills](https://github.com/HKUSTDial/Supervisor-Skills)<br>研究简报、假设、风险与资源约束。 |

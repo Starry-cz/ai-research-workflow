@@ -54,6 +54,7 @@ def sigmoid(value: float) -> float:
 def evaluate(
     rows: list[tuple[float, float, int]], weights: list[float]
 ) -> dict[str, float]:
+    """只读取已训练权重，计算损失和准确率，不更新模型。"""
     losses: list[float] = []
     correct = 0
     for x1, x2, label in rows:
@@ -75,11 +76,14 @@ def train_once(
     epochs: int,
     seed: int,
 ) -> dict:
+    """使用训练集更新参数，再分别读取验证集和测试集。"""
+    # seed 只控制参数初始化；固定 seed 便于调试，不代表结果没有不确定性。
     generator = random.Random(seed)
     weights = [generator.uniform(-0.05, 0.05) for _ in range(3)]
 
     for _ in range(epochs):
         gradients = [0.0, 0.0, 0.0]
+        # 每个 epoch 都只遍历 train_rows，验证与测试标签不参与梯度更新。
         for x1, x2, label in train_rows:
             probability = sigmoid(weights[0] * x1 + weights[1] * x2 + weights[2])
             error = probability - label
@@ -99,6 +103,7 @@ def train_once(
 
 
 def summarize(runs: list[dict], split: str, metric: str) -> dict[str, float]:
+    """汇总全部预先计划的运行，不挑选单个最好 seed。"""
     values = [run[split][metric] for run in runs]
     return {
         "mean": statistics.fmean(values),
@@ -109,6 +114,7 @@ def summarize(runs: list[dict], split: str, metric: str) -> dict[str, float]:
 
 
 def prepare_output(path: Path) -> None:
+    """拒绝覆盖旧目录，使每次运行都有独立证据位置。"""
     if path.exists() and any(path.iterdir()):
         raise FileExistsError(f"输出目录非空，拒绝覆盖：{path}")
     path.mkdir(parents=True, exist_ok=True)

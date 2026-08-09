@@ -217,7 +217,25 @@
 - **采取行动**：新增 `docs/L0_TOOLCHAIN_START.md`，分别给出 Windows 与 macOS/Linux 的版本检查、独立 `.venv`、直接解释器调用、仓库内调试演练、`.gitignore`、环境记录和第一次精确暂存/commit；明确不用降低 PowerShell 策略、管理员权限或 `sudo pip` 绕过环境问题；在 README 的 L0 入口、第一次执行和工具导航中直达该指南，并让准备检查表记录解释器、pip 和 commit 证据。
 - **状态**：已完成。
 
+## 2026-08-09：第一个机器学习闭环审计
+
+### I-016：课程清单与论文复现之间缺少数据角色、训练循环和泄漏的最小桥接
+
+- **当前问题**：README 要求 L1 读者理解数据划分、loss、指标和训练循环，也推荐多套完整课程，但没有用仓库内同一个例子把样本、模型、优化、训练 / 验证 / 测试职责和指标证据串起来。新手可能会运行 Notebook，却仍不知道预处理应在哪个 split 上拟合、验证集用于什么、为什么不能反复看测试集，以及 loss 下降为什么不等于研究结论成立。
+- **经验对照**：
+  - 知乎关于[训练 / 验证 / 测试集划分](https://www.zhihu.com/tardis/bd/art/486396145)和[机器学习自学](https://www.zhihu.com/question/7859966761/answer/1999896259041989042)的内容显示，新手通常先通过“小项目完整跑一遍”理解数据划分、训练和评价，但经验文中的固定比例或反复重划分建议不适合直接作为通用规范；
+  - [入门 MLLM Day 4](https://www.xiaohongshu.com/explore/6a3cd57f0000000011019ccd)把一天任务缩成 demo、检查与结果总结，说明初学者需要小闭环和明确产物，而不是先完成全部理论课程，访问可能需要登录；
+  - 本仓库此前的教学演练已经保存训练、验证和测试结果，但没有专门解释各 split 的权限，实际可运行产物还没有转化为概念理解。
+- **规范与项目对照**：
+  - [ML for Beginners](https://github.com/microsoft/ML-For-Beginners)采用从小到大的项目式课程，每课包含知识检查、活动和作业，支持“概念必须落到可运行产物”的教学方式；
+  - [PyTorch Learn the Basics](https://docs.pytorch.org/tutorials/beginner/basics/intro.html)把数据、DataLoader、模型、自动微分、优化和保存组织成完整工作流；[Datasets & DataLoaders](https://docs.pytorch.org/tutorials/beginner/basics/data_tutorial.html)明确一个 batch 包含 features 和 labels，并给出 shape；
+  - [scikit-learn Common Pitfalls](https://scikit-learn.org/stable/common_pitfalls.html)要求先切分数据，只在训练集上 `fit` 预处理和特征选择，并说明测试信息泄漏会造成过于乐观的估计；
+  - 前一轮采用的 [Tuning Playbook](https://github.com/google-research/tuning_playbook)进一步支持用验证数据进行选择、冻结协议后再形成测试证据，而不是根据最终结果反向修改方案。
+- **适用边界**：仓库演练是固定合成二分类任务，手写梯度且没有 mini-batch，不能替代真实数据、PyTorch 或领域评价。数据比例、划分单位、交叉验证和指标必须按样本依赖、时间、主体、类别和目标场景确定；本指南只规定三类数据的权限和可审计性，不给出通用比例。PyTorch 官方基础教程主要用于学习 API，其数据组织也不能直接视为所有科研项目的评价协议。
+- **采取行动**：新增 `docs/ML_FIRST_LOOP.md`，用现有真实运行脚本逐项映射样本、参数、前向、loss、优化、epoch、指标和 seed；明确训练 / 验证 / 测试权限、最小泄漏检查、指标边界、口头复盘、单变量练习和迁移到 PyTorch 的验收；为教学脚本增加必要中文注释，并在 README 的 L1 入口、首次演练和工具导航以及准备检查表中建立直达路径。
+- **状态**：已完成。
+
 ## 下一轮优先审计
 
 - 等待作者确认许可证、引用署名和首个版本号，再完成 `LICENSE`、`CITATION.cff` 与首个 GitHub Release。
-- 审计从“会运行 Python”到“理解第一个机器学习训练—验证—测试闭环”的最小桥接，避免课程清单与论文复现之间仍存在知识跳跃。
+- 审计数学基础的按需补课路径，避免“数学没学完不敢做实验”与“完全跳过公式只调包”两个极端。
