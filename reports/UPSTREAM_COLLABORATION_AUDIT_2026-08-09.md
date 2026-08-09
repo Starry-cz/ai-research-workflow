@@ -40,9 +40,11 @@ I-011 已要求目标、命令、环境、完整 traceback 和最小复现，但
 
 - 文档质量检查通过：共检查 67 个 Markdown 文件，相对链接、锚点、代码块、README 约束、两类索引和 51 个工具条目均通过；
 - 第一次工作流演练验收通过：三组产物完整，全部计划运行完成，正式比较只改变 `learning_rate`；
-- 修改后的 Issue Form 延续现有有效字段结构，PR 模板和安全说明位于 GitHub 识别的标准路径；最终可用性由推送后的 GitHub 页面和仓库质量工作流复核；
-- `git diff --check` 通过，远端状态在提交推送后回填。
+- 修改后的 Issue Form 延续现有有效字段结构；推送后在已登录的 GitHub Issue 创建页确认“文档、路线或模板问题”可见，并同时出现私密安全报告入口。GitHub Community Profile API 暂未返回 Issue Form，静态 HTML 也未包含动态渲染标题，因此不把二者单独作为模板失效依据；
+- Pull Request 模板与 `SECURITY.md` 已被 GitHub 识别，安全政策页可正常访问；
+- [Repository quality](https://github.com/Starry-cz/ai-research-workflow/actions/runs/31312513556) 与 [First workflow drill](https://github.com/Starry-cz/ai-research-workflow/actions/runs/31312513587) 均通过；
+- `git diff --check` 通过，提交 `35b91b0` 已推送至远端 `main`。
 
 ## 状态
 
-文档实现与本地验证已完成，等待远端验证。
+已完成：文档、仓库社区文件、本地回归、远端页面与 GitHub Actions 均已验证。
