@@ -288,6 +288,7 @@ research-project/
 - [第一次安全修改论文代码](docs/SAFE_FIRST_CODE_CHANGE.md)
 - [运行交接与冷启动复查](docs/RUN_HANDOFF_REPLAY.md)
 - [实验产物保留、归档与安全清理](docs/EXPERIMENT_ARTIFACT_LIFECYCLE.md)
+- [导师与组会反馈闭环](docs/MENTOR_FEEDBACK_LOOP.md)
 - [全部执行指南索引](docs/README.md)
 - [数据集审计](docs/DATASET_FIRST_AUDIT.md)
 - [评价协议](docs/EVALUATION_FIRST_SPEC.md)
@@ -334,7 +335,7 @@ research-project/
 
 汇报时先在 30 秒到 1 分钟内讲结论、阻塞和请求，再补必要背景。每一页只服务一个信息点，不确定内容要明确标记。没有正向结果时，也可以汇报复现差异、失败实验、阅读结论和已经排除的原因。
 
-会后立即记录：收到的反馈、采纳或不采纳的理由、责任人、截止时间和下一次验收标准。口头建议如果没有进入决策日志和下周行动项，就不能算项目状态已经更新。关键运行将被他人用于决策、复算图表或接续工作时，按[运行交接与冷启动复查](docs/RUN_HANDOFF_REPLAY.md)声明 H0–H3 深度，并让接收者从唯一入口实际检查。
+会后立即按[反馈闭环](docs/MENTOR_FEEDBACK_LOOP.md)记录：原始反馈与自己的解释、目标对象、接受 / 部分接受 / 有证据拒绝 / 延期 / 待澄清 / 冲突决定，以及负责人、产物、截止、验收和重开条件。口头建议没有进入行动和再次验收，不能算项目状态已经更新。关键运行将被他人用于决策、复算图表或接续工作时，再按[运行交接与冷启动复查](docs/RUN_HANDOFF_REPLAY.md)声明 H0–H3 深度。
 
 **阶段验收**：协作者能够在一分钟内理解当前结论、证据、阻塞、待决策问题和下一步。
 

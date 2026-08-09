@@ -23,7 +23,7 @@
 | [02-paper-reading-card.md](02-paper-reading-card.md) | 阅读核心论文时 | 方法与证据可以回到原文位置 |
 | [03-reproduction-plan.md](03-reproduction-plan.md) | 克隆论文代码后 | 复现被拆成可验证关卡，论文目标、本地 baseline 与 AI 改动可审计 |
 | [04-experiment-card.md](04-experiment-card.md) | 每次运行正式实验前 | baseline 已稳定，问题、规模升级、重复运行、选择规则、停止条件和产物生命周期明确 |
-| [05-weekly-review.md](05-weekly-review.md) | 每周、组会或阶段结束时 | 证据、反馈、决策和下一步已记录 |
+| [05-weekly-review.md](05-weekly-review.md) | 每周、组会或阶段结束时 | 关键反馈已确认语义并转成处理决定、行动、验证和关闭 / 重开状态 |
 | [06-daily-task-card.md](06-daily-task-card.md) | 每次开始独立学习或科研会话前 | 主任务、产物、验收、时间盒和停止条件明确 |
 | [07-literature-search-log.md](07-literature-search-log.md) | 开始新方向检索或扩展核心论文集合时 | 关键词、查询、去重、版本和停止依据可追踪 |
 | [08-compute-data-environment-checklist.md](08-compute-data-environment-checklist.md) | 使用实验室服务器、云 GPU 或迁移大数据前 | 干净安装、短试跑、恢复测试、预算和结果导出均有记录 |

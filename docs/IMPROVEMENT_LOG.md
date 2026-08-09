@@ -640,8 +640,27 @@
 - **采取行动**：新增[实验产物保留、归档与安全清理](EXPERIMENT_ARTIFACT_LIFECYCLE.md)、[已填写教学生命周期台账](../examples/first-workflow-drill/artifact-lifecycle.md)和[带日期审计](../reports/ARTIFACT_LIFECYCLE_AUDIT_2026-08-09.md)；定义 `T0_TRANSIENT / R1_RECOVERY / E2_EVIDENCE / A3_ARCHIVE / S_RESTRICTED` 五类资产、从主张反向盘点、清理前八项检查、墓碑记录与五种生命周期决定；同步实验卡、交接卡、投稿归档、项目结构、核心工作流和首页。本仓库不提供一键删除脚本，避免在无法判断远端引用和机构政策时自动执行破坏性操作。
 - **状态**：已完成。
 
+## 2026-08-09：导师与组会反馈从口头建议到证据关闭
+
+### I-041：周会记录有反馈和责任人，但无法证明建议被正确理解并再次验收
+
+- **当前问题**：README 与周会模板已要求记录反馈、责任人、截止和下一步，但没有分开原始反馈与学生解释，也没有反馈目标、类型、已见信息、处理决定、事后协议变化、验证证据和重开条件。新手可能把“再看看这个问题”扩成无边界实验，把导师建议静默写进已冻结评价，或每周重复同一行动项却从不按原问题验收。
+- **经验对照**：
+  - [研究生的实验记录该怎么记，以结果为导向](https://www.xiaohongshu.com/explore/696fa4fb000000001a02bc8e)反映日记录碎片化、结果未聚合和汇报前集中整理；本仓库把反馈挂到研究问题和证据链，不按会议次数堆记录；
+  - [科研习惯分享（三）：一次实验我写 3 份记录](https://www.xiaohongshu.com/explore/6612bab8000000001b013f7e)反映随手记录事后难懂，以及个人复盘与组会表达用途不同；本仓库使用唯一来源和反馈 ID，不要求三份重复记录；
+  - 知乎文章[作为研究生新手，应该如何和导师沟通](https://zhuanlan.zhihu.com/p/2033116043812532613)指出学生常强调过程、导师更需要问题、证据和可选决定，并建议会前准备核心障碍与反馈请求。文章由科研服务机构发布，本仓库只吸收结构化问题与选项，不采用固定话术和时长；
+  - 知乎讨论[你们实验室的例会制度是怎样的](https://www.zhihu.com/question/322279340)反映部分组会会变成轮流汇报和进度比较，未产生有效建议。匿名回答只用于确认“频率不等于反馈闭环”，不用于评价具体团队。
+- **规范与项目对照**：
+  - [Learning Research](https://github.com/pengsida/learning_research)通过每周 meet PPT、实验记录、失败分析和真实项目训练科研能力，并明确其经验来自特定实验室；本仓库吸收持续展示与复盘，不强制周频率或 3D Vision 路线；
+  - [Supervisor-Skills](https://github.com/HKUSTDial/Supervisor-Skills)将科研评价、写作和审查经验结构化为指南与 AI skills，并说明万能 Prompt 不能替代判断力；本仓库吸收结构化建议和证据门控，不把 AI 输出登记成导师确认；
+  - [Building and sustaining mentor interactions as a mentee](https://pmc.ncbi.nlm.nih.gov/articles/PMC8490489/)建议共同确认目标、议程、反馈方式和行动项；[The Science of Effective Mentorship in STEMM](https://www.ncbi.nlm.nih.gov/books/NBK552762/)提醒书面计划必须定期检查，工具本身不保证落实；
+  - [Ten Simple Rules for Getting Involved in Your Scientific Community](https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1002232)建议为具体行动指定单一负责人和截止；[GitHub Issues](https://docs.github.com/en/issues/tracking-your-work-with-issues/using-issues)可用 assignee 与关联 PR 表示工程责任和改动，但科研关闭仍需证据验收。
+- **适用边界**：本指南不标准化所有师生关系，也不能处理骚扰、歧视、署名争议、伦理违规或权力滥用；这些问题应使用学校、伦理或申诉渠道。项目决策权限由课题、资助和团队约定决定，模板不能单方面改变。导师反馈不能替代数据与评价审计，看到结果后的建议也不自动成为预注册分析。普通语言编辑不需要完整反馈卡，避免把沟通流程官僚化。
+- **采取行动**：新增[导师与组会反馈闭环](MENTOR_FEEDBACK_LOOP.md)、[已填写反馈示例](../examples/first-workflow-drill/feedback-loop.md)和[带日期审计](../reports/MENTOR_FEEDBACK_AUDIT_2026-08-09.md)；定义七类反馈、六种处理决定和六种关闭状态；将原始语义、解释确认、事后性、单一负责人、产物、验收和重开条件同步到周会、任务卡、研究简报、核心工作流与首页。示例明确来自仓库审计，不伪装成真实导师意见。
+- **状态**：已完成。
+
 ## 下一轮优先审计
 
 - 等待作者确认许可证、引用署名和首个版本号，再完成 `LICENSE`、`CITATION.cff` 与首个 GitHub Release。
 - 使用固定查询和抽样原文继续测试聚合论文平台的重复、遗漏、版本冲突与代码链接准确性；未形成对照样本前不发布覆盖度评分。
-- 审计导师 / 组会反馈是否真正转成可验收改动、责任人与下一次证据，避免“记录了建议”却没有关闭反馈循环。
+- 审计零基础读者接到第一项导师任务时，能否区分被授权的修改、需要确认的研究判断和必须升级的伦理 / 数据 / 对外承诺，避免因“导师让我做”而越权或误改协议。
