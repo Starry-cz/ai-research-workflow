@@ -561,8 +561,27 @@
 - **采取行动**：新增[公平调参与搜索预算](FAIR_TUNING_BUDGET.md)和[带日期审计](../reports/TUNING_FAIRNESS_AUDIT_2026-08-09.md)，将调参拆成变量分类、总 / 各方法 / 确认预算、三种比较方案、完整 trial 台账、验证选择、pilot 与剪枝、确认性准入和最低披露；新增 `FAIR_TO_COMPARE / RE-TUNE_BASELINE / REDESIGN_SEARCH / EXPLORATORY_ONLY / STOP_BUDGET` 五种决定；升级实验卡、评价协议卡、结果—主张审计卡、首页、核心工作流与指南索引。本轮不新增自动调参软件，避免把启动 sweep 误认为完成公平比较。
 - **状态**：已完成。
 
+## 2026-08-09：真实代码库最小接入审计
+
+### I-037：仓库说明“不要复制全部模板”，却没有给出现有代码库的字段映射和接入步骤
+
+- **当前问题**：模板索引、项目结构和教学演练都已经提醒读者只启用当前阶段，但拿到导师项目、实验室仓库、论文官方代码或单个 Notebook 后，读者仍不知道该 fork 还是直接修改、现有 README / tracker / 组会表格与模板如何分工、哪些上游文件不能移动，以及第一次接入的完成标准。结果可能是复制 16 张空模板、建立第二套实验台账，或先重构目录再尝试运行，扩大复现差异。
+- **经验对照**：
+  - 小红书笔记[研究生的实验记录该怎么记，以结果为导向](https://www.xiaohongshu.com/explore/696fa4fb000000001a02bc8e)描述按天记录导致碎片化、实验结果未及时汇总、写论文或汇报前才集中整理，以及多个项目文档切换的成本。它支持按项目聚合证据和及时复盘；周记录、数据库与个人软件仍是作者方案，不成为统一格式；
+  - 小红书笔记[科研人员的极简 Git 实用指南](https://www.xiaohongshu.com/explore/6940d4ea000000000d00d9b9)指出科研代码持续演进、AI 可能短时间改动大量文件，缺少版本记录后难以对应结果与代码；评论中也出现忘记 commit、回过神时已经迭代多次的困惑。它确认新手需要低门槛版本习惯，但不定义 fork、upstream、分支与数据安全规则；
+  - 小红书笔记[PhD 如何打造自己的代码模板库？](https://www.xiaohongshu.com/explore/68391d96000000001101d297)建议根据个人习惯沉淀科研通用代码。可迁移的是复用经过验证的组件，不是把个人模板变成所有项目的目录标准；
+  - 知乎问题[计算机本科科研入门求助](https://www.zhihu.com/question/2036962382614900853/answer/2043702641105142901)反映个人笔记与团队协作工具之间的选择困难。回答提出双轨工具，本仓库只吸收“个人深读与团队共享职责不同”的观察；同一实验事实不能要求新手在两个系统手工维护两份。
+- **规范与项目对照**：
+  - [Good Enough Practices in Scientific Computing](https://doi.org/10.1371/journal.pcbi.1005510)专门面向科研计算新手，以项目组织、数据、代码、协作和记录的最低可采用实践回答“从哪里开始”，支持渐进接入而非一次达到成熟工程标准；
+  - [The Turing Way](https://github.com/the-turing-way/the-turing-way)覆盖可复现研究与项目设计，其[可复现项目模板](https://github.com/the-turing-way/reproducible-project-template)明确允许按项目需要编辑、删除或增加文件，并把 README 定位为目的、协作和关键资源入口。模板应适配现状，不应完整复制后长期留空；
+  - [GitHub Fork 文档](https://docs.github.com/en/pull-requests/how-tos/work-with-forks/fork-a-repo)说明 fork 可在不影响上游的情况下管理个人副本，[配置 upstream](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/working-with-forks/configuring-a-remote-repository-for-a-fork)用于保留原仓库关系；
+  - [Made With ML 的 Notebook 到脚本指南](https://madewithml.com/courses/mlops/scripting/)将脚本化放在需要组织和复用工作负载之后；[Cookiecutter Data Science](https://github.com/drivendataorg/cookiecutter-data-science)提供成熟结构。二者支持由重复运行和协作问题触发升级，不把完整结构设为首次复现仪式。
+- **适用边界**：本指南主要面向 Git 管理的计算机与 AI 研究代码。实验室已有经过验证的内部平台、ELN、强制目录或审计规则时，应复用并补缺。公开仓库允许 fork 不等于数据、权重和第三方内容允许再分发；只读服务器、私有代码、匿名材料和受限数据需要先确认权限。单一来源不意味着只能用一个工具，而是同一事实只有一个权威记录，其余位置使用链接或 ID。
+- **采取行动**：新增[真实代码库最小接入](ADOPT_WORKFLOW_IN_EXISTING_PROJECT.md)和[带日期审计](../reports/WORKFLOW_ADOPTION_AUDIT_2026-08-09.md)，提供实验室仓库、公开论文 fork、只读 / 私有上游、单 Notebook 和全新项目五种场景；增加十五分钟只读盘点、单一来源映射、当前阶段单卡策略、第一条证据链、升级触发和 `ADOPTED_MINIMAL / USE_EXISTING_SYSTEM / NEEDS_PERMISSION / BLOCKED_RUNTIME / RESTRUCTURE_LATER` 五种决定；同步首页、核心工作流、指南索引、项目结构、模板索引和教学演练。本轮没有新增模板或自动搬运脚本，避免用更多文件解决重复记录问题。
+- **状态**：已完成。
+
 ## 下一轮优先审计
 
 - 等待作者确认许可证、引用署名和首个版本号，再完成 `LICENSE`、`CITATION.cff` 与首个 GitHub Release。
 - 使用固定查询和抽样原文继续测试聚合论文平台的重复、遗漏、版本冲突与代码链接准确性；未形成对照样本前不发布覆盖度评分。
-- 审计首次真实项目从本仓库模板迁移到实际代码库时的最小接入流程，避免复制全部文件或建立重复台账。
+- 审计新手第一次修改论文代码时的分支、diff 审查、最小测试与 AI 生成代码验收，避免“一次改很多文件但无法定位收益或回退”。

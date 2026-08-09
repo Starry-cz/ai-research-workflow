@@ -155,7 +155,7 @@ macOS / Linux：
 
 ## 6. 迁移到真实论文复现
 
-完成演练后，先使用[首篇真实 baseline 准入卡](../../templates/11-first-baseline-gate.md)比较两到三个候选，再把同一条证据链迁移到真实项目：
+完成演练后，先使用[首篇真实 baseline 准入卡](../../templates/11-first-baseline-gate.md)比较两到三个候选，再按[真实代码库最小接入](../../docs/ADOPT_WORKFLOW_IN_EXISTING_PROJECT.md)盘点上游结构和现有台账，把同一条证据链映射到真实项目，而不是复制整套示例目录：
 
 | 演练字段 | 真实项目中的对应内容 |
 | --- | --- |

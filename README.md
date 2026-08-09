@@ -67,7 +67,7 @@
 
 - **L0：不会终端、Git 或 Python 环境** → 先做[零基础准备检查表](templates/00-readiness-checklist.md)，按[L0 工具链最小起步指南](docs/L0_TOOLCHAIN_START.md)留下环境记录和第一次 commit，再完成[第一次工作流演练](examples/first-workflow-drill/README.md)和里程碑 M1–M3；
 - **L1：能运行 Notebook，但没有复现过论文** → 先完成[第一个机器学习闭环](docs/ML_FIRST_LOOP.md)和[第一次工作流演练](examples/first-workflow-drill/README.md)，再按[方向选择决策树](docs/DIRECTION_FIRST_CHOICE.md)建立[研究简报](templates/01-research-brief.md)和[文献检索账本](templates/07-literature-search-log.md)，从[首篇 baseline 筛选表](docs/CORE_RESEARCH_WORKFLOW.md#首篇-baseline-筛选表)进入 M4–M6；
-- **L2：已经跑通代码，但实验不可解释或不可复现** → 使用[复现规划](templates/03-reproduction-plan.md)和[baseline 稳定化门](docs/BASELINE_STABILIZATION_GATE.md)先确定当前只能继续复现、有限比较还是可以改进，再进入实验卡；
+- **L2：已经拿到或跑通过代码，但实验不可解释或不可复现** → 先按[真实代码库最小接入](docs/ADOPT_WORKFLOW_IN_EXISTING_PROJECT.md)映射现有 README、环境和实验台账，再使用[复现规划](templates/03-reproduction-plan.md)和[baseline 稳定化门](docs/BASELINE_STABILIZATION_GATE.md)决定下一步；
 - **正在投稿、回复评审或转投** → 使用[投稿、评审与版本归档卡](templates/09-submission-review-archive.md)，先核验当前 venue 规则并冻结实际送审版本。
 
 无法判断等级时，从 L0 检查表开始；已经掌握的项目直接跳过，但对应的最低产物必须能够拿出来验证。
@@ -94,8 +94,8 @@
 1. 用[零基础准备检查表](templates/00-readiness-checklist.md)判断自己目前在哪一层；
 2. 按[L0 工具链最小起步指南](docs/L0_TOOLCHAIN_START.md)安装并核验 Git、Python 和独立环境，不混用不同系统的命令；
 3. 从一个成熟方向列出两到三个候选，使用[首篇真实 baseline 准入卡](templates/11-first-baseline-gate.md)完成低成本预检，再选择有官方代码、训练脚本和可承受算力的一篇；
-4. 先运行官方预训练模型的评测或演示，不要立刻从头训练；
-5. 建立[复现规划](templates/03-reproduction-plan.md)，把缺失信息写入风险登记表；如果需要云端算力或迁移大数据，再完成[算力、数据与环境迁移清单](templates/08-compute-data-environment-checklist.md)。
+4. 克隆选定项目后，按[真实代码库最小接入](docs/ADOPT_WORKFLOW_IN_EXISTING_PROJECT.md)盘点上游、权限和现有记录，再运行官方预训练模型的评测或演示，不要立刻从头训练；
+5. 建立[复现规划](templates/03-reproduction-plan.md)补齐缺失证据；如果需要云端算力或迁移大数据，再完成[算力、数据与环境迁移清单](templates/08-compute-data-environment-checklist.md)。
 
 ### 第一天的最低产物
 
@@ -268,7 +268,7 @@ research-project/
 
 | 当前阶段 | 下一项可验收产物 |
 | --- | --- |
-| **0 建立台账** | 当前问题、资料入口、最新结果、失败项和下一步写进项目 README。 |
+| **0 建立台账** | 新项目直接建立入口；已有代码库按[最小接入指南](docs/ADOPT_WORKFLOW_IN_EXISTING_PROJECT.md)先映射现有记录，只补缺口，不维护第二套台账。 |
 | **1 选择方向与 baseline** | 两到三个候选完成低成本预检；保留一个通过项和一个备选项。 |
 | **2 文献发现与核验** | 按[论文发现与原文回溯](docs/PAPER_DISCOVERY_FIRST_PASS.md)分开记录发现入口、书目身份、原文版本和官方代码；检索式、筛选与停止条件可复查。 |
 | **3 论文与代码映射** | 核心论文阅读卡能连接公式、文件、shape、配置和结果。 |
@@ -283,6 +283,7 @@ research-project/
 第一次只需要完成“一份研究简报 → 一个可运行 baseline → 一次单变量实验 → 一份有边界的结果报告”。完整规范请在用到对应阶段时再打开：
 
 - [核心工作流手册](docs/CORE_RESEARCH_WORKFLOW.md)
+- [真实代码库最小接入](docs/ADOPT_WORKFLOW_IN_EXISTING_PROJECT.md)
 - [全部执行指南索引](docs/README.md)
 - [数据集审计](docs/DATASET_FIRST_AUDIT.md)
 - [评价协议](docs/EVALUATION_FIRST_SPEC.md)
@@ -405,11 +406,11 @@ research-project/
 
 不要按编号顺序填写，也不要一次复制全部模板。首页的[最小模板包](#只启用当前阶段的最小模板包)负责选择；[模板目录](templates/README.md)负责说明每张模板的触发条件与完成标准。
 
-第一次填写前先看[已完成的实验演练](examples/first-workflow-drill/README.md)，只复制当前阶段需要的空白模板。示例数值来自仓库内脚本和配置，用于说明记录方法，不是论文结果。
+第一次填写前先看[已完成的实验演练](examples/first-workflow-drill/README.md)。进入真实项目时先使用[最小接入指南](docs/ADOPT_WORKFLOW_IN_EXISTING_PROJECT.md)把字段映射到现有 README、tracker 或表格；只有现有系统无法承载时，才复制当前阶段的一张模板。示例数值来自仓库内脚本和配置，用于说明记录方法，不是论文结果。
 
 ## 推荐项目结构
 
-第一次只建立能运行和复查的最小骨架：
+全新项目第一次只建立能运行和复查的最小骨架；已有论文或实验室仓库不要照此搬家，先做[真实代码库最小接入](docs/ADOPT_WORKFLOW_IN_EXISTING_PROJECT.md)：
 
 ```text
 research-project/

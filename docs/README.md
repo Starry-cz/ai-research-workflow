@@ -26,6 +26,7 @@
 | 指南 | 何时使用、前置条件与最低产物 |
 | --- | --- |
 | [论文发现与原文回溯](PAPER_DISCOVERY_FIRST_PASS.md) | **触发**：开始新方向、拿到种子论文或准备筛选首篇 baseline。<br>**产物**：查询记录，以及“发现入口—书目身份—原文版本—官方代码”回溯链。 |
+| [真实代码库最小接入](ADOPT_WORKFLOW_IN_EXISTING_PROJECT.md) | **触发**：拿到导师项目、实验室仓库、论文官方代码或单个 Notebook。<br>**产物**：现有记录映射、唯一来源、第一条 `commit—config—run_id—结果—决定` 证据链和接入状态。 |
 | [baseline 稳定化与首次改进](BASELINE_STABILIZATION_GATE.md) | **触发**：完成复现，准备改模型、损失、数据或训练流程。<br>**产物**：论文目标、本地 baseline、复现差距、规模升级证据与四选一门控决定。 |
 | [按任务补数学](MATH_ON_DEMAND.md) | **触发**：某个公式或概念正在阻塞论文、代码或实验。<br>**产物**：符号、shape、假设、玩具数值和代码映射。 |
 | [数据集审计](DATASET_FIRST_AUDIT.md) | **触发**：数据准备进入项目或划分发生变化。<br>**产物**：来源、权利、版本、schema、split、泄漏和准入决定。 |
