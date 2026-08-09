@@ -735,7 +735,7 @@
   - [ORI 选择性报告说明](https://ori.hhs.gov/selective-reporting-results)要求按预先计划报告并披露事后改变；[Fostering Integrity in Research](https://www.ncbi.nlm.nih.gov/books/NBK475939/)讨论隐藏负结果导致的偏差和无效重复。
 - **适用边界**：停止门管理一个明确问题、假设或实验族，不评价个人能力、学业、职业或整个方向。`VALID_NEGATIVE` 不证明零效应；等价、非劣、因果和安全结论需要相应设计。具体 trial 数、预算、复查周期和阈值由任务、团队、领域与资源决定，机构、数据权利方、任务负责人和目标 venue 规则优先。
 - **采取行动**：新增[负结果、无进展与研究停止门](RESEARCH_STOPPING_AND_PIVOT.md)、[已填写教学停止决定](../examples/first-workflow-drill/stopping-decision.md)和[带日期审计](../reports/STOPPING_PIVOT_AUDIT_2026-08-09.md)；定义五类结果、有信息增量的尝试、复查触发器、五个停止门、四类决定和原因码；升级实验卡、周复盘、结果审计、核心流程、README 与索引。教学示例基于现有真实产物，以 `STOP + ANSWERED` 关闭合成实验族，同时以 `PROCEED + NEXT_MILESTONE_READY` 进入真实 baseline。
-- **状态**：实现与本地回归完成，等待远端 CI。
+- **状态**：已完成。
 
 ## 下一轮优先审计
 

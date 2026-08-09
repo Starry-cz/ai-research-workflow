@@ -43,9 +43,9 @@
 - 教学演练验收通过：debug、baseline 与 candidate 三组产物完整，全部计划运行完成，正式比较只改变 `learning_rate`；baseline 与 candidate 测试 accuracy 均值分别重算为 `0.840000` 与 `0.966667`；
 - 仓库质量检查通过：共检查 73 个 Markdown 文件，相对链接、锚点、代码块、README 排版约束、两类索引与 51 个工具条目均通过；
 - 术语检查完成：结果类别统一为五类，顶层决定统一使用 `PROCEED / REFINE / PIVOT / STOP`，具体依据统一放在原因码中；
-- `git diff --check` 通过；
-- Git 提交、远端推送与 GitHub Actions 待完成后回填。
+- `git diff --check` 通过；提交 `977a950` 已推送至远端 `main`；
+- [Repository quality](https://github.com/Starry-cz/ai-research-workflow/actions/runs/31313956177)与[First workflow drill](https://github.com/Starry-cz/ai-research-workflow/actions/runs/31313956158)均通过。
 
 ## 状态
 
-本地实现与回归已完成，等待远端验证。
+已完成：问题对照、指南、模板、教学示例、本地回归与远端 GitHub Actions 均已验证。
