@@ -153,6 +153,17 @@
 - **采取行动**：新增 README“卡住时如何求助”章节、`10-debug-help-request.md`、`SUPPORT.md` 和仓库 Issue Form；统一记录目标、预期、实际、完整命令、commit、配置、环境、最小复现、已尝试排查和具体请求，并明确本仓库、第三方上游、导师协作与私密渠道的分工。
 - **状态**：已完成。
 
+## 2026-08-09：许可、引用与发布审计
+
+### I-012：公开仓库缺少许可证、机器可读引用和面向读者的版本记录
+
+- **当前问题**：仓库已经公开并允许贡献，但根目录没有 `LICENSE`、`CITATION.cff` 或 `CHANGELOG.md`。读者无法判断能否复制、修改和再分发原创说明与模板，也没有稳定方法引用某个具体版本；维护者新增流程时也缺少面向读者的变更摘要。
+- **经验对照**：[如何选择 GitHub 开源许可证](https://www.zhihu.com/en/article/694255272)按广泛复用、衍生作品开放要求和专利条款区分 MIT、GPL、Apache 等选择，说明许可证不是装饰文件，而是作者对复用边界的决定。该经验只用于识别决策维度，具体法律效果仍以正式许可证文本和适用法律为准。
+- **规范对照**：[GitHub 许可证说明](https://docs.github.com/zh/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/licensing-a-repository)明确，没有许可证时默认版权法生效，其他人不能当然复制、分发或创建衍生作品；[GitHub CITATION 说明](https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-citation-files)说明根目录的 `CITATION.cff` 会生成“Cite this repository”入口；[CFF 1.2 schema guide](https://github.com/citation-file-format/citation-file-format/blob/main/schema-guide.md)要求作者、标题、版本等机器可读字段。GitHub Release 基于 tag 指向特定历史点，适合与版本引用对应。
+- **适用边界**：许可证选择会改变他人使用、修改和分发本仓库内容的权利，不能根据“公开仓库”或常见项目惯例替作者决定。仓库含原创文字、模板和外部链接说明，是否采用单一许可证或为文档与代码/模板分别授权需要作者确认；CITATION 中的姓名、ORCID 和版本号也应由作者确认，不能从账号名推断真实身份。
+- **采取行动**：新增 `CHANGELOG.md`，在 README 中明确当前默认版权状态、临时引用方式和外部资源独立许可；贡献指南要求面向读者的变化同步更新变更记录。`LICENSE`、`CITATION.cff` 和首个 Release 保留为作者确认后的下一步，不擅自选择。
+- **状态**：部分完成，等待作者确认许可与引用信息。
+
 ## 下一轮优先审计
 
-- 仓库的许可证、引用、版本发布和长期维护信息是否完整，能否让他人合法复用并准确引用本仓库。
+- 等待作者确认许可证、引用署名和首个版本号，再完成 `LICENSE`、`CITATION.cff` 与首个 GitHub Release。
