@@ -66,7 +66,7 @@
 
 不需要从头读完整份 README。先选择最接近自己的状态：
 
-- **L0：不会终端、Git 或 Python 环境** → 先做[零基础准备检查表](templates/00-readiness-checklist.md)，补齐 Python 运行能力，再完成[第一次工作流演练](examples/first-workflow-drill/README.md)和八周路线第 1–3 周；
+- **L0：不会终端、Git 或 Python 环境** → 先做[零基础准备检查表](templates/00-readiness-checklist.md)，按[L0 工具链最小起步指南](docs/L0_TOOLCHAIN_START.md)留下环境记录和第一次 commit，再完成[第一次工作流演练](examples/first-workflow-drill/README.md)和八周路线第 1–3 周；
 - **L1：能运行 Notebook，但没有复现过论文** → 先完成[第一次工作流演练](examples/first-workflow-drill/README.md)，再建立[研究简报](templates/01-research-brief.md)和[文献检索账本](templates/07-literature-search-log.md)，从[首篇 baseline 筛选表](#首篇-baseline-筛选表)进入第 4–6 周；
 - **L2：已经跑通代码，但实验不可解释或不可复现** → 直接使用[复现规划](templates/03-reproduction-plan.md)与[实验卡](templates/04-experiment-card.md)，重点执行质量门控、单变量实验和失败分析；
 - **正在投稿、回复评审或转投** → 使用[投稿、评审与版本归档卡](templates/09-submission-review-archive.md)，先核验当前 venue 规则并冻结实际送审版本。
@@ -78,7 +78,7 @@
 不要先下载几十个项目。第一次使用本仓库，只完成下面五件事：
 
 1. 用[零基础准备检查表](templates/00-readiness-checklist.md)判断自己目前在哪一层；
-2. 安装 Git、Python 和一种环境管理方式，学会打开终端；
+2. 按[L0 工具链最小起步指南](docs/L0_TOOLCHAIN_START.md)安装并核验 Git、Python 和独立环境，不混用不同系统的命令；
 3. 从一个成熟方向列出两到三个候选，使用[首篇真实 baseline 准入卡](templates/11-first-baseline-gate.md)完成低成本预检，再选择有官方代码、训练脚本和可承受算力的一篇；
 4. 先运行官方预训练模型的评测或演示，不要立刻从头训练；
 5. 建立[复现规划](templates/03-reproduction-plan.md)，把缺失信息写入风险登记表；如果需要云端算力或迁移大数据，再完成[算力、数据与环境迁移清单](templates/08-compute-data-environment-checklist.md)。
@@ -845,7 +845,8 @@ P2：表达、排版、补充解释和其他局部问题
 | 任务 | 入口与必须留下的产物 |
 | --- | --- |
 | **补计算机基础** | [CS 自学指南](https://github.com/PKUFlyingPig/cs-self-learning) / [OSSU CS](https://github.com/ossu/computer-science)<br>选定课程与可运行作业，不要求一次学完。 |
-| **学终端、Git 与调试** | [Missing Semester](https://missing.csail.mit.edu/)<br>命令记录、Git 提交和调试练习。 |
+| **第一次配置工具链** | [L0 工具链最小起步指南](docs/L0_TOOLCHAIN_START.md)<br>解释器路径、独立环境、仓库历史、环境快照和第一次 commit。 |
+| **继续学终端、Git 与调试** | [Missing Semester](https://missing.csail.mit.edu/)<br>命令记录、Git 提交和调试练习。 |
 | **学经典机器学习** | [ML for Beginners](https://github.com/microsoft/ML-For-Beginners)<br>一个完整的训练—验证—测试 Notebook。 |
 | **学深度学习与 PyTorch** | [动手学深度学习](https://github.com/d2l-ai/d2l-zh) / [PyTorch Deep Learning](https://github.com/mrdbourke/pytorch-deep-learning)<br>可修改的训练循环和小项目。 |
 | **从零理解神经网络** | [Neural Networks: Zero to Hero](https://github.com/karpathy/nn-zero-to-hero)<br>手写反向传播、MLP 或小型语言模型。 |

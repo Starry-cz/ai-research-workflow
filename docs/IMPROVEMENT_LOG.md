@@ -199,7 +199,25 @@
 - **采取行动**：重写 README 的首篇 baseline 筛选段落，增加两到三个候选、准入条件、加分项、低成本预检、`PROCEED / REFINE / STOP` 和 M0–M3 分层里程碑；新增 `11-first-baseline-gate.md`，记录目标结果、官方关系、数据与许可证、依赖、精确训练评测命令、权重、算力外推、失败退出和备选候选；同步更新研究简报、模板索引、推荐项目结构和教学演练的真实项目入口。
 - **状态**：已完成。
 
+## 2026-08-09：L0 工具链起步审计
+
+### I-015：能力清单要求会 Git 和环境，但没有跨系统的第一条可执行路径
+
+- **当前问题**：README 已把终端、Git、Python 和独立环境列为最低能力，却只告诉 L0 读者“安装并学会”，没有说明 Windows 与 macOS/Linux 的命令差异、如何确认 `pip` 和运行代码属于同一解释器、为什么 clone 与 ZIP 不同，以及第一次 commit 前如何排除虚拟环境和密钥。读者需要先到多个教程拼接步骤，容易在开始科研前形成全局环境污染或无法追踪版本的项目。
+- **经验对照**：
+  - [Python 环境要配死了](https://www.xiaohongshu.com/explore/68a2ff42000000001b01e5b5)、[跑 baseline 常见的坑](https://www.xiaohongshu.com/explore/6925b658000000001d03acfb)和[第一篇论文复现](https://www.xiaohongshu.com/explore/67cfb412000000002a00c7e8)共同暴露了 Python、CUDA、依赖版本和环境边界是首次复现的主要阻塞之一，访问可能需要登录；
+  - 知乎的[安装了库却找不到](https://www.zhihu.com/tardis/bd/art/677085682)把高频问题归因于安装包的 `pip` 与运行代码的 Python 不属于同一环境，并建议核对 `sys.executable`。该内容只用于确认真实困惑，具体操作以 Python 官方指南为准；
+  - 一些中文环境教程同时建议管理员安装、永久换源、修改系统 Python 或建立“万能环境”。这些做法会随系统和网络条件变化，且可能扩大权限或污染全局环境，因此本仓库没有把它们写成默认方案。
+- **规范与项目对照**：
+  - [Python Packaging User Guide](https://packaging.python.org/en/latest/guides/installing-using-pip-and-virtual-environments/)分别给出 Windows 的 `py -m venv` 与 Unix/macOS 的 `python3 -m venv`，要求将 `.venv` 排除在版本控制外，并核对解释器位置；
+  - [Python 安装包指南](https://packaging.python.org/en/latest/tutorials/installing-packages/)建议使用虚拟环境和 `python -m pip`，并提醒不要用 `sudo` 修改系统管理的 Python；
+  - [Git First-Time Setup](https://git-scm.com/book/en/v2/Getting-Started-First-Time-Git-Setup)说明姓名和邮箱会写入每次 commit，并提供配置来源检查；[GitHub clone 文档](https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository)说明 clone 包含仓库的文件与版本历史；[GitHub 邮箱说明](https://docs.github.com/en/account-and-profile/concepts/email-addresses)提供 `noreply` 地址以避免公开私人邮箱；
+  - [Missing Semester](https://missing.csail.mit.edu/)把 shell、版本控制、调试和数据整理视为可在实际任务中训练的工具能力，支持用一个有产物的短闭环作为入口，而不是先完成整套课程。
+- **适用边界**：`venv + pip` 是为了提供零依赖、跨系统的第一条路径，不宣称优于 conda、uv、Poetry、容器或实验室模块系统。真实论文仓库应优先遵循其官方环境文件和硬件支持矩阵；`pip freeze` 只是当前环境快照，不是跨平台锁文件。学校集群还需遵守登录节点、调度器、存储与软件模块规则，不能直接套用个人电脑训练命令。
+- **采取行动**：新增 `docs/L0_TOOLCHAIN_START.md`，分别给出 Windows 与 macOS/Linux 的版本检查、独立 `.venv`、直接解释器调用、仓库内调试演练、`.gitignore`、环境记录和第一次精确暂存/commit；明确不用降低 PowerShell 策略、管理员权限或 `sudo pip` 绕过环境问题；在 README 的 L0 入口、第一次执行和工具导航中直达该指南，并让准备检查表记录解释器、pip 和 commit 证据。
+- **状态**：已完成。
+
 ## 下一轮优先审计
 
 - 等待作者确认许可证、引用署名和首个版本号，再完成 `LICENSE`、`CITATION.cff` 与首个 GitHub Release。
-- 审计 README 是否为首次使用 Git / 环境的新手提供足够明确、跨系统的安装与版本控制最小路径，同时避免复制完整编程课程。
+- 审计从“会运行 Python”到“理解第一个机器学习训练—验证—测试闭环”的最小桥接，避免课程清单与论文复现之间仍存在知识跳跃。
