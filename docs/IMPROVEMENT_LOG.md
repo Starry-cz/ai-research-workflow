@@ -697,8 +697,27 @@
 - **采取行动**：新增[第一次向开源上游求助与贡献](UPSTREAM_HELP_AND_CONTRIBUTION.md)、[已填写路由示例](../examples/first-workflow-drill/upstream-routing.md)和[带日期审计](../reports/UPSTREAM_COLLABORATION_AUDIT_2026-08-09.md)；定义七类问题、六级证据门、Issue 包、研究代码特殊分流、PR 闭环与八种状态；升级调试卡、README、支持说明、真实项目接入、Issue Form 与索引；新增 PR 模板和 `SECURITY.md`。示例实际验证非空输出目录异常符合防覆盖设计，因此决定不提交上游。
 - **状态**：已完成。
 
+## 2026-08-09：实验结果证据等级与表达边界审计
+
+### I-044：结果主张有审计，但组会、共享、项目决定和论文使用仍被混成同一状态
+
+- **当前问题**：仓库已经要求冻结协议、保留全部运行、检查替代解释并把论文主张连接到证据，但“正式证据 / 初步观察 / 调试线索”和“允许进入位置”仍把证据成熟度、共享权限与表达用途混在一起。新手可能用单次最好结果作组会结论，把公开可运行代码视为论文主张成立，也可能因为结果尚不能写论文而不敢汇报失败与初步观察。
+- **经验对照**：
+  - [研究生的实验记录该怎么记，以结果为导向](https://www.xiaohongshu.com/explore/696fa4fb000000001a02bc8e)反映流水记录难以支撑汇报；本仓库吸收按问题和结果组织，但不隐藏失败或只展示正向结果；
+  - [科研习惯分享（三）：一次实验我写 3 份记录](https://www.xiaohongshu.com/explore/6612bab8000000001b013f7e)区分即时记录、复盘和组会用途；本仓库保留一个证据来源、按受众生成视图，不维护三份可能漂移的事实；
+  - [知乎：深度学习实验是否可以汇报多次测试中的最高准确率](https://www.zhihu.com/en/answer/3249240394)中的回答对最高值、均值和随机种子意见不一，说明个人经验不能批准报告规则；运行前协议、完整尝试与 venue 要求优先；
+  - [知乎：你们实验室的例会制度是怎样的](https://www.zhihu.com/question/322279340)反映例会可能退化为进度比较。匿名个案只确认“汇报频率不等于证据审查”，不用于评价具体团队。
+- **规范与项目对照**：
+  - [Learning Research](https://github.com/pengsida/learning_research)把实验、论文写作和 presentation 视为不同但连接的科研能力，并声明经验来自特定实验室；本仓库吸收实践与交流，不照搬周频率、3D Vision 路线或个人表达方式；
+  - [AutoResearchClaw](https://github.com/aiming-lab/AutoResearchClaw)展示实验运行、验证报告、人工门控和自动论文产物；本仓库借鉴阶段化产物，但不把 pipeline 完成、自动评分或生成 `paper.tex` 当作 V4；
+  - [AAAI-26 Reproducibility Checklist](https://aaai.org/conference/aaai/aaai-26/reproducibility-checklist/)要求区分事实、观点、假设和推测并披露随机性与运行数；[REFORMS](https://reforms.cs.princeton.edu/)把有效性、可复现性、泛化范围和透明报告分开；
+  - [ACM Artifact Evaluation 示例](https://sigsim.acm.org/conf/pads/2024/blog/artifact-evaluation/)区分 artifact 可得、功能 / 可复用与结果被复现；[JMLR NeurIPS 可复现性报告](https://www.jmlr.org/papers/v22/20-303.html)指出选择性报告、适应性过拟合和过度主张风险。
+- **适用边界**：V0–V4 和 S0–S3 是本仓库的入门分流，不是跨学科认证或论文评分；机构、作者团队、数据条款和 venue 规则优先。V4 不保证录用或独立复现，S3 不授予复用权，高证据也可能因隐私、匿名或合同保持 S0。理论、定性、临床和安全关键研究仍需领域规范。
+- **采取行动**：新增[实验结果证据等级与表达边界](EVIDENCE_READINESS_AND_SHARING.md)、[已填写教学示例](../examples/first-workflow-drill/evidence-readiness.md)和[带日期审计](../reports/EVIDENCE_READINESS_AUDIT_2026-08-09.md)；定义 V0–V4、S0–S3、六种用途状态及升级 / 降级规则；升级结果—主张审计、周会、真实项目接入、核心流程、首页与索引。教学示例被判为 V2 + S3 + `SHAREABLE_ARTIFACT_ONLY`，明确公开可见且可重算仍不构成真实方法主张。
+- **状态**：实现与本地验证完成，等待远端验证。
+
 ## 下一轮优先审计
 
 - 等待作者确认许可证、引用署名和首个版本号，再完成 `LICENSE`、`CITATION.cff` 与首个 GitHub Release。
 - 使用固定查询和抽样原文继续测试聚合论文平台的重复、遗漏、版本冲突与代码链接准确性；未形成对照样本前不发布覆盖度评分。
-- 审计零基础读者如何判断一个复现结果是否已达到“可汇报、可共享但不可主张、可写入论文”不同证据等级，避免把内部进展、组会观察和正式结论混为一谈。
+- 审计负结果、长期无提升与资源耗尽时，如何作出继续、收缩、转向或停止决定，并把失败转成可复用证据而不是无限调参。

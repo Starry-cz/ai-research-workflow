@@ -92,7 +92,7 @@ macOS / Linux：
 2. 打开两组 `config.snapshot.json`，确认只有 `experiment_id` 与 `learning_rate` 不同；
 3. 打开 `metrics.json`，确认 `runs` 中没有只保留最高分；
 4. 核对 `environment.json` 中的命令、Python 与平台；
-5. 将结果填回[实验卡](experiment-card.md)，使用[已填写结果—主张审计](result-claim-audit.md)检查反例和结论边界，再选择 `PROCEED / REFINE / PIVOT / STOP`。
+5. 将结果填回[实验卡](experiment-card.md)，使用[已填写结果—主张审计](result-claim-audit.md)检查反例和结论边界，并查看[证据等级与共享判断](evidence-readiness.md)区分公开教学 artifact 与科研主张，再选择 `PROCEED / REFINE / PIVOT / STOP`。
 
 如果运行失败，不要删除目录。保留首个关键报错，并使用[调试与求助卡](../../templates/10-debug-help-request.md)记录完整命令、环境、预期和实际行为。
 
@@ -138,6 +138,8 @@ macOS / Linux：
 [已填写产物生命周期台账](artifact-lifecycle.md)进一步说明为什么仓库内三组记录结果属于结论证据，而个人练习输出和冷启动临时副本不能被同样处理。它示范按用途决定保留，不按分数高低或文件年龄直接删除。
 
 [已填写反馈闭环](feedback-loop.md)演示如何把“另一人真的能复查吗”和“分数更高能否声称方法更好”两项审阅问题，分别关闭为新增证据与收缩主张。示例来自仓库审计，不伪装成真实导师意见。
+
+[已填写证据等级与共享判断](evidence-readiness.md)把调试运行判为 V1、完整教学比较判为 V2，并将公开状态写为 S3 `PUBLIC_VIEWABLE`。它同时说明：公开可见不代表已有开放许可证，教学 artifact 可重算也不代表方法主张达到 V3 / V4。
 
 ### 常见失败与下一步
 

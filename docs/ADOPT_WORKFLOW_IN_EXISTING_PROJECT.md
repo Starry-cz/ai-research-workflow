@@ -90,6 +90,8 @@ git switch -c research/reproduce-baseline
 实验索引或 tracker：
 最新可信 run_id：
 结果与图表来源：
+当前结果 V0–V4 验证等级 / S0–S3 共享等级：
+允许受众、允许表述与禁止表述：
 风险 / 阻塞：
 下一步及通过条件：
 ```
@@ -103,7 +105,7 @@ git switch -c research/reproduce-baseline
 | 还没确定是否值得投入 | [baseline 准入卡](../templates/11-first-baseline-gate.md) |
 | 已选定论文、准备跑代码 | [复现规划](../templates/03-reproduction-plan.md) |
 | 正在运行正式比较 | [实验卡](../templates/04-experiment-card.md)与已冻结的[评价协议](../templates/14-evaluation-spec.md) |
-| 已完成结果、准备写结论 | [结果—主张审计](../templates/15-result-claim-audit.md) |
+| 已完成结果、准备汇报、共享、决策或写结论 | 先判[证据与共享等级](EVIDENCE_READINESS_AND_SHARING.md)，再使用[结果—主张审计](../templates/15-result-claim-audit.md) |
 
 使用模板时有三种合法方式：
 
@@ -171,6 +173,7 @@ question
 - [ ] 没有维护两套同义实验台账；
 - [ ] 当前只启用必要模板，未知字段没有提前猜写；
 - [ ] 第一条命令、配置、run_id、日志、指标和决定可以相互定位；
+- [ ] 准备离开个人记录的结果已分别标注证据等级、共享等级、允许受众和表达边界；
 - [ ] 数据、权重、密钥、隐私材料和大文件没有误提交；
 - [ ] 技术权限与本次任务授权已经分开记录，待确认项没有被默认为允许；
 - [ ] 接入状态和下一步通过条件已经写明。

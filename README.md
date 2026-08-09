@@ -58,6 +58,7 @@
 | 一改代码就失控 | 单变量改动、实验卡和回退机制 |
 | AI 给出的内容真假难辨 | 来源分层、风险登记和人工验收 |
 | 实验做了很多却写不成论文 | 从研究问题到证据表格的一一对应 |
+| 有结果却不知道能说到什么程度 | V0–V4 验证等级、S0–S3 共享权限和用途状态 |
 | 自己能看懂，别人无法复查 | 唯一交接入口、指标重算和冷启动复跑 |
 | 导师给了任务却不知道能否直接动手 | 任务授权卡、三类动作与确认 / 升级状态 |
 | 遇到报错却不知道该向哪里反馈 | 上游所有权、证据门、Issue / 私密报告 / PR 分流 |
@@ -72,6 +73,7 @@
 - **L0：不会终端、Git 或 Python 环境** → 先做[零基础准备检查表](templates/00-readiness-checklist.md)，按[L0 工具链最小起步指南](docs/L0_TOOLCHAIN_START.md)留下环境记录和第一次 commit，再完成[第一次工作流演练](examples/first-workflow-drill/README.md)和里程碑 M1–M3；
 - **L1：能运行 Notebook，但没有复现过论文** → 先完成[第一个机器学习闭环](docs/ML_FIRST_LOOP.md)和[第一次工作流演练](examples/first-workflow-drill/README.md)，再按[方向选择决策树](docs/DIRECTION_FIRST_CHOICE.md)建立[研究简报](templates/01-research-brief.md)和[文献检索账本](templates/07-literature-search-log.md)，从[首篇 baseline 筛选表](docs/CORE_RESEARCH_WORKFLOW.md#首篇-baseline-筛选表)进入 M4–M6；
 - **L2：已经拿到或跑通过代码，但实验不可解释或不可复现** → 先按[真实代码库最小接入](docs/ADOPT_WORKFLOW_IN_EXISTING_PROJECT.md)映射现有 README、环境和实验台账，再使用[复现规划](templates/03-reproduction-plan.md)和[baseline 稳定化门](docs/BASELINE_STABILIZATION_GATE.md)决定下一步；
+- **已经有实验结果，准备组会、共享、决策或写作** → 先用[实验结果证据等级与表达边界](docs/EVIDENCE_READINESS_AND_SHARING.md)分开判断证据成熟度和共享权限，再使用[结果—主张审计](templates/15-result-claim-audit.md)检查具体表述；
 - **正在投稿、回复评审或转投** → 使用[投稿、评审与版本归档卡](templates/09-submission-review-archive.md)，先核验当前 venue 规则并冻结实际送审版本。
 
 无法判断等级时，从 L0 检查表开始；已经掌握的项目直接跳过，但对应的最低产物必须能够拿出来验证。
@@ -85,7 +87,7 @@
 | **L0 工具起步** | 只填[准备检查表](templates/00-readiness-checklist.md)，其余先看[已填写演练](examples/first-workflow-drill/README.md)，不要复制全部空模板。<br>**升级**：能独立运行脚本并找到日志、配置和指标。 |
 | **L1 选方向** | [研究简报](templates/01-research-brief.md) + [文献检索账本](templates/07-literature-search-log.md) + [baseline 准入卡](templates/11-first-baseline-gate.md)；导师任务先填简报内的授权字段。<br>**升级**：候选通过低成本预检并有备选，下一步处于 `READY_WITHIN_SCOPE`。 |
 | **L2 做复现** | [论文阅读卡](templates/02-paper-reading-card.md) + [复现规划](templates/03-reproduction-plan.md)；取得数据后启用[数据集卡](templates/13-dataset-card.md)。<br>**升级**：论文目标与本地 baseline 已分开，并取得稳定化门控决定。 |
-| **L3 做实验** | 运行前用[实验卡](templates/04-experiment-card.md)和[评价协议卡](templates/14-evaluation-spec.md)，运行后用[结果—主张审计](templates/15-result-claim-audit.md)。<br>**升级**：主张、反证、图表和结论均可回到证据。 |
+| **L3 做实验** | 运行前用[实验卡](templates/04-experiment-card.md)和[评价协议卡](templates/14-evaluation-spec.md)，运行后先判[证据与共享等级](docs/EVIDENCE_READINESS_AND_SHARING.md)，再用[结果—主张审计](templates/15-result-claim-audit.md)。<br>**升级**：证据成熟度、受众权限、主张、反证、图表和结论均有依据。 |
 
 其他模板只在事件发生时启用：任务过大用[原子任务卡](templates/06-daily-task-card.md)，需要组会用[每周复盘](templates/05-weekly-review.md)，迁移算力用[迁移清单](templates/08-compute-data-environment-checklist.md)，关键运行需要交给别人复查时用[运行交接卡](templates/16-run-handoff.md)，卡住求助用[调试卡](templates/10-debug-help-request.md)，公式阻塞用[数学概念卡](templates/12-math-concept-card.md)，进入投稿再用[投稿归档卡](templates/09-submission-review-archive.md)。
 
@@ -213,7 +215,7 @@ research-project/
 | **M5 论文与代码**<br>精读论文并阅读官方代码 | **产物**：阅读卡、模块映射、风险登记表。<br>**完成**：能画出数据流并定位代码入口。 |
 | **M6 复现与评测**<br>预训练评测、单批次测试、完整复现 | **产物**：复现日志、配置、指标差异表和[稳定化决定](docs/BASELINE_STABILIZATION_GATE.md)。<br>**完成**：论文目标与本地 baseline 已分开，差距、稳定性和允许主张明确。 |
 | **M7 改进与失败分析**<br>按[首次安全改码](docs/SAFE_FIRST_CODE_CHANGE.md)完成一个单变量改进 | **产物**：修改前快照、可审查 diff、检查证据、假设卡、实验矩阵和消融结果。<br>**完成**：只有 `READY_FOR_CHANGE` 的 baseline 进入改进，修复 / 重构 / 方法改动已分离，效果能被独立检验。 |
-| **M8 分析与表达**<br>结果分析、写作和复盘 | **产物**：研究报告、图表、失败项、下一步；关键运行按需形成[交接入口](docs/RUN_HANDOFF_REPLAY.md)和[产物保留决定](docs/EXPERIMENT_ARTIFACT_LIFECYCLE.md)。<br>**完成**：每个结论都能回到代码、日志或文献，声明可交接的运行已通过冷启动复查，关键证据不会因平台到期或误清理失效。 |
+| **M8 分析与表达**<br>结果分析、写作和复盘 | **产物**：研究报告、图表、失败项、下一步；每项输出标注[证据等级与共享边界](docs/EVIDENCE_READINESS_AND_SHARING.md)，关键运行按需形成[交接入口](docs/RUN_HANDOFF_REPLAY.md)和[产物保留决定](docs/EXPERIMENT_ARTIFACT_LIFECYCLE.md)。<br>**完成**：组会、共享、决策和论文表述不混级；每个结论都能回到证据，关键产物可复查且不会因平台到期或误清理失效。 |
 
 每次复盘只选择一种状态：
 
@@ -338,6 +340,8 @@ research-project/
 
 汇报时先在 30 秒到 1 分钟内讲结论、阻塞和请求，再补必要背景。每一页只服务一个信息点，不确定内容要明确标记。没有正向结果时，也可以汇报复现差异、失败实验、阅读结论和已经排除的原因。
 
+组会允许汇报调试信号和初步观察，但页面要按[证据等级与表达边界](docs/EVIDENCE_READINESS_AND_SHARING.md)写明 V 等级、共享范围、尚缺检查与允许表述。组会认可不是同行评审，公开 artifact 也不自动成为论文主张。
+
 会后立即按[反馈闭环](docs/MENTOR_FEEDBACK_LOOP.md)记录：原始反馈与自己的解释、目标对象、接受 / 部分接受 / 有证据拒绝 / 延期 / 待澄清 / 冲突决定，以及负责人、产物、截止、验收和重开条件。口头建议没有进入行动和再次验收，不能算项目状态已经更新。关键运行将被他人用于决策、复算图表或接续工作时，再按[运行交接与冷启动复查](docs/RUN_HANDOFF_REPLAY.md)声明 H0–H3 深度。
 
 **阶段验收**：协作者能够在一分钟内理解当前结论、证据、阻塞、待决策问题和下一步。
@@ -405,6 +409,7 @@ research-project/
 | **审计数据集** | [零基础数据集审计指南](docs/DATASET_FIRST_AUDIT.md) / [Hugging Face Dataset Cards](https://github.com/huggingface/datasets/blob/main/templates/README_guide.md)<br>来源、许可证、revision、schema、划分、泄漏、隐私与可重建证据。 |
 | **冻结评价协议** | [零基础评价协议指南](docs/EVALUATION_FIRST_SPEC.md) / [scikit-learn Metrics](https://scikit-learn.org/stable/modules/model_evaluation.html)<br>主指标、实现、聚合、阈值、统计单位、不确定性、人工评价和决策门槛。 |
 | **从结果形成主张** | [从实验结果到可辩护主张](docs/RESULT_TO_CLAIM.md) / [NeurIPS Paper Checklist](https://neurips.cc/public/guides/PaperChecklist)<br>结果完整性、配对错误、替代解释、图表来源、主张范围与证据状态。 |
+| **判断结果能否汇报、共享或写入论文** | [实验结果证据等级与表达边界](docs/EVIDENCE_READINESS_AND_SHARING.md) / [已填写教学示例](examples/first-workflow-drill/evidence-readiness.md)<br>分开判断 V0–V4 验证成熟度、S0–S3 共享权限、允许表述和用途状态。 |
 | **第一次修改论文代码** | [第一次安全修改论文代码](docs/SAFE_FIRST_CODE_CHANGE.md) / [GitHub AI 代码审阅](https://docs.github.com/en/copilot/tutorials/review-ai-generated-code)<br>修改前 baseline、改动类别、可审查 diff、按风险选择的检查和准入决定。 |
 | **管理大文件与数据版本** | [Git LFS](https://git-lfs.com/) / [DVC](https://github.com/treeverse/dvc)<br>大文件指针、数据版本与外部存储位置；首个小实验只需先用 `.gitignore`、数据清单和校验值，规模增长后再引入。 |
 | **分层搜索与阅读论文** | [How to Search and Read a Paper](https://github.com/qiyuangong/How_to_Search_and_Read_a_Paper)<br>为检索结果分层，只对核心论文完成精读、讨论和可复用笔记。 |
