@@ -269,7 +269,24 @@
 - **采取行动**：新增 `docs/DATASET_FIRST_AUDIT.md`，建立 D0–D4 数据准入门，说明数据身份、样本单位、group / 时间划分、重复与处理泄漏、质量报告、原始与处理数据分离以及特殊数据追加规则；新增 `13-dataset-card.md`，统一记录来源与权利、revision、manifest、schema、采样、标注、split、质量、泄漏、处理版本链和准入决定；为仓库内合成演练新增真实填写的数据卡和本地核验统计；同步更新 README 的复现流程、工具导航、模板索引、项目结构、误区、准备检查表、研究简报与复现规划。
 - **状态**：已完成。
 
+## 2026-08-09：评价协议与统计单位审计
+
+### I-019：指标字段只有名称，无法约束实现、选择与结论边界
+
+- **当前问题**：README 和实验卡要求记录主指标、波动与统计方案，但读者仍可只写 `F1`、`AUC` 或 `accuracy` 后开始运行，没有固定正类、macro / micro 聚合、阈值、实现版本、异常输出、统计单位和实际意义门槛。测试结果出来后再选择最好 seed、子集、阈值或更有利的指标，会让测试集参与方案设计。人工评价与模型评审也缺少 rubric、盲法、样本分配、分歧处理和校准要求。
+- **经验对照**：
+  - 知乎关于[从小白到论文复现](https://www.zhihu.com/question/659628177/answer/2002333417153513369)把 accuracy、precision、recall、F1 和 ROC/AUC 列为“常用指标”，关于[如何选择模型性能评估标准](https://zhuanlan.zhihu.com/p/59306053)则分别解释分类、回归和排序指标。这些材料说明新手首先接触的是指标名称与公式，但仅认识名称仍不足以重建论文的 aggregation、阈值和实现；
+  - 知乎对[能否报告最高准确率](https://www.zhihu.com/en/answer/3249240394)、[最终结果如何取值](https://www.zhihu.com/en/answer/2229914309)和[相同 seed 是否选最好一次](https://www.zhihu.com/en/answer/3031680072)的讨论反复出现“最好一次、均值、标准差和固定 seed”的混淆。回答质量不一，本仓库只用这些讨论确认困惑存在，统计规则以实验设计和 venue 规范为准。
+- **规范与项目对照**：
+  - [scikit-learn Metrics and scoring](https://scikit-learn.org/stable/modules/model_evaluation.html)说明二分类指标扩展到多分类 / 多标签时需要明确 positive label 和 macro、micro、weighted、samples 等聚合，同名 F1 并不天然等价；
+  - [Google Classification Metrics](https://developers.google.com/machine-learning/crash-course/classification/accuracy-precision-recall)把 accuracy、precision 和 recall 与类别不平衡、阈值及误报 / 漏报代价联系，说明指标必须从任务决策而非排行榜习惯出发；
+  - [NeurIPS Paper Checklist](https://neurips.cc/public/guides/PaperChecklist)要求主要实验在适用时报告误差条、置信区间或统计检验，并解释变异来源和计算方法；[ACL-IJCNLP Reproducibility Checklist](https://2021.aclweb.org/calls/reproducibility-checklist/)要求清楚定义评价统计量、运行次数、选择标准和汇总统计；
+  - [Twenty Years of Confusion in Human Evaluation](https://aclanthology.org/2020.inlg-1.23/)发现 NLG 人工评价构念与报告方式长期不统一，削弱跨论文比较和复现；[ACL Ethics：Researchers](https://ethics.aclweb.org/roles/researchers/)要求提供评价者完整说明、招募、同意、报酬和伦理信息。
+- **适用边界**：本指南不为所有任务指定 accuracy、F1、显著性水平、区间方法或固定重复次数。统计单位、检验、bootstrap、实际意义和人工评价设计必须适配数据依赖、主张、目标领域与 venue；资源不足时可以报告描述性结果，但应降低主张强度。模型评审可以扩展人工评价，却不能因输出像评分就自动替代人工校准和偏差审查。
+- **采取行动**：新增 `docs/EVALUATION_FIRST_SPEC.md`，从决策与错误代价进入主指标，区分训练 loss、选择指标、主测试指标和辅助指标，规定实现、聚合、阈值、统计单位、不确定性、人工评价、模型评审和效率测量的冻结要求；新增 `14-evaluation-spec.md`；为合成演练新增已填写 Eval Spec，明确 accuracy、交叉熵、阈值、seed 汇总和总体标准差的含义及其非置信区间边界；同步更新 README、准备检查表、实验卡、模板索引、项目结构和误区。
+- **状态**：已完成。
+
 ## 下一轮优先审计
 
 - 等待作者确认许可证、引用署名和首个版本号，再完成 `LICENSE`、`CITATION.cff` 与首个 GitHub Release。
-- 审计“指标选了就开始跑”的问题：明确任务单位、主指标、实现版本、方向、聚合、阈值、置信区间、统计单位、人工评价和最低可检测效应，避免只追一个平均分。
+- 审计结果分析到写作的证据链：逐样本错误、替代解释、主张—证据映射、图表数据来源与结论强度，避免从一个平均分直接跳到论文贡献。

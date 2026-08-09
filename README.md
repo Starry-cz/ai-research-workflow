@@ -626,6 +626,31 @@ Git 管理：代码、配置、环境说明、数据清单、运行命令和结�
         → 唯一主要变量 → 预算 → 停止条件 → 统计方案
 ```
 
+#### 先冻结评价协议
+
+指标名称不是完整协议。正式运行前使用[零基础评价协议指南](docs/EVALUATION_FIRST_SPEC.md)和[评价协议卡](templates/14-evaluation-spec.md)，至少固定：
+
+```text
+要支持的决策与错误代价
+  → 评价样本和独立统计单位
+  → 主指标、方向、实现版本与参数
+  → 聚合、阈值、无效输出和排除规则
+  → 模型选择与测试集使用边界
+  → 重复运行、不确定性与实际意义门槛
+  → 人工评价或效率测量协议
+```
+
+- **主指标**只保留一个，直接对应当前主要主张；辅助指标用于解释错误、代价、效率和适用边界；
+- `F1`、`AUC`、`Recall@K` 或相似度名称必须同时写明实现、正类、平均方式、候选集合、`K`、阈值和异常处理等适用参数；
+- 分类阈值、checkpoint 和超参数只能在训练 / 验证协议内选择，不能根据测试结果反向修改；
+- 统计单位可能是样本、患者、用户、文档、场景、任务或独立训练运行，不能把相关记录都当成独立证据；
+- 标准差、标准误、置信区间和分位数回答不同问题，报告时必须写出计算对象、重复次数与方法；
+- 人工评价需要冻结 rubric、说明、样本分配、盲法 / 随机化、评价者信息、分歧处理和必要的伦理安排；模型评审还要锁定模型、版本、prompt、参数并用人工样本校准。
+
+不存在对所有任务都最好的指标或统一“显著提升”阈值。类别不平衡、错误代价、群组依赖和真实使用场景会改变选择；只展示最好 seed、单一平均分或几个成功案例不能证明系统可靠。
+
+**评价验收**：在看最终测试结果前，协作者能够用锁定代码从保存的预测重新计算主指标，并说明该数字支持什么、不支持什么。
+
 #### 参数分组
 
 | 变量类型 | 含义与处理原则 |
@@ -891,6 +916,7 @@ P2：表达、排版、补充解释和其他局部问题
 | **查截止时间** | [CCFDDL](https://ccfddl.com/)<br>带时区的时间表，最终以官网为准。 |
 | **查代码与数据** | [GitHub](https://github.com/) / [Papers with Code](https://paperswithcode.com/)<br>官方仓库、commit、数据版本和评测协议。 |
 | **审计数据集** | [零基础数据集审计指南](docs/DATASET_FIRST_AUDIT.md) / [Hugging Face Dataset Cards](https://github.com/huggingface/datasets/blob/main/templates/README_guide.md)<br>来源、许可证、revision、schema、划分、泄漏、隐私与可重建证据。 |
+| **冻结评价协议** | [零基础评价协议指南](docs/EVALUATION_FIRST_SPEC.md) / [scikit-learn Metrics](https://scikit-learn.org/stable/modules/model_evaluation.html)<br>主指标、实现、聚合、阈值、统计单位、不确定性、人工评价和决策门槛。 |
 | **管理大文件与数据版本** | [Git LFS](https://git-lfs.com/) / [DVC](https://github.com/iterative/dvc)<br>大文件指针、数据版本与外部存储位置；首个小实验只需先用 `.gitignore`、数据清单和校验值，规模增长后再引入。 |
 | **分层搜索与阅读论文** | [How to Search and Read a Paper](https://github.com/qiyuangong/How_to_Search_and_Read_a_Paper)<br>为检索结果分层，只对核心论文完成精读、讨论和可复用笔记。 |
 | **学论文到代码映射** | [Annotated Deep Learning](https://github.com/labmlai/annotated_deep_learning_paper_implementations)<br>公式—代码—shape 对照表。 |
@@ -975,6 +1001,7 @@ Missing Semester 的终端与 Git
 | [首篇真实 baseline 准入卡](templates/11-first-baseline-gate.md) | 比较两到三个候选，完成资料、数据、命令、算力与最小链路预检，并保留退出和备选路径 |
 | [数学概念卡](templates/12-math-concept-card.md) | 围绕当前阻塞公式完成符号、shape、假设、数值与代码验收 |
 | [数据集卡](templates/13-dataset-card.md) | 固定数据来源、使用权、版本、内容、划分、泄漏和处理证据 |
+| [评价协议卡](templates/14-evaluation-spec.md) | 在运行前固定主指标、实现、聚合、阈值、统计单位与决策规则 |
 
 第一次不知道如何填写时，先看[第一次可审计实验演练](examples/first-workflow-drill/README.md)。示例中的数值来自仓库内脚本和配置，只用于说明记录方法，不是论文结果。
 
@@ -987,6 +1014,7 @@ research-project/
 ├── .env.example               # 只保留变量名和示例，不包含真实凭证
 ├── research_brief.md          # 研究问题、假设和资源约束
 ├── baseline_candidates.md     # 首篇 baseline 候选、准入证据、停止规则与备选
+├── evaluation_spec.md         # 主指标、实现、统计单位、不确定性与决策门槛
 ├── papers/
 │   ├── search_log.md          # 关键词、查询、筛选与去重记录
 │   ├── index.md               # 论文主记录、版本和来源路径
@@ -1032,6 +1060,7 @@ research-project/
 | 先收藏几十个课程 | 每次只选一个主资源，并留下可运行产物 |
 | 数学没学完就不能科研 | 围绕当前任务按需补数学，再用数值和代码核对 |
 | 数据能下载就能直接使用 | 先核对发布者、许可证、版本、隐私、划分和再分发边界 |
+| 指标越多越能证明有效 | 先固定一个对应主张的主指标，再用辅助指标解释代价与边界 |
 | 代码跑起来就是复现成功 | 区分官方评测、单批次测试、完整训练和结果容差 |
 | 越新的论文越适合当 baseline | 首个 baseline 更看重代码、训练、评测、算力和可理解性 |
 | 看不懂就让 AI 全部解释 | 先形成自己的问题清单，再核对原文、公式和代码 |

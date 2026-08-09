@@ -18,5 +18,6 @@
 | [11-first-baseline-gate.md](11-first-baseline-gate.md) | 从教学演练进入首篇真实论文前 | 候选经过低成本预检，目标、预算、停止与备选路径明确 |
 | [12-math-concept-card.md](12-math-concept-card.md) | 公式阻塞论文理解、实现或实验判断时 | 符号、shape、假设、玩具数值与代码实现能够相互核对 |
 | [13-dataset-card.md](13-dataset-card.md) | 下载、生成或接收数据后，运行 baseline 前 | 来源与权利明确，版本可识别，划分和处理可重建，泄漏与隐私风险有结论 |
+| [14-evaluation-spec.md](14-evaluation-spec.md) | 设计实验且尚未查看最终测试结果时 | 主指标、实现、聚合、阈值、统计单位、不确定性和决策规则已冻结 |
 
 第一次不知道这些字段如何衔接时，先完成[第一次可审计实验演练](../examples/first-workflow-drill/README.md)。
