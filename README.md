@@ -64,7 +64,7 @@
 2. 安装 Git、Python 和一种环境管理方式，学会打开终端；
 3. 从一个成熟方向中选择一篇有官方代码、训练脚本和可承受算力的论文；
 4. 先运行官方预训练模型的评测或演示，不要立刻从头训练；
-5. 建立[复现规划](templates/03-reproduction-plan.md)，把缺失信息写入风险登记表。
+5. 建立[复现规划](templates/03-reproduction-plan.md)，把缺失信息写入风险登记表；如果需要云端算力或迁移大数据，再完成[算力、数据与环境迁移清单](templates/08-compute-data-environment-checklist.md)。
 
 ### 第一天的最低产物
 
@@ -391,6 +391,49 @@ T0 的目标是筛选，T1 的目标是回答具体问题，T2 的目标是形�
 
 使用[复现规划](templates/03-reproduction-plan.md)，按五个关卡推进。
 
+#### 在申请或租用算力前完成迁移预检
+
+实验室服务器、云 GPU 和临时 Notebook 的名称与价格会变化，但迁移前必须核对的内容基本相同。不要先购买长时算力，再在计费实例中下载数据、试装依赖和猜测显存。
+
+先完成四类清单：
+
+- **计算**：加速器类型、可用显存、CPU 内存、精度、单批次峰值显存和预计总步数；
+- **存储**：原始数据、处理后数据、下载缓存、checkpoint 与日志分别需要多少空间，哪些目录在实例释放后仍会保留；
+- **传输**：数据来源、许可证、预计下载量、校验值、上传与下载方式，以及结果如何导出；
+- **预算**：试跑耗时、预计总时长、计费核验时间、存储与流量费用、最大可接受费用和停止条件。
+
+将项目拆成两层，保证从本地迁移到任意可用算力时不改研究逻辑：
+
+```text
+Git 管理：代码、配置、环境说明、数据清单、运行命令和结果索引
+外部存储：原始数据、缓存、预训练权重、checkpoint 和大体积结果
+```
+
+数据、缓存和输出根目录通过配置或环境变量传入；不要把个人电脑或某台服务器的绝对路径写死在代码里。密钥只放在平台的密钥管理或本地环境变量中，不提交 `.env`、访问令牌或含凭证的配置。
+
+正式长跑前按以下顺序验证：
+
+```text
+干净环境完成安装与 import
+  → CPU 或最小设备冒烟测试
+  → 一个 batch 前向、反向与保存
+  → 短试跑并生成 checkpoint
+  → 主动中断，再从 checkpoint 恢复
+  → 根据实测吞吐估算总时长和费用
+  → 达到预算与恢复门槛后再完整训练
+```
+
+用于续训的 checkpoint 不能只保存模型权重。至少记录模型、优化器、学习率调度器、混合精度状态、epoch 或 global step、当前最佳指标、配置、随机数生成器与数据采样状态、代码 commit 和数据版本；实际需要的状态以所用框架和项目为准。checkpoint 间隔按“最多能接受丢失多少训练时间”确定，并将重要 checkpoint 同步到不会随计算实例释放的存储位置。
+
+预算使用实测值估算，而不是只看硬件标称性能：
+
+```text
+预计总时长 ≈ 短试跑实际时长 ÷ 已完成训练比例
+预计总费用 ≈ 计算费用 + 持久化存储费用 + 必要的数据传输费用
+```
+
+迁移验收不是“新机器上能打开项目”，而是能够在干净环境中完成安装、校验数据、运行同一条冒烟命令、从 checkpoint 恢复到预期 step，并把日志、指标和权重完整导出。使用[算力、数据与环境迁移清单](templates/08-compute-data-environment-checklist.md)记录全过程。
+
 #### 首次复现的最小闭环
 
 ```text
@@ -674,6 +717,7 @@ claim_id | 准备写出的主张 | 实验或文献证据 | 文件位置
 | **管理文献与重复版本** | [Zotero](https://www.zotero.org/) / [重复项说明](https://www.zotero.org/support/duplicate_detection)<br>主记录、来源标签、版本链、阅读状态和可核验元数据。 |
 | **查截止时间** | [CCFDDL](https://ccfddl.com/)<br>带时区的时间表，最终以官网为准。 |
 | **查代码与数据** | [GitHub](https://github.com/) / [Papers with Code](https://paperswithcode.com/)<br>官方仓库、commit、数据版本和评测协议。 |
+| **管理大文件与数据版本** | [Git LFS](https://git-lfs.com/) / [DVC](https://github.com/iterative/dvc)<br>大文件指针、数据版本与外部存储位置；首个小实验只需先用 `.gitignore`、数据清单和校验值，规模增长后再引入。 |
 | **分层搜索与阅读论文** | [How to Search and Read a Paper](https://github.com/qiyuangong/How_to_Search_and_Read_a_Paper)<br>为检索结果分层，只对核心论文完成精读、讨论和可复用笔记。 |
 | **学论文到代码映射** | [Annotated Deep Learning](https://github.com/labmlai/annotated_deep_learning_paper_implementations)<br>公式—代码—shape 对照表。 |
 | **设计实验与调参** | [Tuning Playbook](https://github.com/google-research/tuning_playbook)<br>实验目标、变量分类、曲线和决策。 |
@@ -751,12 +795,15 @@ Missing Semester 的终端与 Git
 | [每周、组会与阶段复盘](templates/05-weekly-review.md) | 记录进度、证据、反馈、失败和下一步 |
 | [原子科研任务卡](templates/06-daily-task-card.md) | 把阶段目标缩成一次可执行、可验收的科研会话 |
 | [文献检索账本与领域地图](templates/07-literature-search-log.md) | 管理关键词、查询、去重、论文版本、领域结构和停止条件 |
+| [算力、数据与环境迁移清单](templates/08-compute-data-environment-checklist.md) | 在使用实验室服务器或云 GPU 前核对资源、路径、缓存、预算、断点恢复和结果导出 |
 
 ## 推荐项目结构
 
 ```text
 research-project/
 ├── README.md                  # 目标、状态、安装与运行入口
+├── .gitignore                 # 排除数据、缓存、密钥和大体积产物
+├── .env.example               # 只保留变量名和示例，不包含真实凭证
 ├── research_brief.md          # 研究问题、假设和资源约束
 ├── papers/
 │   ├── search_log.md          # 关键词、查询、筛选与去重记录
@@ -778,10 +825,14 @@ research-project/
 │   ├── matrix.md              # 实验矩阵
 │   ├── records/               # 单次实验卡
 │   └── logs/                  # 日志索引或外部链接
+├── artifacts/
+│   └── README.md              # 权重、checkpoint 和大结果的外部位置与校验值
 ├── figures/                   # 可追溯图表与生成脚本
 ├── paper/                     # 论文、报告和补充材料
 ├── decisions.md               # 关键决策与放弃理由
-└── environment/               # requirements、environment 或容器说明
+└── environment/
+    ├── README.md              # 系统、驱动、框架、安装和验证命令
+    └── requirements.lock      # 示例名：依赖锁定文件或等价环境规范
 ```
 
 ## 新手常见误区

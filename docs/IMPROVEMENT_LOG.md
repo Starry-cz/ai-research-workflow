@@ -79,8 +79,24 @@
 - **采取行动**：重写 README 的文献发现阶段，增加关键词账本、查询 ID、DOI / arXiv / 标题作者年份去重、版本链归并、领域地图和阶段性停止条件；新增文献检索账本与领域地图模板，并让论文阅读卡记录论文 ID、查询来源和其他版本。
 - **状态**：已完成。
 
+## 2026-08-09：算力、数据与环境迁移审计
+
+### I-007：算力预算只有估算值，缺少可迁移、可恢复和可止损的运行协议
+
+- **当前问题**：README 原先只要求估算显存、时间、数据体积和费用，并在完整训练时保存 checkpoint。它没有要求新手区分临时盘与持久盘、规划数据与缓存路径、在干净环境中重建依赖、主动测试断点恢复，也没有把短试跑结果转换成总时长和费用上限。迁移到实验室服务器或云 GPU 后，仍可能在计费环境中反复配依赖、因路径写死重新传数据，或在实例释放时丢失训练状态。
+- **经验对照**：
+  - [Python 环境要配死了](https://www.xiaohongshu.com/explore/68a2ff42000000001b01e5b5)记录了本科生接到论文复现任务后，从下午到晚上仍未完成环境配置的真实阻塞，说明“导出一个环境文件”尚不足以指导干净重建（访问可能需要登录）；
+  - [跑 baseline 常见的坑](https://www.xiaohongshu.com/explore/6925b658000000001d03acfb)集中提到 PyTorch、CUDA 和依赖版本不兼容，数据预处理缺失，单卡显存与论文多卡配置不匹配，以及 I/O 导致 GPU 利用率低等问题（访问可能需要登录）；
+  - [学生党租 GPU 跑深度学习 tips](https://www.xiaohongshu.com/explore/685e24a2000000000d025557)提到临时算力断连、数据盘容量、上传速度、镜像匹配、后台运行和训练完成后的结果下载。该材料来自算力服务方，因此只用于识别用户痛点，不采纳其平台推荐、赠送额度或价格结论（访问可能需要登录）；
+  - [为什么说大模型训练很难？](https://www.zhihu.com/question/498271491/answer/3175728305)把网络中断、设备故障、checkpoint 存储和训练参数试错成本列为长期训练的现实问题；其大模型场景不能直接等同于新手单卡实验，但“故障一定会发生、恢复能力需要预先设计”可以迁移；
+  - [PyTorch 通用 checkpoint 教程](https://docs.pytorch.org/tutorials/recipes/recipes/saving_and_loading_a_general_checkpoint.html)说明续训需要保存模型之外的优化器、epoch 等状态；[PyTorch 可复现性说明](https://docs.pytorch.org/docs/stable/notes/randomness.html)明确不同版本、平台及 CPU / GPU 之间不保证完全一致；
+  - [pip 可重复安装说明](https://pip.pypa.io/en/stable/topics/repeatable-installs/)区分版本锁定、哈希校验和离线安装包；[Hugging Face 缓存说明](https://huggingface.co/docs/datasets/cache)区分数据处理缓存和 Hub 下载缓存，说明只修改一个缓存变量可能不足；
+  - [GitHub 大文件说明](https://docs.github.com/en/repositories/working-with-files/managing-large-files/about-large-files-on-github)、[Git LFS](https://git-lfs.com/)与 [DVC](https://github.com/iterative/dvc)共同支持“Git 保存代码与元数据，大文件放在外部存储并保留版本关联”的结构。
+- **适用边界**：本仓库不维护云平台价格、镜像、促销、国内镜像或可用区排行榜，因为这些信息变化快且与地区、账户和日期相关。依赖锁定不能消除操作系统、架构、驱动和框架差异；checkpoint 内容与间隔也必须根据框架、训练时长、存储吞吐和可接受损失确定。Git LFS 与 DVC 是规模增长后的可选工具，不是零基础首个小实验的前置条件。
+- **采取行动**：在代码复现阶段新增供应商无关的迁移预检，要求分离 Git 内容与大体积产物，采用“干净安装—冒烟—短试跑—主动中断—恢复—成本外推—完整训练”的升级顺序；新增算力、数据与环境迁移清单，升级复现规划、模板索引、项目结构和机器可读工具表。
+- **状态**：已完成。
+
 ## 下一轮优先审计
 
-- 云 GPU、数据下载和环境配置的国内可访问方案是否需要独立说明；
 - 投稿前如何处理审稿意见、rebuttal、负面结果和版本归档；
 - README 在手机端和窄屏环境下是否仍存在表格换行问题。

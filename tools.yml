@@ -181,6 +181,28 @@ tools:
     summary: 定位论文官方代码、issue、commit、release、环境文件和许可证。
     caveat: README 不一定反映当前实现，复现时应锁定 commit 并记录环境。
 
+  - id: git-lfs
+    name: Git LFS
+    name_zh: Git 大文件存储
+    stage: [大文件管理, 数据与权重版本, 协作]
+    level: [L1, L2, L3]
+    type: cli-and-web
+    url: https://git-lfs.com/
+    summary: 在 Git 中保存大文件指针，将数据、权重或二进制内容存放在配套远端。
+    recommended_output: 为确有版本需求的大文件建立跟踪规则，并记录远端、许可证和下载验证方式。
+    caveat: LFS 不是备份方案，受托管平台配额与访问策略影响；小实验可先用外部链接、校验值和 .gitignore。
+
+  - id: dvc
+    name: DVC
+    name_zh: 数据与实验版本控制
+    stage: [数据版本, 实验复现, 外部存储]
+    level: [L2, L3]
+    type: cli-and-web
+    url: https://github.com/iterative/dvc
+    summary: 用 Git 可追踪的元数据关联数据、模型、流水线和外部存储版本。
+    recommended_output: 在数据或模型版本开始混乱时，让一次实验能够恢复到对应代码、配置与数据状态。
+    caveat: 首个小实验不必立即引入；使用前先掌握普通 Git、目录约定和手工数据清单。
+
   - id: github-copilot
     name: GitHub Copilot
     name_zh: GitHub Copilot
