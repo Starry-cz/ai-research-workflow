@@ -29,8 +29,6 @@
 - [周会、导师与协作沟通](#周会导师与协作沟通)
 - [AI 在科研中的正确位置](#ai-在科研中的正确位置)
 - [工具与入口导航](#工具与入口导航)
-- [可参考的 GitHub 入门资源](#可参考的-github-入门资源)
-- [推荐组合](#推荐组合)
 - [可直接复用的模板](#可直接复用的模板)
 - [推荐项目结构](#推荐项目结构)
 - [新手常见误区](#新手常见误区)
@@ -359,6 +357,8 @@ research-project/
 
 ## 工具与入口导航
 
+按当前任务选择一个主入口，完成表中产物后再决定是否扩展。更多课程和项目见[GitHub 科研入门资源目录](docs/GITHUB_RESOURCE_CATALOG.md)；该目录按阶段和用途组织，不按 Star 排名。
+
 | 任务 | 入口与必须留下的产物 |
 | --- | --- |
 | **补计算机基础** | [CS 自学指南](https://github.com/PKUFlyingPig/cs-self-learning) / [OSSU CS](https://github.com/ossu/computer-science)<br>选定课程与可运行作业，不要求一次学完。 |
@@ -387,65 +387,6 @@ research-project/
 | **设计实验与调参** | [Tuning Playbook](https://github.com/google-research/tuning_playbook)<br>实验目标、变量分类、曲线和决策。 |
 | **规范研究代码** | [Releasing Research Code](https://github.com/paperswithcode/releasing-research-code)<br>依赖、训练、评测、权重和复现命令。 |
 | **设计论文配图** | [CCF-Figure](https://github.com/Deepshare-Official/CCF-Figure)<br>图示草图、变量说明、可编辑源文件和人工校验。 |
-
-## 可参考的 GitHub 入门资源
-
-以下 Star 为 **2026-08-07 的近似快照**，只表示社区可见度，不代表学习顺序或质量排名。使用前请核对最新 README、许可证、依赖和维护状态。
-
-| 资源（Star 快照；适合阶段） | 建议吸收的内容与使用边界 |
-| --- | --- |
-| [OSSU Computer Science](https://github.com/ossu/computer-science)<br>Star：20.7 万+；阶段：L0–L1 | 完整 CS 能力地图、先修关系和项目式学习；按当前需要选择模块，不必学完整套课程后才开始科研。 |
-| [Papers We Love](https://github.com/papers-we-love/papers-we-love)<br>Star：10.8 万+；阶段：L1–L3 | 阅读和讨论经典计算机论文，建立技术品味；将其作为选读材料，不要当成必须全部完成的书单。 |
-| [ML for Beginners](https://github.com/microsoft/ML-For-Beginners)<br>Star：8.9 万+；阶段：L0–L1 | 通过回归、分类、聚类、NLP、时间序列与强化学习练习建立基础；不要只看课程文字而不运行作业。 |
-| [动手学深度学习](https://github.com/d2l-ai/d2l-zh)<br>Star：7.9 万+；阶段：L1–L2 | 学习中文、可运行的深度学习知识和代码；先掌握训练基础，再进入复杂模型。 |
-| [CS 自学指南](https://github.com/PKUFlyingPig/cs-self-learning)<br>Star：7.4 万+；阶段：L0–L2 | 用于课程筛选、作业了解和 CS 学习规划；一次只推进少量课程，避免长期只收藏不产出。 |
-| [Annotated Deep Learning](https://github.com/labmlai/annotated_deep_learning_paper_implementations)<br>Star：6.7 万+；阶段：L2–L3 | 建立论文解释与 PyTorch 实现的并排映射；教学实现不能直接等同于论文官方复现。 |
-| [Tuning Playbook](https://github.com/google-research/tuning_playbook)<br>Star：3 万+；阶段：L2–L3 | 学习科学变量、干扰变量、实验轮次和训练诊断；先跑通 baseline，再开展系统调参。 |
-| [Pumpkin Book](https://github.com/datawhalechina/pumpkin-book)<br>Star：2.5 万+；阶段：L0–L1 | 用于机器学习公式推导和中文补充说明；必须结合代码与数据理解公式。 |
-| [Neural Networks: Zero to Hero](https://github.com/karpathy/nn-zero-to-hero)<br>Star：2.3 万+；阶段：L1–L2 | 练习反向传播、梯度、训练诊断和小型模型实现；不要只观看视频，要完成代码练习。 |
-| [PyTorch Deep Learning](https://github.com/mrdbourke/pytorch-deep-learning)<br>Star：1.8 万+；阶段：L1–L2 | 学习 PyTorch 基础、训练流程和项目式练习；先掌握张量与数据管线，再套用模型。 |
-| [Mathematics for Machine Learning](https://github.com/mml-book/mml-book.github.io)<br>Star：1.5 万+；阶段：L0–L2 | 按需补充线性代数、微积分、概率和优化；不必先学完所有数学再开始实践。 |
-| [Cookiecutter Data Science](https://github.com/drivendataorg/cookiecutter-data-science)<br>Star：1 万左右；阶段：L2–L3 | 参考数据、代码、模型和报告的项目结构；首个小实验不必过早引入复杂工程层。 |
-| [Missing Semester](https://github.com/missing-semester/missing-semester)<br>Star：6000 左右；阶段：L0–L1 | 补充 Shell、编辑器、Git、调试和数据整理能力；把工具学习放进实际项目中练习。 |
-| [Lightning Hydra Template](https://github.com/ashleve/lightning-hydra-template)<br>Star：5300 左右；阶段：L2–L3 | 参考配置化实验、日志和模块化项目模板；熟悉普通 PyTorch 训练循环后再迁移。 |
-| [Releasing Research Code](https://github.com/paperswithcode/releasing-research-code)<br>Star：2900 左右；阶段：L2–L3 | 检查依赖、训练、评测、权重和结果命令的完整性；不要只优化 README 外观而忽略可复现性。 |
-
-## 推荐组合
-
-### 组合一：完全零基础
-
-```text
-Missing Semester 的终端与 Git
-  → CS 自学指南或 OSSU 中的 Python 基础
-  → ML for Beginners 完成一个小项目
-  → 动手学深度学习完成训练循环
-  → 本仓库的首篇论文复现流程
-```
-
-### 组合二：会 Python，但不会科研
-
-```text
-研究简报
-  → Google Scholar / DBLP 建立小型论文集合
-  → 论文阅读卡
-  → 官方预训练评测
-  → shape 检查 + 单批次过拟合
-  → 完整 baseline + 复现报告
-```
-
-### 组合三：已经跑通 baseline
-
-```text
-失败案例与默认假设
-  → 假设卡
-  → 每轮一个主要变量
-  → 主实验 + 消融 + 泛化 + 效率 + 失败分析
-  → 研究报告或论文初稿
-```
-
-### 组合四：算力有限
-
-优先选择小数据、小模型、参数高效方法、训练免费方法、模型压缩、推理效率、迁移、鲁棒性或可解释性问题。无论选择什么方向，都报告 GPU、训练时间、数据规模、参数量、吞吐量、延迟、显存和资源限制对结论的影响。
 
 ## 可直接复用的模板
 
