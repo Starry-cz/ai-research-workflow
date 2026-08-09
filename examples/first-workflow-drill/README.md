@@ -84,7 +84,7 @@ python train.py --config configs/candidate.json --output-dir results/my-candidat
 
 ## 6. 迁移到真实论文复现
 
-完成演练后，把同一条证据链迁移到真实项目：
+完成演练后，先使用[首篇真实 baseline 准入卡](../../templates/11-first-baseline-gate.md)比较两到三个候选，再把同一条证据链迁移到真实项目：
 
 | 演练字段 | 真实项目中的对应内容 |
 | --- | --- |
