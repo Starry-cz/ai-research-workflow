@@ -60,6 +60,7 @@
 | 实验做了很多却写不成论文 | 从研究问题到证据表格的一一对应 |
 | 自己能看懂，别人无法复查 | 唯一交接入口、指标重算和冷启动复跑 |
 | 导师给了任务却不知道能否直接动手 | 任务授权卡、三类动作与确认 / 升级状态 |
+| 遇到报错却不知道该向哪里反馈 | 上游所有权、证据门、Issue / 私密报告 / PR 分流 |
 
 ## 第一次使用：从这里开始
 
@@ -300,7 +301,7 @@ research-project/
 
 ## 卡住时如何求助
 
-求助前先使用[调试与求助卡](templates/10-debug-help-request.md)把“跑不起来”转换成别人可以复查的问题：
+求助前先使用[调试与求助卡](templates/10-debug-help-request.md)把“跑不起来”转换成别人可以复查的问题，再按[第一次向开源上游求助与贡献](docs/UPSTREAM_HELP_AND_CONTRIBUTION.md)判断它属于本地使用、社区问答、上游缺陷、研究分歧还是私密安全问题：
 
 ```text
 目标与预期行为
@@ -316,12 +317,12 @@ research-project/
 选择正确的求助位置：
 
 - **本仓库的链接、表述、路线或模板有问题**：先搜索已有 Issue，再使用[仓库问题表单](https://github.com/Starry-cz/ai-research-workflow/issues/new/choose)提交位置、问题、预期改进和证据；
-- **第三方项目的安装、API 或代码错误**：先读该项目 README、文档和已有 Issue；能够在未修改官方代码上复现后，再按上游模板提交；
+- **第三方项目的安装、API 或代码错误**：先读该项目 README、支持范围、贡献 / 安全说明和已有 Issue；只有在未修改的受支持版本上形成公开最小复现，才把状态升级为 `UPSTREAM_ISSUE_READY`；
 - **自己的改动或私有数据导致的问题**：先缩成公开或合成数据的最小样例，与同伴、导师或代码维护者核对；
 - **研究问题、实验协议和结论解释**：带着假设、`run_id`、对照、失败项和具体请求与导师或合作者讨论，不能只提交代码报错；
 - **含有密钥、个人信息、未公开数据或匿名审稿材料**：不得粘贴到公开 Issue、聊天记录或外部 AI 服务。
 
-完整的支持范围和信息安全边界见 [SUPPORT.md](SUPPORT.md)。
+完整的支持范围和信息安全边界见 [SUPPORT.md](SUPPORT.md)；发现安全漏洞时使用项目指定的私密报告渠道，不在普通 Issue 公开细节。
 
 ## 周会、导师与协作沟通
 
@@ -400,6 +401,7 @@ research-project/
 | **查截止时间** | [CCFDDL](https://ccfddl.com/)<br>带时区的时间表，最终以官网为准。 |
 | **查代码与数据** | [GitHub](https://github.com/) / [Hugging Face Datasets](https://huggingface.co/datasets)<br>官方仓库、commit、数据 revision、许可证和评测协议。趋势论文页只用于发现候选，不能替代代码与基准核验。 |
 | **接到第一项导师任务** | [任务授权边界](docs/FIRST_MENTOR_TASK_BOUNDARY.md) / [已填写示例](examples/first-workflow-drill/task-authority.md)<br>区分可直接执行、先确认和停止升级；技术权限不等于任务授权。 |
+| **向开源上游求助或贡献** | [上游求助与贡献指南](docs/UPSTREAM_HELP_AND_CONTRIBUTION.md) / [已填写路由示例](examples/first-workflow-drill/upstream-routing.md)<br>确认问题所有者、最小复现、正确渠道、PR 范围和私密信息边界。 |
 | **审计数据集** | [零基础数据集审计指南](docs/DATASET_FIRST_AUDIT.md) / [Hugging Face Dataset Cards](https://github.com/huggingface/datasets/blob/main/templates/README_guide.md)<br>来源、许可证、revision、schema、划分、泄漏、隐私与可重建证据。 |
 | **冻结评价协议** | [零基础评价协议指南](docs/EVALUATION_FIRST_SPEC.md) / [scikit-learn Metrics](https://scikit-learn.org/stable/modules/model_evaluation.html)<br>主指标、实现、聚合、阈值、统计单位、不确定性、人工评价和决策门槛。 |
 | **从结果形成主张** | [从实验结果到可辩护主张](docs/RESULT_TO_CLAIM.md) / [NeurIPS Paper Checklist](https://neurips.cc/public/guides/PaperChecklist)<br>结果完整性、配对错误、替代解释、图表来源、主张范围与证据状态。 |
@@ -442,6 +444,7 @@ research-project/
 | 数学没学完就不能科研 | 围绕当前任务按需补数学，再用数值和代码核对 |
 | 数据能下载就能直接使用 | 先核对发布者、许可证、版本、隐私、划分和再分发边界 |
 | 有账号或 Git 写权限就能直接改 | 先确认本次任务允许的分支、数据、预算、共享修改与对外动作 |
+| 出现 traceback 就去上游提 Issue | 先验证支持范围、未修改代码、公开最小复现和真正的问题所有者 |
 | 指标越多越能证明有效 | 先固定一个对应主张的主指标，再用辅助指标解释代价与边界 |
 | 代码跑起来就是复现成功 | 区分官方评测、单批次测试、完整训练和结果容差 |
 | 越新的论文越适合当 baseline | 首个 baseline 更看重代码、训练、评测、算力和可理解性 |

@@ -678,8 +678,27 @@
 - **采取行动**：新增[第一项导师任务授权边界](FIRST_MENTOR_TASK_BOUNDARY.md)、[已填写教学示例](../examples/first-workflow-drill/task-authority.md)和[带日期审计](../reports/FIRST_MENTOR_TASK_AUDIT_2026-08-09.md)；定义任务授权卡、`EXECUTE_WITHIN_SCOPE / CONFIRM_BEFORE_CHANGE / STOP_AND_ESCALATE` 三类动作与五种任务状态；把负责人、读写运行分享付费范围、确认记录和升级项嵌入研究简报、任务卡、算力迁移、方向选择、真实项目接入和安全改码。本轮不新增空白模板，避免重复记录。
 - **状态**：已完成。
 
+## 2026-08-09：第一次向开源上游求助与贡献审计
+
+### I-043：有最小复现仍不足以决定应提 Issue、讨论、私密报告还是 PR
+
+- **当前问题**：I-011 已要求目标、命令、环境、完整 traceback 和最小复现，但“能够复现后提交上游”仍没有说明受支持版本、真正的问题所有者、Issue 与问答 / Discussion 的区别、论文复现差异的研究路由、安全私密渠道，以及功能构想如何先讨论再进入小范围 PR。新手可能把本地路径和私有数据问题提交给维护者，也可能直接发送大型 AI 生成 PR；反过来，真实缺陷也可能因材料不完整长期无法处理。
+- **经验对照**：
+  - [Python 环境要配死了](https://www.xiaohongshu.com/explore/68a2ff42000000001b01e5b5)与[跑 baseline 常见的坑](https://www.xiaohongshu.com/explore/6925b658000000001d03acfb)反映 Python、CUDA、路径、I/O、显存和预处理问题容易混成“上游代码不行”；本仓库据此先核验身份与支持范围，不采用个人环境方案作为通用修复；
+  - [科研人员的极简 Git 实用指南](https://www.xiaohongshu.com/explore/6940d4ea000000000d00d9b9)反映频繁改码和 AI 批量改动后结果无法对应 commit，难以形成可审查 diff；本仓库吸收版本与小范围修改，不把个人 Git 习惯设为上游规则；
+  - 知乎回答[如何正确地在 GitHub 上提 Issue](https://www.zhihu.com/question/21235917/answer/203370582)建议遵循模板、说明环境、复现、预期和实际，并考虑社区语言；该回答年代较早且属个人经验，当前项目规则优先；
+  - 知乎回答[如何加入开源项目](https://www.zhihu.com/question/26640695/answer/2425325922)建议从可承担的 Issue、`good first issue` 和带说明的 PR 开始；标签不保证任务仍空闲、无需方案确认或一定被合并。
+- **规范与项目对照**：
+  - [GitHub 贡献指南](https://docs.github.com/en/communities/setting-up-your-project-for-healthy-contributions/setting-guidelines-for-repository-contributors)与[Issue / PR 模板](https://docs.github.com/en/communities/using-templates-to-encourage-useful-issues-and-pull-requests/about-issue-and-pull-request-templates)用于声明项目接受什么信息和行为；[创建 Issue](https://docs.github.com/en/issues/tracking-your-work-with-issues/using-issues/creating-an-issue)提示重复项并可从 Discussion 转换，[创建 PR](https://docs.github.com/en/pull-requests/how-tos/create-pull-requests/creating-a-pull-request)提供分支、Draft 和 Issue 关联；
+  - [GitHub 私密漏洞报告](https://docs.github.com/en/code-security/how-tos/report-and-fix-vulnerabilities/report-privately)依赖仓库启用；没有入口时应按安全政策询问私密联系人，不能先公开证明细节；
+  - [PyTorch](https://github.com/pytorch/pytorch)把初学者问答、一般交流、bug 与新功能放到不同渠道，并提示新功能先讨论；[Qwen Issue 模板](https://github.com/QwenLM/Qwen3.6/blob/main/.github/ISSUE_TEMPLATE/bug_report.yml)要求模型 / 框架身份、最小复现、命令、预期 / 实际、环境和单一问题，同时把不同产品路由到相应仓库 / 服务；
+  - [Transformers Issue #33405](https://github.com/huggingface/transformers/issues/33405)展示即使包含 traceback，具体模型和集成所有权不清仍会被转到另一项目。个案只说明所有权判断的重要性，不定义所有项目的处理方式。
+- **适用边界**：本指南适合公开 GitHub 上的 AI / 计算机研究软件，不替代上游自身的贡献、安全、行为和支持政策。私有实验室仓库、商业 API、受监管数据与匿名材料使用内部或正式渠道。最小复现证明行为存在，不自动证明根因、严重性或修复方案。维护者可以因范围、重复、兼容性和维护路线拒绝提案；未合并不等于研究观察无效。
+- **采取行动**：新增[第一次向开源上游求助与贡献](UPSTREAM_HELP_AND_CONTRIBUTION.md)、[已填写路由示例](../examples/first-workflow-drill/upstream-routing.md)和[带日期审计](../reports/UPSTREAM_COLLABORATION_AUDIT_2026-08-09.md)；定义七类问题、六级证据门、Issue 包、研究代码特殊分流、PR 闭环与八种状态；升级调试卡、README、支持说明、真实项目接入、Issue Form 与索引；新增 PR 模板和 `SECURITY.md`。示例实际验证非空输出目录异常符合防覆盖设计，因此决定不提交上游。
+- **状态**：已完成。
+
 ## 下一轮优先审计
 
 - 等待作者确认许可证、引用署名和首个版本号，再完成 `LICENSE`、`CITATION.cff` 与首个 GitHub Release。
 - 使用固定查询和抽样原文继续测试聚合论文平台的重复、遗漏、版本冲突与代码链接准确性；未形成对照样本前不发布覆盖度评分。
-- 审计零基础读者第一次向开源上游求助或贡献时，能否区分本地问题、项目缺陷、研究分歧与安全 / 私密报告，并提供最小复现而不泄露课题组材料。
+- 审计零基础读者如何判断一个复现结果是否已达到“可汇报、可共享但不可主张、可写入论文”不同证据等级，避免把内部进展、组会观察和正式结论混为一谈。

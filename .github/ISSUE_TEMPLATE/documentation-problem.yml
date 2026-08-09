@@ -5,7 +5,7 @@ body:
   - type: markdown
     attributes:
       value: |
-        感谢反馈。请只提交本仓库内容问题；第三方代码报错请先阅读 SUPPORT.md，并向对应上游项目求助。
+        感谢反馈。请只提交本仓库内容问题；第三方代码报错请先阅读 SUPPORT.md 和上游求助与贡献指南，并向真正的问题所有者反馈。安全或私密问题不要在此公开。
 
   - type: checkboxes
     id: checks
@@ -17,6 +17,8 @@ body:
         - label: 我已阅读 SUPPORT.md，并确认问题属于本仓库范围。
           required: true
         - label: 内容中不包含密钥、个人信息、受限数据或匿名审稿材料。
+          required: true
+        - label: 我已确认这不是第三方项目运行问题或需要私密报告的安全问题。
           required: true
 
   - type: dropdown

@@ -96,6 +96,8 @@ macOS / Linux：
 
 如果运行失败，不要删除目录。保留首个关键报错，并使用[调试与求助卡](../../templates/10-debug-help-request.md)记录完整命令、环境、预期和实际行为。
 
+[已填写上游路由示例](upstream-routing.md)进一步演示：把输出写到已有 `debug-recorded` 目录会触发文档明确的防覆盖异常，因此应修正个人命令，不应仅因出现 traceback 就提交上游 Issue。
+
 ### 成功标志
 
 每个新输出目录都应存在四个文件，且命令正常退出：
