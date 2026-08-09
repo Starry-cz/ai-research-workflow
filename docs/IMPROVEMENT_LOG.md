@@ -91,7 +91,7 @@
   - [为什么说大模型训练很难？](https://www.zhihu.com/question/498271491/answer/3175728305)把网络中断、设备故障、checkpoint 存储和训练参数试错成本列为长期训练的现实问题；其大模型场景不能直接等同于新手单卡实验，但“故障一定会发生、恢复能力需要预先设计”可以迁移；
   - [PyTorch 通用 checkpoint 教程](https://docs.pytorch.org/tutorials/recipes/recipes/saving_and_loading_a_general_checkpoint.html)说明续训需要保存模型之外的优化器、epoch 等状态；[PyTorch 可复现性说明](https://docs.pytorch.org/docs/stable/notes/randomness.html)明确不同版本、平台及 CPU / GPU 之间不保证完全一致；
   - [pip 可重复安装说明](https://pip.pypa.io/en/stable/topics/repeatable-installs/)区分版本锁定、哈希校验和离线安装包；[Hugging Face 缓存说明](https://huggingface.co/docs/datasets/cache)区分数据处理缓存和 Hub 下载缓存，说明只修改一个缓存变量可能不足；
-  - [GitHub 大文件说明](https://docs.github.com/en/repositories/working-with-files/managing-large-files/about-large-files-on-github)、[Git LFS](https://git-lfs.com/)与 [DVC](https://github.com/iterative/dvc)共同支持“Git 保存代码与元数据，大文件放在外部存储并保留版本关联”的结构。
+  - [GitHub 大文件说明](https://docs.github.com/en/repositories/working-with-files/managing-large-files/about-large-files-on-github)、[Git LFS](https://git-lfs.com/)与 [DVC](https://github.com/treeverse/dvc)共同支持“Git 保存代码与元数据，大文件放在外部存储并保留版本关联”的结构。
 - **适用边界**：本仓库不维护云平台价格、镜像、促销、国内镜像或可用区排行榜，因为这些信息变化快且与地区、账户和日期相关。依赖锁定不能消除操作系统、架构、驱动和框架差异；checkpoint 内容与间隔也必须根据框架、训练时长、存储吞吐和可接受损失确定。Git LFS 与 DVC 是规模增长后的可选工具，不是零基础首个小实验的前置条件。
 - **采取行动**：在代码复现阶段新增供应商无关的迁移预检，要求分离 Git 内容与大体积产物，采用“干净安装—冒烟—短试跑—主动中断—恢复—成本外推—完整训练”的升级顺序；新增算力、数据与环境迁移清单，升级复现规划、模板索引、项目结构和机器可读工具表。
 - **状态**：已完成。
@@ -192,7 +192,7 @@
   - 知乎回答[怎么样从小白自学到能读懂机器学习的论文并复现](https://www.zhihu.com/question/659628177/answer/2002333417153513369)建议先找开源代码、搭建对应环境并从经典小任务开始。其“优先 Star 多”等说法只反映个人筛选经验，本仓库不把 Star 设为准入条件，而用可核验的训练、评测、数据和资源证据替代。
 - **规范与项目对照**：
   - [Releasing Research Code](https://github.com/paperswithcode/releasing-research-code)把依赖、训练代码、评测代码、预训练模型，以及能够生成主要结果的精确命令列为代码完整性的五项核心内容；这些项目侧信息可以反向用于判断一篇论文是否适合作为首个复现对象；
-  - [ML Reproducibility Challenge 2022 任务说明](https://paperswithcode.com/rc2022/task)明确指出，仅重新运行代码不构成复现研究，还需要批判性检查实现是否对应论文以及实验是否足以支持原主张；
+  - [ML Reproducibility Challenge 2022 的 OpenReview 项目页](https://openreview.net/group?id=ML_Reproducibility_Challenge%2F2022)保留了正式任务与报告入口；其复现目标是检查实验结果与主张，而不是把代码成功启动当成完成；
   - [IJCAI-ECAI 2022 Reproducibility Guidelines](https://ijcai-22.org/reproducibility/index.html)区分不可复现、可信和有说服力的可复现程度，并将算法、数据、实验细节、硬件和环境作为不同证据组成；
   - [MICCAI Reproducibility Checklist](https://github.com/JunMa11/MICCAI-Reproducibility-Checklist)进一步列出数据、预处理、训练、评测、环境、停止和模型选择等领域化信息，说明“有仓库链接”不能代表复现入口完整。
 - **适用边界**：准入门控只判断“是否适合作为当前读者的首篇 baseline”，不评价论文质量，也不要求所有理论研究或闭源数据工作提供相同产物。只有推理代码仍可用于功能演示和代码阅读，第三方实现也可用于实现研究；但如果目标是完整训练复现，应改变交付名称或选择资料更完整的候选。项目由导师指定时，可以保留 `REFINE`，同时记录额外支持、缺失证据和调整后的里程碑。
@@ -495,7 +495,23 @@
 - **采取行动**：将 `tools.yml` schema 升级到 v4，为缺失的 33 个条目逐项补充 L0–L3 适用等级和与其功能一致的最低产物，包括查询账本、论文版本链、规则卡、数据卡、代码 diff、实验记录和评估协议；把 `level` 与 `recommended_output` 加入 52 个条目的强制字段，CI 同时验证等级只使用标准 L0–L3 格式。
 - **状态**：已完成。
 
+## 2026-08-09：外部入口与项目状态审计
+
+### I-033：机器目录有结构校验，但无法发现产品改版、仓库更名、失效演示站和证书异常
+
+- **当前问题**：`tools.yml` 已检查必需字段、HTTPS 格式和重复链接，但 52 个资源条目长期没有统一的实时网络核验。链接字符串合法不代表它仍提供原来的能力：Papers with Code 已跳转到不同定位的趋势论文页，DVC 更换了仓库所有者，AI Conferences Info 的演示站返回 404，Arxiv Insight 则在正常 TLS 校验中出现证书过期。若继续保留旧描述，新手会把重定向后的页面误当成代码与榜单数据库，或在不安全连接上继续尝试登录。
+- **经验对照**：
+  - 知乎关于[计算机公开课资源](https://www.zhihu.com/question/38335108/answer/1993372768251687650)和[教程收藏负担](https://www.zhihu.com/tardis/landing/yidian/ans/2046292839185606022)反映“入口很多但无法判断当前是否值得投入”的选择成本；经验帖只帮助发现维护痛点，不用于判定网站安全或项目质量；
+  - [入门 MLLM Day 4](https://www.xiaohongshu.com/explore/6a3cd57f0000000011019ccd)把检查和可见产物纳入每日任务，支持资源库也要把“链接是否仍完成声明的任务”作为验收；该笔记可能要求登录，本仓库不把其工具选择当作通用规则。
+- **规范与项目对照**：
+  - [GitHub 仓库转移文档](https://docs.github.com/en/repositories/creating-and-managing-repositories/transferring-a-repository)说明旧地址可能继续重定向，但新所有者地址才是规范入口；因此不能把“还能打开”当成无需维护；
+  - [Learning Research](https://github.com/pengsida/learning_research)明确说明书面经验应在实践与交流中使用，且具体实验室经验不一定适用于其他情况；这支持把外部资料转换为可执行产物并持续复核边界，而不是镜像原说明；
+  - [Awesome Machine Learning Resources](https://github.com/ZhiningLiu1998/awesome-machine-learning-resources)会标记长期不活跃资源，说明资源目录需要维护状态信号；[AutoResearchClaw](https://github.com/aiming-lab/AutoResearchClaw)则将阶段产物和人工门控写进流程。本仓库只吸收状态核验与人工决策机制，不采用自动生成论文作为新手默认路径。
+- **适用边界**：一次 HTTP 结果不等于永久状态，也不能推断内容质量。限流、代理、区域网络和客户端证书链会制造假异常；因此首轮网络错误必须用第二客户端、官方仓库或 API 复核。反之，关闭 TLS 校验后获得网页内容不能证明连接安全。GitHub 的“未归档”和近期 `pushedAt` 也不能替代许可证、README、release、数据来源与实际运行检查。
+- **采取行动**：新增 `scripts/audit_external_urls.py`，并发检查 `url` / `web_url` 的状态、最终地址和 TLS 错误，且不下载正文；完成 58 个入口与 35 个 GitHub 仓库的双层核验，生成[带日期报告](../reports/URL_AUDIT_2026-08-09.md)；更新 DVC 规范地址，删除 404 演示站，移除证书过期入口，将 Papers with Code 的旧能力描述改为 Hugging Face Trending Papers；贡献规范新增动态审计与二次确认规则，但不把外部网络检查加入必过 CI。
+- **状态**：已完成。
+
 ## 下一轮优先审计
 
 - 等待作者确认许可证、引用署名和首个版本号，再完成 `LICENSE`、`CITATION.cff` 与首个 GitHub Release。
-- 审计 52 个外部 URL 的当前可达性、重定向、登录要求和仓库归档状态；动态网络结果只进入核验报告，不写成永久质量结论。
+- 继续抽查聚合论文平台的数据覆盖、更新频率和回到正式原文的路径；功能评价必须记录样本、日期和对照来源。

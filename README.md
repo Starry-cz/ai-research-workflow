@@ -389,11 +389,11 @@ research-project/
 | **查顶会论文与评审** | [CV Paper Portal](https://hongsong-wang.github.io/CV_Paper_Portal/) / [OpenReview](https://openreview.net/)<br>正式论文版本、评审与回复记录。 |
 | **管理文献与重复版本** | [Zotero](https://www.zotero.org/) / [重复项说明](https://www.zotero.org/support/duplicate_detection)<br>主记录、来源标签、版本链、阅读状态和可核验元数据。 |
 | **查截止时间** | [CCFDDL](https://ccfddl.com/)<br>带时区的时间表，最终以官网为准。 |
-| **查代码与数据** | [GitHub](https://github.com/) / [Papers with Code](https://paperswithcode.com/)<br>官方仓库、commit、数据版本和评测协议。 |
+| **查代码与数据** | [GitHub](https://github.com/) / [Hugging Face Datasets](https://huggingface.co/datasets)<br>官方仓库、commit、数据 revision、许可证和评测协议。趋势论文页只用于发现候选，不能替代代码与基准核验。 |
 | **审计数据集** | [零基础数据集审计指南](docs/DATASET_FIRST_AUDIT.md) / [Hugging Face Dataset Cards](https://github.com/huggingface/datasets/blob/main/templates/README_guide.md)<br>来源、许可证、revision、schema、划分、泄漏、隐私与可重建证据。 |
 | **冻结评价协议** | [零基础评价协议指南](docs/EVALUATION_FIRST_SPEC.md) / [scikit-learn Metrics](https://scikit-learn.org/stable/modules/model_evaluation.html)<br>主指标、实现、聚合、阈值、统计单位、不确定性、人工评价和决策门槛。 |
 | **从结果形成主张** | [从实验结果到可辩护主张](docs/RESULT_TO_CLAIM.md) / [NeurIPS Paper Checklist](https://neurips.cc/public/guides/PaperChecklist)<br>结果完整性、配对错误、替代解释、图表来源、主张范围与证据状态。 |
-| **管理大文件与数据版本** | [Git LFS](https://git-lfs.com/) / [DVC](https://github.com/iterative/dvc)<br>大文件指针、数据版本与外部存储位置；首个小实验只需先用 `.gitignore`、数据清单和校验值，规模增长后再引入。 |
+| **管理大文件与数据版本** | [Git LFS](https://git-lfs.com/) / [DVC](https://github.com/treeverse/dvc)<br>大文件指针、数据版本与外部存储位置；首个小实验只需先用 `.gitignore`、数据清单和校验值，规模增长后再引入。 |
 | **分层搜索与阅读论文** | [How to Search and Read a Paper](https://github.com/qiyuangong/How_to_Search_and_Read_a_Paper)<br>为检索结果分层，只对核心论文完成精读、讨论和可复用笔记。 |
 | **学论文到代码映射** | [Annotated Deep Learning](https://github.com/labmlai/annotated_deep_learning_paper_implementations)<br>公式—代码—shape 对照表。 |
 | **设计实验与调参** | [Tuning Playbook](https://github.com/google-research/tuning_playbook)<br>实验目标、变量分类、曲线和决策。 |
@@ -456,6 +456,8 @@ research-project/
 机器可读的工具信息保存在 [tools.yml](tools.yml)，新增与修改规范见 [CONTRIBUTING.md](CONTRIBUTING.md)。
 
 仓库的持续问题审计、经验材料对照和实际修改记录保存在[持续改进记录](docs/IMPROVEMENT_LOG.md)。新增观点应先记录“当前问题—对照证据—适用边界—采取行动”，再决定是否进入主 README。
+
+最近一次外部入口核验见 [2026-08-09 URL 与 GitHub 项目状态审计](reports/URL_AUDIT_2026-08-09.md)。动态网络结果只表示检查时刻的状态，不代表资源质量或永久可用性。
 
 新增资源时至少记录：原始链接、适用阶段、前置能力、建议产物、维护状态、许可证、已知限制和最后核验日期。资源应能解决明确问题，不能只因为 Star 高或传播广而加入。
 

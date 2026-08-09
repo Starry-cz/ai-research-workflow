@@ -1,6 +1,6 @@
 # AI 科研工具库的机器可读目录。
 # README.md 面向人类阅读；本文件便于后续生成网页、筛选器或统计页面。
-version: 4
+version: 5
 last_verified: "2026-08-09"
 tools:
   - id: ars
@@ -69,17 +69,6 @@ tools:
     recommended_output: 建立带原文链接、筛选理由和待核验项的小型候选论文集合。
     caveat: 功能和维护状态待使用者访问原站核验。
 
-  - id: arxiv-insight
-    name: Arxiv Insight
-    name_zh: Arxiv Insight
-    stage: [论文发现, 阅读]
-    level: [L1, L2, L3]
-    type: web
-    url: https://axsight.top/
-    summary: 多 LLM 驱动的 arXiv 语义检索、翻译、热榜和推荐入口。
-    recommended_output: 保存查询、候选论文、正式版本核验结果和阅读优先级。
-    caveat: 推荐功能可能需要登录。
-
   - id: cool-papers
     name: Cool Papers
     name_zh: Cool Papers
@@ -142,9 +131,8 @@ tools:
     name_zh: AI 顶会论文信息库
     stage: [论文发现, 数据检索]
     level: [L1, L2, L3]
-    type: github-and-web
+    type: github-dataset
     url: https://github.com/george-gca/ai_conferences_info
-    web_url: https://georgegca.pythonanywhere.com/
     summary: 整理部分 AI 顶会和期刊的标题、摘要、作者与链接。
     recommended_output: 形成按会议、年份和任务筛选，并回到原始页面核验的论文表。
     caveat: 会议和年份覆盖会变化，使用前查看仓库最新说明与许可证。
@@ -232,7 +220,7 @@ tools:
     stage: [数据版本, 实验复现, 外部存储]
     level: [L2, L3]
     type: cli-and-web
-    url: https://github.com/iterative/dvc
+    url: https://github.com/treeverse/dvc
     summary: 用 Git 可追踪的元数据关联数据、模型、流水线和外部存储版本。
     recommended_output: 在数据或模型版本开始混乱时，让一次实验能够恢复到对应代码、配置与数据状态。
     caveat: 首个小实验不必立即引入；使用前先掌握普通 Git、目录约定和手工数据清单。
@@ -259,16 +247,16 @@ tools:
     recommended_output: 保存模型版本、提示词、参数、输入样本、输出和人工核验结果。
     caveat: 模型能力、额度、数据保留与服务条款会变化，敏感材料不要直接上传。
 
-  - id: papers-with-code
-    name: Papers with Code
-    name_zh: 论文—代码—基准关联入口
-    stage: [基线检索, 数据集检索, 复现]
+  - id: huggingface-trending-papers
+    name: Hugging Face Trending Papers
+    name_zh: Hugging Face 趋势论文
+    stage: [论文发现, 趋势浏览]
     level: [L1, L2, L3]
     type: web
-    url: https://paperswithcode.com/
-    summary: 按任务、数据集和指标定位相关论文与开源实现。
-    recommended_output: 形成任务、数据、指标、论文与官方代码之间的候选映射。
-    caveat: 指标可比性取决于数据划分、评测协议和代码版本，不能只比较榜单数字。
+    url: https://huggingface.co/papers/trending
+    summary: 浏览 Hugging Face 社区近期关注的机器学习论文及其关联页面。
+    recommended_output: 形成带原文、日期、入选理由和待核验代码状态的近期候选论文表。
+    caveat: 趋势页不等于完整文献库、任务榜单或质量排名；选题与复现仍需回到论文、官方代码和正式评测协议。
 
   - id: huggingface-datasets
     name: Hugging Face Datasets
