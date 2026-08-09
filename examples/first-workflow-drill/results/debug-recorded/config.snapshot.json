@@ -1,0 +1,8 @@
+{
+  "experiment_id": "demo-debug-v1",
+  "learning_rate": 0.1,
+  "epochs": 2,
+  "seeds": [
+    17
+  ]
+}

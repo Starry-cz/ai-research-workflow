@@ -1,0 +1,6 @@
+{
+  "experiment_id": "demo-baseline-v1",
+  "learning_rate": 0.1,
+  "epochs": 80,
+  "seeds": [17, 29, 43, 71, 97]
+}

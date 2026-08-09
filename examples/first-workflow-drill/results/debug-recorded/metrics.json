@@ -1,0 +1,56 @@
+{
+  "experiment_id": "demo-debug-v1",
+  "status": "completed",
+  "dataset": {
+    "type": "deterministic synthetic binary classification",
+    "train_samples": 120,
+    "validation_samples": 30,
+    "test_samples": 30
+  },
+  "runs": [
+    {
+      "seed": 17,
+      "status": "completed",
+      "validation": {
+        "loss": 0.6923162886685825,
+        "accuracy": 0.5
+      },
+      "test": {
+        "loss": 0.6922011184963335,
+        "accuracy": 0.5
+      },
+      "weights": [
+        0.023454955418607887,
+        0.02080125110363286,
+        0.04618016032113634
+      ]
+    }
+  ],
+  "summary": {
+    "validation_accuracy": {
+      "mean": 0.5,
+      "population_std": 0.0,
+      "minimum": 0.5,
+      "maximum": 0.5
+    },
+    "validation_loss": {
+      "mean": 0.6923162886685825,
+      "population_std": 0.0,
+      "minimum": 0.6923162886685825,
+      "maximum": 0.6923162886685825
+    },
+    "test_accuracy": {
+      "mean": 0.5,
+      "population_std": 0.0,
+      "minimum": 0.5,
+      "maximum": 0.5
+    },
+    "test_loss": {
+      "mean": 0.6922011184963335,
+      "population_std": 0.0,
+      "minimum": 0.6922011184963335,
+      "maximum": 0.6922011184963335
+    }
+  },
+  "claim_boundary": "教学演练；不能作为真实任务或方法优越性的证据。"
+}

@@ -1,0 +1,9 @@
+experiment_id=demo-candidate-v1
+command=train.py --config configs/candidate.json --output-dir results/candidate-recorded
+planned_seeds=[17, 29, 43, 71, 97]
+seed=17 status=completed val_accuracy=0.933333 test_accuracy=0.966667
+seed=29 status=completed val_accuracy=0.933333 test_accuracy=0.966667
+seed=43 status=completed val_accuracy=0.933333 test_accuracy=0.966667
+seed=71 status=completed val_accuracy=0.933333 test_accuracy=0.966667
+seed=97 status=completed val_accuracy=0.933333 test_accuracy=0.966667
+test_accuracy_mean=0.966667 test_accuracy_population_std=0.000000

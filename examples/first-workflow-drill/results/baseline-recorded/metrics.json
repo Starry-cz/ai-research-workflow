@@ -1,0 +1,124 @@
+{
+  "experiment_id": "demo-baseline-v1",
+  "status": "completed",
+  "dataset": {
+    "type": "deterministic synthetic binary classification",
+    "train_samples": 120,
+    "validation_samples": 30,
+    "test_samples": 30
+  },
+  "runs": [
+    {
+      "seed": 17,
+      "status": "completed",
+      "validation": {
+        "loss": 0.6084161951885104,
+        "accuracy": 0.8
+      },
+      "test": {
+        "loss": 0.5999828070245237,
+        "accuracy": 0.8333333333333334
+      },
+      "weights": [
+        0.7428458574690925,
+        -0.3857537447728457,
+        -0.04724317420320333
+      ]
+    },
+    {
+      "seed": 29,
+      "status": "completed",
+      "validation": {
+        "loss": 0.6061891660338179,
+        "accuracy": 0.8
+      },
+      "test": {
+        "loss": 0.5975166870075557,
+        "accuracy": 0.8333333333333334
+      },
+      "weights": [
+        0.7544551619630546,
+        -0.41602969650328087,
+        -0.0387502578168116
+      ]
+    },
+    {
+      "seed": 43,
+      "status": "completed",
+      "validation": {
+        "loss": 0.6099951683201298,
+        "accuracy": 0.8
+      },
+      "test": {
+        "loss": 0.601725811992994,
+        "accuracy": 0.8333333333333334
+      },
+      "weights": [
+        0.732934228848673,
+        -0.3635114378472925,
+        -0.05893355210883575
+      ]
+    },
+    {
+      "seed": 71,
+      "status": "completed",
+      "validation": {
+        "loss": 0.607525575084555,
+        "accuracy": 0.8
+      },
+      "test": {
+        "loss": 0.5990071485832007,
+        "accuracy": 0.8666666666666667
+      },
+      "weights": [
+        0.758418880116105,
+        -0.3690527378971439,
+        -0.06963175671246859
+      ]
+    },
+    {
+      "seed": 97,
+      "status": "completed",
+      "validation": {
+        "loss": 0.6097330904515446,
+        "accuracy": 0.8
+      },
+      "test": {
+        "loss": 0.6014386724516989,
+        "accuracy": 0.8333333333333334
+      },
+      "weights": [
+        0.7361085458993791,
+        -0.3643169414400696,
+        -0.05854541027785129
+      ]
+    }
+  ],
+  "summary": {
+    "validation_accuracy": {
+      "mean": 0.8,
+      "population_std": 0.0,
+      "minimum": 0.8,
+      "maximum": 0.8
+    },
+    "validation_loss": {
+      "mean": 0.6083718390157115,
+      "population_std": 0.001412118618195436,
+      "minimum": 0.6061891660338179,
+      "maximum": 0.6099951683201298
+    },
+    "test_accuracy": {
+      "mean": 0.8400000000000001,
+      "population_std": 0.01333333333333333,
+      "minimum": 0.8333333333333334,
+      "maximum": 0.8666666666666667
+    },
+    "test_loss": {
+      "mean": 0.5999342254119946,
+      "population_std": 0.0015607348864552146,
+      "minimum": 0.5975166870075557,
+      "maximum": 0.601725811992994
+    }
+  },
+  "claim_boundary": "教学演练；不能作为真实任务或方法优越性的证据。"
+}

@@ -1,0 +1,9 @@
+experiment_id=demo-baseline-v1
+command=train.py --config configs/baseline.json --output-dir results/baseline-recorded
+planned_seeds=[17, 29, 43, 71, 97]
+seed=17 status=completed val_accuracy=0.800000 test_accuracy=0.833333
+seed=29 status=completed val_accuracy=0.800000 test_accuracy=0.833333
+seed=43 status=completed val_accuracy=0.800000 test_accuracy=0.833333
+seed=71 status=completed val_accuracy=0.800000 test_accuracy=0.866667
+seed=97 status=completed val_accuracy=0.800000 test_accuracy=0.833333
+test_accuracy_mean=0.840000 test_accuracy_population_std=0.013333

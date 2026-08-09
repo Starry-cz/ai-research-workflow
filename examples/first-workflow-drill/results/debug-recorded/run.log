@@ -1,0 +1,5 @@
+experiment_id=demo-debug-v1
+command=train.py --config configs/debug.json --output-dir results/debug-recorded
+planned_seeds=[17]
+seed=17 status=completed val_accuracy=0.500000 test_accuracy=0.500000
+test_accuracy_mean=0.500000 test_accuracy_population_std=0.000000
