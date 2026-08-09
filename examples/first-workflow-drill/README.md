@@ -36,31 +36,55 @@
 - 在看结果前已经声明运行集合和停止条件；
 - 单个最好结果不能代替全部运行的汇总。
 
-## 2. 创建独立环境
+## 2. 进入目录并创建独立环境
 
-该脚本只使用 Python 标准库，建议使用 Python 3.10 或更高版本。先在此目录创建并激活独立环境，再记录版本：
+该脚本只使用 Python 标准库，建议使用 Python 3.10 或更高版本。先从仓库根目录进入演练目录；下面直接调用虚拟环境中的解释器，不依赖 shell 激活状态。
+
+Windows PowerShell：
 
 ```powershell
+Set-Location examples/first-workflow-drill
 python --version
 python -m venv .venv
-.\.venv\Scripts\Activate.ps1
+.\.venv\Scripts\python.exe --version
 ```
 
-macOS 或 Linux 的激活命令不同，应以所用 shell 和 Python 官方文档为准。`.venv` 不应提交到 Git。
+macOS / Linux（bash 或 zsh）：
+
+```bash
+cd examples/first-workflow-drill
+python3 --version
+python3 -m venv .venv
+./.venv/bin/python --version
+```
+
+如果第二次版本检查失败，不要改用另一个随机解释器继续运行；先回到[L0 工具链起步指南](../../docs/L0_TOOLCHAIN_START.md)核对解释器路径和 `venv`。`.venv` 已被 `.gitignore` 排除，不应提交到 Git。
 
 ## 3. 运行基线和候选设置
 
-先用单一固定 seed 做调试运行，再执行预先声明的比较。请为自己的结果使用新的输出目录：
+先用单一固定 seed 做调试运行，再执行预先声明的比较。请为自己的结果使用新的输出目录。
+
+Windows PowerShell：
 
 ```powershell
-python train.py --config configs/debug.json --output-dir results/my-debug
-python train.py --config configs/baseline.json --output-dir results/my-baseline
-python train.py --config configs/candidate.json --output-dir results/my-candidate
+.\.venv\Scripts\python.exe train.py --config configs/debug.json --output-dir results/my-debug
+.\.venv\Scripts\python.exe train.py --config configs/baseline.json --output-dir results/my-baseline
+.\.venv\Scripts\python.exe train.py --config configs/candidate.json --output-dir results/my-candidate
+```
+
+macOS / Linux：
+
+```bash
+./.venv/bin/python train.py --config configs/debug.json --output-dir results/my-debug
+./.venv/bin/python train.py --config configs/baseline.json --output-dir results/my-baseline
+./.venv/bin/python train.py --config configs/candidate.json --output-dir results/my-candidate
 ```
 
 `debug.json` 只运行很少的 epoch，用来确认参数读取、训练、评价和写文件链路；它不进入 baseline 与 candidate 的正式比较。
 
-脚本拒绝覆盖非空输出目录。需要重跑时创建新的 `run_id` 和目录，保留旧结果及其失败原因。
+三条命令在普通 CPU 上通常应在较短时间内结束。本仓库维护者在 Windows、Python 3.11.2 环境中的一次核验总耗时约 0.83 秒；这只是环境记录，不是性能保证。如果调试命令持续超过一分钟，先中断并检查解释器、当前目录和首个报错，不要继续启动后两组。
+
+脚本拒绝覆盖非空输出目录。需要重跑时创建新的 `run_id` 和目录，例如 `my-debug-02`，保留旧结果及其失败原因。个人运行产生的 `results/*` 默认被演练目录的 `.gitignore` 排除，仓库自带的三个 `*-recorded` 目录除外。
 
 ## 4. 按顺序核验
 
@@ -71,6 +95,29 @@ python train.py --config configs/candidate.json --output-dir results/my-candidat
 5. 将结果填回[实验卡](experiment-card.md)，使用[已填写结果—主张审计](result-claim-audit.md)检查反例和结论边界，再选择 `PROCEED / REFINE / PIVOT / STOP`。
 
 如果运行失败，不要删除目录。保留首个关键报错，并使用[调试与求助卡](../../templates/10-debug-help-request.md)记录完整命令、环境、预期和实际行为。
+
+### 成功标志
+
+每个新输出目录都应存在四个文件，且命令正常退出：
+
+```text
+config.snapshot.json
+environment.json
+metrics.json
+run.log
+```
+
+打开 `metrics.json`，调试目录应有一项运行，baseline 与 candidate 应包含配置中预先声明的全部 seed，且状态为 `completed`。文件存在但运行状态失败，不算完成。
+
+### 常见失败与下一步
+
+| 现象 | 先检查什么 |
+| --- | --- |
+| 找不到 `python`、`python3` 或虚拟环境解释器 | 回到 L0 指南核对安装与真实解释器路径，不混用多个 Python。 |
+| 找不到 `train.py` 或 `configs/...` | 运行 `Get-Location`（PowerShell）或 `pwd`（macOS/Linux），确认当前目录是 `first-workflow-drill`。 |
+| 输出目录已存在或非空 | 不覆盖旧证据；改用带序号的新目录。 |
+| 命令退出但结果状态不是 `completed` | 先读 `run.log` 和 `metrics.json` 中的失败项，再填写调试卡。 |
+| 想从头重跑 | 保留需审计的旧目录；仅对自己创建且确认无保留价值的目录做清理，然后使用新的 `run_id`。不要改动三个 `*-recorded` 示例目录。 |
 
 ## 5. 正确解释这个结果
 
