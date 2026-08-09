@@ -230,9 +230,11 @@ tools:
     name: Zotero
     name_zh: Zotero 文献管理器
     stage: [文献管理, 阅读, 引用]
+    level: [L0, L1, L2, L3]
     type: web-and-desktop
     url: https://www.zotero.org/
     summary: 管理论文 PDF、元数据、标签、笔记和引用信息。
+    recommended_output: 建立论文主记录、查询来源标签、阅读状态和版本链，使用合并而非直接删除的方式处理重复项。
     caveat: 自动抓取的元数据和 PDF 版本仍需人工核对。
 
   # 零基础能力资源：level 表示建议起点，recommended_output 表示最低学习产物。
