@@ -390,79 +390,26 @@ research-project/
 
 ## 可直接复用的模板
 
-不要按编号顺序填写，也不要一次复制全部模板。先按[最小模板包](#只启用当前阶段的最小模板包)选择当前阶段，再在事件发生时启用按需模板。
+不要按编号顺序填写，也不要一次复制全部模板。首页的[最小模板包](#只启用当前阶段的最小模板包)负责选择；[模板目录](templates/README.md)负责说明每张模板的触发条件与完成标准。
 
-| 模板 | 用途 |
-| --- | --- |
-| [零基础准备检查表](templates/00-readiness-checklist.md) | 判断当前能力和补课优先级 |
-| [研究简报](templates/01-research-brief.md) | 固定问题、假设、资源和风险 |
-| [论文阅读卡](templates/02-paper-reading-card.md) | 重建论文的方法与证据链 |
-| [复现规划](templates/03-reproduction-plan.md) | 管理模块、shape、超参数、风险和关卡 |
-| [实验卡](templates/04-experiment-card.md) | 约束单变量实验和采用决策 |
-| [每周、组会与阶段复盘](templates/05-weekly-review.md) | 记录进度、证据、反馈、失败和下一步 |
-| [原子科研任务卡](templates/06-daily-task-card.md) | 把阶段目标缩成一次可执行、可验收的科研会话 |
-| [文献检索账本与领域地图](templates/07-literature-search-log.md) | 管理关键词、查询、去重、论文版本、领域结构和停止条件 |
-| [算力、数据与环境迁移清单](templates/08-compute-data-environment-checklist.md) | 在使用实验室服务器或云 GPU 前核对资源、路径、缓存、预算、断点恢复和结果导出 |
-| [投稿、评审与版本归档卡](templates/09-submission-review-archive.md) | 核验会议规则，冻结投稿版本，管理评审回复、负面结果、转投与归档 |
-| [调试与求助卡](templates/10-debug-help-request.md) | 把环境、命令、报错和最小复现整理成可回答的问题 |
-| [首篇真实 baseline 准入卡](templates/11-first-baseline-gate.md) | 比较两到三个候选，完成资料、数据、命令、算力与最小链路预检，并保留退出和备选路径 |
-| [数学概念卡](templates/12-math-concept-card.md) | 围绕当前阻塞公式完成符号、shape、假设、数值与代码验收 |
-| [数据集卡](templates/13-dataset-card.md) | 固定数据来源、使用权、版本、内容、划分、泄漏和处理证据 |
-| [评价协议卡](templates/14-evaluation-spec.md) | 在运行前固定主指标、实现、聚合、阈值、统计单位与决策规则 |
-| [结果—主张审计卡](templates/15-result-claim-audit.md) | 在写论文结论前核对错误、反例、图表来源与每项主张的证据强度 |
-
-第一次不知道如何填写时，先看[第一次可审计实验演练](examples/first-workflow-drill/README.md)。示例中的数值来自仓库内脚本和配置，只用于说明记录方法，不是论文结果。
+第一次填写前先看[已完成的实验演练](examples/first-workflow-drill/README.md)，只复制当前阶段需要的空白模板。示例数值来自仓库内脚本和配置，用于说明记录方法，不是论文结果。
 
 ## 推荐项目结构
 
+第一次只建立能运行和复查的最小骨架：
+
 ```text
 research-project/
-├── README.md                  # 目标、状态、安装与运行入口
-├── .gitignore                 # 排除数据、缓存、密钥和大体积产物
-├── .env.example               # 只保留变量名和示例，不包含真实凭证
-├── research_brief.md          # 研究问题、假设和资源约束
-├── baseline_candidates.md     # 首篇 baseline 候选、准入证据、停止规则与备选
-├── evaluation_spec.md         # 主指标、实现、统计单位、不确定性与决策门槛
-├── papers/
-│   ├── search_log.md          # 关键词、查询、筛选与去重记录
-│   ├── index.md               # 论文主记录、版本和来源路径
-│   ├── domain_map.md          # 方法、数据、评价、争议与缺口
-│   ├── reading_cards/         # 结构化阅读卡
-│   └── math_cards/            # 被任务触发的数学概念卡
-├── data/
-│   ├── README.md              # 数据集卡：来源、使用权、版本、内容、划分与风险
-│   ├── manifests/             # 文件清单、校验值与 split ID
-│   ├── raw/                   # 原始数据，通常不提交 Git
-│   └── processed/             # 处理后数据，通常不提交 Git
-├── src/
-│   ├── data/                  # 数据加载与预处理
-│   ├── models/                # 模型与模块
-│   ├── train.py               # 训练入口
-│   └── evaluate.py            # 评测入口
-├── configs/                   # 可版本化配置
-├── tests/                     # shape、数据和关键逻辑测试
-├── experiments/
-│   ├── matrix.md              # 实验矩阵
-│   ├── records/               # 单次实验卡
-│   └── logs/                  # 日志索引或外部链接
-├── analysis/
-│   ├── claim_audit.md         # 主张、证据、反证、替代解释和状态
-│   └── error_slices.md        # 配对错误、预设切片与探索性发现
-├── artifacts/
-│   └── README.md              # 权重、checkpoint 和大结果的外部位置与校验值
-├── figures/                   # 可追溯图表与生成脚本
-├── paper/                     # 论文、报告和补充材料
-├── submissions/
-│   └── venue-year/
-│       ├── submission-v1/     # 实际送审文件与版本清单
-│       ├── reviews/           # 原始评审与原子问题卡
-│       ├── response/          # 回复、证据与作者核对记录
-│       └── decision.md        # 决定、修订范围与转投条件
-├── decisions.md               # 关键决策与放弃理由
-└── environment/
-    ├── README.md              # 系统、驱动、框架、安装和验证命令
-    └── requirements.lock      # 示例名：依赖锁定文件或等价环境规范
+├── README.md              # 问题、安装、运行、结果和下一步
+├── .gitignore             # 排除密钥、缓存、数据和大文件
+├── environment/           # Python 与依赖
+├── data/README.md         # 数据来源、版本、划分和本地路径
+├── src/                   # 脚本或第一个 Notebook
+├── configs/               # 本次运行的配置
+└── experiments/           # 命令、日志、指标和失败
 ```
+
+只有在文献、数据版本、实验数量、论文写作或协作规模增长时才扩展目录。完整升级触发条件和 L2–L3 结构见[科研项目结构指南](docs/PROJECT_STRUCTURE.md)。
 
 ## 新手常见误区
 
