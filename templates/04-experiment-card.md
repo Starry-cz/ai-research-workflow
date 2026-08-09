@@ -45,7 +45,10 @@
 - checkpoint / 模型选择规则：
 - 结果汇总方式与波动来源：
 - 预算：
-- 停止条件：
+- 停止门指南：[RESEARCH_STOPPING_AND_PIVOT.md](../docs/RESEARCH_STOPPING_AND_PIVOT.md)
+- 复查触发器：最大 trial / 成本 / 日期 / 关键反证 / 风险：
+- 支持、有效负结果与证据不足的预设判据：
+- 停止条件与重开触发器：
 - 产物生命周期指南：[EXPERIMENT_ARTIFACT_LIFECYCLE.md](../docs/EXPERIMENT_ARTIFACT_LIFECYCLE.md)
 - pilot 升级到代表性规模的条件：
 - 失败判定：
@@ -74,6 +77,8 @@
 - [ ] pilot、剪枝、失败、中断和人工调整都进入 trial 台账
 - [ ] 最终配置只根据允许的验证信息选择并已冻结
 - [ ] seed、重复运行集合和选择规则在看结果前写定
+- [ ] 每项计划尝试都说明将区分什么解释，以及不同结果如何改变决定
+- [ ] 复查触发器、顶层决定和停止原因码已在运行前定义
 - [ ] 输出目录不会覆盖已有结果
 - [ ] 日志、配置和 checkpoint 会被保存
 - [ ] 产物已按临时 / 恢复 / 证据 / 归档 / 受限分类，并声明负责人和首次复查日
@@ -98,6 +103,12 @@
 - pilot 到代表性规模：保持 / 减弱 / 反转 / 未检查
 - 候选收益是否仍低于论文目标，以及这对当前主张的影响：
 
+### 有信息增量的尝试台账
+
+| attempt_id | 唯一新增信息与预测 | 改动 / 固定项 | 证据与成本 | 结果类别 | 已排除解释与决定影响 |
+| --- | --- | --- | --- | --- | --- |
+|  |  |  |  | INVALID_RUN / VALID_NEGATIVE / INCONCLUSIVE / POSITIVE_BOUNDED / RISK_OR_POLICY_STOP |  |
+
 ## 6. 结论与决策
 
 - 结果—主张审计：[15-result-claim-audit.md](15-result-claim-audit.md)
@@ -105,5 +116,9 @@
 - 证据：
 - 无法排除的替代解释：
 - 结论适用边界：
-- 决策：采用 / 回退 / 继续探索
+- 决策：PROCEED / REFINE / PIVOT / STOP
+- 原因码：CONFIRMATORY_READY / NEXT_MILESTONE_READY / INVALID_PROTOCOL / SCOPE_TOO_BROAD / ONE_DISCRIMINATING_TEST / HYPOTHESIS_REFUTED / BASELINE_UNSUITABLE / EXTERNAL_CONSTRAINT_CHANGED / ANSWERED / BUDGET / RISK / NO_DISCRIMINATING_TEST
+- 为什么下一项实验会新增可区分信息，或为什么不存在这样的实验：
+- 已用 / 剩余预算与闭环可行性：
+- 停止对象、保留证据与重开触发器：
 - 下一轮唯一问题：

@@ -92,7 +92,7 @@ macOS / Linux：
 2. 打开两组 `config.snapshot.json`，确认只有 `experiment_id` 与 `learning_rate` 不同；
 3. 打开 `metrics.json`，确认 `runs` 中没有只保留最高分；
 4. 核对 `environment.json` 中的命令、Python 与平台；
-5. 将结果填回[实验卡](experiment-card.md)，使用[已填写结果—主张审计](result-claim-audit.md)检查反例和结论边界，并查看[证据等级与共享判断](evidence-readiness.md)区分公开教学 artifact 与科研主张，再选择 `PROCEED / REFINE / PIVOT / STOP`。
+5. 将结果填回[实验卡](experiment-card.md)，使用[已填写结果—主张审计](result-claim-audit.md)检查反例和结论边界，查看[证据等级与共享判断](evidence-readiness.md)区分公开教学 artifact 与科研主张，再参考[已填写停止决定](stopping-decision.md)选择 `PROCEED / REFINE / PIVOT / STOP` 及原因码。
 
 如果运行失败，不要删除目录。保留首个关键报错，并使用[调试与求助卡](../../templates/10-debug-help-request.md)记录完整命令、环境、预期和实际行为。
 

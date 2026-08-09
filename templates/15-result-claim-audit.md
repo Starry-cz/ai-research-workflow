@@ -112,11 +112,15 @@
 ## 8. 决策
 
 - 原假设：支持 / 部分支持 / 不支持 / 无法判断
+- 结果类别：INVALID_RUN / VALID_NEGATIVE / INCONCLUSIVE / POSITIVE_BOUNDED / RISK_OR_POLICY_STOP
+- 类别依据，以及为什么无效运行没有被写成负结果：
 - 当前最强可辩护结论：
 - 必须降级或删除的表述：
 - 探索性发现形成的新假设：
-- 下一轮确认实验：
+- 下一轮确认实验将区分哪些解释；若没有，为什么不应继续：
 - 决策：PROCEED / REFINE / PIVOT / STOP
+- 原因码：CONFIRMATORY_READY / NEXT_MILESTONE_READY / INVALID_PROTOCOL / SCOPE_TOO_BROAD / ONE_DISCRIMINATING_TEST / HYPOTHESIS_REFUTED / BASELINE_UNSUITABLE / EXTERNAL_CONSTRAINT_CHANGED / ANSWERED / BUDGET / RISK / NO_DISCRIMINATING_TEST
+- 已用 / 剩余预算、停止对象与重开触发器：
 - 证据位置：
 
 > 平均分提高只是一项观察。机制、泛化、效率、因果和理论主张需要各自对应的证据；图表美化不得改变数据与不确定性表达。

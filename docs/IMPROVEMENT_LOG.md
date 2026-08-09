@@ -716,8 +716,29 @@
 - **采取行动**：新增[实验结果证据等级与表达边界](EVIDENCE_READINESS_AND_SHARING.md)、[已填写教学示例](../examples/first-workflow-drill/evidence-readiness.md)和[带日期审计](../reports/EVIDENCE_READINESS_AUDIT_2026-08-09.md)；定义 V0–V4、S0–S3、六种用途状态及升级 / 降级规则；升级结果—主张审计、周会、真实项目接入、核心流程、首页与索引。教学示例被判为 V2 + S3 + `SHAREABLE_ARTIFACT_ONLY`，明确公开可见且可重算仍不构成真实方法主张。
 - **状态**：已完成。
 
+## 2026-08-09：负结果、无进展与研究停止门审计
+
+### I-045：已有继续 / 转向状态，但无法区分失败性质或证明下一轮值得运行
+
+- **当前问题**：仓库已经使用 `PROCEED / REFINE / PIVOT / STOP`，并要求写预算、失败和停止条件，但没有统一区分协议失效、有效负结果、证据不足、范围内正结果和风险停止，也没有要求每次继续实验必须增加能够改变决定的信息。新手可能把环境 / 数据 / 指标错误写成“方法失败”，一次不提升就放弃，或在测试结果可见后无限更换参数、seed 和切片。
+- **经验对照**：
+  - [科研探索目的下 Codex 老在奇怪的地方使劲](https://www.xiaohongshu.com/explore/6a76af7d000000002500743e)反映 AI 容易扩张任务和过度实现；本仓库用唯一问题、最大范围和信息增量约束继续运行，不把个案推广到所有工具；
+  - [跑 baseline 常见的坑](https://www.xiaohongshu.com/explore/6925b658000000001d03acfb)反映环境、数据、评价与方法失败容易混在一起；本仓库先判协议有效性，再判断假设；
+  - [研一暑假做实验才发现，数据管理比调参更重要](https://www.xiaohongshu.com/explore/6a5f37be00000000110120f5)强调版本、划分和设置缺失会导致反复核对；本仓库要求停止决定绑定唯一证据入口；
+  - [研究生的实验记录该怎么记，以结果为导向](https://www.xiaohongshu.com/explore/696fa4fb000000001a02bc8e)反映流水记录难以形成判断；本仓库按问题、尝试、证据和决定组织，同时保留全部失败与负结果；
+  - [知乎：负面结果怎么写？让失败实验也有发表价值](https://zhuanlan.zhihu.com/p/1973701811283195210)和[长期不主动汇报的导师视角](https://zhuanlan.zhihu.com/p/2058886370387571300)只用于确认术语混淆与阻塞延迟暴露的痛点；它们是二手 / 个人经验，不定义统计结论、统一停止次数或师生责任。
+- **规范与项目对照**：
+  - [Learning Research](https://github.com/pengsida/learning_research/blob/master/getting_advanced_in_research.md)把分析实验为何不工作和实验记录列为实验能力；本仓库吸收失败分析，不照搬特定实验室路线；
+  - [AutoResearchClaw](https://github.com/aiming-lab/AutoResearchClaw)展示阶段化决定、人工门控、版本化 artifact、迭代上限和费用保护；本仓库吸收结构，不把固定轮数、金额或自动批准设为通用规则；
+  - [Deep Learning Tuning Playbook](https://github.com/google-research/tuning_playbook)讨论有限预算、方差诊断和收益—复杂度权衡，支持边际信息检查与完整 trial 台账；
+  - [Position: Embracing Negative Results in Machine Learning](https://arxiv.org/abs/2406.03980)讨论机器学习负结果及排除实现缺陷的重要性；它是立场论文，不能替代具体统计设计；
+  - [ORI 选择性报告说明](https://ori.hhs.gov/selective-reporting-results)要求按预先计划报告并披露事后改变；[Fostering Integrity in Research](https://www.ncbi.nlm.nih.gov/books/NBK475939/)讨论隐藏负结果导致的偏差和无效重复。
+- **适用边界**：停止门管理一个明确问题、假设或实验族，不评价个人能力、学业、职业或整个方向。`VALID_NEGATIVE` 不证明零效应；等价、非劣、因果和安全结论需要相应设计。具体 trial 数、预算、复查周期和阈值由任务、团队、领域与资源决定，机构、数据权利方、任务负责人和目标 venue 规则优先。
+- **采取行动**：新增[负结果、无进展与研究停止门](RESEARCH_STOPPING_AND_PIVOT.md)、[已填写教学停止决定](../examples/first-workflow-drill/stopping-decision.md)和[带日期审计](../reports/STOPPING_PIVOT_AUDIT_2026-08-09.md)；定义五类结果、有信息增量的尝试、复查触发器、五个停止门、四类决定和原因码；升级实验卡、周复盘、结果审计、核心流程、README 与索引。教学示例基于现有真实产物，以 `STOP + ANSWERED` 关闭合成实验族，同时以 `PROCEED + NEXT_MILESTONE_READY` 进入真实 baseline。
+- **状态**：实现与本地回归完成，等待远端 CI。
+
 ## 下一轮优先审计
 
 - 等待作者确认许可证、引用署名和首个版本号，再完成 `LICENSE`、`CITATION.cff` 与首个 GitHub Release。
 - 使用固定查询和抽样原文继续测试聚合论文平台的重复、遗漏、版本冲突与代码链接准确性；未形成对照样本前不发布覆盖度评分。
-- 审计负结果、长期无提升与资源耗尽时，如何作出继续、收缩、转向或停止决定，并把失败转成可复用证据而不是无限调参。
+- 审计“实验已停止但知识未迁移”的问题：如何把失败模式、复现差异和适用边界转成可检索的项目知识，而不复制配置、指标和日志事实。
