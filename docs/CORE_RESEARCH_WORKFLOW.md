@@ -228,7 +228,9 @@
 
 归档前按[实验产物生命周期](EXPERIMENT_ARTIFACT_LIFECYCLE.md)区分临时缓存、恢复状态、主张证据、长期归档与受限资产。失败或未采用运行至少保留可解释元数据；仍被图表、评审、交接或下游任务引用的唯一产物不能清理。执行任何远端 GC 或批量删除前，必须检查引用、唯一性、权限、恢复与备份，并在清理后保留墓碑记录。
 
-**推荐产物**：[投稿、评审与版本归档卡](../templates/09-submission-review-archive.md)；有平台到期、存储告警或结题清理时使用[产物生命周期指南](EXPERIMENT_ARTIFACT_LIFECYCLE.md)。通过 G4 后再对外发布结论和产物。
+如果同一失败可能再次出现、复现差异会影响后续选择，或停止 / 转向理由需要跨成员保存，再按[研究知识提炼](RESEARCH_KNOWLEDGE_CAPTURE.md)建立薄索引。知识条目只保存检索入口、范围、诊断顺序和决定后果；config、指标、日志和原始反馈仍回到唯一来源。项目结束不要求为每次运行建卡。
+
+**推荐产物**：[投稿、评审与版本归档卡](../templates/09-submission-review-archive.md)；有平台到期、存储告警或结题清理时使用[产物生命周期指南](EXPERIMENT_ARTIFACT_LIFECYCLE.md)，有跨运行知识复用需求时使用[研究知识提炼](RESEARCH_KNOWLEDGE_CAPTURE.md)。通过 G4 后再对外发布结论和产物。
 
 ## 一次项目的最短闭环
 

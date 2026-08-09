@@ -121,4 +121,7 @@
 - 为什么下一项实验会新增可区分信息，或为什么不存在这样的实验：
 - 已用 / 剩余预算与闭环可行性：
 - 停止对象、保留证据与重开触发器：
+- 是否触发知识提炼：否 / 是；触发理由：重复出现 / 跨运行复用 / 关键决定 / 项目暂停交接 / 其他
+- 候选知识类型与可检索标题：FAILURE_PATTERN / REPRODUCTION_DELTA / NEGATIVE_FINDING / DECISION_RATIONALE / PROTOCOL_GUARDRAIL / REUSABLE_PROCEDURE；
+- 知识条目、原证据与状态：
 - 下一轮唯一问题：

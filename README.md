@@ -59,6 +59,7 @@
 | AI 给出的内容真假难辨 | 来源分层、风险登记和人工验收 |
 | 实验做了很多却写不成论文 | 从研究问题到证据表格的一一对应 |
 | 长期不提升，不知道该继续还是停止 | 结果分类、有效尝试台账、预算 / 信息增量停止门和重开条件 |
+| 相同错误反复排查，经验无法被下一位成员找到 | 薄知识索引、原证据链接、适用范围、复用回写和 supersede 状态 |
 | 有结果却不知道能说到什么程度 | V0–V4 验证等级、S0–S3 共享权限和用途状态 |
 | 自己能看懂，别人无法复查 | 唯一交接入口、指标重算和冷启动复跑 |
 | 导师给了任务却不知道能否直接动手 | 任务授权卡、三类动作与确认 / 升级状态 |
@@ -75,6 +76,7 @@
 - **L1：能运行 Notebook，但没有复现过论文** → 先完成[第一个机器学习闭环](docs/ML_FIRST_LOOP.md)和[第一次工作流演练](examples/first-workflow-drill/README.md)，再按[方向选择决策树](docs/DIRECTION_FIRST_CHOICE.md)建立[研究简报](templates/01-research-brief.md)和[文献检索账本](templates/07-literature-search-log.md)，从[首篇 baseline 筛选表](docs/CORE_RESEARCH_WORKFLOW.md#首篇-baseline-筛选表)进入 M4–M6；
 - **L2：已经拿到或跑通过代码，但实验不可解释或不可复现** → 先按[真实代码库最小接入](docs/ADOPT_WORKFLOW_IN_EXISTING_PROJECT.md)映射现有 README、环境和实验台账，再使用[复现规划](templates/03-reproduction-plan.md)和[baseline 稳定化门](docs/BASELINE_STABILIZATION_GATE.md)决定下一步；
 - **连续不提升、反复失败或预算快用完** → 先用[研究停止门](docs/RESEARCH_STOPPING_AND_PIVOT.md)区分无效运行、有效负结果与证据不足，再判断下一项实验是否真的会改变决定；
+- **同一失败反复出现，或项目准备暂停 / 交接** → 用[研究知识提炼指南](docs/RESEARCH_KNOWLEDGE_CAPTURE.md)建立薄索引，条目只链接原证据并写清适用范围、状态与替代关系；
 - **已经有实验结果，准备组会、共享、决策或写作** → 先用[实验结果证据等级与表达边界](docs/EVIDENCE_READINESS_AND_SHARING.md)分开判断证据成熟度和共享权限，再使用[结果—主张审计](templates/15-result-claim-audit.md)检查具体表述；
 - **正在投稿、回复评审或转投** → 使用[投稿、评审与版本归档卡](templates/09-submission-review-archive.md)，先核验当前 venue 规则并冻结实际送审版本。
 
@@ -217,7 +219,7 @@ research-project/
 | **M5 论文与代码**<br>精读论文并阅读官方代码 | **产物**：阅读卡、模块映射、风险登记表。<br>**完成**：能画出数据流并定位代码入口。 |
 | **M6 复现与评测**<br>预训练评测、单批次测试、完整复现 | **产物**：复现日志、配置、指标差异表和[稳定化决定](docs/BASELINE_STABILIZATION_GATE.md)。<br>**完成**：论文目标与本地 baseline 已分开，差距、稳定性和允许主张明确。 |
 | **M7 改进与失败分析**<br>按[首次安全改码](docs/SAFE_FIRST_CODE_CHANGE.md)完成一个单变量改进 | **产物**：修改前快照、可审查 diff、检查证据、假设卡、有效尝试台账、实验矩阵和消融结果。<br>**完成**：只有 `READY_FOR_CHANGE` 的 baseline 进入改进；修复 / 重构 / 方法改动已分离；无效运行、有效负结果和证据不足已分开，继续实验能说明新增信息。 |
-| **M8 分析与表达**<br>结果分析、写作和复盘 | **产物**：研究报告、图表、失败项、[继续 / 转向 / 停止决定](docs/RESEARCH_STOPPING_AND_PIVOT.md)和下一步；每项输出标注[证据等级与共享边界](docs/EVIDENCE_READINESS_AND_SHARING.md)，关键运行按需形成[交接入口](docs/RUN_HANDOFF_REPLAY.md)和[产物保留决定](docs/EXPERIMENT_ARTIFACT_LIFECYCLE.md)。<br>**完成**：组会、共享、决定和论文表述不混级；停止对象、原因码和重开条件明确，每个结论都能回到证据。 |
+| **M8 分析与表达**<br>结果分析、写作和复盘 | **产物**：研究报告、图表、失败项、[继续 / 转向 / 停止决定](docs/RESEARCH_STOPPING_AND_PIVOT.md)和下一步；按需形成[交接入口](docs/RUN_HANDOFF_REPLAY.md)、[知识条目](docs/RESEARCH_KNOWLEDGE_CAPTURE.md)和[产物保留决定](docs/EXPERIMENT_ARTIFACT_LIFECYCLE.md)。<br>**完成**：表达、共享与决定不混级；停止对象明确；跨运行经验可检索、可核验、可 supersede，每个结论仍回到原证据。 |
 
 每次复盘只选择一种状态：
 
@@ -284,7 +286,7 @@ research-project/
 | **5 形成研究问题** | 失败现象转成可证伪假设，并写出反例与最小验证实验。 |
 | **6 实验设计与执行** | 评价协议先冻结；先按[首次安全改码](docs/SAFE_FIRST_CODE_CHANGE.md)审查修改范围与最低测试，再按[公平调参与搜索预算](docs/FAIR_TUNING_BUDGET.md)审计 baseline 与候选的搜索机会；全部 trial 和确认运行可追踪。 |
 | **7 分析与表达** | 观察、解释与主张分开；反例、替代解释和图表来源已审计。 |
-| **8 交接、投稿与归档** | 关键运行完成对应深度的复查并取得产物保留决定；官方规则已核验，实际提交版本、评审、回复和负面结果已冻结。 |
+| **8 交接、知识提炼与归档** | 关键运行完成对应深度的复查并取得产物保留决定；可复用失败 / 决定进入薄索引；实际提交版本、评审、回复和负面结果已冻结。 |
 
 四个停止检查点是：**G1 方向与 baseline、G2 文献与假设、G3 复现与实验、G4 证据与交付**。没有通过当前门控时，不进入下一阶段，也不允许 AI 自动批准关键研究判断。
 
@@ -301,6 +303,7 @@ research-project/
 - [评价协议](docs/EVALUATION_FIRST_SPEC.md)
 - [公平调参与搜索预算](docs/FAIR_TUNING_BUDGET.md)
 - [负结果、无进展与研究停止门](docs/RESEARCH_STOPPING_AND_PIVOT.md)
+- [从实验记录到可检索研究知识](docs/RESEARCH_KNOWLEDGE_CAPTURE.md)
 - [结果到主张](docs/RESULT_TO_CLAIM.md)
 - [模板最短路径](templates/README.md)
 
@@ -414,6 +417,7 @@ research-project/
 | **从结果形成主张** | [从实验结果到可辩护主张](docs/RESULT_TO_CLAIM.md) / [NeurIPS Paper Checklist](https://neurips.cc/public/guides/PaperChecklist)<br>结果完整性、配对错误、替代解释、图表来源、主张范围与证据状态。 |
 | **判断结果能否汇报、共享或写入论文** | [实验结果证据等级与表达边界](docs/EVIDENCE_READINESS_AND_SHARING.md) / [已填写教学示例](examples/first-workflow-drill/evidence-readiness.md)<br>分开判断 V0–V4 验证成熟度、S0–S3 共享权限、允许表述和用途状态。 |
 | **长期无提升、负结果或预算耗尽时做决定** | [负结果、无进展与研究停止门](docs/RESEARCH_STOPPING_AND_PIVOT.md) / [已填写教学决定](examples/first-workflow-drill/stopping-decision.md)<br>区分无效运行、有效负结果和证据不足，只为能改变决定的新证据继续实验。 |
+| **把失败和决定变成可检索项目知识** | [研究知识提炼指南](docs/RESEARCH_KNOWLEDGE_CAPTURE.md) / [教学知识索引](examples/first-workflow-drill/knowledge-index.md)<br>按症状与组件检索，链接原始证据，复用前核对范围，复用后回写或 supersede。 |
 | **第一次修改论文代码** | [第一次安全修改论文代码](docs/SAFE_FIRST_CODE_CHANGE.md) / [GitHub AI 代码审阅](https://docs.github.com/en/copilot/tutorials/review-ai-generated-code)<br>修改前 baseline、改动类别、可审查 diff、按风险选择的检查和准入决定。 |
 | **管理大文件与数据版本** | [Git LFS](https://git-lfs.com/) / [DVC](https://github.com/treeverse/dvc)<br>大文件指针、数据版本与外部存储位置；首个小实验只需先用 `.gitignore`、数据清单和校验值，规模增长后再引入。 |
 | **分层搜索与阅读论文** | [How to Search and Read a Paper](https://github.com/qiyuangong/How_to_Search_and_Read_a_Paper)<br>为检索结果分层，只对核心论文完成精读、讨论和可复用笔记。 |
