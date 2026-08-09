@@ -659,8 +659,27 @@
 - **采取行动**：新增[导师与组会反馈闭环](MENTOR_FEEDBACK_LOOP.md)、[已填写反馈示例](../examples/first-workflow-drill/feedback-loop.md)和[带日期审计](../reports/MENTOR_FEEDBACK_AUDIT_2026-08-09.md)；定义七类反馈、六种处理决定和六种关闭状态；将原始语义、解释确认、事后性、单一负责人、产物、验收和重开条件同步到周会、任务卡、研究简报、核心工作流与首页。示例明确来自仓库审计，不伪装成真实导师意见。
 - **状态**：已完成。
 
+## 2026-08-09：第一项导师任务授权边界审计
+
+### I-042：“导师让我做”没有被拆成可执行、需确认和必须升级的动作
+
+- **当前问题**：研究简报、方向选择和真实项目接入原先会询问任务、权限和可修改范围，但没有统一区分技术访问、任务委托和研究决策权，也没有给出明确开始状态。新手可能拥有 Git 写权限或服务器账号后就修改共享 baseline、上传受限数据、调用付费服务、公开联系上游或删除旧产物；也可能因权限不完全明确而停止所有只读检查，无法形成可供负责人判断的证据。
+- **经验对照**：
+  - [计算机博士 Codex 科研入门使用心得](https://www.xiaohongshu.com/explore/6a4e055c000000001702d0c8)建议先向 AI 说明目标、已有文件和预期结果，并限制修改原件；本仓库吸收任务与文件边界，不把个人提示词经验当作团队授权，页面可能需要登录；
+  - [科研探索目的下 Codex 老在奇怪的地方使劲](https://www.xiaohongshu.com/explore/6a76af7d000000002500743e)反映 AI 扩大任务和过度工程化会偏离假设验证；本仓库用时间盒和最大范围收敛任务，但保留伦理、数据和破坏性动作的必要门控；
+  - 知乎文章[作为研究生新手，应该如何和导师沟通](https://zhuanlan.zhihu.com/p/2033116043812532613)建议用问题、证据、选项和明确请求支持决策。文章由科研服务机构发布，只用于确认沟通痛点，不定义统一师生制度；
+  - [Learning Research](https://github.com/pengsida/learning_research)通过课程作业、具体论文、实验室项目和持续反馈帮助新手进入科研；其路径来自特定 3D Vision 实验室，“参与项目”不能自动推出共享代码、数据和对外权限。
+- **规范与项目对照**：
+  - [GitHub repository roles](https://docs.github.com/en/organizations/managing-user-access-to-your-organizations-repositories/managing-repository-roles/repository-roles-for-an-organization)区分 Read、Triage、Write、Maintain 与 Admin，并建议授予完成职责所需的最低角色；[protected branches](https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-protected-branches/about-protected-branches)可以要求审阅、状态检查和限制 push，说明平台权限与一次具体变更的批准不是同一件事；
+  - [GitHub fork permissions and visibility](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/working-with-forks/about-permissions-and-visibility-of-forks)说明公开、私有与组织 fork 的可见性和权限不同，私有内容不能照搬公开 fork 流程；
+  - [The Turing Way Data Management Plan](https://book.the-turing-way.org/reproducible-research/rdm/rdm-dmp/)要求记录谁能访问、谁授予访问、存储、公开边界与成本；[Sharing Sensitive Data](https://book.the-turing-way.org/project-design/data-security/sdpm/sharing-sensitive-data/)说明匿名化后仍有重识别风险，可采用条件访问；
+  - [AutoResearchClaw](https://github.com/aiming-lab/AutoResearchClaw)展示人工门控、暂停、拒绝、预算和版本化，也允许 `--auto-approve`。本仓库吸收门控结构，不把自动批准设为零基础真实科研默认值。
+- **适用边界**：本指南是入门任务分流，不构成法律、伦理或安全意见，不能覆盖实验室、机构、资助方、合同、数据提供者或 venue 的正式政策。不同团队可以调整动作类别，但应明确决定负责人和依据。公开教学练习通常允许本地只读与新目录运行；受监管、商业敏感、人类参与者或高风险项目需要专门流程。
+- **采取行动**：新增[第一项导师任务授权边界](FIRST_MENTOR_TASK_BOUNDARY.md)、[已填写教学示例](../examples/first-workflow-drill/task-authority.md)和[带日期审计](../reports/FIRST_MENTOR_TASK_AUDIT_2026-08-09.md)；定义任务授权卡、`EXECUTE_WITHIN_SCOPE / CONFIRM_BEFORE_CHANGE / STOP_AND_ESCALATE` 三类动作与五种任务状态；把负责人、读写运行分享付费范围、确认记录和升级项嵌入研究简报、任务卡、算力迁移、方向选择、真实项目接入和安全改码。本轮不新增空白模板，避免重复记录。
+- **状态**：已完成。
+
 ## 下一轮优先审计
 
 - 等待作者确认许可证、引用署名和首个版本号，再完成 `LICENSE`、`CITATION.cff` 与首个 GitHub Release。
 - 使用固定查询和抽样原文继续测试聚合论文平台的重复、遗漏、版本冲突与代码链接准确性；未形成对照样本前不发布覆盖度评分。
-- 审计零基础读者接到第一项导师任务时，能否区分被授权的修改、需要确认的研究判断和必须升级的伦理 / 数据 / 对外承诺，避免因“导师让我做”而越权或误改协议。
+- 审计零基础读者第一次向开源上游求助或贡献时，能否区分本地问题、项目缺陷、研究分歧与安全 / 私密报告，并提供最小复现而不泄露课题组材料。

@@ -5,6 +5,7 @@
 ## 最短使用路径
 
 - **还不会运行脚本**：只填 `00`，然后阅读仓库内已填写演练；
+- **刚接到导师 / 团队任务**：先在 `01` 的授权字段中记录负责人、允许范围和任务状态，再进入对应阶段；
 - **正在选第一篇论文**：使用 `01 + 07 + 11`；
 - **正在复现**：使用 `02 + 03`，真实数据到位后加入 `13`；
 - **正在做正式实验**：使用 `04 + 14`，结果出来后使用 `15`；
@@ -19,7 +20,7 @@
 | 模板 | 使用时机 | 完成标志 |
 | --- | --- | --- |
 | [00-readiness-checklist.md](00-readiness-checklist.md) | 开始科研前 | 找到当前最大能力缺口 |
-| [01-research-brief.md](01-research-brief.md) | 选择方向和 baseline 时 | 问题、资源和风险边界明确 |
+| [01-research-brief.md](01-research-brief.md) | 选择方向、接到导师任务和筛选 baseline 时 | 问题、资源、任务授权和风险边界明确 |
 | [02-paper-reading-card.md](02-paper-reading-card.md) | 阅读核心论文时 | 方法与证据可以回到原文位置 |
 | [03-reproduction-plan.md](03-reproduction-plan.md) | 克隆论文代码后 | 复现被拆成可验证关卡，论文目标、本地 baseline 与 AI 改动可审计 |
 | [04-experiment-card.md](04-experiment-card.md) | 每次运行正式实验前 | baseline 已稳定，问题、规模升级、重复运行、选择规则、停止条件和产物生命周期明确 |

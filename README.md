@@ -59,6 +59,7 @@
 | AI 给出的内容真假难辨 | 来源分层、风险登记和人工验收 |
 | 实验做了很多却写不成论文 | 从研究问题到证据表格的一一对应 |
 | 自己能看懂，别人无法复查 | 唯一交接入口、指标重算和冷启动复跑 |
+| 导师给了任务却不知道能否直接动手 | 任务授权卡、三类动作与确认 / 升级状态 |
 
 ## 第一次使用：从这里开始
 
@@ -66,6 +67,7 @@
 
 不需要从头读完整份 README。先选择最接近自己的状态：
 
+- **刚接到导师或团队的第一项任务** → 先用[第一项导师任务授权边界](docs/FIRST_MENTOR_TASK_BOUNDARY.md)确认交付、允许读取 / 写入 / 运行 / 分享的范围和决定负责人，再进入方向选择或真实项目接入；
 - **L0：不会终端、Git 或 Python 环境** → 先做[零基础准备检查表](templates/00-readiness-checklist.md)，按[L0 工具链最小起步指南](docs/L0_TOOLCHAIN_START.md)留下环境记录和第一次 commit，再完成[第一次工作流演练](examples/first-workflow-drill/README.md)和里程碑 M1–M3；
 - **L1：能运行 Notebook，但没有复现过论文** → 先完成[第一个机器学习闭环](docs/ML_FIRST_LOOP.md)和[第一次工作流演练](examples/first-workflow-drill/README.md)，再按[方向选择决策树](docs/DIRECTION_FIRST_CHOICE.md)建立[研究简报](templates/01-research-brief.md)和[文献检索账本](templates/07-literature-search-log.md)，从[首篇 baseline 筛选表](docs/CORE_RESEARCH_WORKFLOW.md#首篇-baseline-筛选表)进入 M4–M6；
 - **L2：已经拿到或跑通过代码，但实验不可解释或不可复现** → 先按[真实代码库最小接入](docs/ADOPT_WORKFLOW_IN_EXISTING_PROJECT.md)映射现有 README、环境和实验台账，再使用[复现规划](templates/03-reproduction-plan.md)和[baseline 稳定化门](docs/BASELINE_STABILIZATION_GATE.md)决定下一步；
@@ -80,7 +82,7 @@
 | 当前阶段 | 最小模板包与升级条件 |
 | --- | --- |
 | **L0 工具起步** | 只填[准备检查表](templates/00-readiness-checklist.md)，其余先看[已填写演练](examples/first-workflow-drill/README.md)，不要复制全部空模板。<br>**升级**：能独立运行脚本并找到日志、配置和指标。 |
-| **L1 选方向** | [研究简报](templates/01-research-brief.md) + [文献检索账本](templates/07-literature-search-log.md) + [baseline 准入卡](templates/11-first-baseline-gate.md)。<br>**升级**：候选通过低成本预检并有备选。 |
+| **L1 选方向** | [研究简报](templates/01-research-brief.md) + [文献检索账本](templates/07-literature-search-log.md) + [baseline 准入卡](templates/11-first-baseline-gate.md)；导师任务先填简报内的授权字段。<br>**升级**：候选通过低成本预检并有备选，下一步处于 `READY_WITHIN_SCOPE`。 |
 | **L2 做复现** | [论文阅读卡](templates/02-paper-reading-card.md) + [复现规划](templates/03-reproduction-plan.md)；取得数据后启用[数据集卡](templates/13-dataset-card.md)。<br>**升级**：论文目标与本地 baseline 已分开，并取得稳定化门控决定。 |
 | **L3 做实验** | 运行前用[实验卡](templates/04-experiment-card.md)和[评价协议卡](templates/14-evaluation-spec.md)，运行后用[结果—主张审计](templates/15-result-claim-audit.md)。<br>**升级**：主张、反证、图表和结论均可回到证据。 |
 
@@ -92,10 +94,10 @@
 
 不要先下载几十个项目。下面五件事描述完整起步阶段，不要求同一天完成：
 
-1. 用[零基础准备检查表](templates/00-readiness-checklist.md)判断自己目前在哪一层；
+1. 用[零基础准备检查表](templates/00-readiness-checklist.md)判断自己目前在哪一层；已有导师或团队任务时，同时确认[第一项任务的授权边界](docs/FIRST_MENTOR_TASK_BOUNDARY.md)；
 2. 按[L0 工具链最小起步指南](docs/L0_TOOLCHAIN_START.md)安装并核验 Git、Python 和独立环境，不混用不同系统的命令；
 3. 从一个成熟方向列出两到三个候选，使用[首篇真实 baseline 准入卡](templates/11-first-baseline-gate.md)完成低成本预检，再选择有官方代码、训练脚本和可承受算力的一篇；
-4. 克隆选定项目后，按[真实代码库最小接入](docs/ADOPT_WORKFLOW_IN_EXISTING_PROJECT.md)盘点上游、权限和现有记录，再运行官方预训练模型的评测或演示，不要立刻从头训练；
+4. 克隆选定项目后，按[真实代码库最小接入](docs/ADOPT_WORKFLOW_IN_EXISTING_PROJECT.md)盘点上游、任务授权和现有记录，再在获准范围内运行官方预训练模型的评测或演示，不要立刻从头训练；
 5. 建立[复现规划](templates/03-reproduction-plan.md)补齐缺失证据；如果需要云端算力或迁移大数据，再完成[算力、数据与环境迁移清单](templates/08-compute-data-environment-checklist.md)。
 
 ### 第一天的最低产物
@@ -111,7 +113,7 @@ research-project/
 └── environment/           # 依赖与环境说明
 ```
 
-第一天不要求提出创新点。只要能够解释“我要复现哪篇论文、为什么选择它、需要哪些数据和算力、下一步运行什么命令”，就已经完成起步。
+第一天不要求提出创新点。只要能够解释“我要复现哪篇论文、为什么选择它、需要哪些数据和算力、哪些动作已经获准、下一步运行什么命令”，就已经完成起步。
 
 ## 先完成一次工作流演练
 
@@ -397,6 +399,7 @@ research-project/
 | **管理文献与重复版本** | [Zotero](https://www.zotero.org/) / [重复项说明](https://www.zotero.org/support/duplicate_detection)<br>主记录、来源标签、版本链、阅读状态和可核验元数据。 |
 | **查截止时间** | [CCFDDL](https://ccfddl.com/)<br>带时区的时间表，最终以官网为准。 |
 | **查代码与数据** | [GitHub](https://github.com/) / [Hugging Face Datasets](https://huggingface.co/datasets)<br>官方仓库、commit、数据 revision、许可证和评测协议。趋势论文页只用于发现候选，不能替代代码与基准核验。 |
+| **接到第一项导师任务** | [任务授权边界](docs/FIRST_MENTOR_TASK_BOUNDARY.md) / [已填写示例](examples/first-workflow-drill/task-authority.md)<br>区分可直接执行、先确认和停止升级；技术权限不等于任务授权。 |
 | **审计数据集** | [零基础数据集审计指南](docs/DATASET_FIRST_AUDIT.md) / [Hugging Face Dataset Cards](https://github.com/huggingface/datasets/blob/main/templates/README_guide.md)<br>来源、许可证、revision、schema、划分、泄漏、隐私与可重建证据。 |
 | **冻结评价协议** | [零基础评价协议指南](docs/EVALUATION_FIRST_SPEC.md) / [scikit-learn Metrics](https://scikit-learn.org/stable/modules/model_evaluation.html)<br>主指标、实现、聚合、阈值、统计单位、不确定性、人工评价和决策门槛。 |
 | **从结果形成主张** | [从实验结果到可辩护主张](docs/RESULT_TO_CLAIM.md) / [NeurIPS Paper Checklist](https://neurips.cc/public/guides/PaperChecklist)<br>结果完整性、配对错误、替代解释、图表来源、主张范围与证据状态。 |
@@ -438,6 +441,7 @@ research-project/
 | 先收藏几十个课程 | 每次只选一个主资源，并留下可运行产物 |
 | 数学没学完就不能科研 | 围绕当前任务按需补数学，再用数值和代码核对 |
 | 数据能下载就能直接使用 | 先核对发布者、许可证、版本、隐私、划分和再分发边界 |
+| 有账号或 Git 写权限就能直接改 | 先确认本次任务允许的分支、数据、预算、共享修改与对外动作 |
 | 指标越多越能证明有效 | 先固定一个对应主张的主指标，再用辅助指标解释代价与边界 |
 | 代码跑起来就是复现成功 | 区分官方评测、单批次测试、完整训练和结果容差 |
 | 越新的论文越适合当 baseline | 首个 baseline 更看重代码、训练、评测、算力和可理解性 |
