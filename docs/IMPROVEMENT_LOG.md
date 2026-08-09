@@ -463,7 +463,23 @@
 - **采取行动**：新增零依赖 `scripts/validate_repository.py`，检查全部 Markdown 相对链接与中英文锚点、未闭合代码块、根 README 两列上限与 600 行阈值、`docs/README.md` 指南覆盖和 `templates/README.md` 模板覆盖；新增只读 GitHub Actions 在每次 push / pull request 执行；贡献指南增加一条本地命令和 CI 验收项。
 - **状态**：已完成。
 
+## 2026-08-09：机器可读资源目录审计
+
+### I-031：`tools.yml` 仍保存动态 Star 快照，可能让后续页面重新生成热度排序
+
+- **当前问题**：首页已经删除高 Star 排名，但机器可读目录仍有 24 个 `star_snapshot` 字段和“高 Star 方法与学习资源”分组。后续若从 YAML 生成网页或筛选器，会重新把过期热度放回用户决策路径；目录也没有自动检查必需字段、重复 ID、重复 URL 或非 HTTPS 链接。
+- **经验对照**：
+  - 知乎关于[计算机公开课资源](https://www.zhihu.com/question/38335108/answer/1993372768251687650)指出真正困难是从海量材料中判断投入对象，而不是继续累积热度指标；经验内容不用于评判具体项目；
+  - [入门 MLLM Day 4](https://www.xiaohongshu.com/explore/6a3cd57f0000000011019ccd)围绕任务产物组织行动，不依赖项目热度；访问可能需要登录，本仓库只吸收任务优先原则。
+- **规范与项目对照**：
+  - [Awesome Machine Learning Resources](https://github.com/ZhiningLiu1998/awesome-machine-learning-resources)通过主题分类和长期不活跃标记帮助发现候选，而不是把所有二级目录按 Star 变成单一路线；
+  - [nature-skills](https://github.com/Yuan1z0825/nature-skills)强调入口应说明任务适配、输入、输出和边界，支持机器目录把稳定的决策字段置于动态热度之前；
+  - 本仓库的 `docs/GITHUB_RESOURCE_CATALOG.md` 已按阶段、任务、建议吸收内容和边界组织，`tools.yml` 应作为同一原则的机器表示，而非维护第二套排名。
+- **适用边界**：Star 可以用于一次性生态调研或发现候选，但必须带日期、不能代表正确性或适用性，也不应进入稳定接口。删除 Star 不意味着所有资源同等推荐；阶段、前置能力、建议产物、维护状态、许可证和风险仍需人工核验。
+- **采取行动**：将 `tools.yml` schema 版本升级到 v3，删除 24 个 `star_snapshot` 字段并重命名分组说明；贡献示例和规则明确禁止在机器目录保存 Star；扩展零依赖仓库检查，解析当前受限 YAML 目录结构，验证版本、核验日期、52 个条目的必需字段、唯一 ID、唯一 URL 和 HTTPS；检查已本地通过并由 Repository quality CI 执行。
+- **状态**：已完成。
+
 ## 下一轮优先审计
 
 - 等待作者确认许可证、引用署名和首个版本号，再完成 `LICENSE`、`CITATION.cff` 与首个 GitHub Release。
-- 审计机器可读 `tools.yml` 是否与新的资源目录、任务导航和“Star 不排序”规则一致，并补充无第三方依赖的结构校验。
+- 审计 `tools.yml` 的 52 个条目是否都具备适用等级和建议产物；先定义不同资源类型的必需字段，避免用一个 schema 强迫搜索引擎、课程和研究框架填写不适用信息。

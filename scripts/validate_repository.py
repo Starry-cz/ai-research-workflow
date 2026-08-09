@@ -12,6 +12,8 @@ REPOSITORY_ROOT = Path(__file__).resolve().parents[1]
 MARKDOWN_LINK = re.compile(r"!?\[[^\]]*\]\(([^)]+)\)")
 HEADING = re.compile(r"^#{1,6}\s+(.+?)\s*$")
 FENCE = re.compile(r"^\s*(```|~~~)")
+TOOL_START = re.compile(r"^  - id:\s*([a-z0-9][a-z0-9-]*)\s*$")
+TOOL_FIELD = re.compile(r"^    ([a-z][a-z0-9_]*):\s*(.+?)\s*$")
 
 
 class ValidationError(RuntimeError):
@@ -116,6 +118,52 @@ def validate_index(index_path: Path, members: list[Path], label: str) -> None:
         raise ValidationError(f"{label}缺少条目：{missing}")
 
 
+def validate_tools_catalog() -> int:
+    """按 tools.yml 当前的受限目录结构检查条目，不引入 YAML 依赖。"""
+    path = REPOSITORY_ROOT / "tools.yml"
+    text = path.read_text(encoding="utf-8")
+    if "star_snapshot:" in text:
+        raise ValidationError("tools.yml 不应保存动态 Star 快照")
+    if not re.search(r'^version:\s*\d+\s*$', text, flags=re.MULTILINE):
+        raise ValidationError("tools.yml 缺少整数 version")
+    if not re.search(r'^last_verified:\s*"\d{4}-\d{2}-\d{2}"\s*$', text, flags=re.MULTILINE):
+        raise ValidationError("tools.yml 缺少 YYYY-MM-DD 格式的 last_verified")
+
+    entries: list[dict[str, str]] = []
+    current: dict[str, str] | None = None
+    for line in text.splitlines():
+        start_match = TOOL_START.match(line)
+        if start_match:
+            if current is not None:
+                entries.append(current)
+            current = {"id": start_match.group(1)}
+            continue
+        field_match = TOOL_FIELD.match(line)
+        if current is not None and field_match:
+            current[field_match.group(1)] = field_match.group(2)
+    if current is not None:
+        entries.append(current)
+
+    require_fields = {"id", "name", "name_zh", "stage", "type", "url", "summary", "caveat"}
+    ids: set[str] = set()
+    urls: set[str] = set()
+    for entry in entries:
+        missing = sorted(require_fields - set(entry))
+        if missing:
+            raise ValidationError(f"tools.yml 条目 {entry['id']} 缺少字段：{missing}")
+        if entry["id"] in ids:
+            raise ValidationError(f"tools.yml 出现重复 id：{entry['id']}")
+        if entry["url"] in urls:
+            raise ValidationError(f"tools.yml 出现重复 url：{entry['url']}")
+        if not entry["url"].startswith("https://"):
+            raise ValidationError(f"tools.yml 条目 {entry['id']} 的 url 不是 HTTPS")
+        ids.add(entry["id"])
+        urls.add(entry["url"])
+    if not entries:
+        raise ValidationError("tools.yml 没有工具条目")
+    return len(entries)
+
+
 def main() -> None:
     markdown_files = sorted(REPOSITORY_ROOT.rglob("*.md"))
     validate_links(markdown_files)
@@ -128,9 +176,10 @@ def main() -> None:
     )
     validate_index(REPOSITORY_ROOT / "docs" / "README.md", docs, "docs/README.md ")
     validate_index(REPOSITORY_ROOT / "templates" / "README.md", templates, "templates/README.md ")
+    tool_count = validate_tools_catalog()
 
     print(f"PASS：已检查 {len(markdown_files)} 个 Markdown 文件。")
-    print("相对链接与锚点、代码块、README 两列表格与长度、指南索引、模板索引均通过。")
+    print(f"相对链接与锚点、代码块、README 约束、两类索引和 {tool_count} 个工具条目均通过。")
 
 
 if __name__ == "__main__":
