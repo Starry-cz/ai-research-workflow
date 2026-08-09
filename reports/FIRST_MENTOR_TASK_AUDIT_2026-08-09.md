@@ -41,8 +41,8 @@
 - 仓库文档质量检查通过：共检查 62 个 Markdown 文件，相对链接、锚点、代码块、README 约束、两类索引和 51 个工具条目均通过；
 - 第一次工作流演练验收通过：三组记录产物完整，全部计划运行完成，正式比较只改变 `learning_rate`；
 - `git diff --check` 通过；
-- 远端 GitHub Actions 状态在本轮提交推送后回填。
+- 远端 [Repository quality](https://github.com/Starry-cz/ai-research-workflow/actions/runs/31312031013) 与 [First workflow drill](https://github.com/Starry-cz/ai-research-workflow/actions/runs/31312031010) 均通过。
 
 ## 状态
 
-文档实现与本地验证已完成，等待远端验证。
+文档实现、本地验证与远端验证均已完成。
