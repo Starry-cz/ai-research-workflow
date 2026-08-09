@@ -67,7 +67,7 @@
 
 - **L0：不会终端、Git 或 Python 环境** → 先做[零基础准备检查表](templates/00-readiness-checklist.md)，按[L0 工具链最小起步指南](docs/L0_TOOLCHAIN_START.md)留下环境记录和第一次 commit，再完成[第一次工作流演练](examples/first-workflow-drill/README.md)和里程碑 M1–M3；
 - **L1：能运行 Notebook，但没有复现过论文** → 先完成[第一个机器学习闭环](docs/ML_FIRST_LOOP.md)和[第一次工作流演练](examples/first-workflow-drill/README.md)，再按[方向选择决策树](docs/DIRECTION_FIRST_CHOICE.md)建立[研究简报](templates/01-research-brief.md)和[文献检索账本](templates/07-literature-search-log.md)，从[首篇 baseline 筛选表](docs/CORE_RESEARCH_WORKFLOW.md#首篇-baseline-筛选表)进入 M4–M6；
-- **L2：已经跑通代码，但实验不可解释或不可复现** → 直接使用[复现规划](templates/03-reproduction-plan.md)与[实验卡](templates/04-experiment-card.md)，重点执行质量门控、单变量实验和失败分析；
+- **L2：已经跑通代码，但实验不可解释或不可复现** → 使用[复现规划](templates/03-reproduction-plan.md)和[baseline 稳定化门](docs/BASELINE_STABILIZATION_GATE.md)先确定当前只能继续复现、有限比较还是可以改进，再进入实验卡；
 - **正在投稿、回复评审或转投** → 使用[投稿、评审与版本归档卡](templates/09-submission-review-archive.md)，先核验当前 venue 规则并冻结实际送审版本。
 
 无法判断等级时，从 L0 检查表开始；已经掌握的项目直接跳过，但对应的最低产物必须能够拿出来验证。
@@ -80,7 +80,7 @@
 | --- | --- |
 | **L0 工具起步** | 只填[准备检查表](templates/00-readiness-checklist.md)，其余先看[已填写演练](examples/first-workflow-drill/README.md)，不要复制全部空模板。<br>**升级**：能独立运行脚本并找到日志、配置和指标。 |
 | **L1 选方向** | [研究简报](templates/01-research-brief.md) + [文献检索账本](templates/07-literature-search-log.md) + [baseline 准入卡](templates/11-first-baseline-gate.md)。<br>**升级**：候选通过低成本预检并有备选。 |
-| **L2 做复现** | [论文阅读卡](templates/02-paper-reading-card.md) + [复现规划](templates/03-reproduction-plan.md)；取得数据后启用[数据集卡](templates/13-dataset-card.md)。<br>**升级**：官方评测或目标复现达到预设判定。 |
+| **L2 做复现** | [论文阅读卡](templates/02-paper-reading-card.md) + [复现规划](templates/03-reproduction-plan.md)；取得数据后启用[数据集卡](templates/13-dataset-card.md)。<br>**升级**：论文目标与本地 baseline 已分开，并取得稳定化门控决定。 |
 | **L3 做实验** | 运行前用[实验卡](templates/04-experiment-card.md)和[评价协议卡](templates/14-evaluation-spec.md)，运行后用[结果—主张审计](templates/15-result-claim-audit.md)。<br>**升级**：主张、反证、图表和结论均可回到证据。 |
 
 其他模板只在事件发生时启用：任务过大用[原子任务卡](templates/06-daily-task-card.md)，需要组会用[每周复盘](templates/05-weekly-review.md)，迁移算力用[迁移清单](templates/08-compute-data-environment-checklist.md)，卡住求助用[调试卡](templates/10-debug-help-request.md)，公式阻塞用[数学概念卡](templates/12-math-concept-card.md)，进入投稿再用[投稿归档卡](templates/09-submission-review-archive.md)。
@@ -207,8 +207,8 @@ research-project/
 | **M3 深度学习基础**<br>PyTorch、张量、梯度与训练循环 | **产物**：一个可过拟合小样本的模型。<br>**完成**：能解释输入输出 shape 和梯度来源。 |
 | **M4 方向与 baseline**<br>按[方向选择决策树](docs/DIRECTION_FIRST_CHOICE.md)扫描候选并筛选论文 | **产物**：任务句、非目标、研究简报、候选表和资源预算。<br>**完成**：选出一篇适合复现的 baseline，并保留备选。 |
 | **M5 论文与代码**<br>精读论文并阅读官方代码 | **产物**：阅读卡、模块映射、风险登记表。<br>**完成**：能画出数据流并定位代码入口。 |
-| **M6 复现与评测**<br>预训练评测、单批次测试、完整复现 | **产物**：复现日志、配置、指标差异表。<br>**完成**：baseline 达到预设容差或差异可解释。 |
-| **M7 改进与失败分析**<br>失败案例与单变量改进 | **产物**：假设卡、实验矩阵、消融结果。<br>**完成**：改动的效果能被独立检验。 |
+| **M6 复现与评测**<br>预训练评测、单批次测试、完整复现 | **产物**：复现日志、配置、指标差异表和[稳定化决定](docs/BASELINE_STABILIZATION_GATE.md)。<br>**完成**：论文目标与本地 baseline 已分开，差距、稳定性和允许主张明确。 |
+| **M7 改进与失败分析**<br>失败案例与单变量改进 | **产物**：假设卡、实验矩阵、规模升级记录和消融结果。<br>**完成**：只有 `READY_FOR_CHANGE` 的 baseline 进入改进，效果能被独立检验。 |
 | **M8 分析与表达**<br>结果分析、写作和复盘 | **产物**：研究报告、图表、失败项和下一步。<br>**完成**：每个结论都能回到代码、日志或文献。 |
 
 每次复盘只选择一种状态：
@@ -272,7 +272,7 @@ research-project/
 | **1 选择方向与 baseline** | 两到三个候选完成低成本预检；保留一个通过项和一个备选项。 |
 | **2 文献发现与核验** | 按[论文发现与原文回溯](docs/PAPER_DISCOVERY_FIRST_PASS.md)分开记录发现入口、书目身份、原文版本和官方代码；检索式、筛选与停止条件可复查。 |
 | **3 论文与代码映射** | 核心论文阅读卡能连接公式、文件、shape、配置和结果。 |
-| **4 baseline 复现** | 环境、数据、命令、日志和评测齐全；结果达到容差或差异可解释。 |
+| **4 baseline 复现** | 环境、数据、命令、日志和评测齐全；按[稳定化门](docs/BASELINE_STABILIZATION_GATE.md)区分论文目标、本地 baseline 与候选方法，并作四选一决定。 |
 | **5 形成研究问题** | 失败现象转成可证伪假设，并写出反例与最小验证实验。 |
 | **6 实验设计与执行** | 评价协议先冻结；一次只改一个主要变量；全部计划运行可追踪。 |
 | **7 分析与表达** | 观察、解释与主张分开；反例、替代解释和图表来源已审计。 |

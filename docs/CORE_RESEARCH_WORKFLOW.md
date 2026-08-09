@@ -129,7 +129,9 @@
 
 复现结论只能是以下之一：达到预设容差；未达到但差异可定位；由于明确限制无法完成。不要用“看起来差不多”或最好一次结果替代判定规则。
 
-**推荐产物**：[复现规划](../templates/03-reproduction-plan.md)、[数据集审计指南](DATASET_FIRST_AUDIT.md)、[数据集卡](../templates/13-dataset-card.md)。
+进入方法改进前还要通过[baseline 稳定化门](BASELINE_STABILIZATION_GATE.md)：分开记录论文目标值、本地锁定 baseline 和候选方法，并选择 `READY_FOR_CHANGE / REPRODUCTION_ONLY / COMPARATOR_ONLY / REPLACE_BASELINE`。只有 `READY_FOR_CHANGE` 可以作为首次改进的主 baseline；“差异已解释”必须有证据、残余边界，并确认不会与候选改动混杂。
+
+**推荐产物**：[复现规划](../templates/03-reproduction-plan.md)、[baseline 准入卡](../templates/11-first-baseline-gate.md)、[数据集审计指南](DATASET_FIRST_AUDIT.md)、[数据集卡](../templates/13-dataset-card.md)。
 
 ## 5. 从复现走向研究问题
 
@@ -143,6 +145,8 @@
 一个可执行问题应明确：在哪类输入或条件下；哪个 baseline 出现什么可重复现象；为什么现有机制可能导致它；什么实验结果会支持或否定解释。
 
 优先从错误切片、训练曲线、资源瓶颈、消融缺口、跨数据失效和论文明确局限中找问题。避免只写“加入某模块可能提升性能”。
+
+极小数据或短训练的收益只能作为 pilot 信号。进入正式比较前，要在更接近目标协议的代表性规模上检查效应是保持、减弱还是反转；模块来自新论文、顶会或高 Star 项目都不能替代机制假设和新颖性核验。
 
 通过 G2 前，导师、同伴或自己应能指出假设的反例、主要混杂因素和最小验证实验。
 

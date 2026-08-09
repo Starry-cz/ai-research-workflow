@@ -91,6 +91,22 @@
 - 估算误差和未覆盖成本：
 - 决定：继续 / 缩小目标 / 停止
 
+### P4 本地 baseline 稳定化
+
+- 论文目标值与对应协议：
+- 未加入研究改动的本地 baseline commit：
+- 本地 baseline 的全部 run IDs：
+- 中心趋势、离散与异常运行：
+- 训练 / 验证曲线和 checkpoint 选择：
+- 与论文目标的差距：
+- 数据 / 代码 / 环境 / 预算 / 评价 / 随机性排查证据：
+- 未解释残差及其是否可能与候选改动交互：
+- pilot 到代表性规模的复查结果：保持 / 减弱 / 反转 / 未检查
+- 稳定化决定：READY_FOR_CHANGE / REPRODUCTION_ONLY / COMPARATOR_ONLY / REPLACE_BASELINE
+- 决定依据与允许主张：
+
+只有 `READY_FOR_CHANGE` 可以把该实现作为首次方法改进的主 baseline。其他状态的处理规则见[从 baseline 复现到首次改进](../docs/BASELINE_STABILIZATION_GATE.md)。
+
 ## 5. 分层里程碑与成功标准
 
 - **M0 目标冻结**：论文、代码、数据、目标结果和容差均已记录。

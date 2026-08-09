@@ -527,7 +527,25 @@
 - **采取行动**：新增[论文发现与原文回溯指南](PAPER_DISCOVERY_FIRST_PASS.md)和[带日期平台审计](../reports/PAPER_DISCOVERY_AUDIT_2026-08-09.md)，把最小组合固定为“一个发现入口—书目身份—实际原文版本—需要复现时的官方代码”；升级文献检索账本；将 `tools.yml` 升级到 v6 并为 12 个文献入口增加 `research_role`；更新 CosmosPaper 的规范仓库、当前声明范围和 BYOK 边界；首页只保留任务入口。
 - **状态**：已完成。
 
+## 2026-08-09：baseline 稳定化与改进准入审计
+
+### I-035：“baseline 已复现或差异已解释”不足以决定能否开始改模型
+
+- **当前问题**：实验卡原本只有“baseline 已复现或差异已解释”一个复选框，没有区分论文报告值、本地官方实现结果和候选方法结果。“差异已解释”也没有证据门槛。新手可能在 baseline 仍不稳定时给候选调参，把 pilot / 小数据上涨当成完整实验，或者在本地改进仍低于论文结果时写出“超过 baseline”。
+- **经验对照**：
+  - [什么时候对 baseline 进行改进](https://www.xiaohongshu.com/explore/6a27a897000000001702e3d0)提出先测试官方权重、再训练并理解数据流；评论集中出现“小数据有效但 full data 失效”“本地改进仍低于论文结果”“issue 中多人复现不出”“提升几个小数是否有效”等问题。该笔记与回复是个人经验，本仓库只吸收实际阻塞，不把“换 baseline”“某个涨幅明显有效”等单句回答变成通用规则；页面可能需要登录；
+  - [把 idea 变成可靠的代码的工作流](https://www.xiaohongshu.com/explore/6a1a82e400000000380345ea)强调理解、规划、最小修改与逐步验证，评论则反映 AI 生成改动效果差、代码与 idea 无法区分、公式不理解仍想加模块等困惑。本仓库采用其可验证工作流，但对会改变方法的公式、损失和假设设置更严格的理解门槛；页面可能需要登录；
+  - 知乎回答[从小白到读懂并复现机器学习论文](https://www.zhihu.com/question/659628177/answer/2002333417153513369)使用“跑通 baseline 后做简单改进”的学习顺序。它适合入门练习，但“跑通”不能直接升级为科研比较。
+- **规范与项目对照**：
+  - [Deep Learning Tuning Playbook](https://github.com/google-research/tuning_playbook)要求区分科学与干扰超参数、设计公平 study、检查训练曲线和搜索边界、保存配置与复现命令，并提醒短训练得到的超参数不保证迁移到长训练；
+  - [Releasing Research Code](https://github.com/paperswithcode/releasing-research-code)把依赖、训练、评价、预训练模型和精确结果命令列为代码完整性要素；[PyTorch Reproducibility](https://docs.pytorch.org/docs/stable/notes/randomness.html)明确跨版本、平台与设备不保证完全相同，说明需要预设容差与环境边界，而不是要求任意环境逐位复现；
+  - [Lightning-Hydra-Template](https://github.com/ashleve/lightning-hydra-template)展示配置化运行、独立日志、多 seed、checkpoint 恢复和冒烟测试，同时明确其多数测试只检查运行不报错；[NeurIPS Paper Checklist](https://neurips.cc/public/guides/PaperChecklist)要求报告训练设置、超参数选择和实验不确定性。工程通过、结果复现和论文主张因此必须分层。
+- **适用边界**：本门控主要面向有训练与评价实验的 AI / ML 研究，不要求理论论文、定性研究或不可公开资产的项目提供同样产物。`READY_FOR_CHANGE` 不保证方法新颖或最终有效；`COMPARATOR_ONLY` 也不是鼓励忽略复现失败，而是限制当前实现只能支持同协议下的有限比较。代表性规模、重复次数、容差和公平调参预算必须按任务、数据、波动与资源预先定义，不使用统一百分比或统一涨点阈值。
+- **采取行动**：新增[baseline 稳定化与首次改进指南](BASELINE_STABILIZATION_GATE.md)和[带日期审计](../reports/BASELINE_TRANSITION_AUDIT_2026-08-09.md)；将论文目标、本地锁定 baseline 与候选方法分开；增加 `READY_FOR_CHANGE / REPRODUCTION_ONLY / COMPARATOR_ONLY / REPLACE_BASELINE` 四分支；升级 baseline 准入卡、复现规划和实验卡，记录全部 baseline run IDs、复现差距、残余混杂、pilot 到代表性规模以及允许主张；同步更新 M6、M7 和核心工作流。
+- **状态**：已完成。
+
 ## 下一轮优先审计
 
 - 等待作者确认许可证、引用署名和首个版本号，再完成 `LICENSE`、`CITATION.cff` 与首个 GitHub Release。
 - 使用固定查询和抽样原文继续测试聚合论文平台的重复、遗漏、版本冲突与代码链接准确性；未形成对照样本前不发布覆盖度评分。
+- 审计从候选方法进入确认性实验时的调参预算、公平性与多重尝试披露，避免“候选调得更多、baseline 使用默认参数”。

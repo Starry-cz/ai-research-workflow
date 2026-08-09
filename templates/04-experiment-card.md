@@ -3,6 +3,8 @@
 ## 1. 实验问题
 
 - 运行模式：debug / pilot / confirmatory
+- baseline 稳定化门：[11-first-baseline-gate.md](11-first-baseline-gate.md)
+- 稳定化决定：READY_FOR_CHANGE / 其他状态不得进入方法比较
 - 研究假设：
 - 本轮唯一主要问题：
 - 可检验预测：
@@ -12,6 +14,9 @@
 
 - 评价协议：[14-evaluation-spec.md](14-evaluation-spec.md)
 - baseline：
+- 论文目标值与协议：
+- 本地 baseline commit 与 run IDs：
+- 本地 baseline 与论文目标的差距及边界：
 - 唯一主要改动：
 - 科学变量：
 - 干扰变量：
@@ -26,6 +31,7 @@
 - 结果汇总方式与波动来源：
 - 预算：
 - 停止条件：
+- pilot 升级到代表性规模的条件：
 - 失败判定：
 - 运行排除规则：
 
@@ -40,7 +46,9 @@
 
 ## 4. 运行前检查
 
-- [ ] baseline 已复现或差异已解释
+- [ ] baseline 已取得 `READY_FOR_CHANGE`，证据与允许主张明确
+- [ ] 本地 baseline 没有混入未审计的研究改动
+- [ ] pilot 结果不会被直接当成完整协议结论
 - [ ] 训练、验证、测试用途分离
 - [ ] 除主要变量外的设置保持公平
 - [ ] seed、重复运行集合和选择规则在看结果前写定
@@ -58,6 +66,8 @@
 - 失败、中断与排除运行及理由：
 - 异常与失败案例：
 - 与 baseline 的差异：
+- pilot 到代表性规模：保持 / 减弱 / 反转 / 未检查
+- 候选收益是否仍低于论文目标，以及这对当前主张的影响：
 
 ## 6. 结论与决策
 
