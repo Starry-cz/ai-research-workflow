@@ -777,7 +777,7 @@
   - [Diátaxis Tutorials](https://diataxis.fr/tutorials/)把教程定义为通过具体行动、可见结果和重复形成能力，并要求用实际用户观察发现缺口；[How-to guides](https://diataxis.fr/how-to-guides/)面向已具备基本能力的使用者，说明参考说明不能替代首次演练。
 - **适用边界**：教学任务只覆盖当前公开脚本的一条防覆盖路由，不覆盖模型不收敛、指标异常、数据泄漏、分布式系统或安全事件。两个干扰项明确标记为 `TEACHING_FIXTURE`，不是历史实验或项目知识，不得进入正式索引。自动验证只能证明查询材料、CLI 与运行证据一致，不能证明陌生新手的理解、速度或跨团队效果；后者必须观察未参与编写的人完成预定义任务。
 - **采取行动**：新增[第一次检索并安全复用研究知识](FIRST_KNOWLEDGE_REUSE_DRILL.md)、[闭卷式练习](../examples/first-workflow-drill/knowledge-retrieval-drill.md)、[教学候选夹具](../examples/first-workflow-drill/knowledge-retrieval-fixtures.md)、[已填写结果](../examples/first-workflow-drill/knowledge-retrieval-result.md)和[带日期审计](../reports/KNOWLEDGE_REUSE_DRILL_AUDIT_2026-08-09.md)；定义“原始症状—Q0 至 Q4 查询—多个候选—身份 / 状态 / 来源 / 权限—最小验证—决定—写回”闭环。新增自动校验，实际确认当前 CLI 无 overwrite 选项、非空记录目录拒绝覆盖、新临时目录运行成功；同步升级首次工作流 CI、调试求助卡、知识提炼指南、核心流程、README、索引和变更记录。
-- **状态**：实现与本地回归完成，等待远端 CI。
+- **状态**：已完成；实现提交 `119b7d0` 的 Repository quality 与 First workflow drill 均通过。自动检查不作为真人新手可用性证据。
 
 ## 下一轮优先审计
 

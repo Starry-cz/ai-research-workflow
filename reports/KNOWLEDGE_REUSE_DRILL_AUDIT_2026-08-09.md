@@ -42,8 +42,10 @@
 - 完整教学演练：通过，debug、baseline、candidate 三组运行及原公平比较验收通过，新知识复用检查同时通过；
 - Windows 编码回归：子进程按当前系统首选编码严格读取，校验脚本自身固定输出 UTF-8；没有使用忽略解码错误的兜底；
 - `git diff --check`：通过；仅有工作区 LF / CRLF 提示，没有空白错误；
-- Git 提交、远端推送与 GitHub Actions：等待完成后回填。
+- 实现提交：`119b7d0`（`docs: add safe knowledge reuse drill`），已推送到 `main`；
+- [Repository quality](https://github.com/Starry-cz/ai-research-workflow/actions/runs/31315525330)：通过；
+- [First workflow drill](https://github.com/Starry-cz/ai-research-workflow/actions/runs/31315525323)：通过，包含新增知识检索与安全复用校验。
 
 ## 状态
 
-实现与本地验证完成，等待远端 CI。
+已完成。自动检查与真人可用性证据的边界仍保留在报告和教程中。
