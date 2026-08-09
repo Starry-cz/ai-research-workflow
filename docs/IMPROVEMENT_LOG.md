@@ -621,8 +621,27 @@
 - **采取行动**：新增[运行交接与冷启动复查](RUN_HANDOFF_REPLAY.md)、[运行交接卡](../templates/16-run-handoff.md)、[已填写教学交接](../examples/first-workflow-drill/run-handoff.md)和[带日期审计](../reports/RUN_HANDOFF_AUDIT_2026-08-09.md)；定义 `H0_LOCATE / H1_VERIFY / H2_REPLAY / H3_TAKEOVER` 四级深度与五种结果；将唯一入口、访问权限、产物保留、指标重算和接收者差异同步到 README、核心工作流、真实项目接入、周会与索引，并对教学演练执行空目录冷启动复跑。
 - **状态**：已完成。
 
+## 2026-08-09：失败实验、checkpoint 与平台产物生命周期
+
+### I-040：要求保留失败与产物，却没有定义到期、清理和长期归档边界
+
+- **当前问题**：仓库已要求保留失败运行、checkpoint、日志和结果位置，交接卡也记录 artifact retention；但没有区分可重建缓存、续训恢复状态、支撑论文主张的证据、长期归档包和受限资产，也没有负责人、复查日、平台 TTL、引用检查或清理后的墓碑记录。新手可能只留下最好 checkpoint 并删除失败证据，也可能把所有中间文件无限保留；GitHub Actions、tracker、服务器或个人账号到期后，文档中的链接仍在但资产已消失。
+- **经验对照**：
+  - [研一暑假做实验才发现，数据管理比调参更重要](https://www.xiaohongshu.com/explore/6a5f37be00000000110120f5)强调数据版本、split、标签处理、训练设置和指标范围缺失会迫使实验重新核验，并指出实验记录比单一权重更重要；本仓库吸收身份与解释链，不把个人命名方法设为规则；
+  - [接手师兄烂摊子，实验记录像天书](https://www.xiaohongshu.com/explore/6a5831f5000000000103163d)反映资产位置和隐性参数未日常记录时，离开前突击交接仍会失败；该内容来自湿实验，本仓库只迁移日常盘点、负责人和交接原则；
+  - 知乎文章[毕业季，实验室最头疼的问题来了](https://zhuanlan.zhihu.com/p/2056073543717336306)指出原始文件、统计过程、失败 / 异常和重复实验散落在个人设备后难以复核。该内容由商业 ELN 服务商发布且偏湿实验，本仓库仅用于确认失败证据与日常归档痛点，不采用其产品结论；
+  - [实验记录需要注意的关键点](https://zhuanlan.zhihu.com/p/534204566)强调无效数据也应保留并说明原因。其规则面向更强审计的实验室；本仓库转换为“所有运行保留可解释元数据，大二进制按证据依赖与政策决定”。
+- **规范与项目对照**：
+  - [The Turing Way 的 Data Management Plan](https://book.the-turing-way.org/reproducible-research/rdm/rdm-dmp/)要求持续规划输出生成、大小、存储、备份、访问、项目后保存、仓库政策和成本；[Data Storage and Organisation](https://book.the-turing-way.org/reproducible-research/rdm/rdm-storage.html)强调多副本与恢复，并允许大型数据按标准选择备份；
+  - [GitHub Actions 保留期文档](https://docs.github.com/en/organizations/managing-organization-settings/configuring-the-retention-period-for-github-actions-artifacts-and-logs-in-your-organization)说明 workflow artifact 与日志会按设置自动删除，CI 链接不是长期归档；[W&B artifact TTL](https://docs.wandb.ai/models/artifacts/ttl)还受到团队管理员权限限制；
+  - [MLflow CLI `gc`](https://mlflow.org/docs/latest/api_reference/cli.html)会永久删除 deleted run 的元数据和 artifact，且不会用 UI pin 或标签保护；[DVC garbage collection](https://dvc.org/doc/command-reference/gc)的保留范围取决于 workspace、分支、标签与提交选择，未推送或未正确引用的对象可能永久丢失；
+  - [NeurIPS Paper Checklist](https://neurips.cc/public/guides/PaperChecklist)要求实验设置、计算资源和可复现信息能够被审查，说明直接支撑论文主张的资产需要与临时工程文件区分。
+- **适用边界**：本指南不是法律保存期限。机构、伦理、资助方、合同、数据提供方和 venue 规则优先；敏感数据可能必须删除，不能用“可复现”无限期保留。失败元数据保留不等于所有 checkpoint 永久保存；可重建不等于重建成本可接受；同步盘也不自动等于独立备份。理论或定性项目可替换资产类型，但仍需说明证据、访问与处置。
+- **采取行动**：新增[实验产物保留、归档与安全清理](EXPERIMENT_ARTIFACT_LIFECYCLE.md)、[已填写教学生命周期台账](../examples/first-workflow-drill/artifact-lifecycle.md)和[带日期审计](../reports/ARTIFACT_LIFECYCLE_AUDIT_2026-08-09.md)；定义 `T0_TRANSIENT / R1_RECOVERY / E2_EVIDENCE / A3_ARCHIVE / S_RESTRICTED` 五类资产、从主张反向盘点、清理前八项检查、墓碑记录与五种生命周期决定；同步实验卡、交接卡、投稿归档、项目结构、核心工作流和首页。本仓库不提供一键删除脚本，避免在无法判断远端引用和机构政策时自动执行破坏性操作。
+- **状态**：已完成。
+
 ## 下一轮优先审计
 
 - 等待作者确认许可证、引用署名和首个版本号，再完成 `LICENSE`、`CITATION.cff` 与首个 GitHub Release。
 - 使用固定查询和抽样原文继续测试聚合论文平台的重复、遗漏、版本冲突与代码链接准确性；未形成对照样本前不发布覆盖度评分。
-- 审计失败、放弃与过期实验的保留期限和存储生命周期，避免交接入口仍在但 checkpoint、日志或数据已被清理。
+- 审计导师 / 组会反馈是否真正转成可验收改动、责任人与下一次证据，避免“记录了建议”却没有关闭反馈循环。

@@ -210,7 +210,7 @@ research-project/
 | **M5 论文与代码**<br>精读论文并阅读官方代码 | **产物**：阅读卡、模块映射、风险登记表。<br>**完成**：能画出数据流并定位代码入口。 |
 | **M6 复现与评测**<br>预训练评测、单批次测试、完整复现 | **产物**：复现日志、配置、指标差异表和[稳定化决定](docs/BASELINE_STABILIZATION_GATE.md)。<br>**完成**：论文目标与本地 baseline 已分开，差距、稳定性和允许主张明确。 |
 | **M7 改进与失败分析**<br>按[首次安全改码](docs/SAFE_FIRST_CODE_CHANGE.md)完成一个单变量改进 | **产物**：修改前快照、可审查 diff、检查证据、假设卡、实验矩阵和消融结果。<br>**完成**：只有 `READY_FOR_CHANGE` 的 baseline 进入改进，修复 / 重构 / 方法改动已分离，效果能被独立检验。 |
-| **M8 分析与表达**<br>结果分析、写作和复盘 | **产物**：研究报告、图表、失败项、下一步；关键运行按需形成[交接入口](docs/RUN_HANDOFF_REPLAY.md)。<br>**完成**：每个结论都能回到代码、日志或文献，声明可交接的运行已在对应深度通过冷启动复查。 |
+| **M8 分析与表达**<br>结果分析、写作和复盘 | **产物**：研究报告、图表、失败项、下一步；关键运行按需形成[交接入口](docs/RUN_HANDOFF_REPLAY.md)和[产物保留决定](docs/EXPERIMENT_ARTIFACT_LIFECYCLE.md)。<br>**完成**：每个结论都能回到代码、日志或文献，声明可交接的运行已通过冷启动复查，关键证据不会因平台到期或误清理失效。 |
 
 每次复盘只选择一种状态：
 
@@ -277,7 +277,7 @@ research-project/
 | **5 形成研究问题** | 失败现象转成可证伪假设，并写出反例与最小验证实验。 |
 | **6 实验设计与执行** | 评价协议先冻结；先按[首次安全改码](docs/SAFE_FIRST_CODE_CHANGE.md)审查修改范围与最低测试，再按[公平调参与搜索预算](docs/FAIR_TUNING_BUDGET.md)审计 baseline 与候选的搜索机会；全部 trial 和确认运行可追踪。 |
 | **7 分析与表达** | 观察、解释与主张分开；反例、替代解释和图表来源已审计。 |
-| **8 交接、投稿与归档** | 关键运行按用途完成查找、指标核验、最小复跑或接管；官方规则已核验，实际提交版本、评审、回复和负面结果已冻结。 |
+| **8 交接、投稿与归档** | 关键运行完成对应深度的复查并取得产物保留决定；官方规则已核验，实际提交版本、评审、回复和负面结果已冻结。 |
 
 四个停止检查点是：**G1 方向与 baseline、G2 文献与假设、G3 复现与实验、G4 证据与交付**。没有通过当前门控时，不进入下一阶段，也不允许 AI 自动批准关键研究判断。
 
@@ -287,6 +287,7 @@ research-project/
 - [真实代码库最小接入](docs/ADOPT_WORKFLOW_IN_EXISTING_PROJECT.md)
 - [第一次安全修改论文代码](docs/SAFE_FIRST_CODE_CHANGE.md)
 - [运行交接与冷启动复查](docs/RUN_HANDOFF_REPLAY.md)
+- [实验产物保留、归档与安全清理](docs/EXPERIMENT_ARTIFACT_LIFECYCLE.md)
 - [全部执行指南索引](docs/README.md)
 - [数据集审计](docs/DATASET_FIRST_AUDIT.md)
 - [评价协议](docs/EVALUATION_FIRST_SPEC.md)

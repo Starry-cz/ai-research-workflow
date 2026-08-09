@@ -46,6 +46,7 @@
 - 结果汇总方式与波动来源：
 - 预算：
 - 停止条件：
+- 产物生命周期指南：[EXPERIMENT_ARTIFACT_LIFECYCLE.md](../docs/EXPERIMENT_ARTIFACT_LIFECYCLE.md)
 - pilot 升级到代表性规模的条件：
 - 失败判定：
 - 运行排除规则：
@@ -75,6 +76,7 @@
 - [ ] seed、重复运行集合和选择规则在看结果前写定
 - [ ] 输出目录不会覆盖已有结果
 - [ ] 日志、配置和 checkpoint 会被保存
+- [ ] 产物已按临时 / 恢复 / 证据 / 归档 / 受限分类，并声明负责人和首次复查日
 
 ## 5. 结果
 
@@ -89,6 +91,8 @@
 - 测试结果可见后的所有变更：
 - 运行时间、显存和吞吐量：
 - 失败、中断与排除运行及理由：
+- 产物位置、分类、大小、负责人、平台 TTL 与复查日：
+- 生命周期决定：KEEP_ACTIVE / ARCHIVE_IMMUTABLE / PRUNE_BINARY_KEEP_RECORD / HOLD_RESTRICTED / REVIEW_REQUIRED
 - 异常与失败案例：
 - 与 baseline 的差异：
 - pilot 到代表性规模：保持 / 减弱 / 反转 / 未检查

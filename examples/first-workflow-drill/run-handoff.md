@@ -22,7 +22,7 @@
 | 配置 | `configs/*.json` | debug / baseline / candidate | 公开仓库 |
 | 关键运行 | `teaching-debug-001`、`teaching-baseline-001`、`teaching-candidate-001` | 全部 `completed` | 公开仓库 |
 | 日志 | `results/*-recorded/run.log` | 与对应 run ID 一致 | 公开仓库 |
-| 产物 | `results/*-recorded/` | 每组含配置、环境、指标和日志 | 随仓库保留 |
+| 产物 | `results/*-recorded/` | 每组含配置、环境、指标和日志 | `E2_EVIDENCE`；见[生命周期台账](artifact-lifecycle.md) |
 | 指标与图表 | `verify.py`、`metrics.json` | accuracy 与 loss；按 seed 汇总 | 公开仓库 |
 | 决策记录 | [实验卡](experiment-card.md)、[结果—主张审计](result-claim-audit.md) | 2026-08-09 | 公开仓库 |
 
@@ -32,6 +32,8 @@
 - 检出：`git checkout ad6538378ff9c15a744d13ecfd9c17e1afc9de15`
 - 环境：使用 Python 3.10+ 的独立环境；脚本没有第三方依赖
 - 允许共享资产：全部输入由脚本生成，不需要账号、密钥或下载
+- 平台 TTL / 服务器回收日：不适用；记录产物由 Git 跟踪
+- 生命周期决定：`ARCHIVE_IMMUTABLE`
 - 已有产物核验：
 
 ```powershell

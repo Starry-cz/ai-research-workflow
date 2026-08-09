@@ -28,6 +28,11 @@
 
 不要填写密钥。受限资产只写访问范围、申请方式和负责人。
 
+- 产物生命周期指南：[EXPERIMENT_ARTIFACT_LIFECYCLE.md](../docs/EXPERIMENT_ARTIFACT_LIFECYCLE.md)
+- 平台 TTL / 账号或服务器回收日：
+- 生命周期决定：KEEP_ACTIVE / ARCHIVE_IMMUTABLE / PRUNE_BINARY_KEEP_RECORD / HOLD_RESTRICTED / REVIEW_REQUIRED
+- 若已清理，墓碑记录与替代入口：
+
 ## 3. 最小复查入口
 
 - 起始目录：
