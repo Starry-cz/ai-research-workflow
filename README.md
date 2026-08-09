@@ -180,6 +180,7 @@ research-project/
 | 机器学习 | 完成一个训练—验证—测试闭环并解释指标 |
 | PyTorch | 写出 Dataset、DataLoader、模型、loss 和训练循环 |
 | 论文阅读 | 完成一张有证据位置的论文阅读卡 |
+| 按需数学 | 完成一张[数学概念卡](templates/12-math-concept-card.md)，用 shape、玩具数值和代码检查当前公式 |
 
 ## 可调节的八周入门路线
 
@@ -438,7 +439,7 @@ T0 的目标是筛选，T1 的目标是回答具体问题，T2 的目标是形�
         → 代码文件 → 函数 / 类 → 张量 shape → 实验配置 → 结果表格
 ```
 
-看不懂时先记录问题，不要在一个公式上无限停留。优先理解它在完整系统中的作用，再补数学细节。
+看不懂时先记录问题，不要在一个公式上无限停留。优先理解它在完整系统中的作用，再补数学细节。遇到会阻塞代码、实验设计或结论判断的公式时，使用[按任务触发的数学补课指南](docs/MATH_ON_DEMAND.md)和[数学概念卡](templates/12-math-concept-card.md)，把符号、shape、假设、玩具数值和代码位置对应起来；补到能完成当前任务后立即返回论文或实验。
 
 **阶段验收**：不看摘要也能讲清问题、数据流、核心模块、证据和局限。
 
@@ -853,6 +854,7 @@ P2：表达、排版、补充解释和其他局部问题
 | **理解第一个 ML 闭环** | [第一个机器学习训练—验证—测试闭环](docs/ML_FIRST_LOOP.md)<br>用仓库内已运行示例解释样本、loss、数据划分、泄漏和结论边界。 |
 | **学深度学习与 PyTorch** | [动手学深度学习](https://github.com/d2l-ai/d2l-zh) / [PyTorch Deep Learning](https://github.com/mrdbourke/pytorch-deep-learning)<br>可修改的训练循环和小项目。 |
 | **从零理解神经网络** | [Neural Networks: Zero to Hero](https://github.com/karpathy/nn-zero-to-hero)<br>手写反向传播、MLP 或小型语言模型。 |
+| **按当前任务补数学** | [按任务触发的数学补课指南](docs/MATH_ON_DEMAND.md) / [Mathematics for Machine Learning](https://github.com/mml-book/mml-book.github.io) / [Pumpkin Book](https://github.com/datawhalechina/pumpkin-book)<br>一张含符号、shape、假设、玩具数值与代码位置的数学概念卡。 |
 | **确定研究问题** | [Supervisor-Skills](https://github.com/HKUSTDial/Supervisor-Skills)<br>研究简报、假设、风险与资源约束。 |
 | **规划科研成长与项目训练** | [Learning Research](https://github.com/pengsida/learning_research)<br>把广度学习、深度复现、独立项目和每周交流组织成个人路线。 |
 | **组织完整科研流程** | [Academic Research Skills](https://github.com/Imbad0202/academic-research-skills)<br>调研、写作、审稿和投稿清单。 |
@@ -944,6 +946,7 @@ Missing Semester 的终端与 Git
 | [投稿、评审与版本归档卡](templates/09-submission-review-archive.md) | 核验会议规则，冻结投稿版本，管理评审回复、负面结果、转投与归档 |
 | [调试与求助卡](templates/10-debug-help-request.md) | 把环境、命令、报错和最小复现整理成可回答的问题 |
 | [首篇真实 baseline 准入卡](templates/11-first-baseline-gate.md) | 比较两到三个候选，完成资料、数据、命令、算力与最小链路预检，并保留退出和备选路径 |
+| [数学概念卡](templates/12-math-concept-card.md) | 围绕当前阻塞公式完成符号、shape、假设、数值与代码验收 |
 
 第一次不知道如何填写时，先看[第一次可审计实验演练](examples/first-workflow-drill/README.md)。示例中的数值来自仓库内脚本和配置，只用于说明记录方法，不是论文结果。
 
@@ -960,7 +963,8 @@ research-project/
 │   ├── search_log.md          # 关键词、查询、筛选与去重记录
 │   ├── index.md               # 论文主记录、版本和来源路径
 │   ├── domain_map.md          # 方法、数据、评价、争议与缺口
-│   └── reading_cards/         # 结构化阅读卡
+│   ├── reading_cards/         # 结构化阅读卡
+│   └── math_cards/            # 被任务触发的数学概念卡
 ├── data/
 │   ├── README.md              # 来源、许可证、版本和划分
 │   ├── raw/                   # 原始数据，通常不提交 Git

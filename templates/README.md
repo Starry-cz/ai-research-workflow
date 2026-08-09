@@ -16,5 +16,6 @@
 | [09-submission-review-archive.md](09-submission-review-archive.md) | 投稿、作者回复、拒稿转投或录用归档时 | 规则、送审版本、评审问题、回复证据和版本链均可追溯 |
 | [10-debug-help-request.md](10-debug-help-request.md) | 环境、代码、数据或研究流程卡住并准备求助时 | 问题、环境、命令、最小复现、排查记录和求助对象明确 |
 | [11-first-baseline-gate.md](11-first-baseline-gate.md) | 从教学演练进入首篇真实论文前 | 候选经过低成本预检，目标、预算、停止与备选路径明确 |
+| [12-math-concept-card.md](12-math-concept-card.md) | 公式阻塞论文理解、实现或实验判断时 | 符号、shape、假设、玩具数值与代码实现能够相互核对 |
 
 第一次不知道这些字段如何衔接时，先完成[第一次可审计实验演练](../examples/first-workflow-drill/README.md)。
