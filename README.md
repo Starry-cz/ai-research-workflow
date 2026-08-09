@@ -61,6 +61,7 @@
 | 长期不提升，不知道该继续还是停止 | 结果分类、有效尝试台账、预算 / 信息增量停止门和重开条件 |
 | 相同错误反复排查，经验无法被下一位成员找到 | 薄知识索引、原证据链接、适用范围、复用回写和 supersede 状态 |
 | 搜到了相似经验，却不知道能否直接照做 | 原始症状查询、候选排除、身份核验、最小验证和安全复用演练 |
+| 搜不到答案，求助时又要从头解释 | 原始查询、负面发现、唯一问题和权限随问题交接；回复验证后再回流 |
 | 有结果却不知道能说到什么程度 | V0–V4 验证等级、S0–S3 共享权限和用途状态 |
 | 自己能看懂，别人无法复查 | 唯一交接入口、指标重算和冷启动复跑 |
 | 导师给了任务却不知道能否直接动手 | 任务授权卡、三类动作与确认 / 升级状态 |
@@ -79,6 +80,7 @@
 - **连续不提升、反复失败或预算快用完** → 先用[研究停止门](docs/RESEARCH_STOPPING_AND_PIVOT.md)区分无效运行、有效负结果与证据不足，再判断下一项实验是否真的会改变决定；
 - **同一失败反复出现，或项目准备暂停 / 交接** → 用[研究知识提炼指南](docs/RESEARCH_KNOWLEDGE_CAPTURE.md)建立薄索引，条目只链接原证据并写清适用范围、状态与替代关系；
 - **已经搜到相似经验，但不确定是否适用** → 先完成[第一次知识检索与安全复用演练](docs/FIRST_KNOWLEDGE_REUSE_DRILL.md)，比较至少两个候选，核对当前身份和来源后再执行最小动作；
+- **检索无命中或候选仍无法区分** → 不要重新发送一句“跑不起来”；继续使用[知识复用演练的无死路分支](docs/FIRST_KNOWLEDGE_REUSE_DRILL.md#8-无命中或无法区分时不要重新开始)，把原始查询、已开候选、负面发现、权限和一个具体问题交给唯一所有者，回复验证后再关闭；
 - **已经有实验结果，准备组会、共享、决策或写作** → 先用[实验结果证据等级与表达边界](docs/EVIDENCE_READINESS_AND_SHARING.md)分开判断证据成熟度和共享权限，再使用[结果—主张审计](templates/15-result-claim-audit.md)检查具体表述；
 - **正在投稿、回复评审或转投** → 使用[投稿、评审与版本归档卡](templates/09-submission-review-archive.md)，先核验当前 venue 规则并冻结实际送审版本。
 
@@ -319,11 +321,15 @@ research-project/
   → 实际行为与第一个关键报错
   → 完整命令、commit、配置和环境
   → 最小可复现样例
-  → 已尝试的排查及其结果
-  → 希望对方帮助判断的具体问题
+  → 原始查询、已开候选和负面发现
+  → 一个所有者、一个渠道、一个具体问题
+  → 回复作为候选在当前身份下验证
+  → 结果写回原记录并决定是否更新知识
 ```
 
 最小可复现不等于只截最后一行报错。应从未修改的官方示例开始，使用最小公开数据或合成数据复现，保留必要代码、配置、完整 traceback 和环境版本；删除无关模块后重新运行，确认精简后的样例仍能触发同一问题。
+
+检索无命中只表示当前入口没有可用条目，不证明没有原因或存在上游 bug。不要让自助搜索变成死路：求助时附上搜索原文、已查看位置、已排除原因、最小观察和共享权限。导师、同伴或维护者的回复先标记为 `ANSWER_CANDIDATE`，在当前 commit、配置与新临时目录中验证后，才写成 `VERIFIED_WITHIN_SCOPE`；一次直接路径错误可以只改善现有文档，不必新建知识卡。
 
 选择正确的求助位置：
 
@@ -420,7 +426,7 @@ research-project/
 | **从结果形成主张** | [从实验结果到可辩护主张](docs/RESULT_TO_CLAIM.md) / [NeurIPS Paper Checklist](https://neurips.cc/public/guides/PaperChecklist)<br>结果完整性、配对错误、替代解释、图表来源、主张范围与证据状态。 |
 | **判断结果能否汇报、共享或写入论文** | [实验结果证据等级与表达边界](docs/EVIDENCE_READINESS_AND_SHARING.md) / [已填写教学示例](examples/first-workflow-drill/evidence-readiness.md)<br>分开判断 V0–V4 验证成熟度、S0–S3 共享权限、允许表述和用途状态。 |
 | **长期无提升、负结果或预算耗尽时做决定** | [负结果、无进展与研究停止门](docs/RESEARCH_STOPPING_AND_PIVOT.md) / [已填写教学决定](examples/first-workflow-drill/stopping-decision.md)<br>区分无效运行、有效负结果和证据不足，只为能改变决定的新证据继续实验。 |
-| **把失败和决定变成可检索、可安全复用的知识** | [研究知识提炼指南](docs/RESEARCH_KNOWLEDGE_CAPTURE.md) / [第一次知识复用演练](docs/FIRST_KNOWLEDGE_REUSE_DRILL.md)<br>按原始症状召回多个候选，链接原证据，排除过期或不适用条目，最小验证后写回或 supersede。 |
+| **把失败和决定变成可检索、可安全复用的知识** | [研究知识提炼指南](docs/RESEARCH_KNOWLEDGE_CAPTURE.md) / [第一次知识复用演练](docs/FIRST_KNOWLEDGE_REUSE_DRILL.md)<br>按原始症状召回候选；无命中时把查询、负面发现和权限交给唯一所有者；回复验证后再改善入口、新建或 supersede。 |
 | **第一次修改论文代码** | [第一次安全修改论文代码](docs/SAFE_FIRST_CODE_CHANGE.md) / [GitHub AI 代码审阅](https://docs.github.com/en/copilot/tutorials/review-ai-generated-code)<br>修改前 baseline、改动类别、可审查 diff、按风险选择的检查和准入决定。 |
 | **管理大文件与数据版本** | [Git LFS](https://git-lfs.com/) / [DVC](https://github.com/treeverse/dvc)<br>大文件指针、数据版本与外部存储位置；首个小实验只需先用 `.gitignore`、数据清单和校验值，规模增长后再引入。 |
 | **分层搜索与阅读论文** | [How to Search and Read a Paper](https://github.com/qiyuangong/How_to_Search_and_Read_a_Paper)<br>为检索结果分层，只对核心论文完成精读、讨论和可复用笔记。 |

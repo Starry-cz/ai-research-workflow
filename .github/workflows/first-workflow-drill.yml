@@ -44,3 +44,6 @@ jobs:
 
       - name: 验收知识检索与安全复用夹具
         run: python verify_knowledge_retrieval.py
+
+      - name: 验收无命中求助与知识回流
+        run: python verify_no_match_handoff.py

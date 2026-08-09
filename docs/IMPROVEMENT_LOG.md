@@ -779,9 +779,30 @@
 - **采取行动**：新增[第一次检索并安全复用研究知识](FIRST_KNOWLEDGE_REUSE_DRILL.md)、[闭卷式练习](../examples/first-workflow-drill/knowledge-retrieval-drill.md)、[教学候选夹具](../examples/first-workflow-drill/knowledge-retrieval-fixtures.md)、[已填写结果](../examples/first-workflow-drill/knowledge-retrieval-result.md)和[带日期审计](../reports/KNOWLEDGE_REUSE_DRILL_AUDIT_2026-08-09.md)；定义“原始症状—Q0 至 Q4 查询—多个候选—身份 / 状态 / 来源 / 权限—最小验证—决定—写回”闭环。新增自动校验，实际确认当前 CLI 无 overwrite 选项、非空记录目录拒绝覆盖、新临时目录运行成功；同步升级首次工作流 CI、调试求助卡、知识提炼指南、核心流程、README、索引和变更记录。
 - **状态**：已完成；实现提交 `119b7d0` 的 Repository quality 与 First workflow drill 均通过。自动检查不作为真人新手可用性证据。
 
+## 2026-08-09：检索无命中后的无死路求助审计
+
+### I-048：自助检索的上下文没有进入求助，回复也没有回到原问题验证
+
+- **当前问题**：I-047 已训练原始症状查询、候选排除和安全复用，但成功路径仍假设最终能找到适用条目。正式索引无命中或候选无法区分时，调试卡没有强制冻结搜索词、已开候选、负面发现、下一位所有者和一个具体问题；新手可能重新发送一句“跑不起来”。同伴、导师或维护者的回复也可能被直接记成答案，形成脱离当前 commit、权限和运行证据的第二份事实。
+- **经验对照**：
+  - [如何向师兄师姐请教，不让人觉得是伸手党？](https://www.xiaohongshu.com/explore/6a6dccf4000000002c001ef9)建议先查资料与尝试，说明已做工作，选择合适对象并在得到帮助后反馈；本仓库吸收“准备—提问—反馈”，不把个人话术设为统一师生规范；
+  - [希望在读研究生能先思考再求助](https://www.xiaohongshu.com/explore/684991330000000012004857)反映毕业成员继续承担隐性科研支持、责任不清的压力；正文较短且属个人感受，只用于说明为什么要明确所有者和已完成工作，不评价求助者品格；
+  - [如何优雅的应对师弟师妹复现实验](https://www.xiaohongshu.com/explore/6a1e8c5d000000003601d1b3)以讽刺方式呈现复现报错与参数未被核对、只得到“慢慢来、加油”的断点；它用于识别模糊回复不能关闭问题，不作为沟通范例；
+  - [最近带了几个研一新生，谈谈感受](https://www.xiaohongshu.com/explore/674a942c0000000007035d9d)强调根据基础问题、技术问题和项目决定选择不同对象，并提供环境、现象与已尝试项；其中学历比较、个人管理方式和固定求助顺序不进入仓库规则；
+  - 知乎文章[作为研究生新手，应该如何和导师沟通](https://zhuanlan.zhihu.com/p/2033116043812532613)建议用问题、证据、选项和明确请求沟通。文章由科研服务机构发布，只用于确认结构化沟通痛点；
+  - 知乎回答[如何正确地在 GitHub 上提 Issue](https://www.zhihu.com/question/21235917/answer/203370582)强调环境、复现、预期和实际；回答较早且属个人经验，上游当前政策和模板优先。
+- **规范与项目对照**：
+  - [How-To-Ask-Questions-The-Smart-Way](https://github.com/ryanhanwu/How-To-Ask-Questions-The-Smart-Way)要求先搜索、保留尝试、描述症状、选择正确渠道，并在解决后补充结果；本仓库吸收可检查结构，不采用其中对新手带有贬损性的语言，也不把黑客社区礼仪当作师生制度；
+  - [Stack Overflow 的最小可复现示例](https://stackoverflow.com/help/minimal-reproducible-example)要求问题最小、完整、可复现且发出前重新运行；这不决定数据是否可公开、问题所有权或研究主张；
+  - [KCS：Capture the Requestor's Context](https://library.serviceinnovation.org/KCS/KCS_v6/KCS_v6_Practices_Guide/030/030/010/020)要求把请求者原始用词、自助搜索字符串、已查看文章和环境交给响应者，并把这种连续性称为避免 “no dead-ends”；本仓库只迁移上下文连续性，不把支持工单知识当作科研证据；
+  - [GitHub form schema](https://docs.github.com/en/communities/using-templates-to-encourage-useful-issues-and-pull-requests/syntax-for-githubs-form-schema)可以用结构化输入与必填验证收集环境和复现；表单完整不证明问题属于该仓库、运行真实或回复正确。
+- **适用边界**：无死路不等于无限升级、保证答复或向多个渠道重复发帖。每次只选择一个当前所有者和一个能区分下一步的问题。敏感数据、密钥、未公开代码、匿名材料和安全漏洞只走获准私密渠道。任何人员回复先是 `ANSWER_CANDIDATE`，必须在当前身份和权限下验证；一次直接路径错误通常不值得新建正式知识条目。
+- **采取行动**：新增[已填写无命中交接记录](../examples/first-workflow-drill/knowledge-no-match-handoff.md)、自动校验与[带日期审计](../reports/NO_DEAD_END_HELP_AUDIT_2026-08-09.md)；定义 `MATCHED / NO_MATCH / AMBIGUOUS / RESTRICTED` 检索结果、无死路交接包、`ANSWER_CANDIDATE` 回复验证和五种知识回流。以实际不存在的配置路径为例，确认正式索引无匹配、错误发生在输出目录创建前，并用现有配置与新临时目录验证回复候选；最终以 `SELF_RESOLVED_NO_ARTICLE + IMPROVE_FINDABILITY` 关闭。同步升级调试卡、README、指南索引、核心工作流、真实项目接入、上游路由、教学 README、CI 和变更记录。
+- **状态**：已实现，待本地全量检查与 GitHub Actions 核验；自动检查不作为真人求助体验或陌生新手可用性证据。
+
 ## 下一轮优先审计
 
 - 等待作者确认许可证、引用署名和首个版本号，再完成 `LICENSE`、`CITATION.cff` 与首个 GitHub Release。
 - 使用固定查询和抽样原文继续测试聚合论文平台的重复、遗漏、版本冲突与代码链接准确性；未形成对照样本前不发布覆盖度评分。
-- 审计“检索无命中或候选无法区分时出现死路”的问题：让原始查询、已开候选、最小观察和权限边界无损进入同伴 / 导师 / 上游求助，并验证求助后的答案能否回流到原问题而不产生另一份事实。
 - 设计一次真正的陌生读者可用性观察：在不提示正确文件的条件下记录任务成功、误用、求助点和卡住位置；没有真人证据前，不把自动脚本通过表述为“零基础用户已验证”。
+- 审计跨平台首次执行：使用 Windows PowerShell 与 Ubuntu 的全新目录分别完成 L0、第一条实验、无命中求助和结果定位，记录命令差异与首次卡点。

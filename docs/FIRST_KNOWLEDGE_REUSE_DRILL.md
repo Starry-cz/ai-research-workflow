@@ -5,6 +5,7 @@
 ```text
 原始症状 → 查询阶梯 → 候选集合 → 身份与状态核对
         → 最小验证 → 复用决定 → 结果写回
+        ↘ 无命中 / 无法区分 → 带上下文求助 → 回复验证 → 知识回流
 ```
 
 > 找到一条看起来相似的经验，不等于已经找到当前问题的根因。检索负责召回候选，诊断负责排除错误候选；两者不能合并成“搜索结果第一条就是答案”。
@@ -124,6 +125,15 @@ GitHub Code Search 还支持引号精确匹配、`repo:`、`path:`、`language:`
 
 不得把“没有找到条目”写成“没有已知原因”，也不得把“条目不适用”写成“条目错误”。
 
+先单独记录检索结果，再决定下一步：
+
+- `MATCHED`：至少一个候选通过身份、来源、权限和最小验证；
+- `NO_MATCH`：当前索引、文档和历史问题没有可用候选；
+- `AMBIGUOUS`：仍有两个以上候选，现有观察无法区分；
+- `RESTRICTED`：可能存在候选，但来源、数据或动作受权限限制。
+
+`NO_MATCH` 和 `AMBIGUOUS` 不是终点，也不是上游缺陷证明。它们应进入带上下文的求助或下一项区分观察。
+
 ## 7. 搜索与复用记录
 
 第一次演练至少留下：
@@ -143,9 +153,38 @@ GitHub Code Search 还支持引号精确匹配、`repo:`、`path:`、`language:`
 
 Consortium for Service Innovation 的 KCS 指南强调保留请求者最初使用的词语、把事件与知识条目关联，并在复用时审查和改进条目。本仓库只迁移这套检索与反馈闭环，不把技术支持知识库规则当作科研证据或实验结论标准。
 
-## 8. 教学演练与验收
+## 8. 无命中或无法区分时不要重新开始
 
-打开[第一次工作流演练](../examples/first-workflow-drill/README.md)，先完成[知识检索练习](../examples/first-workflow-drill/knowledge-retrieval-drill.md)，再核对[已填写结果](../examples/first-workflow-drill/knowledge-retrieval-result.md)。演练包含明确标记的教学干扰项，用来练习排除过期或近似建议；它们不属于正式知识索引，也不得作为项目事实引用。
+当结果是 `NO_MATCH`、`AMBIGUOUS` 或 `RESTRICTED` 时，把已有工作直接交给下一位问题所有者：
+
+```text
+原始问题与查询
+  → 已开候选与排除理由
+  → 已完成的最小观察与负面发现
+  → 当前身份、权限和可共享范围
+  → 一个需要对方判断的问题
+  → 一个明确所有者与渠道
+```
+
+这就是“无死路交接包”。不要重新发送“跑不起来”，也不要同时向导师、师兄、论坛和上游重复投递。基础命令、路径和本地环境优先找项目同伴或教学负责人；研究问题、协议与结论找导师或合作者；只有在受支持的未修改版本上形成公开最小复现后，才升级为上游缺陷候选；敏感内容只走获准私密渠道。
+
+向对方提出的请求应是一个可判断的问题，例如“当前接口是否要求已有配置文件，还是应自动生成默认配置？”，而不是“请帮我修好”。如果对方仍不能判断，请其指出下一项有区分度的观察。
+
+收到回复后，先标记为 `ANSWER_CANDIDATE`，再核对：
+
+1. 回复针对的是不是当前 commit、数据、配置、平台和任务；
+2. 建议是否超出读取、运行、修改、公开或付费权限；
+3. 能否用只读检查、公开最小样例或新临时目录验证；
+4. 实际结果是 `VERIFIED_WITHIN_SCOPE`、`REJECTED` 还是 `NEEDS_MORE_EVIDENCE`；
+5. 结果写回原调试记录，而不是另建一份无法关联的聊天摘要。
+
+最后选择一种知识回流：`NO_ARTICLE`、`IMPROVE_FINDABILITY`、`UPDATE_SCOPE`、`CREATE_PROVISIONAL` 或 `SUPERSEDE_ENTRY`。一次直接路径错误通常只需改善现有文档；反复出现、跨成员有价值且能回到原证据时，才建立正式知识条目。
+
+KCS 把保留自助搜索字符串、已查看文章和环境并传给响应者称为避免用户“no dead-ends”。这里借用的是上下文连续性，不是把科研协作改造成客服工单。
+
+## 9. 教学演练与验收
+
+打开[第一次工作流演练](../examples/first-workflow-drill/README.md)，先完成[知识检索练习](../examples/first-workflow-drill/knowledge-retrieval-drill.md)，再核对[已填写结果](../examples/first-workflow-drill/knowledge-retrieval-result.md)。随后阅读[无命中交接记录](../examples/first-workflow-drill/knowledge-no-match-handoff.md)，练习把 `NO_MATCH` 交给正确所有者、验证回复候选并决定是否需要知识条目。演练中的教学干扰项和模拟回复均有明确标记，不属于正式知识索引，也不得作为真实人员意见引用。
 
 演练完成至少满足：
 
@@ -155,10 +194,13 @@ Consortium for Service Innovation 的 KCS 指南强调保留请求者最初使�
 - 检查了当前代码 / 文档和至少一个可运行证据；
 - 写出唯一复用决定和不超过证据范围的理由；
 - 将查询失败、候选排除和运行结果写回。
+- 无命中时保留自助上下文、唯一问题、所有者与权限边界；
+- 回复未经当前环境验证前只标记为候选；
+- 根据复用价值选择改善现有入口或新建条目，不把每次报错都知识化。
 
 自动脚本只能验证教学材料、命令和预期证据仍然一致，不能证明陌生新手真正理解。要评价教学可用性，应让未参与编写的人在不提示正确文件的情况下完成任务，记录成功、误用、求助点和卡住位置，再按实际观察修改教程。
 
-## 9. AI 辅助边界
+## 10. AI 辅助边界
 
 AI 可以帮助生成同义查询、汇总候选差异、指出缺失身份和起草写回记录，但必须遵守：
 
@@ -171,20 +213,26 @@ AI 可以帮助生成同义查询、汇总候选差异、指出缺失身份和�
 
 GitHub 的 Debugging tutor 示例建议从稳定复现、错误信息、最近变化和最小样例开始，并用引导问题建立独立排错能力；`obra/superpowers` 的 systematic-debugging skill 也强调先调查根因、比较差异、单一假设与最小测试。本仓库吸收顺序和证据意识，不把 Copilot 指令或某个 agent skill 当作科研方法学认证。
 
-## 10. 经验、项目与规范依据
+## 11. 经验、项目与规范依据
 
 - [逻辑排错能力如何执行呢？](https://www.xiaohongshu.com/explore/6a5de291000000000c015350)描述新手在实验失败后重复运行、同时更换很多因素，仍无法定位原因的困境；本教程吸收“分步骤、对照和单变量区分”，不据个人观察规定统一排错成本；
 - [最近带了几个研一新生，谈谈感受](https://www.xiaohongshu.com/explore/674a942c0000000007035d9d)强调先明确任务、针对性搜索、按问题类型选择求助对象，并用具体环境与现象降低求助成本；其中学历比较与个人管理经验不作为能力评价规则；
+- [如何向师兄师姐请教，不让人觉得是伸手党？](https://www.xiaohongshu.com/explore/6a6dccf4000000002c001ef9)建议求助前先检索和尝试、说明已做工作、选择合适对象并反馈结果；本教程吸收准备与回流，不把个人沟通建议设为统一师生规范；
+- [如何优雅的应对师弟师妹复现实验](https://www.xiaohongshu.com/explore/6a1e8c5d000000003601d1b3)以讽刺方式呈现报错与参数被忽略、只得到模糊鼓励的复现困境；它用于识别“回复没有进入验证”的断点，不作为沟通范例；
 - [我把 AI 翻车记录做成了一张清单](https://www.xiaohongshu.com/explore/6a7546dd0000000033011d5f)用原文、条件、研究对象和作者表述检查 AI 输出；其医学科研语境只用于确认“流畅答案仍需回源”的痛点；
 - [知乎：如何正确地在 GitHub 上提 Issue](https://www.zhihu.com/question/21235917/answer/203370582)建议说明环境、复现、预期和实际；该回答年代较早且属个人经验，当前项目模板和上游规则优先；
 - [知乎：初学者如何使用 GitHub](https://www.zhihu.com/en/answer/961953665)建议用精确关键词搜索已有 Issue；个人回答只说明检索习惯，不证明第一条结果适用；
 - [GitHub Code Search syntax](https://docs.github.com/en/search-github/github-code-search/understanding-github-code-search-syntax)定义精确短语、布尔表达式、`repo:`、`path:` 和正则等查询能力；
 - [GitHub Debugging tutor](https://docs.github.com/en/copilot/tutorials/customization-library/custom-instructions/debugging-tutor)强调稳定复现、仔细阅读错误、逐项检查和一次改变一个变量，同时明确示例需要适配具体项目；
 - [systematic-debugging](https://github.com/obra/superpowers/blob/main/skills/systematic-debugging/SKILL.md)提供从根因调查、模式比较、单一假设到验证的 agent 工作流；它是软件开发 skill，不替代 ML 实验设计、统计推断或领域协议；
+- [How-To-Ask-Questions-The-Smart-Way](https://github.com/ryanhanwu/How-To-Ask-Questions-The-Smart-Way)强调先搜索、保留尝试、描述症状、选择渠道并在解决后补充结果；本教程采用可检查结构，不采用其中对新手带有贬损性的措辞；
+- [Stack Overflow 的最小可复现示例](https://stackoverflow.com/help/minimal-reproducible-example)要求样例最小、完整、可复现且发送前重跑；它不判断科研数据共享权限、问题所有权或结论证据；
+- [GitHub form schema](https://docs.github.com/en/communities/using-templates-to-encourage-useful-issues-and-pull-requests/syntax-for-githubs-form-schema)支持结构化输入和必填验证；字段完整不证明报告已正确路由或答案成立；
+- [KCS：Capture the Requestor's Context](https://library.serviceinnovation.org/KCS/KCS_v6/KCS_v6_Practices_Guide/030/030/010/020)要求保留原始用词、自助搜索字符串、已查看文章和环境，让上下文随问题进入响应阶段，并明确讨论 “no dead-ends”；本教程只迁移上下文连续性；
 - [KCS：Searching is Creating](https://library.serviceinnovation.org/KCS/KCS_v6/KCS_v6_Practices_Guide/030/030/010/030)要求记录请求者搜索词、环境与区分特征；[Reuse is Review](https://library.serviceinnovation.org/KCS/KCS_v6/KCS_v6_Practices_Guide/030/030/040/020)要求在真实复用中及时改进有价值的条目；本教程只迁移需求驱动维护；
 - [Diátaxis Tutorials](https://diataxis.fr/tutorials/)区分“通过行动学习”的教程与面向已具备能力者的 how-to，并要求具体步骤、可见结果和实际用户观察。
 
-## 11. 完成标准
+## 12. 完成标准
 
 一次安全复用完成时，应能回答：
 
@@ -194,5 +242,7 @@ GitHub 的 Debugging tutor 示例建议从稳定复现、错误信息、最近�
 - 哪个最小验证真正区分了候选？
 - 采取了哪个决定，动作有什么副作用？
 - 这次使用让原条目保持、变得更易检索、收缩范围，还是需要替代？
+- 如果没有命中，原始查询、负面发现、权限和唯一问题是否无损进入下一位所有者？
+- 收到的回复如何从 `ANSWER_CANDIDATE` 变成经验证的本地结论？
 
 如果这些问题无法回答，说明完成的是“找到一段文字”，不是可审计的知识复用。

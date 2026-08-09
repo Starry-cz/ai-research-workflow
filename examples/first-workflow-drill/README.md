@@ -100,6 +100,8 @@ macOS / Linux：
 
 [知识检索练习](knowledge-retrieval-drill.md)不会先给出正确条目，而是要求从模糊症状召回正式记录和明确标记的教学干扰项，核对当前 CLI、状态、来源和副作用后再作决定。完成后可查看[已填写结果](knowledge-retrieval-result.md)；自动校验只保证夹具没有与当前脚本漂移，不证明陌生新手已经掌握。
 
+[检索无命中后的交接记录](knowledge-no-match-handoff.md)再演示另一条真实脚本路径：不存在的配置触发 `FileNotFoundError`，正式知识索引没有适用条目。记录保留原始查询、负面发现、唯一问题和权限，先路由到本地所有者；教学模拟回复只作为 `ANSWER_CANDIDATE`，用已有配置和新临时目录验证后，以 `SELF_RESOLVED_NO_ARTICLE` 关闭并改善本页入口。
+
 ### 成功标志
 
 每个新输出目录都应存在四个文件，且命令正常退出：
@@ -149,6 +151,7 @@ macOS / Linux：
 | --- | --- |
 | 找不到 `python`、`python3` 或虚拟环境解释器 | 回到 L0 指南核对安装与真实解释器路径，不混用多个 Python。 |
 | 找不到 `train.py` 或 `configs/...` | 运行 `Get-Location`（PowerShell）或 `pwd`（macOS/Linux），确认当前目录是 `first-workflow-drill`。 |
+| 配置文件不存在或路径拼错 | 先用 `python train.py --help` 核对参数，再列出 `configs/` 中实际文件；不要假设脚本会生成默认配置。检索无命中时保留查询与负面发现，再按[已填写交接记录](knowledge-no-match-handoff.md)求助。 |
 | 输出目录已存在或非空 | 不覆盖旧证据；改用带序号的新目录。 |
 | 命令退出但结果状态不是 `completed` | 先读 `run.log` 和 `metrics.json` 中的失败项，再填写调试卡。 |
 | 想从头重跑 | 保留需审计的旧目录；仅对自己创建且确认无保留价值的目录做清理，然后使用新的 `run_id`。不要改动三个 `*-recorded` 示例目录。 |

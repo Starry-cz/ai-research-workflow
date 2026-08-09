@@ -41,6 +41,8 @@
 - 保留候选及来源：
 - 排除候选及原因（状态 / 身份 / 症状 / 权限 / 副作用）：
 - 没有找到或无法区分时，仍缺少的观察：
+- 检索结果：MATCHED / NO_MATCH / AMBIGUOUS / RESTRICTED
+- 已确认的负面发现（哪些位置、版本或原因已经排除）：
 - 复用决定与写回位置：
 
 第一次填写时可参考[知识检索与安全复用演练](../docs/FIRST_KNOWLEDGE_REUSE_DRILL.md)。搜索结果只用于召回候选，不能替代当前问题的最小复现和根因证据。
@@ -111,6 +113,17 @@
 - 若准备 PR，对应 Issue / 方案确认：
 - PR 的 base branch、唯一范围、测试和明确不修改项：
 
+无命中或候选无法区分时，附上无死路交接包：
+
+- 下一位问题所有者与唯一渠道：
+- 希望对方判断的一个具体问题：
+- 随问题移交的原始查询、已开候选、负面发现和最小观察：
+- 允许分享的代码、配置、日志和数据范围：
+- 禁止访问、修改、删除、公开或付费的内容：
+- 若仍无法判断，希望对方指出的下一类区分观察：
+
+不要同时向多个渠道重复投递同一问题。若当前证据只指向本地命令、路径或私有改动，先找本地所有者；不要把 `NO_MATCH` 直接升级成上游 Issue。
+
 ## 7. 公开前安全检查
 
 - [ ] 已删除 API key、token、密码、内网地址和个人路径
@@ -121,9 +134,14 @@
 
 ## 8. 当前路由状态
 
-- 状态：LOCAL_USAGE_RESOLVED / ASK_COMMUNITY / UPSTREAM_ISSUE_READY / DISCUSS_BEFORE_CHANGE / READY_FOR_PR / PRIVATE_REPORT / RESEARCH_REVIEW / INSUFFICIENT_EVIDENCE
+- 状态：SELF_RESOLVED_NO_ARTICLE / LOCAL_USAGE_RESOLVED / ASK_LOCAL_OWNER / ASK_COMMUNITY / UPSTREAM_ISSUE_READY / DISCUSS_BEFORE_CHANGE / READY_FOR_PR / PRIVATE_REPORT / RESEARCH_REVIEW / INSUFFICIENT_EVIDENCE
 - 状态依据：
 - Issue / Discussion / PR / 私密报告链接：
-- 上游回复或关闭原因：
-- 在上游声明修复的版本上重新验证的命令与结果：
+- 回复原文或链接及来源身份：
+- 回复初始状态：ANSWER_CANDIDATE
+- 回复验证：VERIFIED_WITHIN_SCOPE / REJECTED / NEEDS_MORE_EVIDENCE
+- 本地验证命令、当前身份与结果：
+- 上游关闭原因或声明修复的版本（如适用）：
+- 知识回流：NO_ARTICLE / IMPROVE_FINDABILITY / UPDATE_SCOPE / CREATE_PROVISIONAL / SUPERSEDE_ENTRY
+- 不新建或新建知识条目的依据：
 - 回写本地复现、实验或决定记录的位置：

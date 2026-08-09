@@ -29,7 +29,7 @@
 | [07-literature-search-log.md](07-literature-search-log.md) | 开始新方向检索或扩展核心论文集合时 | 关键词、查询、去重、版本和停止依据可追踪 |
 | [08-compute-data-environment-checklist.md](08-compute-data-environment-checklist.md) | 使用实验室服务器、云 GPU 或迁移大数据前 | 干净安装、短试跑、恢复测试、预算和结果导出均有记录 |
 | [09-submission-review-archive.md](09-submission-review-archive.md) | 投稿、作者回复、拒稿转投或录用归档时 | 规则、送审版本、评审问题、回复证据、版本链和长期产物均可追溯 |
-| [10-debug-help-request.md](10-debug-help-request.md) | 环境、代码、数据或研究流程卡住，准备复用历史经验、求助、提上游 Issue 或贡献时 | 原始查询、候选排除、问题所有者、支持范围、最小复现、公开边界和路由状态明确 |
+| [10-debug-help-request.md](10-debug-help-request.md) | 环境、代码、数据或研究流程卡住，准备复用历史经验、求助、提上游 Issue 或贡献时 | 原始查询、候选排除；无命中时的所有者、唯一问题和权限；回复验证、知识回流与路由状态明确 |
 | [11-first-baseline-gate.md](11-first-baseline-gate.md) | 选择首篇真实论文，以及复现结束准备改进时 | 候选完成低成本预检；本地 baseline 稳定化后作出四选一决定 |
 | [12-math-concept-card.md](12-math-concept-card.md) | 公式阻塞论文理解、实现或实验判断时 | 符号、shape、假设、玩具数值与代码实现能够相互核对 |
 | [13-dataset-card.md](13-dataset-card.md) | 下载、生成或接收数据后，运行 baseline 前 | 来源与权利明确，版本可识别，划分和处理可重建，泄漏与隐私风险有结论 |
