@@ -1,6 +1,6 @@
 # AI 科研工具库的机器可读目录。
 # README.md 面向人类阅读；本文件便于后续生成网页、筛选器或统计页面。
-version: 5
+version: 6
 last_verified: "2026-08-09"
 tools:
   - id: ars
@@ -63,11 +63,13 @@ tools:
     name_zh: CosmosPaper
     stage: [论文发现]
     level: [L1, L2, L3]
-    type: web
-    url: https://www.cosmospapers.com/
-    summary: 论文发现 / 论文知识入口。
+    type: github-and-web
+    url: https://github.com/ulairii/cosmospaper
+    web_url: https://www.cosmospapers.com/
+    research_role: [discovery, venue-index]
+    summary: 聚合部分 AI、机器学习、视觉、图形与安全会议论文，提供筛选、语义搜索和趋势入口。
     recommended_output: 建立带原文链接、筛选理由和待核验项的小型候选论文集合。
-    caveat: 功能和维护状态待使用者访问原站核验。
+    caveat: 项目当前声明覆盖 15+ 会议与 2022–2026 年论文，不代表全部 AI / CS venue；AI 摘要与 BibTeX 应回到 DOI 或原文核验，并留意自带 API key 的数据条款。
 
   - id: cool-papers
     name: Cool Papers
@@ -76,6 +78,7 @@ tools:
     level: [L1, L2, L3]
     type: web
     url: https://papers.cool/
+    research_role: [discovery, venue-index, trend-monitoring]
     summary: 支持 arXiv 和 venue 搜索的 AI / CS 论文发现入口。
     recommended_output: 形成按任务筛选并回到原文核验的会议或 arXiv 论文清单。
     caveat: 收录范围和数据完整性需与官方来源交叉验证。
@@ -99,6 +102,7 @@ tools:
     type: github-and-web
     url: https://github.com/hongsong-wang/CV_Paper_Portal
     web_url: https://hongsong-wang.github.io/CV_Paper_Portal/
+    research_role: [discovery, venue-index]
     summary: 按关键词检索计算机视觉、机器学习和 AI 顶会历年论文摘要。
     recommended_output: 形成与当前视觉任务相关且已回到正式论文版本的候选表。
     caveat: 方向覆盖有限，使用时核验论文原始来源。
@@ -111,6 +115,7 @@ tools:
     type: github-and-web
     url: https://github.com/hongsong-wang/AI_arXiv_Portal
     web_url: https://hongsong-wang.github.io/AI_arXiv_Portal/
+    research_role: [discovery, trend-monitoring]
     summary: 按主题聚合 AI、机器学习和计算机视觉方向的 arXiv 摘要。
     recommended_output: 形成带主题、版本日期、原文与代码状态的近期论文跟踪表。
     caveat: 具体版本、作者和结论以 arXiv 原文为准。
@@ -122,6 +127,7 @@ tools:
     level: [L1, L2, L3]
     type: web
     url: https://papercopilot.com/
+    research_role: [discovery, venue-index, review-context]
     summary: 提供 AI / ML 会议和期刊导航、论文检索及 OpenReview 相关评审信息。
     recommended_output: 建立经会议官网或 OpenReview 交叉核验的论文与评审信息记录。
     caveat: 聚合数据可能不完整，录用状态和评审信息应回到官方来源核验。
@@ -133,6 +139,7 @@ tools:
     level: [L1, L2, L3]
     type: github-dataset
     url: https://github.com/george-gca/ai_conferences_info
+    research_role: [discovery, venue-index]
     summary: 整理部分 AI 顶会和期刊的标题、摘要、作者与链接。
     recommended_output: 形成按会议、年份和任务筛选，并回到原始页面核验的论文表。
     caveat: 会议和年份覆盖会变化，使用前查看仓库最新说明与许可证。
@@ -144,6 +151,7 @@ tools:
     level: [L1, L2, L3]
     type: github-list
     url: https://github.com/SarahRastegar/Best-Papers-Top-Venues
+    research_role: [discovery, venue-index]
     summary: 汇总 CVPR、NeurIPS、ICLR、ICML、ICCV、ECCV、AAAI 等 venue 的获奖论文。
     recommended_output: 选择与当前问题相关的获奖论文，完成阅读卡并说明为何可借鉴。
     caveat: 获奖不等于对当前课题直接适用，需结合问题和证据阅读。
@@ -155,6 +163,7 @@ tools:
     level: [L1, L2, L3]
     type: web
     url: https://arxiv.org/
+    research_role: [primary-paper, version-history]
     summary: 获取计算机科学和其他学科预印本、论文版本与原文入口。
     recommended_output: 保存 arXiv ID、版本日期、PDF 和正式发表版本之间的关系。
     caveat: 预印本不等同于同行评审后的最终版本，需记录版本日期。
@@ -166,6 +175,7 @@ tools:
     level: [L1, L2, L3]
     type: web
     url: https://scholar.google.com/
+    research_role: [discovery, citation-tracing]
     summary: 按标题、作者、关键词和引用关系发现学术文献。
     recommended_output: 记录完整查询式、筛选结果、引用追踪路径和原文核验状态。
     caveat: 检索结果、全文可得性和版本信息需要回到正式出版页或原文核验。
@@ -177,6 +187,7 @@ tools:
     level: [L1, L2, L3]
     type: web
     url: https://dblp.org/
+    research_role: [bibliographic-record]
     summary: 提供计算机科学论文、作者和会议书目信息。
     recommended_output: 建立作者、论文、会议和正式书目版本的可核验主记录。
     caveat: 适合书目定位，不替代论文全文、录用状态和实验结论核验。
@@ -188,6 +199,7 @@ tools:
     level: [L1, L2, L3]
     type: web
     url: https://openreview.net/
+    research_role: [primary-paper, review-record]
     summary: 查看部分会议的投稿、评审、回复和讨论信息。
     recommended_output: 保存论文版本、公开评审、作者回复和最终决定的来源链接。
     caveat: 不同 venue 的公开范围和流程不同，页面信息不代表全部评审事实。
@@ -254,6 +266,7 @@ tools:
     level: [L1, L2, L3]
     type: web
     url: https://huggingface.co/papers/trending
+    research_role: [discovery, trend-monitoring]
     summary: 浏览 Hugging Face 社区近期关注的机器学习论文及其关联页面。
     recommended_output: 形成带原文、日期、入选理由和待核验代码状态的近期候选论文表。
     caveat: 趋势页不等于完整文献库、任务榜单或质量排名；选题与复现仍需回到论文、官方代码和正式评测协议。

@@ -270,7 +270,7 @@ research-project/
 | --- | --- |
 | **0 建立台账** | 当前问题、资料入口、最新结果、失败项和下一步写进项目 README。 |
 | **1 选择方向与 baseline** | 两到三个候选完成低成本预检；保留一个通过项和一个备选项。 |
-| **2 文献发现与核验** | 检索式、筛选、版本和停止条件可复查；关键表述回到原文。 |
+| **2 文献发现与核验** | 按[论文发现与原文回溯](docs/PAPER_DISCOVERY_FIRST_PASS.md)分开记录发现入口、书目身份、原文版本和官方代码；检索式、筛选与停止条件可复查。 |
 | **3 论文与代码映射** | 核心论文阅读卡能连接公式、文件、shape、配置和结果。 |
 | **4 baseline 复现** | 环境、数据、命令、日志和评测齐全；结果达到容差或差异可解释。 |
 | **5 形成研究问题** | 失败现象转成可证伪假设，并写出反例与最小验证实验。 |
@@ -385,7 +385,7 @@ research-project/
 | **规划科研成长与项目训练** | [Learning Research](https://github.com/pengsida/learning_research)<br>把广度学习、深度复现、独立项目和每周交流组织成个人路线。 |
 | **组织完整科研流程** | [Academic Research Skills](https://github.com/Imbad0202/academic-research-skills)<br>调研、写作、审稿和投稿清单。 |
 | **参考阶段化科研编排** | [AutoResearchClaw](https://github.com/aiming-lab/AutoResearchClaw)<br>学习阶段产物、人工门控、预算约束、证据核验和版本化归档；新手应优先理解流程，不把自动输出视为已验证研究。 |
-| **查论文** | [Google Scholar](https://scholar.google.com/) / [DBLP](https://dblp.org/) / [AI arXiv Paper Portal](https://hongsong-wang.github.io/AI_arXiv_Portal/)<br>检索式、筛选记录和核心论文集合。 |
+| **查论文** | [论文发现与原文回溯](docs/PAPER_DISCOVERY_FIRST_PASS.md) / [Google Scholar](https://scholar.google.com/) / [DBLP](https://dblp.org/)<br>只选一个发现入口，再留下稳定标识、实际原文版本和官方代码状态。 |
 | **查顶会论文与评审** | [CV Paper Portal](https://hongsong-wang.github.io/CV_Paper_Portal/) / [OpenReview](https://openreview.net/)<br>正式论文版本、评审与回复记录。 |
 | **管理文献与重复版本** | [Zotero](https://www.zotero.org/) / [重复项说明](https://www.zotero.org/support/duplicate_detection)<br>主记录、来源标签、版本链、阅读状态和可核验元数据。 |
 | **查截止时间** | [CCFDDL](https://ccfddl.com/)<br>带时区的时间表，最终以官网为准。 |

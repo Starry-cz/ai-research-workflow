@@ -48,6 +48,8 @@
   caveat: 至少写明一个重要限制。
 ```
 
+论文发现类条目还必须增加 `research_role`，从以下职责中选择一个或多个：`discovery`、`venue-index`、`trend-monitoring`、`citation-tracing`、`bibliographic-record`、`primary-paper`、`version-history`、`review-context`、`review-record`。入口只声明实际承担的职责，不能用聚合或趋势页代替书目、原文和评审记录。
+
 Star 是动态信息，不能决定排序或推荐等级，也不进入 `tools.yml`。如维护报告确需引用社区可见度，应在审计记录中同时写明核验日期，避免使用“排名第一”“最好”等不可证实表述；面向新手的入口优先按任务、能力阶段和可验收产物组织。
 
 ## 修改原则

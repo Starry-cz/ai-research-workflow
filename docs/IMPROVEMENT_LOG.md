@@ -511,7 +511,23 @@
 - **采取行动**：新增 `scripts/audit_external_urls.py`，并发检查 `url` / `web_url` 的状态、最终地址和 TLS 错误，且不下载正文；完成 58 个入口与 35 个 GitHub 仓库的双层核验，生成[带日期报告](../reports/URL_AUDIT_2026-08-09.md)；更新 DVC 规范地址，删除 404 演示站，移除证书过期入口，将 Papers with Code 的旧能力描述改为 Hugging Face Trending Papers；贡献规范新增动态审计与二次确认规则，但不把外部网络检查加入必过 CI。
 - **状态**：已完成。
 
+## 2026-08-09：论文入口职责与原文回溯审计
+
+### I-034：多个论文平台并列出现，但新手不知道哪个负责发现、版本与证据
+
+- **当前问题**：首页和 `tools.yml` 已收录 Google Scholar、DBLP、arXiv、OpenReview 与多个聚合平台，但只按“论文发现、会议检索”等宽泛阶段分类。新手仍可能搜索全部网站、引用聚合摘要、把书目链接当全文证据，或忽略预印本、会议版与官方代码之间的关系。工具数量增加后，缺少职责分层本身会成为新的选择负担。
+- **经验对照**：
+  - [计算机科研新手快速入门](https://www.xiaohongshu.com/explore/6a55f71400000000170282b1)建议第一次深入时选择近期、开源、框架相对清楚且算力可承受的论文，先测试官方模型再进入训练；这里只吸收“用可执行种子缩小范围”的经验，不采用文中的商业产品推荐，也不把个人路径外推为通用规律；
+  - [大二科研经验和工具使用详细分享（文献篇）](https://www.xiaohongshu.com/explore/68cbd6850000000012021069)记录了从导师给定论文转向关键词、venue、引文追踪和 Zotero 管理的过程；评论中关于关键词和是否阅读全部结果的问题，说明入口后必须有筛选与停止协议；
+  - [科研入门指南：找文献篇](https://www.zhihu.com/tardis/bd/art/660258901)与[文献检索的五种常用方式](https://www.zhihu.com/tardis/bd/art/5273768340)使用关键词、种子论文、参考文献和正反向引文组织检索，支持“先有种子，再扩展”的执行顺序。
+- **规范与项目对照**：
+  - [Google Scholar 帮助](https://scholar.google.com/intl/us/scholar/help.html)说明相关性 / 日期排序、`Cited by`、相关论文、版本与覆盖边界；[DBLP FAQ](https://dblp.org/faq/1474565)将其职责限定为书目元数据和电子版链接；[arXiv 版本说明](https://info.arxiv.org/help/versions.html)要求注意永久版本、替换和版本化引用。这三类官方说明共同证明“发现、书目身份和实际原文”不能混为一层；
+  - [Hermes Agent 的研究论文工作流](https://github.com/nousresearch/hermes-agent/blob/main/skills/research/research-paper-writing/SKILL.md)使用种子论文、结构化搜索与引用核验；[DeerFlow 的系统综述技能](https://github.com/bytedance/deer-flow/blob/main/skills/public/systematic-literature-review/SKILL.md)将检索、筛选和综合分开；[ASReview](https://github.com/asreview/asreview)保留结构化筛选决定。本仓库只吸收可审计顺序，不采用自动写论文，也不把小型首轮搜索包装成系统综述。
+- **适用边界**：平台检查只反映 2026-08-09 可见页面、README 和官方说明，不构成覆盖率实验。聚合记录数、venue 数、Star、趋势和引用数都不能单独证明完整性或质量。首轮 5–12 篇候选是时间盒建议，不是任何领域的查全标准；正式系统综述需要对应数据库、完整检索式、筛选协议和报告规范。
+- **采取行动**：新增[论文发现与原文回溯指南](PAPER_DISCOVERY_FIRST_PASS.md)和[带日期平台审计](../reports/PAPER_DISCOVERY_AUDIT_2026-08-09.md)，把最小组合固定为“一个发现入口—书目身份—实际原文版本—需要复现时的官方代码”；升级文献检索账本；将 `tools.yml` 升级到 v6 并为 12 个文献入口增加 `research_role`；更新 CosmosPaper 的规范仓库、当前声明范围和 BYOK 边界；首页只保留任务入口。
+- **状态**：已完成。
+
 ## 下一轮优先审计
 
 - 等待作者确认许可证、引用署名和首个版本号，再完成 `LICENSE`、`CITATION.cff` 与首个 GitHub Release。
-- 继续抽查聚合论文平台的数据覆盖、更新频率和回到正式原文的路径；功能评价必须记录样本、日期和对照来源。
+- 使用固定查询和抽样原文继续测试聚合论文平台的重复、遗漏、版本冲突与代码链接准确性；未形成对照样本前不发布覆盖度评分。

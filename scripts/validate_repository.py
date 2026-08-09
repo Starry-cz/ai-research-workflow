@@ -14,6 +14,31 @@ HEADING = re.compile(r"^#{1,6}\s+(.+?)\s*$")
 FENCE = re.compile(r"^\s*(```|~~~)")
 TOOL_START = re.compile(r"^  - id:\s*([a-z0-9][a-z0-9-]*)\s*$")
 TOOL_FIELD = re.compile(r"^    ([a-z][a-z0-9_]*):\s*(.+?)\s*$")
+LITERATURE_TOOL_IDS = {
+    "ai-arxiv-portal",
+    "ai-conferences-info",
+    "arxiv",
+    "best-papers-top-venues",
+    "cool-papers",
+    "cosmos-paper",
+    "cv-paper-portal",
+    "dblp",
+    "google-scholar",
+    "huggingface-trending-papers",
+    "openreview",
+    "paper-copilot",
+}
+ALLOWED_RESEARCH_ROLES = {
+    "bibliographic-record",
+    "citation-tracing",
+    "discovery",
+    "primary-paper",
+    "review-context",
+    "review-record",
+    "trend-monitoring",
+    "venue-index",
+    "version-history",
+}
 
 
 class ValidationError(RuntimeError):
@@ -171,6 +196,19 @@ def validate_tools_catalog() -> int:
         levels = re.findall(r"L[0-3]", entry["level"])
         if not levels or entry["level"] != f"[{', '.join(levels)}]":
             raise ValidationError(f"tools.yml 条目 {entry['id']} 的 level 格式无效")
+        if entry["id"] in LITERATURE_TOOL_IDS:
+            role_field = entry.get("research_role")
+            if role_field is None:
+                raise ValidationError(f"tools.yml 文献条目 {entry['id']} 缺少 research_role")
+            # 固定列表格式，避免后续筛选器把同一角色解析为不同值。
+            roles = [role.strip() for role in role_field.strip("[]").split(",")]
+            if not roles or role_field != f"[{', '.join(roles)}]":
+                raise ValidationError(f"tools.yml 条目 {entry['id']} 的 research_role 格式无效")
+            unknown_roles = sorted(set(roles) - ALLOWED_RESEARCH_ROLES)
+            if unknown_roles:
+                raise ValidationError(
+                    f"tools.yml 条目 {entry['id']} 使用未知 research_role：{unknown_roles}"
+                )
         ids.add(entry["id"])
         urls.add(entry["url"])
     if not entries:
