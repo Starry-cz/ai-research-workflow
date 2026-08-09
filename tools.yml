@@ -310,6 +310,17 @@ tools:
     star_snapshot: "约 10.8 万（2026-08-07）"
     caveat: 内容范围很广，不适合作为必须全部完成的固定书单。
 
+  - id: how-to-search-and-read-a-paper
+    name: How to Search and Read a Paper
+    name_zh: 如何搜索和阅读一篇论文
+    stage: [论文检索, 论文筛选, 分层阅读, 引用追踪]
+    level: [L0, L1, L2]
+    type: github-guide
+    url: https://github.com/qiyuangong/How_to_Search_and_Read_a_Paper
+    summary: 面向计算机专业新生讲解关键词积累、引用追踪、论文筛选、泛读与精读。
+    recommended_output: 建立关键词表和分层文献清单，只对核心论文完成精读与讨论。
+    caveat: 部分数据库和网站信息较早，具体检索入口、访问方式和版本应以当前官方页面为准。
+
   - id: nn-zero-to-hero
     name: Neural Networks Zero to Hero
     name_zh: 神经网络从零到入门
