@@ -18,6 +18,10 @@
 - 本地 baseline commit 与 run IDs：
 - 本地 baseline 与论文目标的差距及边界：
 - 唯一主要改动：
+- 安全改码记录：[SAFE_FIRST_CODE_CHANGE.md](../docs/SAFE_FIRST_CODE_CHANGE.md)
+- base commit、改动 commit 与分支：
+- 改动类别与准入决定：RESEARCH_CHANGE + SAFE_FOR_PILOT / 其他状态不得进入 pilot
+- 修改前后检查命令与证据位置：
 - 科学变量：
 - 干扰变量：
 - 固定变量：
@@ -59,6 +63,9 @@
 
 - [ ] baseline 已取得 `READY_FOR_CHANGE`，证据与允许主张明确
 - [ ] 本地 baseline 没有混入未审计的研究改动
+- [ ] 修复、重构、观测和研究方法改动已经分离
+- [ ] 已逐文件审查 diff，且最低检查覆盖本轮主要改动
+- [ ] AI 生成的研究相关代码能够由作者解释，新增 API 与依赖已核验
 - [ ] pilot 结果不会被直接当成完整协议结论
 - [ ] 训练、验证、测试用途分离
 - [ ] 除主要变量外的设置保持公平

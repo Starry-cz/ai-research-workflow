@@ -96,15 +96,23 @@
 
 ## 8. AI 辅助改动审计
 
-每次让 AI 修改环境、配置或代码后复制一份：
+每次让 AI 修改环境、配置或代码后复制一份。准备方法改进时先完成[第一次安全修改论文代码](../docs/SAFE_FIRST_CODE_CHANGE.md)：
 
 - 时间与操作者：
+- base commit、当前分支与修改前 baseline run_id：
 - 原始报错或问题：
+- 改动类别：ENVIRONMENT_REPAIR / BASELINE_REPAIR / REFACTOR / INSTRUMENTATION / RESEARCH_CHANGE
+- 本轮唯一目标：
+- 允许修改 / 禁止修改的文件：
+- 修改前检查命令与结果：
 - 修改文件与 diff：
 - 修改理由：
 - 对 baseline 公平性的潜在影响：
-- 验证命令与结果：
+- 修改后检查命令、退出状态与证据位置：
+- 是否新增依赖、API 或许可证义务，核验位置：
+- 是否删除、跳过或放宽测试：否 / 是，说明
 - 回退 commit 或恢复方式：
+- 准入决定：SAFE_FOR_PILOT / SPLIT_CHANGE / REPAIR_BASELINE_FIRST / REVIEW_REQUIRED / REVERT_AND_REPRODUCE
 - 是否理解并接受该修改：是 / 否 / 待复核
 
 ## 9. 最终结果

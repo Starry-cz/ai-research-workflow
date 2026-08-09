@@ -133,6 +133,8 @@
 
 进入方法改进前还要通过[baseline 稳定化门](BASELINE_STABILIZATION_GATE.md)：分开记录论文目标值、本地锁定 baseline 和候选方法，并选择 `READY_FOR_CHANGE / REPRODUCTION_ONLY / COMPARATOR_ONLY / REPLACE_BASELINE`。只有 `READY_FOR_CHANGE` 可以作为首次改进的主 baseline；“差异已解释”必须有证据、残余边界，并确认不会与候选改动混杂。
 
+复现阶段不得不修环境或 baseline 时，以及进入第一次方法改动前，都执行[安全改码准入](SAFE_FIRST_CODE_CHANGE.md)：先冻结 base commit 与最近一次可运行证据，把环境修复、baseline 修复、重构、观测和研究改动分开，按风险选择最低检查并逐文件审查 diff。只有取得 `READY_FOR_CHANGE` 且改动状态为 `SAFE_FOR_PILOT`，才进入方法试运行；发现 baseline 或评测变化时返回稳定化阶段。
+
 **推荐产物**：[复现规划](../templates/03-reproduction-plan.md)、[baseline 准入卡](../templates/11-first-baseline-gate.md)、[数据集审计指南](DATASET_FIRST_AUDIT.md)、[数据集卡](../templates/13-dataset-card.md)。
 
 ## 5. 从复现走向研究问题
@@ -180,7 +182,7 @@
 
 自动化工具可以执行命令和整理产物，但数据、评价、主要假设、异常结果和对外结论必须人工审核。
 
-**推荐产物**：[评价协议指南](EVALUATION_FIRST_SPEC.md)、[公平调参与搜索预算](FAIR_TUNING_BUDGET.md)、[评价协议卡](../templates/14-evaluation-spec.md)、[实验卡](../templates/04-experiment-card.md)。通过后进入 G3。
+**推荐产物**：[第一次安全修改论文代码](SAFE_FIRST_CODE_CHANGE.md)、[评价协议指南](EVALUATION_FIRST_SPEC.md)、[公平调参与搜索预算](FAIR_TUNING_BUDGET.md)、[评价协议卡](../templates/14-evaluation-spec.md)、[实验卡](../templates/04-experiment-card.md)。通过后进入 G3。
 
 ## 7. 结果分析与论文表达
 

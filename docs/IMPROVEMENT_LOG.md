@@ -580,8 +580,29 @@
 - **采取行动**：新增[真实代码库最小接入](ADOPT_WORKFLOW_IN_EXISTING_PROJECT.md)和[带日期审计](../reports/WORKFLOW_ADOPTION_AUDIT_2026-08-09.md)，提供实验室仓库、公开论文 fork、只读 / 私有上游、单 Notebook 和全新项目五种场景；增加十五分钟只读盘点、单一来源映射、当前阶段单卡策略、第一条证据链、升级触发和 `ADOPTED_MINIMAL / USE_EXISTING_SYSTEM / NEEDS_PERMISSION / BLOCKED_RUNTIME / RESTRUCTURE_LATER` 五种决定；同步首页、核心工作流、指南索引、项目结构、模板索引和教学演练。本轮没有新增模板或自动搬运脚本，避免用更多文件解决重复记录问题。
 - **状态**：已完成。
 
+## 2026-08-09：首次修改论文代码与 AI 生成代码审计
+
+### I-038：已有单变量与 commit 原则，但没有“修改前 baseline—diff—最小检查—回退”的准入门
+
+- **当前问题**：README 已要求单变量改动、保留 commit、检查 AI 是否改变数据和评价，复现规划也有 AI 改动记录；但新手仍不知道修改前应冻结哪个运行、环境修复与方法改动如何分开、不同风险至少检查到什么程度，以及 AI 生成代码出现虚构 API、隐藏依赖、测试删除或静默兜底时如何拒绝。一次 diff 同时包含修 bug、重构与方法变化后，即使分数提高也无法判断收益来源。
+- **经验对照**：
+  - [把 idea 变成可靠的代码的工作流](https://www.xiaohongshu.com/explore/6a1a82e400000000380345ea)强调理解、规划、最小实现和验证，评论反映 AI 改动后难以区分想法与实现问题；它支持最小 patch 和独立验证，不证明任何 AI 工具的代码天然可靠；
+  - [科研人员的极简 Git 实用指南](https://www.xiaohongshu.com/explore/6940d4ea000000000d00d9b9)记录代码迭代与实验结果失去版本对应、忘记 commit 后难以回退的痛点；它确认版本入口的重要性，不定义正式 Git 协作规则；
+  - [计算机博士 Codex 科研入门使用心得](https://www.xiaohongshu.com/explore/6a4e055c000000001702d0c8)建议先明确目标、现有文件和预期结果，并限制 AI 随意修改原文件。本仓库吸收任务边界，但不采用按 Star 自动安装技能的建议，外部代码仍需来源、许可证和内容审查；
+  - [科研探索目的下 Codex 老在奇怪的地方使劲](https://www.xiaohongshu.com/explore/6a76af7d000000002500743e)反映过量格式、覆盖率和防御性工作会挤压假设验证，并建议记录假设、失败、原因与决定。本仓库吸收按风险和主张配置检查的原则，但不采用全面禁止门控、分支或回退的个人做法；
+  - 知乎文章[大规模编排 AI 代码审查](https://zhuanlan.zhihu.com/p/2053168414206718925)讨论结合仓库上下文和 diff 审查，并指出被标记为生成文件的内容也可能包含必须核验的语义变化。该文章用于确认审查痛点，不把 AI 评审结论作为合并批准。
+- **规范与项目对照**：
+  - [Learning Research](https://github.com/pengsida/learning_research)把实验能力落实到写代码、分析不工作原因和实验记录，并提醒经验来自特定实验室与方向；本仓库将其转化为项目制改码训练，不照搬 3D Vision 课程要求；
+  - [AutoResearchClaw](https://github.com/aiming-lab/AutoResearchClaw)提供阶段产物、人工参与模式、预算、版本化和 `PROCEED / REFINE / PIVOT` 决策。本仓库只吸收编排与门控，不把“一行命令出论文”或自动批准视为研究可信性证明；
+  - [Google Engineering Practices](https://google.github.io/eng-practices/review/developer/small-cls.html)建议小而自包含的改动、相关测试，并分开重构与功能 / 修复修改；其示例行数没有转成固定阈值；
+  - [GitHub 变更审阅指南](https://docs.github.com/en/pull-requests/concepts/helping-others-review-your-changes)强调聚焦范围、上下文、自审 diff 和测试；[GitHub AI 代码审阅教程](https://docs.github.com/en/copilot/tutorials/review-ai-generated-code)进一步要求核验意图、依赖、许可证、虚构 API，以及被删除或跳过的测试；
+  - [Releasing Research Code](https://github.com/paperswithcode/releasing-research-code)要求依赖、训练、评价、权重和精确命令，为代码变化建立可运行入口。
+- **适用边界**：本准入门面向 Git 管理的 AI 实验代码，不替代安全关键软件、受控实验室或机构合规流程。不是每次修改都要完整训练；检查应覆盖修改风险与主张，而不是机械追求覆盖率。测试通过只能支持被检查行为，不能证明论文实现正确、方法有效、比较公平或结论可推广。PR 与第二位审阅者适合协作项目，个人项目可保留完整自审证据而不强制 PR。
+- **采取行动**：新增[第一次安全修改论文代码](SAFE_FIRST_CODE_CHANGE.md)和[带日期审计](../reports/FIRST_CODE_CHANGE_AUDIT_2026-08-09.md)，将改动分成 `ENVIRONMENT_REPAIR / BASELINE_REPAIR / REFACTOR / INSTRUMENTATION / RESEARCH_CHANGE`，提供 T0–T4 风险比例检查、逐文件 diff 清单、AI 代码接受条件、提交顺序与 `SAFE_FOR_PILOT / SPLIT_CHANGE / REPAIR_BASELINE_FIRST / REVIEW_REQUIRED / REVERT_AND_REPRODUCE` 五种决定；同步 README、核心工作流、指南索引、真实项目接入、复现规划、实验卡和调试卡。
+- **状态**：已完成。
+
 ## 下一轮优先审计
 
 - 等待作者确认许可证、引用署名和首个版本号，再完成 `LICENSE`、`CITATION.cff` 与首个 GitHub Release。
 - 使用固定查询和抽样原文继续测试聚合论文平台的重复、遗漏、版本冲突与代码链接准确性；未形成对照样本前不发布覆盖度评分。
-- 审计新手第一次修改论文代码时的分支、diff 审查、最小测试与 AI 生成代码验收，避免“一次改很多文件但无法定位收益或回退”。
+- 审计实验台账在导师、合作者和不同机器之间的最小交接字段，验证另一人能否只根据入口复查一次运行和决定。

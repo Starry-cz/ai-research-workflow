@@ -208,7 +208,7 @@ research-project/
 | **M4 方向与 baseline**<br>按[方向选择决策树](docs/DIRECTION_FIRST_CHOICE.md)扫描候选并筛选论文 | **产物**：任务句、非目标、研究简报、候选表和资源预算。<br>**完成**：选出一篇适合复现的 baseline，并保留备选。 |
 | **M5 论文与代码**<br>精读论文并阅读官方代码 | **产物**：阅读卡、模块映射、风险登记表。<br>**完成**：能画出数据流并定位代码入口。 |
 | **M6 复现与评测**<br>预训练评测、单批次测试、完整复现 | **产物**：复现日志、配置、指标差异表和[稳定化决定](docs/BASELINE_STABILIZATION_GATE.md)。<br>**完成**：论文目标与本地 baseline 已分开，差距、稳定性和允许主张明确。 |
-| **M7 改进与失败分析**<br>失败案例与单变量改进 | **产物**：假设卡、实验矩阵、规模升级记录和消融结果。<br>**完成**：只有 `READY_FOR_CHANGE` 的 baseline 进入改进，效果能被独立检验。 |
+| **M7 改进与失败分析**<br>按[首次安全改码](docs/SAFE_FIRST_CODE_CHANGE.md)完成一个单变量改进 | **产物**：修改前快照、可审查 diff、检查证据、假设卡、实验矩阵和消融结果。<br>**完成**：只有 `READY_FOR_CHANGE` 的 baseline 进入改进，修复 / 重构 / 方法改动已分离，效果能被独立检验。 |
 | **M8 分析与表达**<br>结果分析、写作和复盘 | **产物**：研究报告、图表、失败项和下一步。<br>**完成**：每个结论都能回到代码、日志或文献。 |
 
 每次复盘只选择一种状态：
@@ -274,7 +274,7 @@ research-project/
 | **3 论文与代码映射** | 核心论文阅读卡能连接公式、文件、shape、配置和结果。 |
 | **4 baseline 复现** | 环境、数据、命令、日志和评测齐全；按[稳定化门](docs/BASELINE_STABILIZATION_GATE.md)区分论文目标、本地 baseline 与候选方法，并作四选一决定。 |
 | **5 形成研究问题** | 失败现象转成可证伪假设，并写出反例与最小验证实验。 |
-| **6 实验设计与执行** | 评价协议先冻结；按[公平调参与搜索预算](docs/FAIR_TUNING_BUDGET.md)审计 baseline 与候选的搜索机会；全部 trial 和确认运行可追踪。 |
+| **6 实验设计与执行** | 评价协议先冻结；先按[首次安全改码](docs/SAFE_FIRST_CODE_CHANGE.md)审查修改范围与最低测试，再按[公平调参与搜索预算](docs/FAIR_TUNING_BUDGET.md)审计 baseline 与候选的搜索机会；全部 trial 和确认运行可追踪。 |
 | **7 分析与表达** | 观察、解释与主张分开；反例、替代解释和图表来源已审计。 |
 | **8 投稿与归档** | 官方规则已核验；实际提交版本、评审、回复和负面结果已冻结。 |
 
@@ -284,6 +284,7 @@ research-project/
 
 - [核心工作流手册](docs/CORE_RESEARCH_WORKFLOW.md)
 - [真实代码库最小接入](docs/ADOPT_WORKFLOW_IN_EXISTING_PROJECT.md)
+- [第一次安全修改论文代码](docs/SAFE_FIRST_CODE_CHANGE.md)
 - [全部执行指南索引](docs/README.md)
 - [数据集审计](docs/DATASET_FIRST_AUDIT.md)
 - [评价协议](docs/EVALUATION_FIRST_SPEC.md)
@@ -395,6 +396,7 @@ research-project/
 | **审计数据集** | [零基础数据集审计指南](docs/DATASET_FIRST_AUDIT.md) / [Hugging Face Dataset Cards](https://github.com/huggingface/datasets/blob/main/templates/README_guide.md)<br>来源、许可证、revision、schema、划分、泄漏、隐私与可重建证据。 |
 | **冻结评价协议** | [零基础评价协议指南](docs/EVALUATION_FIRST_SPEC.md) / [scikit-learn Metrics](https://scikit-learn.org/stable/modules/model_evaluation.html)<br>主指标、实现、聚合、阈值、统计单位、不确定性、人工评价和决策门槛。 |
 | **从结果形成主张** | [从实验结果到可辩护主张](docs/RESULT_TO_CLAIM.md) / [NeurIPS Paper Checklist](https://neurips.cc/public/guides/PaperChecklist)<br>结果完整性、配对错误、替代解释、图表来源、主张范围与证据状态。 |
+| **第一次修改论文代码** | [第一次安全修改论文代码](docs/SAFE_FIRST_CODE_CHANGE.md) / [GitHub AI 代码审阅](https://docs.github.com/en/copilot/tutorials/review-ai-generated-code)<br>修改前 baseline、改动类别、可审查 diff、按风险选择的检查和准入决定。 |
 | **管理大文件与数据版本** | [Git LFS](https://git-lfs.com/) / [DVC](https://github.com/treeverse/dvc)<br>大文件指针、数据版本与外部存储位置；首个小实验只需先用 `.gitignore`、数据清单和校验值，规模增长后再引入。 |
 | **分层搜索与阅读论文** | [How to Search and Read a Paper](https://github.com/qiyuangong/How_to_Search_and_Read_a_Paper)<br>为检索结果分层，只对核心论文完成精读、讨论和可复用笔记。 |
 | **学论文到代码映射** | [Annotated Deep Learning](https://github.com/labmlai/annotated_deep_learning_paper_implementations)<br>公式—代码—shape 对照表。 |
