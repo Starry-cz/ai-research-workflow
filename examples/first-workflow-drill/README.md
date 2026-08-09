@@ -68,7 +68,7 @@ python train.py --config configs/candidate.json --output-dir results/my-candidat
 2. 打开两组 `config.snapshot.json`，确认只有 `experiment_id` 与 `learning_rate` 不同；
 3. 打开 `metrics.json`，确认 `runs` 中没有只保留最高分；
 4. 核对 `environment.json` 中的命令、Python 与平台；
-5. 将结果填回[实验卡](experiment-card.md)，再选择 `PROCEED / REFINE / PIVOT / STOP`。
+5. 将结果填回[实验卡](experiment-card.md)，使用[已填写结果—主张审计](result-claim-audit.md)检查反例和结论边界，再选择 `PROCEED / REFINE / PIVOT / STOP`。
 
 如果运行失败，不要删除目录。保留首个关键报错，并使用[调试与求助卡](../../templates/10-debug-help-request.md)记录完整命令、环境、预期和实际行为。
 

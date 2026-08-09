@@ -286,7 +286,24 @@
 - **采取行动**：新增 `docs/EVALUATION_FIRST_SPEC.md`，从决策与错误代价进入主指标，区分训练 loss、选择指标、主测试指标和辅助指标，规定实现、聚合、阈值、统计单位、不确定性、人工评价、模型评审和效率测量的冻结要求；新增 `14-evaluation-spec.md`；为合成演练新增已填写 Eval Spec，明确 accuracy、交叉熵、阈值、seed 汇总和总体标准差的含义及其非置信区间边界；同步更新 README、准备检查表、实验卡、模板索引、项目结构和误区。
 - **状态**：已完成。
 
+## 2026-08-09：结果到主张的证据链审计
+
+### I-020：声明—证据台账只有字段，没有配对错误、图表来源和主张强度门控
+
+- **当前问题**：README 已要求建立声明—证据台账，但没有给出可直接填写的模板，也没有要求从逐样本 / group 预测检查“候选修复”和“候选破坏”、区分预设分析与看完结果后的探索性切片，或为每张结果图表记录输入文件和生成命令。新手仍可能把平均分提高直接解释为机制成立、普遍泛化或方法有效，再挑选几个成功案例配图。
+- **经验对照**：
+  - 知乎的[高水平论文写作经验](https://www.zhihu.com/tardis/zm/art/596042829)强调研究问题、假设、实验、结果和含义需要形成逻辑链，每个图表还应有结果和反常结果的解释；[如何高效读论文](https://www.zhihu.com/tardis/zm/art/35170379)指出只展示图表而不分析就直接进入结论是常见缺口。这些内容主要是写作经验，本仓库吸收“图表服务问题和解释”的结构，不采用其中的固定表达模板或发表承诺；
+  - [第一次复现](https://www.xiaohongshu.com/explore/67cfb412000000002a00c7e8)和[研究生读了一年才把论文复现整明白](https://www.xiaohongshu.com/explore/6a3bcaa0000000000f0150e8)反映出新手通常先关注结果是否接近论文，再逐渐意识到失败样本、协议层级和证据标签的重要性；这些笔记访问可能需要登录，且后者带有工具推广，因此只用于确认分析痛点。
+- **规范与项目对照**：
+  - [NeurIPS Paper Checklist](https://neurips.cc/public/guides/PaperChecklist)要求摘要和引言中的主张与理论、实验结果的范围一致，并披露重要假设与限制；
+  - [Beyond Accuracy: Behavioral Testing of NLP Models with CheckList](https://aclanthology.org/2020.acl-main.442/)展示 held-out accuracy 仍可能遗漏关键行为失败，支持按能力、测试类型和具体反例补充平均指标；
+  - [Releasing Research Code](https://github.com/paperswithcode/releasing-research-code)要求提供训练与评测代码，以及生成主要结果的精确命令；[ACM Artifact Evaluation 示例规则](https://sigsim.acm.org/conf/pads/2024/blog/artifact-evaluation/)进一步要求产物有文档、与论文一致、可执行，并为待复现图表提供脚本；
+  - [NeurIPS LLM Checklist Assistant 实验](https://blog.neurips.cc/2024/12/10/results-of-the-neurips-2024-experiment-on-the-usefulness-of-llms-as-an-author-checklist-assistant-for-scientific-papers/)在人工检查中发现模型会补写原文不存在的硬件描述和占位 URL，说明 AI 生成的结果解释和证据位置必须回到原始材料核验。
+- **适用边界**：不同任务的错误单位、切片、行为测试和机制证据不同；本指南不要求所有论文使用同一种 taxonomy。逐样本错误分析不能替代统计评价，消融通常也不能单独证明因果或唯一机制。受限数据无法公开时仍应在授权环境保留内部来源链，并用可公开的脱敏说明交代缺失范围。
+- **采取行动**：新增 `docs/RESULT_TO_CLAIM.md`，建立“冻结输入—完整性—配对错误—探索 / 确认—替代解释—主张分级—图表来源”的分析闭环；新增 `15-result-claim-audit.md`，统一记录逐样本 / group 错误、反证、figure / table 生成链和 `verified / qualified / pending / rejected` 主张；为教学演练新增已填写审计，明确哪些工作流观察成立、为什么“学习率普遍更优”必须拒绝，以及缺少逐样本预测造成的分析边界；同步更新 README、实验卡、模板索引和项目结构。
+- **状态**：已完成。
+
 ## 下一轮优先审计
 
 - 等待作者确认许可证、引用署名和首个版本号，再完成 `LICENSE`、`CITATION.cff` 与首个 GitHub Release。
-- 审计结果分析到写作的证据链：逐样本错误、替代解释、主张—证据映射、图表数据来源与结论强度，避免从一个平均分直接跳到论文贡献。
+- 审计仓库在连续扩展后的认知负担：为 L0–L3 定义最小必用模板包、可选模板和升级触发条件，避免零基础读者误以为开始第一个小实验就必须填写全部模板。

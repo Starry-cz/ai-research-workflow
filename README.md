@@ -725,7 +725,7 @@ verification：测试、对照、复核人与复核时间
 
 ### 7. 结果分析与论文表达
 
-先组织证据，再组织文字：
+先使用[从实验结果到可辩护主张](docs/RESULT_TO_CLAIM.md)和[结果—主张审计卡](templates/15-result-claim-audit.md)组织证据，再组织文字：
 
 ```text
 主张 → 支持实验 → 对照组 → 数字或图表 → 反例 → 适用边界
@@ -739,6 +739,18 @@ claim_id | 准备写出的主张 | 实验或文献证据 | 文件位置
 ```
 
 实验数字只有在能定位到 `run_id`、配置和日志时才能标记为 `verified`；引用只有在原文确实支持当前表述时才能进入定稿。`pending` 内容可以留在工作笔记中，不能伪装成已确认结论。
+
+先把分析分成三个层级，不要从平均分直接跳到机制解释：
+
+| 层级 | 可以写什么 |
+| --- | --- |
+| **观察** | 在锁定数据、实现、指标和运行集合下，哪个结果更高、差异多大、波动与失败是什么。 |
+| **解释** | 哪些逐样本错误、group、消融或反例支持一种机制；同时保留标签问题、泄漏、预算和实现差异等替代解释。 |
+| **主张** | 只在证据覆盖的任务、数据、模型、资源和统计单位内表述；机制、泛化、效率和因果分别需要对应证据。 |
+
+至少完成一次配对错误分析：对同一评价单位区分“都正确、都错误、候选修复、候选破坏”，再按预先有意义的类别、group 或场景查看分布。看到结果后发现的新切片标为探索性发现，必须在新数据或新实验中确认后才能升级为主要证据。
+
+每张包含结果的图表都建立来源记录：输入预测或汇总文件、生成脚本、配置、命令、commit、输出文件和人工编辑。文字中的精确数字应来自同一冻结结果；手工美化不能改变数据、坐标、误差条或样本选择。
 
 论文各部分围绕同一条主线：
 
@@ -917,6 +929,7 @@ P2：表达、排版、补充解释和其他局部问题
 | **查代码与数据** | [GitHub](https://github.com/) / [Papers with Code](https://paperswithcode.com/)<br>官方仓库、commit、数据版本和评测协议。 |
 | **审计数据集** | [零基础数据集审计指南](docs/DATASET_FIRST_AUDIT.md) / [Hugging Face Dataset Cards](https://github.com/huggingface/datasets/blob/main/templates/README_guide.md)<br>来源、许可证、revision、schema、划分、泄漏、隐私与可重建证据。 |
 | **冻结评价协议** | [零基础评价协议指南](docs/EVALUATION_FIRST_SPEC.md) / [scikit-learn Metrics](https://scikit-learn.org/stable/modules/model_evaluation.html)<br>主指标、实现、聚合、阈值、统计单位、不确定性、人工评价和决策门槛。 |
+| **从结果形成主张** | [从实验结果到可辩护主张](docs/RESULT_TO_CLAIM.md) / [NeurIPS Paper Checklist](https://neurips.cc/public/guides/PaperChecklist)<br>结果完整性、配对错误、替代解释、图表来源、主张范围与证据状态。 |
 | **管理大文件与数据版本** | [Git LFS](https://git-lfs.com/) / [DVC](https://github.com/iterative/dvc)<br>大文件指针、数据版本与外部存储位置；首个小实验只需先用 `.gitignore`、数据清单和校验值，规模增长后再引入。 |
 | **分层搜索与阅读论文** | [How to Search and Read a Paper](https://github.com/qiyuangong/How_to_Search_and_Read_a_Paper)<br>为检索结果分层，只对核心论文完成精读、讨论和可复用笔记。 |
 | **学论文到代码映射** | [Annotated Deep Learning](https://github.com/labmlai/annotated_deep_learning_paper_implementations)<br>公式—代码—shape 对照表。 |
@@ -1002,6 +1015,7 @@ Missing Semester 的终端与 Git
 | [数学概念卡](templates/12-math-concept-card.md) | 围绕当前阻塞公式完成符号、shape、假设、数值与代码验收 |
 | [数据集卡](templates/13-dataset-card.md) | 固定数据来源、使用权、版本、内容、划分、泄漏和处理证据 |
 | [评价协议卡](templates/14-evaluation-spec.md) | 在运行前固定主指标、实现、聚合、阈值、统计单位与决策规则 |
+| [结果—主张审计卡](templates/15-result-claim-audit.md) | 在写论文结论前核对错误、反例、图表来源与每项主张的证据强度 |
 
 第一次不知道如何填写时，先看[第一次可审计实验演练](examples/first-workflow-drill/README.md)。示例中的数值来自仓库内脚本和配置，只用于说明记录方法，不是论文结果。
 
@@ -1037,6 +1051,9 @@ research-project/
 │   ├── matrix.md              # 实验矩阵
 │   ├── records/               # 单次实验卡
 │   └── logs/                  # 日志索引或外部链接
+├── analysis/
+│   ├── claim_audit.md         # 主张、证据、反证、替代解释和状态
+│   └── error_slices.md        # 配对错误、预设切片与探索性发现
 ├── artifacts/
 │   └── README.md              # 权重、checkpoint 和大结果的外部位置与校验值
 ├── figures/                   # 可追溯图表与生成脚本
@@ -1066,7 +1083,7 @@ research-project/
 | 看不懂就让 AI 全部解释 | 先形成自己的问题清单，再核对原文、公式和代码 |
 | 一次加入多个模块更容易涨点 | 一次一个主要变量，否则无法解释贡献 |
 | 只报告最好的一次结果 | 预先确定协议，报告波动、失败和选择规则 |
-| 指标提高就代表研究成立 | 检查公平性、计算成本、泛化、反例和替代解释 |
+| 指标提高就代表研究成立 | 先核对配对错误、反例、替代解释和主张所需的额外证据 |
 | AI 写得像论文就可以投稿 | 作者必须理解、核验、修改并承担全部责任 |
 | 情绪受一次失败影响 | 把反馈当信息，把复现失败和拒稿纳入正常迭代 |
 
