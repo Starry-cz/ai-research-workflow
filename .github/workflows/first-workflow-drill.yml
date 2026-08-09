@@ -1,0 +1,43 @@
+name: First workflow drill
+
+on:
+  push:
+    paths:
+      - "examples/first-workflow-drill/**"
+      - ".github/workflows/first-workflow-drill.yml"
+  pull_request:
+    paths:
+      - "examples/first-workflow-drill/**"
+      - ".github/workflows/first-workflow-drill.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  run-and-verify:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: examples/first-workflow-drill
+
+    steps:
+      - name: 检出仓库
+        uses: actions/checkout@v7
+
+      - name: 配置 Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.11"
+
+      - name: 运行三组教学配置
+        run: |
+          python train.py --config configs/debug.json --output-dir results/ci-debug
+          python train.py --config configs/baseline.json --output-dir results/ci-baseline
+          python train.py --config configs/candidate.json --output-dir results/ci-candidate
+
+      - name: 验收证据链与公平比较
+        run: |
+          python verify.py \
+            --debug-dir results/ci-debug \
+            --baseline-dir results/ci-baseline \
+            --candidate-dir results/ci-candidate

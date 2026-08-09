@@ -431,7 +431,23 @@
 - **采取行动**：为演练增加从仓库根目录进入的 Windows PowerShell 与 macOS/Linux 命令；不再依赖环境激活，直接调用 `.venv` 内解释器；补充当前维护环境的 0.83 秒实际耗时、超过一分钟先中断的判断、四文件与 `completed` 状态双重成功标志、五类常见失败和新 `run_id` 重跑规则；实际在系统临时目录运行 debug、baseline、candidate 三组配置并核验 12 个产物后清理临时结果。
 - **状态**：已完成。
 
+## 2026-08-09：演练自动验收审计
+
+### I-029：四类产物需要手工逐个核对，无法自动发现 seed 缺失、汇总错误或多变量变化
+
+- **当前问题**：演练要求读者打开三组目录中的配置、环境、指标和日志，手工确认 seed、状态和公平比较。文件存在并不代表全部运行完成，`summary` 也可能与逐次结果不一致；只看两个均值还会漏掉 baseline 与 candidate 同时改变 epoch、seed 或数据。仓库本身也没有在提交后自动执行演练，文档和代码可能逐渐漂移。
+- **经验对照**：
+  - [第一次复现](https://www.xiaohongshu.com/explore/67cfb412000000002a00c7e8)和[研究生读了一年才把论文复现整明白](https://www.xiaohongshu.com/explore/6a3bcaa0000000000f0150e8)反映新手容易把“看到输出”当成“复现完成”；这些笔记可能要求登录，本仓库只吸收“成功需要分层验收”的痛点；
+  - 知乎关于[相同 seed 是否选最好一次](https://www.zhihu.com/en/answer/3031680072)与[最终结果如何取值](https://www.zhihu.com/en/answer/2229914309)显示读者会混淆逐次运行与汇总数字；回答质量不一，具体统计规则不以问答帖为依据。
+- **规范与项目对照**：
+  - [ML for Beginners](https://github.com/microsoft/ML-For-Beginners)把活动、知识检查、挑战和作业嵌入每课，说明可执行教程需要明确验收，而不只提供答案文件；
+  - [AutoResearchClaw](https://github.com/aiming-lab/AutoResearchClaw)将阶段产物、质量门和运行恢复写入流水线。可借鉴的是机器检查产物合同，本仓库不采用自动批准研究结论；
+  - [GitHub Actions](https://docs.github.com/en/actions)支持在 push 和 pull request 后运行仓库内检查；官方 [checkout](https://github.com/actions/checkout) 与 [setup-python](https://github.com/actions/setup-python)项目提供当前主版本和最小 `contents: read` 权限建议。
+- **适用边界**：自动验收只能检查已编码规则，不能判断研究问题是否重要、真实数据是否合法、评价是否适配领域或主张是否科学。演练固定要求 baseline 与 candidate 只改变 `learning_rate`，真实研究的科学变量和允许差异必须在各自 Eval Spec 中定义，不能直接套用此脚本。
+- **采取行动**：新增零依赖 `verify.py`，检查三组目录与四类文件、实验 ID、环境命令、全部计划 seed、`completed` 状态、日志、summary 重新计算、数据一致性和唯一主要变量；固定 UTF-8 输出并给出 `PASS / FAIL` 与结论边界；在仓库记录结果和新生成结果上双重通过；新增 GitHub Actions，在 Python 3.11 上重新运行三组配置并验收；文档补充双平台验收命令，贡献规范要求相关改动必须实际运行。
+- **状态**：已完成。
+
 ## 下一轮优先审计
 
 - 等待作者确认许可证、引用署名和首个版本号，再完成 `LICENSE`、`CITATION.cff` 与首个 GitHub Release。
-- 审计演练脚本是否缺少自动化验收命令，避免读者手工打开多个 JSON 才能判断三组运行是否齐全、公平且可比较。
+- 审计仓库是否缺少针对全部 Markdown 相对链接、代码块和 README 两列表格的自动检查，避免当前本地维护检查无法在外部贡献中复现。

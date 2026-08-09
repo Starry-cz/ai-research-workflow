@@ -109,6 +109,28 @@ run.log
 
 打开 `metrics.json`，调试目录应有一项运行，baseline 与 candidate 应包含配置中预先声明的全部 seed，且状态为 `completed`。文件存在但运行状态失败，不算完成。
 
+完成三组运行后，用自动验收脚本一次检查文件、seed、状态、汇总重算、数据一致性和唯一主要变量。
+
+Windows PowerShell：
+
+```powershell
+.\.venv\Scripts\python.exe verify.py `
+  --debug-dir results/my-debug `
+  --baseline-dir results/my-baseline `
+  --candidate-dir results/my-candidate
+```
+
+macOS / Linux：
+
+```bash
+./.venv/bin/python verify.py \
+  --debug-dir results/my-debug \
+  --baseline-dir results/my-baseline \
+  --candidate-dir results/my-candidate
+```
+
+成功时第一行以 `PASS` 开头；失败时第一行以 `FAIL` 开头并说明首个未通过规则。验收通过只证明教学证据链完整，不证明候选设置或方法普遍更优。
+
 ### 常见失败与下一步
 
 | 现象 | 先检查什么 |
