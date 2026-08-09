@@ -274,7 +274,7 @@ research-project/
 | **3 论文与代码映射** | 核心论文阅读卡能连接公式、文件、shape、配置和结果。 |
 | **4 baseline 复现** | 环境、数据、命令、日志和评测齐全；按[稳定化门](docs/BASELINE_STABILIZATION_GATE.md)区分论文目标、本地 baseline 与候选方法，并作四选一决定。 |
 | **5 形成研究问题** | 失败现象转成可证伪假设，并写出反例与最小验证实验。 |
-| **6 实验设计与执行** | 评价协议先冻结；一次只改一个主要变量；全部计划运行可追踪。 |
+| **6 实验设计与执行** | 评价协议先冻结；按[公平调参与搜索预算](docs/FAIR_TUNING_BUDGET.md)审计 baseline 与候选的搜索机会；全部 trial 和确认运行可追踪。 |
 | **7 分析与表达** | 观察、解释与主张分开；反例、替代解释和图表来源已审计。 |
 | **8 投稿与归档** | 官方规则已核验；实际提交版本、评审、回复和负面结果已冻结。 |
 
@@ -286,6 +286,7 @@ research-project/
 - [全部执行指南索引](docs/README.md)
 - [数据集审计](docs/DATASET_FIRST_AUDIT.md)
 - [评价协议](docs/EVALUATION_FIRST_SPEC.md)
+- [公平调参与搜索预算](docs/FAIR_TUNING_BUDGET.md)
 - [结果到主张](docs/RESULT_TO_CLAIM.md)
 - [模板最短路径](templates/README.md)
 
@@ -396,7 +397,7 @@ research-project/
 | **管理大文件与数据版本** | [Git LFS](https://git-lfs.com/) / [DVC](https://github.com/treeverse/dvc)<br>大文件指针、数据版本与外部存储位置；首个小实验只需先用 `.gitignore`、数据清单和校验值，规模增长后再引入。 |
 | **分层搜索与阅读论文** | [How to Search and Read a Paper](https://github.com/qiyuangong/How_to_Search_and_Read_a_Paper)<br>为检索结果分层，只对核心论文完成精读、讨论和可复用笔记。 |
 | **学论文到代码映射** | [Annotated Deep Learning](https://github.com/labmlai/annotated_deep_learning_paper_implementations)<br>公式—代码—shape 对照表。 |
-| **设计实验与调参** | [Tuning Playbook](https://github.com/google-research/tuning_playbook)<br>实验目标、变量分类、曲线和决策。 |
+| **设计实验与调参** | [公平调参与搜索预算](docs/FAIR_TUNING_BUDGET.md) / [Tuning Playbook](https://github.com/google-research/tuning_playbook)<br>科学与干扰变量、baseline / 候选搜索机会、完整 trial 台账、冻结配置和确认性实验。 |
 | **规范研究代码** | [Releasing Research Code](https://github.com/paperswithcode/releasing-research-code)<br>依赖、训练、评测、权重和复现命令。 |
 | **设计论文配图** | [CCF-Figure](https://github.com/Deepshare-Official/CCF-Figure)<br>图示草图、变量说明、可编辑源文件和人工校验。 |
 

@@ -544,8 +544,25 @@
 - **采取行动**：新增[baseline 稳定化与首次改进指南](BASELINE_STABILIZATION_GATE.md)和[带日期审计](../reports/BASELINE_TRANSITION_AUDIT_2026-08-09.md)；将论文目标、本地锁定 baseline 与候选方法分开；增加 `READY_FOR_CHANGE / REPRODUCTION_ONLY / COMPARATOR_ONLY / REPLACE_BASELINE` 四分支；升级 baseline 准入卡、复现规划和实验卡，记录全部 baseline run IDs、复现差距、残余混杂、pilot 到代表性规模以及允许主张；同步更新 M6、M7 和核心工作流。
 - **状态**：已完成。
 
+## 2026-08-09：调参公平性与多重尝试审计
+
+### I-036：候选方法的调参机会与 best-of-N 选择没有形成可执行门控
+
+- **当前问题**：实验卡原本只有“调参预算与各组公平性”一个空白字段，评价协议只有一行超参数选择规则。它们没有要求区分科学变量和干扰超参数，也没有分别记录 baseline 与候选的搜索空间、trial 上限、失败 / 剪枝、计算成本、最终配置冻结和测试后变更。新手可能让候选反复调参而 baseline 只运行默认值，或从许多尝试中挑出最好结果后只报告该次运行。
+- **经验对照**：
+  - [什么时候对 baseline 进行改进](https://www.xiaohongshu.com/explore/6a27a897000000001702e3d0)及评论出现“baseline 参数要不要调”“小数据有效但 full data 失效”“本地改进仍低于论文结果”等问题。该笔记用于确认复现与调参边界的真实困惑；个人回复中“baseline 基本不动、主要调新模块”的做法不作为通用公平规则；页面可能需要登录；
+  - [把 idea 变成可靠的代码的工作流](https://www.xiaohongshu.com/explore/6a1a82e400000000380345ea)强调理解、规划、最小改动和验证，评论反映 AI 改动后难以分辨收益来自想法还是实现。它支持保留每轮改动和 trial 轨迹，但不能规定不同方法应获得多少预算；
+  - 知乎文章[点积 vs. MLP：推荐模型到底用哪个更好？](https://www.zhihu.com/tardis/zm/art/143161957)通过论文案例展示相同数据和大部分设置下，参数化、调参范围和比较口径仍会改变结论；关于[是否报告最高准确率](https://www.zhihu.com/en/answer/3249240394)与[如何选择最终结果](https://www.zhihu.com/en/answer/2229914309)的讨论也说明 best run 选择是常见困惑。它们只作为经验案例，不能替代运行前协议。
+- **规范与项目对照**：
+  - [Deep Learning Tuning Playbook](https://github.com/google-research/tuning_playbook)要求区分科学与干扰超参数，用 study 和 trial 明确搜索空间、数量与算法，并在有限预算下兼顾科学变量覆盖、搜索范围和采样密度；如果不同科学配置没有获得足够的干扰参数优化机会，比较可能不公平；
+  - [NeurIPS Paper Checklist](https://neurips.cc/public/guides/PaperChecklist)要求披露训练细节、超参数选择、计算资源与实验不确定性；[PyTorch Reproducibility](https://docs.pytorch.org/docs/stable/notes/randomness.html)说明确定性与跨环境复现存在边界，因此固定环境和随机性条件不能简化成“只报一个最高值”；
+  - [Releasing Research Code](https://github.com/paperswithcode/releasing-research-code)要求提供依赖、训练、评价、预训练模型和精确结果命令；[Lightning-Hydra-Template](https://github.com/ashleve/lightning-hydra-template)展示配置化运行、独立日志、多 seed 和 sweep。工程工具帮助记录 trial，但不会自动保证搜索机会、测试权限或主张公平。
+- **适用边界**：公平不要求不同方法拥有完全相同的参数空间、trial 数或逐秒相同的成本。方法特有参数可以不同，但机会必须可比较，差异必须有理由且成本必须披露。固定 trial 数不适用于所有任务；资源不足时应缩小比较范围或结论。pilot、早停和剪枝可以节约资源，但都属于搜索尝试，且可能偏向更快显效的方法。看过测试结果后继续修改配置时，没有新的独立测试证据只能形成探索性观察。
+- **采取行动**：新增[公平调参与搜索预算](FAIR_TUNING_BUDGET.md)和[带日期审计](../reports/TUNING_FAIRNESS_AUDIT_2026-08-09.md)，将调参拆成变量分类、总 / 各方法 / 确认预算、三种比较方案、完整 trial 台账、验证选择、pilot 与剪枝、确认性准入和最低披露；新增 `FAIR_TO_COMPARE / RE-TUNE_BASELINE / REDESIGN_SEARCH / EXPLORATORY_ONLY / STOP_BUDGET` 五种决定；升级实验卡、评价协议卡、结果—主张审计卡、首页、核心工作流与指南索引。本轮不新增自动调参软件，避免把启动 sweep 误认为完成公平比较。
+- **状态**：已完成。
+
 ## 下一轮优先审计
 
 - 等待作者确认许可证、引用署名和首个版本号，再完成 `LICENSE`、`CITATION.cff` 与首个 GitHub Release。
 - 使用固定查询和抽样原文继续测试聚合论文平台的重复、遗漏、版本冲突与代码链接准确性；未形成对照样本前不发布覆盖度评分。
-- 审计从候选方法进入确认性实验时的调参预算、公平性与多重尝试披露，避免“候选调得更多、baseline 使用默认参数”。
+- 审计首次真实项目从本仓库模板迁移到实际代码库时的最小接入流程，避免复制全部文件或建立重复台账。
