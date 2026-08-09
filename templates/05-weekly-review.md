@@ -24,6 +24,10 @@
 | --- | --- | --- | --- | --- |
 |  |  |  |  |  |
 
+- 需要他人复查的运行与唯一入口：
+- 交接深度与状态：不触发 / H0 / H1 / H2 / H3；HANDOFF_READY / REVIEW_ONLY / NEEDS_ACCESS / STALE_REFERENCE / REPLAY_FAILED
+- 接收者发现的差异或缺失：
+
 ## 4. 失败、异常与未解决问题
 
 - 

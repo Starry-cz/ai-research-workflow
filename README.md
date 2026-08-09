@@ -58,6 +58,7 @@
 | 一改代码就失控 | 单变量改动、实验卡和回退机制 |
 | AI 给出的内容真假难辨 | 来源分层、风险登记和人工验收 |
 | 实验做了很多却写不成论文 | 从研究问题到证据表格的一一对应 |
+| 自己能看懂，别人无法复查 | 唯一交接入口、指标重算和冷启动复跑 |
 
 ## 第一次使用：从这里开始
 
@@ -83,7 +84,7 @@
 | **L2 做复现** | [论文阅读卡](templates/02-paper-reading-card.md) + [复现规划](templates/03-reproduction-plan.md)；取得数据后启用[数据集卡](templates/13-dataset-card.md)。<br>**升级**：论文目标与本地 baseline 已分开，并取得稳定化门控决定。 |
 | **L3 做实验** | 运行前用[实验卡](templates/04-experiment-card.md)和[评价协议卡](templates/14-evaluation-spec.md)，运行后用[结果—主张审计](templates/15-result-claim-audit.md)。<br>**升级**：主张、反证、图表和结论均可回到证据。 |
 
-其他模板只在事件发生时启用：任务过大用[原子任务卡](templates/06-daily-task-card.md)，需要组会用[每周复盘](templates/05-weekly-review.md)，迁移算力用[迁移清单](templates/08-compute-data-environment-checklist.md)，卡住求助用[调试卡](templates/10-debug-help-request.md)，公式阻塞用[数学概念卡](templates/12-math-concept-card.md)，进入投稿再用[投稿归档卡](templates/09-submission-review-archive.md)。
+其他模板只在事件发生时启用：任务过大用[原子任务卡](templates/06-daily-task-card.md)，需要组会用[每周复盘](templates/05-weekly-review.md)，迁移算力用[迁移清单](templates/08-compute-data-environment-checklist.md)，关键运行需要交给别人复查时用[运行交接卡](templates/16-run-handoff.md)，卡住求助用[调试卡](templates/10-debug-help-request.md)，公式阻塞用[数学概念卡](templates/12-math-concept-card.md)，进入投稿再用[投稿归档卡](templates/09-submission-review-archive.md)。
 
 同一时间建议只维护一个阶段门控、一个当前任务 / 实验记录，以及一个确有阻塞才启用的按需卡。导师或实验室已有等价记录时直接复用，不为匹配本仓库重复填写。
 
@@ -209,7 +210,7 @@ research-project/
 | **M5 论文与代码**<br>精读论文并阅读官方代码 | **产物**：阅读卡、模块映射、风险登记表。<br>**完成**：能画出数据流并定位代码入口。 |
 | **M6 复现与评测**<br>预训练评测、单批次测试、完整复现 | **产物**：复现日志、配置、指标差异表和[稳定化决定](docs/BASELINE_STABILIZATION_GATE.md)。<br>**完成**：论文目标与本地 baseline 已分开，差距、稳定性和允许主张明确。 |
 | **M7 改进与失败分析**<br>按[首次安全改码](docs/SAFE_FIRST_CODE_CHANGE.md)完成一个单变量改进 | **产物**：修改前快照、可审查 diff、检查证据、假设卡、实验矩阵和消融结果。<br>**完成**：只有 `READY_FOR_CHANGE` 的 baseline 进入改进，修复 / 重构 / 方法改动已分离，效果能被独立检验。 |
-| **M8 分析与表达**<br>结果分析、写作和复盘 | **产物**：研究报告、图表、失败项和下一步。<br>**完成**：每个结论都能回到代码、日志或文献。 |
+| **M8 分析与表达**<br>结果分析、写作和复盘 | **产物**：研究报告、图表、失败项、下一步；关键运行按需形成[交接入口](docs/RUN_HANDOFF_REPLAY.md)。<br>**完成**：每个结论都能回到代码、日志或文献，声明可交接的运行已在对应深度通过冷启动复查。 |
 
 每次复盘只选择一种状态：
 
@@ -276,7 +277,7 @@ research-project/
 | **5 形成研究问题** | 失败现象转成可证伪假设，并写出反例与最小验证实验。 |
 | **6 实验设计与执行** | 评价协议先冻结；先按[首次安全改码](docs/SAFE_FIRST_CODE_CHANGE.md)审查修改范围与最低测试，再按[公平调参与搜索预算](docs/FAIR_TUNING_BUDGET.md)审计 baseline 与候选的搜索机会；全部 trial 和确认运行可追踪。 |
 | **7 分析与表达** | 观察、解释与主张分开；反例、替代解释和图表来源已审计。 |
-| **8 投稿与归档** | 官方规则已核验；实际提交版本、评审、回复和负面结果已冻结。 |
+| **8 交接、投稿与归档** | 关键运行按用途完成查找、指标核验、最小复跑或接管；官方规则已核验，实际提交版本、评审、回复和负面结果已冻结。 |
 
 四个停止检查点是：**G1 方向与 baseline、G2 文献与假设、G3 复现与实验、G4 证据与交付**。没有通过当前门控时，不进入下一阶段，也不允许 AI 自动批准关键研究判断。
 
@@ -285,6 +286,7 @@ research-project/
 - [核心工作流手册](docs/CORE_RESEARCH_WORKFLOW.md)
 - [真实代码库最小接入](docs/ADOPT_WORKFLOW_IN_EXISTING_PROJECT.md)
 - [第一次安全修改论文代码](docs/SAFE_FIRST_CODE_CHANGE.md)
+- [运行交接与冷启动复查](docs/RUN_HANDOFF_REPLAY.md)
 - [全部执行指南索引](docs/README.md)
 - [数据集审计](docs/DATASET_FIRST_AUDIT.md)
 - [评价协议](docs/EVALUATION_FIRST_SPEC.md)
@@ -331,7 +333,7 @@ research-project/
 
 汇报时先在 30 秒到 1 分钟内讲结论、阻塞和请求，再补必要背景。每一页只服务一个信息点，不确定内容要明确标记。没有正向结果时，也可以汇报复现差异、失败实验、阅读结论和已经排除的原因。
 
-会后立即记录：收到的反馈、采纳或不采纳的理由、责任人、截止时间和下一次验收标准。口头建议如果没有进入决策日志和下周行动项，就不能算项目状态已经更新。
+会后立即记录：收到的反馈、采纳或不采纳的理由、责任人、截止时间和下一次验收标准。口头建议如果没有进入决策日志和下周行动项，就不能算项目状态已经更新。关键运行将被他人用于决策、复算图表或接续工作时，按[运行交接与冷启动复查](docs/RUN_HANDOFF_REPLAY.md)声明 H0–H3 深度，并让接收者从唯一入口实际检查。
 
 **阶段验收**：协作者能够在一分钟内理解当前结论、证据、阻塞、待决策问题和下一步。
 

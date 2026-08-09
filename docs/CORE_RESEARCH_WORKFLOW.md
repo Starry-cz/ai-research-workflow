@@ -173,6 +173,8 @@
 
 每次运行必须关联唯一 `run_id`，并保存代码 commit、配置、命令、环境、数据版本、日志、指标和状态。调试运行用于发现错误；只有符合冻结协议的确认性运行才能支持主要结论。
 
+当关键运行将进入组会决定、论文图表、服务器迁移或由别人接续时，启用[运行交接与冷启动复查](RUN_HANDOFF_REPLAY.md)。先声明接收者需要达到查找、指标核验、最小复跑还是完整接管，再让对方从唯一入口在空目录或另一台机器验证；tracker 页面或作者口头说明不能替代这次检查。
+
 运行后只作四种决定：
 
 - **PROCEED**：证据达到预设门槛，进入下一问题；
@@ -182,7 +184,7 @@
 
 自动化工具可以执行命令和整理产物，但数据、评价、主要假设、异常结果和对外结论必须人工审核。
 
-**推荐产物**：[第一次安全修改论文代码](SAFE_FIRST_CODE_CHANGE.md)、[评价协议指南](EVALUATION_FIRST_SPEC.md)、[公平调参与搜索预算](FAIR_TUNING_BUDGET.md)、[评价协议卡](../templates/14-evaluation-spec.md)、[实验卡](../templates/04-experiment-card.md)。通过后进入 G3。
+**推荐产物**：[第一次安全修改论文代码](SAFE_FIRST_CODE_CHANGE.md)、[评价协议指南](EVALUATION_FIRST_SPEC.md)、[公平调参与搜索预算](FAIR_TUNING_BUDGET.md)、[评价协议卡](../templates/14-evaluation-spec.md)、[实验卡](../templates/04-experiment-card.md)；发生交接事件时再使用[运行交接卡](../templates/16-run-handoff.md)。通过后进入 G3。
 
 ## 7. 结果分析与论文表达
 

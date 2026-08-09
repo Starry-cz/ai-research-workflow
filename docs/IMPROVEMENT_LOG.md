@@ -601,8 +601,28 @@
 - **采取行动**：新增[第一次安全修改论文代码](SAFE_FIRST_CODE_CHANGE.md)和[带日期审计](../reports/FIRST_CODE_CHANGE_AUDIT_2026-08-09.md)，将改动分成 `ENVIRONMENT_REPAIR / BASELINE_REPAIR / REFACTOR / INSTRUMENTATION / RESEARCH_CHANGE`，提供 T0–T4 风险比例检查、逐文件 diff 清单、AI 代码接受条件、提交顺序与 `SAFE_FOR_PILOT / SPLIT_CHANGE / REPAIR_BASELINE_FIRST / REVIEW_REQUIRED / REVERT_AND_REPRODUCE` 五种决定；同步 README、核心工作流、指南索引、真实项目接入、复现规划、实验卡和调试卡。
 - **状态**：已完成。
 
+## 2026-08-09：实验台账交接与协作者冷启动复查
+
+### I-039：运行记录字段齐全，但没有证明另一人能够独立复查
+
+- **当前问题**：仓库已经要求每次运行保存 `run_id`、commit、配置、环境、日志、指标和决定，周会也要求说明证据位置；但这些字段分散在 README、tracker、结果目录和个人说明中。原流程没有指定接收者与交接深度，也没有记录数据 / artifact 权限、指标重算命令、保留期限和空目录复跑结果。新手可能把“发了 tracker 链接”或“导师听懂汇报”误当成可交接，换机器或换负责人后仍要依赖作者口头补充。
+- **经验对照**：
+  - [研究生的实验记录该怎么记，以结果为导向](https://www.xiaohongshu.com/explore/696fa4fb000000001a02bc8e)反映日常记录碎片化、结果未及时聚合和临近汇报才整理的痛点；本仓库吸收项目级入口与及时决定，不采用个人软件和固定周频率；
+  - [科研习惯分享（三）：一次实验我写 3 份记录](https://www.xiaohongshu.com/explore/6612bab8000000001b013f7e)反映随手记录造成事后细节不清，也提示个人复盘与组会表达面向不同对象；本仓库使用唯一来源加用途链接，不要求维护三份同义记录；
+  - [接手师兄烂摊子，实验记录像天书](https://www.xiaohongshu.com/explore/6a5831f5000000000103163d)建议提前交接、跟随一次完整流程、记录隐性参数和资产位置。该内容来自湿实验，本仓库只迁移“提前走通、显式依赖、资产清单”的原则，以代码冷启动和权限映射替代仪器盘点与签字；
+  - [研一暑假做实验才发现，数据管理比调参更重要](https://www.xiaohongshu.com/explore/6a5f37be00000000110120f5)强调数据版本、处理、split、标签、训练设置和指标样本范围会直接影响重验；本仓库把这些身份集中到交接入口，不强制个人命名习惯；
+  - 知乎文章[如何科学地进行实验设计和记录](https://zhuanlan.zhihu.com/p/69353695)回顾漏记细节、过后无法理解自己实验的问题，并强调实验应产生信息和下一步计划；本仓库吸收上下文与决定闭环，不指定笔记软件。以上经验材料用于识别痛点，页面状态与个人做法不作为规范证明。
+- **规范与项目对照**：
+  - [The Turing Way 的可复现与协作项目说明](https://book.the-turing-way.org/project-design/pd-overview/pd-overview-repro/)把协作与可复现共同设计，要求新参与者能理解当前状态、开发和未来计划；[Good Enough Practices 的协作指南](https://carpentries-lab.github.io/good-enough-practices/04-collaboration.html)要求即使个人项目也为未来合作者和未来的自己提供 README、依赖与示例；
+  - [MLflow Tracking](https://mlflow.org/docs/latest/ml/tracking/)和 [W&B Runs](https://docs.wandb.ai/models/runs)提供稳定 run ID、代码、配置、状态、指标和 artifact 模型，但团队复查仍依赖后端、账号、artifact store 与保留状态；
+  - [DVC Collaborative Experiments](https://dvc.org/blog/collaborative-experiments/)说明跨机器恢复实验需要共享代码、数据、参数和产物的远端及权限；[Reproducibility checklist](https://ropensci-archive.github.io/reproducibility-guide/sections/checklist/)进一步要求入口、输入来源、版本、随机性和特定重复运行可定位；
+  - [Sustainable Research Software Hand-Over](https://arxiv.org/abs/1909.09469)指出人员流动会造成研究软件和隐性知识丢失，交接规则应按项目规模采用。
+- **适用边界**：本机制主要面向有代码与运行产物的 AI / 计算机研究，不强制理论或定性项目产生相同文件。交接按用途选择 H0–H3，不要求每次完整训练；跨平台不保证逐位一致，容差应预先声明。受限数据、私有代码、匿名材料和密钥不能因交接而公开，合法限制只能降级为 `REVIEW_ONLY` 并写明不可验证步骤。tracker、DVC 或云存储是来源载体，不自动证明交接成功。
+- **采取行动**：新增[运行交接与冷启动复查](RUN_HANDOFF_REPLAY.md)、[运行交接卡](../templates/16-run-handoff.md)、[已填写教学交接](../examples/first-workflow-drill/run-handoff.md)和[带日期审计](../reports/RUN_HANDOFF_AUDIT_2026-08-09.md)；定义 `H0_LOCATE / H1_VERIFY / H2_REPLAY / H3_TAKEOVER` 四级深度与五种结果；将唯一入口、访问权限、产物保留、指标重算和接收者差异同步到 README、核心工作流、真实项目接入、周会与索引，并对教学演练执行空目录冷启动复跑。
+- **状态**：已完成。
+
 ## 下一轮优先审计
 
 - 等待作者确认许可证、引用署名和首个版本号，再完成 `LICENSE`、`CITATION.cff` 与首个 GitHub Release。
 - 使用固定查询和抽样原文继续测试聚合论文平台的重复、遗漏、版本冲突与代码链接准确性；未形成对照样本前不发布覆盖度评分。
-- 审计实验台账在导师、合作者和不同机器之间的最小交接字段，验证另一人能否只根据入口复查一次运行和决定。
+- 审计失败、放弃与过期实验的保留期限和存储生命周期，避免交接入口仍在但 checkpoint、日志或数据已被清理。
