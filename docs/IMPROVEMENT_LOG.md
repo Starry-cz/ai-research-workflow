@@ -447,7 +447,23 @@
 - **采取行动**：新增零依赖 `verify.py`，检查三组目录与四类文件、实验 ID、环境命令、全部计划 seed、`completed` 状态、日志、summary 重新计算、数据一致性和唯一主要变量；固定 UTF-8 输出并给出 `PASS / FAIL` 与结论边界；在仓库记录结果和新生成结果上双重通过；新增 GitHub Actions，在 Python 3.11 上重新运行三组配置并验收；文档补充双平台验收命令，贡献规范要求相关改动必须实际运行。
 - **状态**：已完成。
 
+## 2026-08-09：仓库级文档回归审计
+
+### I-030：排版与链接规则只在维护者本地执行，外部贡献无法复现
+
+- **当前问题**：仓库已经在贡献规范中要求检查相对链接、代码块、首页两列表格和索引，但实际依赖维护者临时运行 PowerShell。外部贡献者无法用一条命令获得同样结果；新增指南可能漏进 `docs/README.md`，新增模板可能漏进模板索引，README 也可能再次增长到难以导航。
+- **经验对照**：
+  - 知乎关于[计算机公开课资源](https://www.zhihu.com/question/38335108/answer/1993372768251687650)与[教程收藏负担](https://www.zhihu.com/tardis/landing/yidian/ans/2046292839185606022)说明资源维护如果只增加、不约束入口，会重新制造选择成本；经验帖只用于确认读者痛点；
+  - [入门 MLLM Day 4](https://www.xiaohongshu.com/explore/6a3cd57f0000000011019ccd)将检查作为任务本身的一部分，支持把“写完再人工看看”升级为可重复验收；访问可能需要登录，具体检查项仍由本仓库规则定义。
+- **规范与项目对照**：
+  - [ML for Beginners](https://github.com/microsoft/ML-For-Beginners)包含 GitHub Actions、贡献指南、支持与排错文档，说明面向新手的内容仓库同样需要可重复维护流程；
+  - [nature-skills](https://github.com/Yuan1z0825/nature-skills)把入口职责和复杂内容位置写成仓库规则，支持对 README 与索引结构建立自动约束；
+  - [GitHub Actions 文档](https://docs.github.com/en/actions)提供 push / pull request 自动检查机制；本工作流使用官方 `checkout@v7`、`setup-python@v6` 和只读 `contents` 权限，不接触密钥或外部数据。
+- **适用边界**：自动脚本只验证仓库内部结构，不能证明外部网页当前可访问、内容正确、许可证兼容或经验适用。600 行是本仓库当前的信息架构维护阈值，不是所有 GitHub README 的通用上限；如未来确有必要调整，应同时审计首屏和移动端，而不是为绕过 CI 拆分无意义文件。
+- **采取行动**：新增零依赖 `scripts/validate_repository.py`，检查全部 Markdown 相对链接与中英文锚点、未闭合代码块、根 README 两列上限与 600 行阈值、`docs/README.md` 指南覆盖和 `templates/README.md` 模板覆盖；新增只读 GitHub Actions 在每次 push / pull request 执行；贡献指南增加一条本地命令和 CI 验收项。
+- **状态**：已完成。
+
 ## 下一轮优先审计
 
 - 等待作者确认许可证、引用署名和首个版本号，再完成 `LICENSE`、`CITATION.cff` 与首个 GitHub Release。
-- 审计仓库是否缺少针对全部 Markdown 相对链接、代码块和 README 两列表格的自动检查，避免当前本地维护检查无法在外部贡献中复现。
+- 审计机器可读 `tools.yml` 是否与新的资源目录、任务导航和“Star 不排序”规则一致，并补充无第三方依赖的结构校验。
