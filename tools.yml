@@ -1,7 +1,7 @@
 # AI 科研工具库的机器可读目录。
 # README.md 面向人类阅读；本文件便于后续生成网页、筛选器或统计页面。
 version: 2
-last_verified: "2026-08-07"
+last_verified: "2026-08-09"
 tools:
   - id: ars
     name: Academic Research Skills
@@ -20,6 +20,28 @@ tools:
     url: https://github.com/HKUSTDial/Supervisor-Skills
     summary: 将导师式科研经验整理为可调用的 AI 技能。
     caveat: 输出应结合领域知识、真实证据和导师意见复核。
+
+  - id: learning-research
+    name: Learning Research
+    name_zh: 科研成长与项目训练经验
+    stage: [基础学习, 方向入门, 科研能力, 实验记录, 写作, 展示]
+    level: [L0, L1, L2, L3]
+    type: github-guide
+    url: https://github.com/pengsida/learning_research
+    summary: 以广度学习、深度复现和独立项目组织科研成长，并强调问题、方案、实验、写作和展示能力。
+    recommended_output: 形成个人学习路线、项目周报、实验记录和阶段性研究展示。
+    caveat: 部分案例和课程面向 3D Vision，应根据自己的研究方向、导师要求和资源条件调整。
+
+  - id: autoresearchclaw
+    name: AutoResearchClaw
+    name_zh: 阶段化自动科研编排系统
+    stage: [研究定义, 文献, 假设, 实验设计, 实验执行, 结果分析, 写作, 归档]
+    level: [L2, L3]
+    type: github-framework
+    url: https://github.com/aiming-lab/AutoResearchClaw
+    summary: 以阶段产物、人工门控、预算约束、证据核验和版本化归档组织端到端科研流程。
+    recommended_output: 将阶段产物合同、质量门控、运行清单和 PROCEED / REFINE / PIVOT 决策应用到自己的项目。
+    caveat: 自动生成的文献、实验、分析和论文仍需人工核验；零基础用户应先理解手动流程，再评估是否使用自动化系统。
 
   - id: ccf-figure
     name: CCF-Figure
