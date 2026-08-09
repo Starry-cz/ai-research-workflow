@@ -96,7 +96,24 @@
 - **采取行动**：在代码复现阶段新增供应商无关的迁移预检，要求分离 Git 内容与大体积产物，采用“干净安装—冒烟—短试跑—主动中断—恢复—成本外推—完整训练”的升级顺序；新增算力、数据与环境迁移清单，升级复现规划、模板索引、项目结构和机器可读工具表。
 - **状态**：已完成。
 
+## 2026-08-09：投稿、评审与版本链审计
+
+### I-008：投稿检查止于格式与事实，缺少规则卡、送审冻结和评审问题矩阵
+
+- **当前问题**：README 原有三层投稿检查和项目结束归档，但没有记录当前 venue 的回复限制，也没有冻结实际送审的 PDF、代码、配置和数据版本。收到评审后，新手仍可能逐段即兴回复，无法区分会导致结论失效的问题、影响录用判断的问题和局部表达问题；拒稿后也可能直接换模板转投，覆盖失败实验与旧版本。
+- **经验对照**：
+  - [Rebuttal 心得](https://www.xiaohongshu.com/explore/675973800000000002026fc8)把内容限定于 AAAI、IJCAI 等计算机会议的个人实践，并提醒学生作者与导师共同决策；评论讨论也显示，有无 rebuttal、是否需要升级沟通会随会议流程而异。因此该材料只用于识别“先核验 venue 规则”和“共同复核”的需求，不作为通用会议规则。
+  - [论文审稿意见回复（干货）](https://www.xiaohongshu.com/explore/6906b6970000000003023c70)及其读者反馈显示，第一次进入回复期的学生需要可直接执行的结构化提示；该笔记主要为图片经验内容，因此只用于确认真实使用场景，不单独支持技术性结论。
+  - [How to write a rebuttal for an academic paper?](https://www.zhihu.com/en/answer/187612713)区分“原文没有写清楚”和“工作本身没有完成”，建议针对事实与问题作答；[另一则作者回复经验](https://www.zhihu.com/en/answer/1932804322)强调 rebuttal 用于澄清误解和回答问题，而不是情绪宣泄。这些经验支持先分类、再回应，但不覆盖具体会议限制。
+- **规范对照**：
+  - [ICML 2026 Reviewer Instructions](https://icml.cc/Conferences/2026/ReviewerInstructions)说明多轮作者—评审讨论、字符限制和问题编号等机制；[ICML 2026 Peer Review FAQ](https://icml.cc/Conferences/2026/PeerReviewFAQ)明确原投稿不能在讨论期内被修订。
+  - [ICLR 2026 Author Guide](https://iclr.cc/Conferences/2026/AuthorGuide)则允许讨论期修订论文，但要求清楚说明变化，并强调双盲、公开讨论和伦理沟通边界。二者差异证明不能把某一会议的 rebuttal 规则写成通用常识。
+  - [CVPR Author Kit 的 rebuttal 模板](https://github.com/cvpr-org/author-kit/blob/main/rebuttal.tex)将回复限定为纠正事实错误或补充评审要求的信息，并限制新增贡献与实验；[Releasing Research Code](https://github.com/paperswithcode/releasing-research-code)要求依赖、训练、评测、权重和精确命令完整，适合作为投稿代码快照的最低完整性对照。
+  - [GitHub Releases](https://docs.github.com/en/repositories/releasing-projects-on-github/about-releases)基于 tag 标记仓库历史中的特定点并提供源代码归档；[Zenodo DOI Versioning](https://zenodo.org/help/versioning)区分特定版本 DOI 与覆盖全部版本的 Concept DOI，支持对准确研究版本进行长期引用。
+- **适用边界**：作者回复是否可选、是否公开、是否允许修订 PDF、补实验、外部链接或附件，必须逐年核对官方规则。Git tag 和 Release 适合标记代码状态，但不能自动包含外部数据、未跟踪产物或全部 Git LFS 内容；需要长期引用时仍应检查归档文件、元数据和许可证。负面结果只有在数据、实现和评价流程可信后，才能被解释为假设被否定或适用边界，而不是把运行失败包装成研究发现。
+- **采取行动**：扩展 README 的投稿章节，增加 venue 规则卡、送审快照、P0/P1/P2 评审问题分级、证据式回复、补实验约束、拒稿与负面结果分类、转投门槛和版本归档；新增 `09-submission-review-archive.md`，并更新模板索引和推荐项目结构。
+- **状态**：已完成。
+
 ## 下一轮优先审计
 
-- 投稿前如何处理审稿意见、rebuttal、负面结果和版本归档；
 - README 在手机端和窄屏环境下是否仍存在表格换行问题。

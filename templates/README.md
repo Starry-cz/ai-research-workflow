@@ -13,3 +13,4 @@
 | [06-daily-task-card.md](06-daily-task-card.md) | 每次开始独立学习或科研会话前 | 主任务、产物、验收、时间盒和停止条件明确 |
 | [07-literature-search-log.md](07-literature-search-log.md) | 开始新方向检索或扩展核心论文集合时 | 关键词、查询、去重、版本和停止依据可追踪 |
 | [08-compute-data-environment-checklist.md](08-compute-data-environment-checklist.md) | 使用实验室服务器、云 GPU 或迁移大数据前 | 干净安装、短试跑、恢复测试、预算和结果导出均有记录 |
+| [09-submission-review-archive.md](09-submission-review-archive.md) | 投稿、作者回复、拒稿转投或录用归档时 | 规则、送审版本、评审问题、回复证据和版本链均可追溯 |
