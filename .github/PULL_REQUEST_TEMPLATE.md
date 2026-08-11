@@ -19,7 +19,7 @@
 ## 验证
 
 - [ ] 已运行 `python scripts/validate_repository.py`
-- [ ] 修改教学演练时已运行三组配置和 `verify.py`
+- [ ] 修改教学演练时已运行 `verify_first_run.py`、三组配置和 `verify.py`
 - [ ] 修改外部入口时已运行 URL 审计并复核异常
 - [ ] 已检查 `git diff --check`
 

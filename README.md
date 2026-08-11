@@ -8,15 +8,36 @@
 选定一个可执行的小方向
   → 读懂一篇代表性论文
   → 跑通官方代码与预训练模型
-  → 复现一个可信 baseline
+  → 复现一个可信的对照基线（baseline）
   → 完成一次单变量改进实验
   → 用证据写出研究报告或论文初稿
 ```
 
 > AI 可以帮助检索、解释、配置环境、阅读代码和检查遗漏，但研究者必须理解并核验论文、代码、数据、实验和结论。
 
+## 第一次来：默认从这里开始
+
+如果你暂时不知道自己属于 L0、L1 还是 L2，不要先浏览全部资源、模板和专项指南。先完成下面一条默认路径；已经拿到导师或团队任务时，唯一需要前置插入的是[任务授权边界](docs/FIRST_MENTOR_TASK_BOUNDARY.md)。
+
+第一次看到 `commit`、`origin`、`seed`、`run_id` 或 `baseline` 时，不需要先搜索一整套课程。只打开[零基础默认路径术语速查](docs/BEGINNER_GLOSSARY.md)的对应条目，看完“现在要做什么”和“不能推出什么”就返回当前步骤。
+
+| 开始前要知道 | 本轮约定 |
+| --- | --- |
+| **适合谁** | 第一次接触计算机 / AI 科研，尚未独立跑通过可检查实验的人。 |
+| **会学到什么** | 确认真实 Python 解释器，运行一次脚本，并从配置、日志和指标找到证据。 |
+| **会留下什么** | 包含本次实际配置副本、环境、日志和指标的独立运行目录；进入 L0 指南时还会在 `learning/first-run` 分支留下第一次本地版本记录（commit），不会自动发布。 |
+| **前置条件** | 一台允许安装 Git 与 Python 的电脑；不要求先会深度学习、Linux 或读完课程。 |
+| **建议时间** | 首轮预留 60–120 分钟；软件下载、网络、权限或系统故障时间另计，不以耗时判断能力。 |
+
+1. 打开[零基础准备检查表](templates/00-readiness-checklist.md)，第一次只核对“工具能力”；有一项不知道如何验证，就进入[L0 工具链指南](docs/L0_TOOLCHAIN_START.md)；
+2. 工具能力可验证后，完成[第一次可审计实验演练](examples/first-workflow-drill/README.md)，不要同时选择真实论文、GPU、Agent 或整套课程；
+3. 看到验收脚本输出 `PASS`，并能指出四项产物、实际解释器和输出目录后，再回到[30 秒选择入口](#30-秒选择入口)决定进入机器学习闭环、方向选择还是已有项目接入。
+
+**完成标志**：不是“页面看完了”，而是 `verify_first_run.py` 输出验收通过（`PASS`）；你能找到 `config.snapshot.json`、`environment.json`、`metrics.json` 和 `run.log`，并说明失败时应保留哪条命令与首个报错。第一次只完成单配置运行，三组公平比较是第二轮，不是首次成功的前置条件。卡住时只打开演练页的“常见失败”，仍无法区分再填写[调试与求助卡](templates/10-debug-help-request.md)。如果这是你第一次使用本仓库，无论完成、误入其他页面还是中途停止，都可以提交[零基础首次使用反馈](https://github.com/Starry-cz/ai-research-workflow/issues/new?template=beginner-first-use.yml)；不要求你提出解决方案或查找依据。
+
 ## 目录
 
+- [第一次来：默认从这里开始](#第一次来默认从这里开始)
 - [这个仓库适合谁](#这个仓库适合谁)
 - [第一次使用：从这里开始](#第一次使用从这里开始)
 - [30 秒选择入口](#30-秒选择入口)
@@ -62,10 +83,12 @@
 | 相同错误反复排查，经验无法被下一位成员找到 | 薄知识索引、原证据链接、适用范围、复用回写和 supersede 状态 |
 | 搜到了相似经验，却不知道能否直接照做 | 原始症状查询、候选排除、身份核验、最小验证和安全复用演练 |
 | 搜不到答案，求助时又要从头解释 | 原始查询、负面发现、唯一问题和权限随问题交接；回复验证后再回流 |
+| 文档写了多系统命令，却不知道是否真的可运行 | Windows、Ubuntu、macOS CI 矩阵与含中文、空格路径检查；同时明确个人 IDE、GPU 和服务器仍需本机验证 |
 | 有结果却不知道能说到什么程度 | V0–V4 验证等级、S0–S3 共享权限和用途状态 |
 | 自己能看懂，别人无法复查 | 唯一交接入口、指标重算和冷启动复跑 |
 | 导师给了任务却不知道能否直接动手 | 任务授权卡、三类动作与确认 / 升级状态 |
 | 遇到报错却不知道该向哪里反馈 | 上游所有权、证据门、Issue / 私密报告 / PR 分流 |
+| 不确定首页是否真的适合陌生新手 | 不提示答案的首次使用观察、轻量反馈、隐私边界和另一位读者复查 |
 
 ## 第一次使用：从这里开始
 
@@ -74,7 +97,7 @@
 不需要从头读完整份 README。先选择最接近自己的状态：
 
 - **刚接到导师或团队的第一项任务** → 先用[第一项导师任务授权边界](docs/FIRST_MENTOR_TASK_BOUNDARY.md)确认交付、允许读取 / 写入 / 运行 / 分享的范围和决定负责人，再进入方向选择或真实项目接入；
-- **L0：不会终端、Git 或 Python 环境** → 先做[零基础准备检查表](templates/00-readiness-checklist.md)，按[L0 工具链最小起步指南](docs/L0_TOOLCHAIN_START.md)留下环境记录和第一次 commit，再完成[第一次工作流演练](examples/first-workflow-drill/README.md)和里程碑 M1–M3；
+- **L0：不会终端、Git 或 Python 环境** → 先做[零基础准备检查表](templates/00-readiness-checklist.md)，按[L0 工具链最小起步指南](docs/L0_TOOLCHAIN_START.md)确认远程所有者、创建个人练习分支并留下第一次本地 commit，再完成[第一次工作流演练](examples/first-workflow-drill/README.md)和里程碑 M1–M3；
 - **L1：能运行 Notebook，但没有复现过论文** → 先完成[第一个机器学习闭环](docs/ML_FIRST_LOOP.md)和[第一次工作流演练](examples/first-workflow-drill/README.md)，再按[方向选择决策树](docs/DIRECTION_FIRST_CHOICE.md)建立[研究简报](templates/01-research-brief.md)和[文献检索账本](templates/07-literature-search-log.md)，从[首篇 baseline 筛选表](docs/CORE_RESEARCH_WORKFLOW.md#首篇-baseline-筛选表)进入 M4–M6；
 - **L2：已经拿到或跑通过代码，但实验不可解释或不可复现** → 先按[真实代码库最小接入](docs/ADOPT_WORKFLOW_IN_EXISTING_PROJECT.md)映射现有 README、环境和实验台账，再使用[复现规划](templates/03-reproduction-plan.md)和[baseline 稳定化门](docs/BASELINE_STABILIZATION_GATE.md)决定下一步；
 - **连续不提升、反复失败或预算快用完** → 先用[研究停止门](docs/RESEARCH_STOPPING_AND_PIVOT.md)区分无效运行、有效负结果与证据不足，再判断下一项实验是否真的会改变决定；
@@ -130,6 +153,8 @@ research-project/
 
 在下载真实论文代码前，建议先完成[第一次可审计实验演练](examples/first-workflow-drill/README.md)。它使用 Python 标准库和合成数据，在 CPU 上演示：
 
+第一次只运行调试配置并用 `verify_first_run.py` 验收四项产物；看到第一个 `PASS` 后可以停止。下面的完整比较链属于第二轮：
+
 ```text
 冻结问题与配置
   → 运行固定 seed 的调试实验
@@ -141,6 +166,8 @@ research-project/
 
 这个演练的目的不是取得高准确率，而是让你第一次看见 `question → config → run_id → log → metrics → decision` 如何连成证据链。它不是论文复现，也不能作为算法创新、模型优越性或真实数据泛化能力的证据。
 
+该最小链路已配置 GitHub Actions，在 Windows、Ubuntu 和 macOS 的 Python 3.11 环境执行，并额外检查含中文与空格的路径；各系统只有在对应 job 实际通过后才计为远端证据。绿色 CI 只证明对应提交在托管 runner 上通过；你的 IDE 解释器、WSL、CUDA / GPU、学校服务器和真实论文依赖仍需在目标环境单独核验，具体边界见[L0 工具链指南](docs/L0_TOOLCHAIN_START.md#本仓库实际验证到哪里)。
+
 完成后再进入真实 baseline。此时至少应该能够回答：哪个文件固定了变量，哪条命令生成结果，哪个指标来自哪个 `run_id`，失败运行放在哪里，以及为什么不能只挑最好的一次。
 
 如果还不能解释样本、特征、标签、loss、指标以及训练 / 验证 / 测试集的不同职责，先完成[第一个机器学习训练—验证—测试闭环](docs/ML_FIRST_LOOP.md)，再进入论文代码。
@@ -151,7 +178,7 @@ research-project/
 
 | 等级 | 当前状态与下一阶段目标 |
 | --- | --- |
-| L0 工具零基础 | **当前**：不熟悉终端、Git、Python 环境和 Jupyter。<br>**下一步**：能克隆仓库、创建环境、安装依赖、运行脚本。 |
+| L0 工具零基础 | **当前**：不熟悉终端、Git、Python 环境和 Jupyter。<br>**下一步**：能确认远程所有者，在个人练习分支创建本地提交，并创建环境、安装依赖、运行脚本。 |
 | L1 AI 基础入门 | **当前**：能运行 Notebook，但不熟悉训练、验证和指标。<br>**下一步**：能修改样例、解释数据划分、训练循环和评价指标。 |
 | L2 论文复现入门 | **当前**：能跑通训练代码，但无法解释论文与实现对应关系。<br>**下一步**：能复现 baseline、定位差异并形成复现报告。 |
 | L3 研究实践入门 | **当前**：能复现论文，准备尝试改进。<br>**下一步**：能提出可证伪假设、完成对照实验和失败分析。 |
@@ -333,6 +360,7 @@ research-project/
 
 选择正确的求助位置：
 
+- **第一次使用时误点、犹豫或不知道怎样开始**：使用[零基础首次使用反馈](https://github.com/Starry-cz/ai-research-workflow/issues/new?template=beginner-first-use.yml)，只写实际发生了什么；不要求提出改法或外部依据。导师、学习小组和维护者可按[首次使用可用性观察](docs/BEGINNER_USABILITY_OBSERVATION.md)组织不提示答案的复查；
 - **本仓库的链接、表述、路线或模板有问题**：先搜索已有 Issue，再使用[仓库问题表单](https://github.com/Starry-cz/ai-research-workflow/issues/new/choose)提交位置、问题、预期改进和证据；
 - **第三方项目的安装、API 或代码错误**：先读该项目 README、支持范围、贡献 / 安全说明和已有 Issue；只有在未修改的受支持版本上形成公开最小复现，才把状态升级为 `UPSTREAM_ISSUE_READY`；
 - **自己的改动或私有数据导致的问题**：先缩成公开或合成数据的最小样例，与同伴、导师或代码维护者核对；
@@ -398,7 +426,7 @@ research-project/
 
 ## 工具与入口导航
 
-按当前任务选择一个主入口，完成表中产物后再决定是否扩展。更多课程和项目见[GitHub 科研入门资源目录](docs/GITHUB_RESOURCE_CATALOG.md)；该目录按阶段和用途组织，不按 Star 排名。
+按当前任务选择一个主入口，完成表中产物后再决定是否扩展。更多课程和项目见[GitHub 科研入门资源目录](docs/GITHUB_RESOURCE_CATALOG.md)；该目录按阶段和用途组织，并在点开前说明主要语言、最低前置、账号或算力门槛，不按 Star 排名。
 
 | 任务 | 入口与必须留下的产物 |
 | --- | --- |
@@ -496,7 +524,7 @@ research-project/
 
 最近一次外部入口核验见 [2026-08-09 URL 与 GitHub 项目状态审计](reports/URL_AUDIT_2026-08-09.md)。动态网络结果只表示检查时刻的状态，不代表资源质量或永久可用性。
 
-新增资源时至少记录：原始链接、适用阶段、前置能力、建议产物、维护状态、许可证、已知限制和最后核验日期。资源应能解决明确问题，不能只因为 Star 高或传播广而加入。
+新增资源时至少记录：原始链接、适用阶段、主要语言、最低进入要求、建议产物、维护状态、许可证、已知限制和最后核验日期。资源应能解决明确问题，不能只因为 Star 高或传播广而加入；费用、账号、云服务和算力要求不得写成永久不变的承诺。
 
 建议维护频率：
 

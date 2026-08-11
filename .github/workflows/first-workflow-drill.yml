@@ -15,7 +15,12 @@ permissions:
 
 jobs:
   run-and-verify:
-    runs-on: ubuntu-latest
+    name: ${{ matrix.os }} / Python 3.11
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
     defaults:
       run:
         working-directory: examples/first-workflow-drill
@@ -35,15 +40,17 @@ jobs:
           python train.py --config configs/baseline.json --output-dir results/ci-baseline
           python train.py --config configs/candidate.json --output-dir results/ci-candidate
 
+      - name: 验收第一次单配置运行
+        run: python verify_first_run.py --run-dir results/ci-debug
+
       - name: 验收证据链与公平比较
-        run: |
-          python verify.py \
-            --debug-dir results/ci-debug \
-            --baseline-dir results/ci-baseline \
-            --candidate-dir results/ci-candidate
+        run: python verify.py --debug-dir results/ci-debug --baseline-dir results/ci-baseline --candidate-dir results/ci-candidate
 
       - name: 验收知识检索与安全复用夹具
         run: python verify_knowledge_retrieval.py
 
       - name: 验收无命中求助与知识回流
         run: python verify_no_match_handoff.py
+
+      - name: 验收含中文与空格路径
+        run: python verify_cross_platform.py

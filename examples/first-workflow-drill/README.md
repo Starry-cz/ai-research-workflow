@@ -2,9 +2,17 @@
 
 这是一个面向零基础读者的工作流演练。它用 Python 标准库训练一个极小的二分类模型，帮助你看懂一次实验如何从问题、配置和命令走到日志、指标与有限结论。
 
+本页第一次出现 `seed`、`run_id`、`baseline`、loss 或 CI 时会给出当前动作；仍不清楚时，只打开[零基础默认路径术语速查](../../docs/BEGINNER_GLOSSARY.md)的对应条目，不要先离开演练去补完整课程。
+
 > 这里使用固定生成的合成数据，没有论文、真实业务数据或新方法。运行结果只能证明这条教学链路在记录的环境中执行过，不能证明论文复现成功、算法具有创新性或模型能够泛化到真实任务。
 
-## 你会留下什么
+## 第一次会留下什么
+
+```text
+一份调试配置 → 一次运行 → 配置、环境、指标、日志 → 单目录 PASS
+```
+
+第一次只学习“命令如何留下可检查证据”。公平比较是第二轮目标：
 
 ```text
 问题与边界
@@ -24,7 +32,81 @@
 
 仓库已经保存一份实际运行产物，便于在运行前查看证据链的形状。你自己的运行必须写入新目录，不能覆盖示例结果。
 
-## 1. 先读数据卡和实验卡
+## 第一次只完成到第一个 PASS
+
+第一次进入本页时，只做一次调试运行和一次最小验收。暂时不要读完本页后半部分，不要运行 baseline / candidate，也不要先学习 seed、标准差、证据等级、知识复用和停止门。
+
+保持终端位于仓库根目录。先确认位置和根目录环境：
+
+Windows PowerShell：
+
+```powershell
+Get-Location
+.\.venv\Scripts\python.exe -c "import sys; print(sys.executable)"
+```
+
+macOS / Linux：
+
+```bash
+pwd
+./.venv/bin/python -c "import sys; print(sys.executable)"
+```
+
+位置的最后一级应为 `ai-research-workflow`，解释器应指向这个仓库根目录的 `.venv`。如果命令不存在，先完成 [L0 工具链指南](../../docs/L0_TOOLCHAIN_START.md)，不要在本目录再创建第二个环境。
+
+如果 L0 指南已经生成 `examples/first-workflow-drill/results/my-first-debug`，直接进入验收，不要覆盖或重复运行。否则执行一条调试命令：
+
+Windows PowerShell：
+
+```powershell
+.\.venv\Scripts\python.exe examples\first-workflow-drill\train.py --config examples\first-workflow-drill\configs\debug.json --output-dir examples\first-workflow-drill\results\my-first-debug
+```
+
+macOS / Linux：
+
+```bash
+./.venv/bin/python examples/first-workflow-drill/train.py --config examples/first-workflow-drill/configs/debug.json --output-dir examples/first-workflow-drill/results/my-first-debug
+```
+
+正常输出会包含以下可识别信息；数值不是成绩：
+
+```text
+experiment_id=demo-debug-v1
+planned_seeds=[17]
+seed=17 status=completed
+test_accuracy_mean=0.500000
+```
+
+现在只验收这一个目录：
+
+Windows PowerShell：
+
+```powershell
+.\.venv\Scripts\python.exe examples\first-workflow-drill\verify_first_run.py --run-dir examples\first-workflow-drill\results\my-first-debug
+```
+
+macOS / Linux：
+
+```bash
+./.venv/bin/python examples/first-workflow-drill/verify_first_run.py --run-dir examples/first-workflow-drill/results/my-first-debug
+```
+
+成功时第一行必须以 `PASS` 开头。随后打开四个文件并回答：
+
+| 产物 | 现在只回答一个问题 |
+| --- | --- |
+| `config.snapshot.json` | 这次实际使用了哪些设置？ |
+| `environment.json` | 哪个 Python、系统和命令生成了结果？ |
+| `metrics.json` | 计划运行是否完成，记录了哪些指标？ |
+| `run.log` | 人工检查时能否快速找到运行顺序和状态？ |
+
+到这里就已经完成第一次成功闭环。你可以先停止：看不懂样本、loss 和指标时进入[第一个机器学习闭环](../../docs/ML_FIRST_LOOP.md)；想学习怎样公平比较两个设置时，再继续下面的第二轮。一次运行的 `PASS` 不能支持“候选方法优于 baseline”。
+
+## 第二轮：从一次运行升级到公平比较
+
+第二轮才增加任务边界、数据、评价、实验设计、多个 seed 和结论限制。它不是首次 `PASS` 的前置条件。
+
+### 1. 先读数据卡和实验卡
 
 先打开[已填写任务授权边界](task-authority.md)，确认哪些本地运行可以直接做、哪些改码和提交必须先确认、哪些数据与材料不得进入演练。再打开[已填写数据集卡](dataset-card.md)，确认 180 条样本由仓库脚本确定性生成、三组按索引固定切分、没有外部个人数据，并且这份合成数据不能代表真实任务。随后查看[已填写评价协议](evaluation-spec.md)，理解这里为什么报告 accuracy 与 loss、如何跨 seed 汇总，以及为什么总体标准差不是置信区间。
 
@@ -36,57 +118,57 @@
 - 在看结果前已经声明运行集合和停止条件；
 - 单个最好结果不能代替全部运行的汇总。
 
-## 2. 进入目录并创建独立环境
+### 2. 继续复用根目录环境
 
-该脚本只使用 Python 标准库，建议使用 Python 3.10 或更高版本。先从仓库根目录进入演练目录；下面直接调用虚拟环境中的解释器，不依赖 shell 激活状态。
+该脚本只使用 Python 标准库，建议使用 Python 3.10 或更高版本。第二轮继续停留在仓库根目录并使用同一个 `.venv`，不进入子目录、不嵌套创建环境，也不依赖 shell 激活状态。
 
 Windows PowerShell：
 
 ```powershell
-Set-Location examples/first-workflow-drill
-python --version
-python -m venv .venv
 .\.venv\Scripts\python.exe --version
+.\.venv\Scripts\python.exe -c "import sys; print(sys.executable)"
 ```
 
 macOS / Linux（bash 或 zsh）：
 
 ```bash
-cd examples/first-workflow-drill
-python3 --version
-python3 -m venv .venv
 ./.venv/bin/python --version
+./.venv/bin/python -c "import sys; print(sys.executable)"
 ```
 
-如果第二次版本检查失败，不要改用另一个随机解释器继续运行；先回到[L0 工具链起步指南](../../docs/L0_TOOLCHAIN_START.md)核对解释器路径和 `venv`。`.venv` 已被 `.gitignore` 排除，不应提交到 Git。
+如果检查失败，不要改用另一个随机解释器继续运行；先回到[L0 工具链起步指南](../../docs/L0_TOOLCHAIN_START.md)核对解释器路径和 `venv`。根目录 `.venv` 已被 `.gitignore` 排除，不应提交到 Git。
 
-## 3. 运行基线和候选设置
+### 3. 运行基线和候选设置
 
-先用单一固定 seed 做调试运行，再执行预先声明的比较。请为自己的结果使用新的输出目录。
+保留首次调试目录，再执行预先声明的两组比较。请为自己的结果使用新的输出目录。
 
 Windows PowerShell：
 
 ```powershell
-.\.venv\Scripts\python.exe train.py --config configs/debug.json --output-dir results/my-debug
-.\.venv\Scripts\python.exe train.py --config configs/baseline.json --output-dir results/my-baseline
-.\.venv\Scripts\python.exe train.py --config configs/candidate.json --output-dir results/my-candidate
+.\.venv\Scripts\python.exe examples\first-workflow-drill\train.py --config examples\first-workflow-drill\configs\baseline.json --output-dir examples\first-workflow-drill\results\my-first-baseline
+.\.venv\Scripts\python.exe examples\first-workflow-drill\train.py --config examples\first-workflow-drill\configs\candidate.json --output-dir examples\first-workflow-drill\results\my-first-candidate
 ```
 
 macOS / Linux：
 
 ```bash
-./.venv/bin/python train.py --config configs/debug.json --output-dir results/my-debug
-./.venv/bin/python train.py --config configs/baseline.json --output-dir results/my-baseline
-./.venv/bin/python train.py --config configs/candidate.json --output-dir results/my-candidate
+./.venv/bin/python examples/first-workflow-drill/train.py --config examples/first-workflow-drill/configs/baseline.json --output-dir examples/first-workflow-drill/results/my-first-baseline
+./.venv/bin/python examples/first-workflow-drill/train.py --config examples/first-workflow-drill/configs/candidate.json --output-dir examples/first-workflow-drill/results/my-first-candidate
 ```
 
 `debug.json` 只运行很少的 epoch，用来确认参数读取、训练、评价和写文件链路；它不进入 baseline 与 candidate 的正式比较。
 
 三条命令在普通 CPU 上通常应在较短时间内结束。本仓库维护者在 Windows、Python 3.11.2 环境中的一次核验总耗时约 0.83 秒；这只是环境记录，不是性能保证。如果调试命令持续超过一分钟，先中断并检查解释器、当前目录和首个报错，不要继续启动后两组。
 
-脚本拒绝覆盖非空输出目录。需要重跑时创建新的 `run_id` 和目录，例如 `my-debug-02`，保留旧结果及其失败原因。个人运行产生的 `results/*` 默认被演练目录的 `.gitignore` 排除，仓库自带的三个 `*-recorded` 目录除外。
+脚本拒绝覆盖非空输出目录。需要重跑时创建新的 `run_id` 和目录，例如 `my-first-baseline-02`，保留旧结果及其失败原因。个人运行产生的 `results/*` 默认被演练目录的 `.gitignore` 排除，仓库自带的三个 `*-recorded` 目录除外。
 
-## 4. 按顺序核验
+### 持续验证范围
+
+仓库的 `First workflow drill` 已配置为在 GitHub 托管的 Windows、Ubuntu 和 macOS runner 上使用 Python 3.11，运行三组配置、全部教学验收脚本，并通过 [`verify_cross_platform.py`](verify_cross_platform.py)检查含中文与空格的输出路径、四项产物和防覆盖行为。各系统只有在对应 job 实际通过后才计为远端证据；它证明的是对应提交在这些 runner 镜像上的最小链路，不是“所有个人电脑都已验证”。
+
+CI 不覆盖 IDE 解释器选择、PowerShell 激活策略、WSL、学校服务器、代理与私有网络，也不覆盖 CUDA、GPU 驱动和真实论文依赖。前述 Windows 3.11.2 耗时只是一次人工环境记录；遇到本机问题时仍应保留 `sys.executable`、完整命令、首个报错和系统版本，不要拿绿色徽章替代本机诊断。
+
+### 4. 按顺序核验
 
 1. 检查调试运行是否生成四类产物，再确认两组比较实验的所有计划 seed 均为 `completed`；
 2. 打开两组 `config.snapshot.json`，确认只有 `experiment_id` 与 `learning_rate` 不同；
@@ -120,19 +202,19 @@ run.log
 Windows PowerShell：
 
 ```powershell
-.\.venv\Scripts\python.exe verify.py `
-  --debug-dir results/my-debug `
-  --baseline-dir results/my-baseline `
-  --candidate-dir results/my-candidate
+.\.venv\Scripts\python.exe examples\first-workflow-drill\verify.py `
+  --debug-dir examples\first-workflow-drill\results\my-first-debug `
+  --baseline-dir examples\first-workflow-drill\results\my-first-baseline `
+  --candidate-dir examples\first-workflow-drill\results\my-first-candidate
 ```
 
 macOS / Linux：
 
 ```bash
-./.venv/bin/python verify.py \
-  --debug-dir results/my-debug \
-  --baseline-dir results/my-baseline \
-  --candidate-dir results/my-candidate
+./.venv/bin/python examples/first-workflow-drill/verify.py \
+  --debug-dir examples/first-workflow-drill/results/my-first-debug \
+  --baseline-dir examples/first-workflow-drill/results/my-first-baseline \
+  --candidate-dir examples/first-workflow-drill/results/my-first-candidate
 ```
 
 成功时第一行以 `PASS` 开头；失败时第一行以 `FAIL` 开头并说明首个未通过规则。验收通过只证明教学证据链完整，不证明候选设置或方法普遍更优。
@@ -150,13 +232,14 @@ macOS / Linux：
 | 现象 | 先检查什么 |
 | --- | --- |
 | 找不到 `python`、`python3` 或虚拟环境解释器 | 回到 L0 指南核对安装与真实解释器路径，不混用多个 Python。 |
-| 找不到 `train.py` 或 `configs/...` | 运行 `Get-Location`（PowerShell）或 `pwd`（macOS/Linux），确认当前目录是 `first-workflow-drill`。 |
-| 配置文件不存在或路径拼错 | 先用 `python train.py --help` 核对参数，再列出 `configs/` 中实际文件；不要假设脚本会生成默认配置。检索无命中时保留查询与负面发现，再按[已填写交接记录](knowledge-no-match-handoff.md)求助。 |
+| 找不到 `train.py` 或 `configs/...` | 运行 `Get-Location`（PowerShell）或 `pwd`（macOS/Linux），确认当前位置是仓库根目录 `ai-research-workflow`。 |
+| Windows 路径含空格、中文或反斜杠后失败 | 先完整复制命令与路径，并用参数形式传递路径；Python 源码中的 Windows 路径字面量优先使用 `pathlib.Path` 或原始字符串，不要把字符串转义问题当成文件缺失。 |
+| 配置文件不存在或路径拼错 | 先用项目解释器运行 `examples/first-workflow-drill/train.py --help`，再列出配置目录中的实际文件；不要假设脚本会生成默认配置。检索无命中时保留查询与负面发现，再按[已填写交接记录](knowledge-no-match-handoff.md)求助。 |
 | 输出目录已存在或非空 | 不覆盖旧证据；改用带序号的新目录。 |
 | 命令退出但结果状态不是 `completed` | 先读 `run.log` 和 `metrics.json` 中的失败项，再填写调试卡。 |
 | 想从头重跑 | 保留需审计的旧目录；仅对自己创建且确认无保留价值的目录做清理，然后使用新的 `run_id`。不要改动三个 `*-recorded` 示例目录。 |
 
-## 5. 正确解释这个结果
+## 正确解释第二轮结果
 
 可以写：
 
@@ -168,7 +251,7 @@ macOS / Linux：
 
 原因是本例没有真实数据、代表性任务、独立调参协议或足以支持泛化主张的评价设计。
 
-## 6. 迁移到真实论文复现
+## 迁移到真实论文复现
 
 完成演练后，先使用[首篇真实 baseline 准入卡](../../templates/11-first-baseline-gate.md)比较两到三个候选，再按[真实代码库最小接入](../../docs/ADOPT_WORKFLOW_IN_EXISTING_PROJECT.md)盘点上游结构和现有台账，把同一条证据链映射到真实项目，而不是复制整套示例目录：
 

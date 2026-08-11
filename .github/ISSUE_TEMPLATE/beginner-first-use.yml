@@ -1,0 +1,91 @@
+name: 零基础首次使用反馈
+description: 记录第一次从首页进入演练时实际点了什么、在哪里犹豫或停止
+title: "[新手路径] "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        这不是考试，也不要求你提出解决方案或查找外部依据。请按第一次真实使用的记忆填写；“没有开始”或“中途停止”同样有价值。
+
+        GitHub Issue 是公开页面，账号和提交内容对外可见。不要上传完整终端日志、录屏、学校或实验室信息、个人路径、密钥、未公开数据、论文和审稿材料。第三方项目报错或安全问题请改用 SUPPORT.md 指定的渠道。
+
+  - type: checkboxes
+    id: safety
+    attributes:
+      label: 公开信息确认
+      options:
+        - label: 我确认内容只涉及本仓库的首次使用路径，不包含密钥、个人信息、受限材料或安全漏洞。
+          required: true
+
+  - type: dropdown
+    id: starting_point
+    attributes:
+      label: 开始前最接近的状态
+      description: 只用于理解入口是否匹配，不评价能力。
+      options:
+        - 不会确认终端、Git 或 Python 环境
+        - 能运行 Python，但没有独立完成过可检查实验
+        - 跑过代码，但不知道怎样记录配置、日志和指标
+        - 已有导师或团队任务
+        - 不确定或不愿说明
+    validations:
+      required: true
+
+  - type: dropdown
+    id: outcome
+    attributes:
+      label: 本次结果
+      options:
+        - 完成，未使用额外帮助
+        - 完成，只使用了仓库内帮助
+        - 完成，使用了搜索、AI、同伴或导师等外部帮助
+        - 开始后卡住并停止
+        - 看过首页，但不知道怎样开始
+        - 因设备、权限或网络条件未运行
+    validations:
+      required: true
+
+  - type: textarea
+    id: first_action
+    attributes:
+      label: 你最先做了什么
+      description: 请按真实顺序写，不要回看 README 后修正；如果没有开始，写下你当时想做什么。
+      placeholder: 例如：先打开了资源目录；或先下载仓库，但没有找到下一条命令。
+    validations:
+      required: true
+
+  - type: textarea
+    id: first_friction
+    attributes:
+      label: 第一个犹豫或卡住的位置
+      description: 提供页面标题、链接文字、命令或经过脱敏的首个报错即可；如果没有，填写“无”。
+      placeholder: 例如：看到 L0 和演练两个入口，不知道应该先点哪个。
+    validations:
+      required: true
+
+  - type: dropdown
+    id: help_source
+    attributes:
+      label: 你怎样继续或决定停止
+      options:
+        - 没有求助，自己继续
+        - 阅读当前页面或仓库内其他说明
+        - 使用搜索引擎或外部教程
+        - 询问 AI 工具
+        - 询问同伴、导师或维护者
+        - 没有找到合适的求助入口
+        - 不适用
+    validations:
+      required: true
+
+  - type: textarea
+    id: observation
+    attributes:
+      label: 可选：你实际看到的结果
+      description: 可以粘贴一小段已脱敏文字，或说明找到 / 没找到哪些产物；不要上传完整日志或录屏。
+
+  - type: textarea
+    id: one_change
+    attributes:
+      label: 可选：最希望只改的一件事
+      description: 不知道如何修改也可以留空，定位和解决问题是维护者的责任。

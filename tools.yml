@@ -1,7 +1,7 @@
 # AI 科研工具库的机器可读目录。
 # README.md 面向人类阅读；本文件便于后续生成网页、筛选器或统计页面。
-version: 6
-last_verified: "2026-08-09"
+version: 7
+last_verified: "2026-08-11"
 tools:
   - id: ars
     name: Academic Research Skills
@@ -13,6 +13,8 @@ tools:
     summary: 覆盖 research、write、review、revise、finalize 的完整学术研究流程。
     recommended_output: 按当前阶段选择一项技能，留下可核验的调研、写作、审查或投稿记录。
     caveat: 原项目主要面向 Claude Code，跨客户端使用前需核对兼容性。
+    primary_language: [zh, en]
+    entry_requirement: 阅读中文说明可直接了解方法；实际调用需安装受支持的 AI 编程客户端并配置对应模型访问，部分导出功能另需本地工具。
 
   - id: supervisor-skills
     name: Supervisor-Skills
@@ -24,6 +26,8 @@ tools:
     summary: 将导师式科研经验整理为可调用的 AI 技能。
     recommended_output: 形成研究简报、假设评估、风险清单或带证据位置的修改意见。
     caveat: 输出应结合领域知识、真实证据和导师意见复核。
+    primary_language: [zh]
+    entry_requirement: handbook 可直接在线阅读；调用 skills 需受支持的 AI 客户端，且应先准备自己的研究材料与核验来源。
 
   - id: learning-research
     name: Learning Research
@@ -35,6 +39,8 @@ tools:
     summary: 以广度学习、深度复现和独立项目组织科研成长，并强调问题、方案、实验、写作和展示能力。
     recommended_output: 形成个人学习路线、项目周报、实验记录和阶段性研究展示。
     caveat: 部分案例和课程面向 3D Vision，应根据自己的研究方向、导师要求和资源条件调整。
+    primary_language: [zh]
+    entry_requirement: 浏览器即可阅读；要执行其中的课程、代码或项目建议，需按所选方向另行准备环境、数据与算力。
 
   - id: autoresearchclaw
     name: AutoResearchClaw
@@ -46,6 +52,8 @@ tools:
     summary: 以阶段产物、人工门控、预算约束、证据核验和版本化归档组织端到端科研流程。
     recommended_output: 将阶段产物合同、质量门控、运行清单和 PROCEED / REFINE / PIVOT 决策应用到自己的项目。
     caveat: 自动生成的文献、实验、分析和论文仍需人工核验；零基础用户应先理解手动流程，再评估是否使用自动化系统。
+    primary_language: [multilingual]
+    entry_requirement: 阅读多语言说明无需安装；完整运行面向已有研究与工程基础的用户，需要本地 Python、OpenClaw、模型访问和按任务配置的执行环境。
 
   - id: ccf-figure
     name: CCF-Figure
@@ -57,6 +65,8 @@ tools:
     summary: 根据论文类型规划 AI / CS 论文的科研配图结构和提示词。
     recommended_output: 形成变量关系明确、来源可追踪且保留可编辑源文件的论文图。
     caveat: 生成结果需要人工检查并建议使用矢量工具精修。
+    primary_language: [zh, en]
+    entry_requirement: 阅读模板可直接开始；作为 skill 使用需 Claude Code 或 Codex，真正生成图片还需要可用的图像模型或后续绘图工具。
 
   - id: cosmos-paper
     name: CosmosPaper
@@ -315,6 +325,8 @@ tools:
     summary: 以先修关系组织完整的计算机科学自学课程和项目路线。
     recommended_output: 只选择当前科研所需模块，完成课程作业或项目，不要求学完整套课程后才开始科研。
     caveat: 完整路线跨度很长，应结合当前方向和时间按需取舍。
+    primary_language: [en]
+    entry_requirement: 课程地图可在线阅读；具体课程的语言、账号、软件和作业要求各不相同，只选择解决当前阻塞的模块。
 
   - id: cs-self-learning
     name: CS Self Learning
@@ -327,6 +339,8 @@ tools:
     summary: 面向中文学习者整理优质计算机课程、作业信息和学习经验。
     recommended_output: 每次选一门主课程，完成可运行作业并记录学习成果。
     caveat: 资源覆盖广，不宜同时开启过多课程或长期只收藏不实践。
+    primary_language: [zh]
+    entry_requirement: 中文导航可直接阅读；实际课程多来自外部平台，语言、账号、开发环境和作业要求需进入对应课程核对。
 
   - id: missing-semester
     name: The Missing Semester of Your CS Education
@@ -339,6 +353,8 @@ tools:
     summary: 讲解 Shell、编辑器、Git、调试、数据整理等科研和开发常用工具。
     recommended_output: 在真实项目中完成命令练习、Git 提交和一次可解释的调试记录。
     caveat: 仓库主要承载课程网站，学习内容应以课程页面和练习为主。
+    primary_language: [zh, en]
+    entry_requirement: 课程文字与视频可在线学习；动手练习需要可用的 Shell，Git 章节需要本地 Git，不要求 GPU。
 
   - id: ml-for-beginners
     name: Machine Learning for Beginners
@@ -350,6 +366,8 @@ tools:
     summary: 通过课程、测验和项目讲解经典机器学习任务与方法。
     recommended_output: 完成一个包含训练、验证、测试和指标解释的 Notebook。
     caveat: 课程练习用于建立基础，不应直接作为科研结论或强 baseline。
+    primary_language: [multilingual]
+    entry_requirement: 支持简体中文等多语言材料；运行练习需 Python 与 Notebook 环境，可本地使用，具体依赖按课程说明安装。
 
   - id: d2l-zh
     name: Dive into Deep Learning
@@ -361,6 +379,8 @@ tools:
     summary: 面向中文读者提供可运行、可讨论的深度学习教材与代码。
     recommended_output: 修改并运行训练循环，解释数据管线、损失、指标和关键张量。
     caveat: 建议先掌握 Python 和基本机器学习概念，再进入复杂模型章节。
+    primary_language: [zh]
+    entry_requirement: 中文教材可在线阅读；代码练习需 Python 与所选深度学习框架，基础章节可先用 CPU，复杂训练再核对算力。
 
   - id: papers-we-love
     name: Papers We Love
@@ -372,6 +392,8 @@ tools:
     summary: 汇集计算机社区值得阅读和讨论的论文与主题资源。
     recommended_output: 选择与当前问题相关的论文，完成结构化阅读卡和讨论问题。
     caveat: 内容范围很广，不适合作为必须全部完成的固定书单。
+    primary_language: [en]
+    entry_requirement: 目录可直接浏览；论文语言、开放获取状态和阅读前置随条目变化，先按研究问题筛选一篇。
 
   - id: how-to-search-and-read-a-paper
     name: How to Search and Read a Paper
@@ -383,6 +405,8 @@ tools:
     summary: 面向计算机专业新生讲解关键词积累、引用追踪、论文筛选、泛读与精读。
     recommended_output: 建立关键词表和分层文献清单，只对核心论文完成精读与讨论。
     caveat: 部分数据库和网站信息较早，具体检索入口、访问方式和版本应以当前官方页面为准。
+    primary_language: [zh]
+    entry_requirement: 中文指南可直接阅读；实际检索可能遇到机构订阅、登录或数据库变化，原文与书目信息需回到当前官方入口。
 
   - id: nn-zero-to-hero
     name: Neural Networks Zero to Hero
@@ -394,6 +418,8 @@ tools:
     summary: 通过从零编码讲解反向传播、语言模型、MLP、BatchNorm、梯度和 GPT。
     recommended_output: 完成课程练习，并独立实现一个可训练的小模型。
     caveat: 课程假设具备基本 Python 和少量高中微积分基础。
+    primary_language: [en]
+    entry_requirement: 英文视频与 Notebook；需基本 Python、少量微积分和可运行 Notebook，部分练习提供 Colab 入口。
 
   - id: pytorch-deep-learning
     name: PyTorch Deep Learning
@@ -406,6 +432,8 @@ tools:
     summary: 以课程和 Notebook 讲解 PyTorch 与深度学习项目流程。
     recommended_output: 完成一个包含数据加载、训练、评测和保存模型的小项目。
     caveat: 不建议跳过张量、数据管线和训练循环直接套用复杂模型。
+    primary_language: [en]
+    entry_requirement: 英文课程与 Notebook；需基本 Python，可按课程使用本地环境或 Colab，起步练习不以 GPU 为前置。
 
   - id: mathematics-for-machine-learning
     name: Mathematics for Machine Learning
@@ -417,6 +445,8 @@ tools:
     summary: 提供机器学习所需数学知识的教材和配套资源。
     recommended_output: 围绕当前模型补齐一项数学概念，并用数值例子或代码验证。
     caveat: 适合按需补充，不必学完全部章节后再开始实验。
+    primary_language: [en]
+    entry_requirement: 英文教材可在线阅读；按当前公式查阅即可，做配套练习时准备基础代数与微积分知识。
 
   - id: pumpkin-book
     name: Pumpkin Book
@@ -428,6 +458,8 @@ tools:
     summary: 对《机器学习》中的公式进行详细推导和中文说明。
     recommended_output: 把当前任务涉及的公式与代码实现、输入输出和假设对应起来。
     caveat: 公式学习应与代码、数据和实验结合，避免只记推导过程。
+    primary_language: [zh]
+    entry_requirement: 中文推导材料可在线阅读；需结合《机器学习》对应章节，数值核对可使用任意基础 Python 环境。
 
   - id: cookiecutter-data-science
     name: Cookiecutter Data Science
@@ -439,6 +471,8 @@ tools:
     summary: 提供逻辑清晰、相对标准且可调整的数据科学项目结构。
     recommended_output: 将数据、代码、模型、报告和环境分离，并保留清晰运行入口。
     caveat: 首个小实验应保持简单，避免为追求工程完整而增加不必要复杂度。
+    primary_language: [en]
+    entry_requirement: 英文文档；生成项目需本地 Python 与命令行，适合已有重复运行或协作需求后采用。
 
   - id: lightning-hydra-template
     name: Lightning Hydra Template
@@ -450,6 +484,8 @@ tools:
     summary: 提供基于 PyTorch Lightning 和 Hydra 的可配置实验项目模板。
     recommended_output: 在理解普通 PyTorch 训练循环后，将一个已跑通项目配置化。
     caveat: 对 L0–L1 学习者过重，不应替代对训练循环和配置含义的理解。
+    primary_language: [en]
+    entry_requirement: 英文文档；需熟悉 Python、PyTorch、配置文件和命令行，并已有能够独立运行的训练循环。
 
   - id: releasing-research-code
     name: Releasing Research Code
@@ -461,6 +497,21 @@ tools:
     summary: 整理机器学习研究代码的完整性建议和 README 模板。
     recommended_output: 提供依赖、训练代码、评测代码、预训练权重和生成主要结果的准确命令。
     caveat: 发布形式不能替代结果真实性、许可证核验和可复现测试。
+    primary_language: [en]
+    entry_requirement: 英文指南可直接阅读；应用到项目时需要已有代码与结果，并能核对依赖、许可证、权重和运行命令。
+
+  - id: made-with-ml
+    name: Made With ML
+    name_zh: 机器学习工程实践课程
+    stage: [项目结构, 实验追踪, 测试, 部署]
+    level: [L1, L2, L3]
+    type: github-course
+    url: https://github.com/GokuMohandas/Made-With-ML
+    summary: 以渐进方式连接机器学习实验、脚本化、测试、追踪和生产工程。
+    recommended_output: 先在个人电脑运行一条完整工作负载，再按真实复用需求拆分脚本、测试与追踪。
+    caveat: 生产化与集群内容不是首个科研闭环的前置，外部服务和算力选项需按当前官方说明核对。
+    primary_language: [en]
+    entry_requirement: 英文课程；需基本 Python 与机器学习概念，官方说明提供个人电脑路径，集群或 GPU 选项不是起步必需。
 
   # AI 方法与学习资源：按任务适配和可验收产物选择，不按 Star 排序。
   - id: generative-ai-for-beginners
@@ -528,6 +579,8 @@ tools:
     summary: 提供带并排解释的深度学习论文实现，覆盖 Transformer、扩散模型、优化器和强化学习等主题。
     recommended_output: 完成一张论文公式、PyTorch 代码、shape 和实验设置的映射表。
     caveat: 实现用于学习和理解，复现论文结果时仍需对照原始论文和官方代码。
+    primary_language: [en]
+    entry_requirement: 英文解释与 PyTorch 实现；需能阅读论文公式、张量 shape 和基础训练代码，再选择与当前问题相关的一项实现。
 
   - id: ai-agents-for-beginners
     name: AI Agents for Beginners
@@ -561,6 +614,8 @@ tools:
     summary: 讨论增量调参、实验目标、超参数分类、训练曲线、资源预算和实验追踪。
     recommended_output: 建立科学变量、干扰变量、固定变量、调参预算和实验决策记录。
     caveat: 主要面向已有可运行训练管线的监督学习任务，需要根据任务类型调整。
+    primary_language: [en]
+    entry_requirement: 英文方法手册可直接阅读；采用前需已有稳定 baseline、训练管线、评估指标和明确资源预算。
 
   - id: datawhale-llm-cookbook
     name: Datawhale LLM Cookbook

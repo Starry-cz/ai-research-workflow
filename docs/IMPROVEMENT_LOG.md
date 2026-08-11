@@ -798,11 +798,137 @@
   - [GitHub form schema](https://docs.github.com/en/communities/using-templates-to-encourage-useful-issues-and-pull-requests/syntax-for-githubs-form-schema)可以用结构化输入与必填验证收集环境和复现；表单完整不证明问题属于该仓库、运行真实或回复正确。
 - **适用边界**：无死路不等于无限升级、保证答复或向多个渠道重复发帖。每次只选择一个当前所有者和一个能区分下一步的问题。敏感数据、密钥、未公开代码、匿名材料和安全漏洞只走获准私密渠道。任何人员回复先是 `ANSWER_CANDIDATE`，必须在当前身份和权限下验证；一次直接路径错误通常不值得新建正式知识条目。
 - **采取行动**：新增[已填写无命中交接记录](../examples/first-workflow-drill/knowledge-no-match-handoff.md)、自动校验与[带日期审计](../reports/NO_DEAD_END_HELP_AUDIT_2026-08-09.md)；定义 `MATCHED / NO_MATCH / AMBIGUOUS / RESTRICTED` 检索结果、无死路交接包、`ANSWER_CANDIDATE` 回复验证和五种知识回流。以实际不存在的配置路径为例，确认正式索引无匹配、错误发生在输出目录创建前，并用现有配置与新临时目录验证回复候选；最终以 `SELF_RESOLVED_NO_ARTICLE + IMPROVE_FINDABILITY` 关闭。同步升级调试卡、README、指南索引、核心工作流、真实项目接入、上游路由、教学 README、CI 和变更记录。
-- **状态**：已实现，待本地全量检查与 GitHub Actions 核验；自动检查不作为真人求助体验或陌生新手可用性证据。
+- **状态**：已完成；实现提交 `d597ad2` 的 [Repository quality](https://github.com/Starry-cz/ai-research-workflow/actions/runs/31316263655) 与 [First workflow drill](https://github.com/Starry-cz/ai-research-workflow/actions/runs/31316263665) 均通过。自动检查不作为真人求助体验、响应质量或陌生新手可用性证据。
+
+## 2026-08-11：首次运行跨平台证据审计
+
+### I-049：多系统命令停留在文字层面，CI 只验证 Ubuntu
+
+- **当前问题**：L0 指南和首次演练分别提供 Windows PowerShell 与 macOS/Linux 命令，但原 `First workflow drill` 只运行 `ubuntu-latest`，验收步骤还使用 Bash 反斜杠续行。一次 Windows 3.11.2 人工耗时记录也不能替代持续回归。新手容易把“写了命令”或绿色 Ubuntu CI 理解成个人 Windows、macOS、IDE、WSL、GPU 与服务器已经可用；本机报错时又可能同时修改 PATH、解释器、shell 和依赖，无法定位单一原因。
+- **经验对照**：
+  - [“我明明 pip install 了啊！”](https://www.xiaohongshu.com/explore/67bb262f000000000603ba8b)记录命令行安装成功、PyCharm 仍出现 `ModuleNotFoundError` 的解释器错位；本仓库据此固定并记录实际解释器，不把 IDE 个案当作全部导入错误的原因；
+  - [Python 读取文件：路径存在特殊字符](https://www.xiaohongshu.com/explore/677b47f60000000014020670)展示 Windows 路径字面量的反斜杠转义问题；它只支持检查路径语法，不能解释所有 CLI、权限或缺失文件错误；
+  - [cmd 运行 Python 无法打开（已设置 PATH）](https://www.xiaohongshu.com/explore/663adfb3000000001e037a77)呈现应用执行别名、PATH 与多版本混淆；本仓库要求记录 `sys.executable`，不把修改注册表、卸载 Python 或关闭别名设为通用动作；
+  - [Python 环境要配死了](https://www.xiaohongshu.com/explore/68a2ff42000000001b01e5b5)集中呈现 Python、CUDA 和路径配置摩擦，只用于确认痛点，不提供本仓库的版本组合；
+  - 知乎文章[Python3 安装后崩溃？新手必看的 10 大解决方案](https://www.zhihu.com/tardis/bd/art/30868245301)汇总 PATH、权限、虚拟环境和多版本症状；它属于个人经验汇总，管理员运行、卸载或修改系统别名等建议必须在定位根因和确认风险后另行判断。
+- **规范与项目对照**：
+  - [GitHub Actions workflow syntax](https://docs.github.com/en/actions/reference/workflows-and-actions/workflow-syntax)和[使用 GitHub Actions 构建与测试 Python](https://docs.github.com/actions/automating-builds-and-tests/building-and-testing-python)提供操作系统矩阵与 `setup-python` 用法；本仓库用实际 job 结果约束兼容声明；
+  - [actions/setup-python](https://github.com/actions/setup-python)与[runner-images](https://github.com/actions/runner-images)分别固定 runner 上的 Python 并公开托管镜像状态；它们不能证明个人机器的 PATH、IDE 或驱动正确；
+  - [Python `venv`](https://docs.python.org/3/library/venv.html)说明平台激活命令不同且激活并非必要，[`pathlib`](https://docs.python.org/3/library/pathlib.html)提供平台适配的路径对象；因此指南直接调用 `.venv` 解释器，测试则真实传递特殊路径参数；
+  - [The Turing Way：Reproducible Environments](https://book.the-turing-way.org/reproducible-research/renv/)说明操作系统、软件与版本共同构成环境；矩阵通过是证据增量，不是任意机器复现保证。
+- **适用边界**：矩阵只覆盖 GitHub 托管的 Windows、Ubuntu、macOS runner、Python 3.11 和当前标准库演练。它不覆盖 `cmd`、所有 PowerShell 策略、IDE / Notebook kernel、WSL、学校服务器、代理、挂载盘、conda / uv / Poetry、PyTorch、CUDA、GPU 驱动、编译器、真实数据和论文依赖，也不证明跨系统逐位一致。路径测试证明参数列表可携带中文和空格，不说明所有路径、权限和编码问题已解决。
+- **采取行动**：将首次演练 CI 改为 Windows、Ubuntu、macOS 矩阵并保留各 job 结果；移除 shell 专属续行写法；新增含中文与空格路径的真实子进程检查，核对四项产物、环境身份、完成状态与防覆盖；同步首页、L0 指南、教学 README、变更记录和[带日期审计](../reports/CROSS_PLATFORM_FIRST_RUN_AUDIT_2026-08-11.md)。
+- **状态**：本地 Windows 的特殊路径、三组实验、知识检索、无命中交接与仓库质量检查均已通过；三个远端 runner 的证据必须在提交并推送后回填。自动检查不作为个人 IDE、GPU、服务器或陌生新手可用性证据。
+
+## 2026-08-11：零基础首页入口审计
+
+### I-050：入口很多但没有首屏唯一默认动作
+
+- **当前问题**：根 README 原先到约第 70 行才进入行动分流，“30 秒选择”一次列出导师任务、L0–L2、失败停止、知识复用、结果共享和投稿等多类状态。它能服务已经知道自己问题的人，却要求真正零基础读者先理解 L0、baseline、门控和证据等级才能选第一步。准备检查表又同时展示工具、Python、机器学习、深度学习与科研能力，没有限定首次填写范围，容易把课程、工具、模板、论文和 Agent 一起启动。
+- **经验对照**：
+  - [计算机科研新手快速入门](https://www.xiaohongshu.com/explore/6a55f71400000000170282b1)给出短路线，但评论仍反复追问如何选方向、找 baseline，以及 Agent 复现后自己学不到什么；本仓库吸收明确起点与验收，不采用“近年 A 会、低 GPU、完整训练”作为所有方向的固定规则；
+  - [从零开始发论文系列（一）](https://www.xiaohongshu.com/explore/690437d00000000003020d22)的评论出现直接按个人想法写代码、没有 baseline、长期无进展，以及不知道读多少篇、从哪里找代码；固定篇数和个人判断不进入仓库门控；
+  - 知乎问题[计算机本科科研入门求助（文献笔记管理、AI 工具使用）](https://www.zhihu.com/question/2036962382614900853/answer/2043702641105142901)把多种笔记、协作和 AI 工具同时放进入门决策；回答带产品推荐，本仓库只吸收工具选择会分散起步注意力；
+  - 知乎回答[本科生小白如何入门机器学习](https://www.zhihu.com/question/666314243/answer/1994435066227598413)提醒不要同时学习全部资源，并建议用 CPU 小任务和可展示项目起步；其中课程与服务选择不作为通用标准。
+- **规范与项目对照**：
+  - [GitHub Skills Content Model](https://skills.github.com/content-model)和[Quickstart Guide](https://skills.github.com/quickstart)要求入口说明对象、目标、产物、前置、时间、启动动作与求助位置，并用三到五个递进步骤保持单一学习目标；
+  - [Introduction to GitHub](https://github.com/skills/introduction-to-github)把第一天练习组织为明确产物和真实仓库动作；本仓库迁移结构，不照搬其时长或自动机器人流程；
+  - [Diátaxis Tutorials](https://diataxis.fr/tutorials/)强调通过有意义的实际行动达到可实现目标，因此阅读完成不作为验收；
+  - [Learning Research](https://github.com/pengsida/learning_research)使用广度基础、深入一篇论文和独立项目的阶段递进，并声明其 3D Vision / 实验室情境；本仓库迁移阶段逻辑，不把特定课程或实验室路径普遍化；
+  - [AutoResearchClaw](https://github.com/aiming-lab/AutoResearchClaw)通过阶段、checkpoint、恢复和人工介入暴露复杂流程状态；其自动论文产物不等于零基础读者已经学习科研。
+- **适用边界**：唯一默认入口只服务无法判断当前层级的读者；已有导师任务必须先确认授权，已有可检查产物可以跳过相应讲解。60–120 分钟是本地最小练习规划窗口，不包含下载、网络、权限和系统故障，也不评价个人能力。自动结构检查不能证明陌生新手理解、路径选择或完成效果。
+- **采取行动**：将默认入口移动到目录之前，加入“适合谁—学什么—产物—前置—时间—三步行动—完成标志—求助出口”；首次只检查工具能力，再分流到 L0 或第一次演练；把指南索引中的默认主线前移并补入可审计演练；准备表增加 `NEEDS_L0 / READY_FOR_DRILL`，并把首次不需要的 Jupyter 能力移到后续 Python 部分；仓库质量脚本新增首页入口顺序和关键字段回归检查；完整证据见[带日期审计](../reports/BEGINNER_ONRAMP_AUDIT_2026-08-11.md)。
+- **状态**：本地仓库质量检查已覆盖 86 份 Markdown、首页入口顺序与关键字段、相对链接、锚点、代码块、两类索引和 51 个工具条目并通过；首次演练的特殊路径、三组实验、知识检索和无命中交接检查也通过。真人可用性仍待观察，远端证据待提交后生成。
+
+## 2026-08-11：零基础首次使用真人证据审计
+
+### I-051：自动检查通过，但没有观察陌生新手怎样选择、误用或停止
+
+- **当前问题**：I-050 已把默认入口移到首屏，并用脚本检查起点、产物、时间、完成标志和求助出口是否存在；这些证据仍来自编写者设计与机器检查。仓库没有观察未参与编写者完成任务的统一方法，通用 Issue 表单又要求提交者给出问题位置、预期改进和外部依据。真正的新手可能只知道“我先点错了”“不知道 L0 是什么”或“没有报错但放弃了”，却必须先替维护者诊断和设计方案，导致最重要的首次体验无法进入改进记录。
+- **经验对照**：
+  - [研0科研小白求助](https://www.xiaohongshu.com/explore/6a51acbe000000001101def3)的评论同时建议长课程链、只学最新 YOLO、直接使用代码 Agent 或转方向，呈现新手在互相冲突且工具导向的建议中难以确定第一步；它是一则个人求助与评论样本，只用于识别入口不确定性，不定义课程、研究方向或就业规则；
+  - [计算机科研新手快速入门](https://www.xiaohongshu.com/explore/6a55f71400000000170282b1)的评论继续追问方向、baseline 和 Agent 代做后的学习缺失，说明发布短路线不等于读者能够执行；评论不能证明本仓库当前入口存在同样问题；
+  - 知乎问题[计算机本科科研入门求助](https://www.zhihu.com/question/2036962382614900853/answer/2043702641105142901)把多种笔记、协作和 AI 工具同时放进入门决策，反映工具选择本身会成为起步负担；回答带产品推荐，只支持“需要更明确第一步”；
+  - 知乎回答[本科生小白如何入门机器学习](https://www.zhihu.com/question/666314243/answer/1994435066227598413)建议不要同时启动全部资源，并以小任务和可展示产物推进；它属于个人经验，不替代本仓库真人观察。
+- **规范与项目对照**：
+  - [GitHub Skills Quickstart Guide](https://skills.github.com/quickstart)要求用潜在学习者实际测试课程并邀请反馈；[Diátaxis Tutorials](https://diataxis.fr/tutorials/)要求通过行动与可见结果建立能力，并在真实学习者使用中发现缺口；
+  - [GOV.UK moderated usability testing](https://www.gov.uk/service-manual/user-research/using-moderated-usability-testing)要求观察真实或潜在用户完成清晰、可信且不暗示答案的任务，告诉参与者测试对象是服务而不是个人，并主要观察与倾听；[研究记录指南](https://www.gov.uk/service-manual/user-research/taking-notes-and-recording-user-research-sessions)要求分开可见行为与研究者解释；政府服务方法需要缩小后用于开源教程，不能机械搬用其组织和样本规则；
+  - [GitHub Issue Forms](https://docs.github.com/en/communities/using-templates-to-encourage-useful-issues-and-pull-requests/syntax-for-githubs-form-schema)支持结构化输入与必填校验，但表单完整不能保证新手愿意公开账号或完整描述问题；
+  - [Learning Research](https://github.com/pengsida/learning_research)明确个人与特定实验室经验不一定适用于其他情境，并通过开源审阅持续改进；[AutoResearchClaw](https://github.com/aiming-lab/AutoResearchClaw)公开邀请测试者并提供测试指南。本仓库吸收经验边界、测试入口和反馈回路，不采用特定 3D Vision 路线，也不把自动产出论文当作新手验收。
+- **适用边界**：一次或少量便利样本只能发现具体问题，不能证明普遍成功率；同一位已被提示的读者不能继续作为“首次可发现”证据。GitHub Issue 会公开账号和正文，不能覆盖不愿公开者；观察者只能提交脱敏摘要。录音、录像、屏幕、个人路径、学校、实验室、密钥、私有仓库、受限数据和未公开材料都不是默认收集项。不同系统、语言、设备和辅助技术需要分别记录，不能从单一环境外推。
+- **采取行动**：新增[零基础首次使用反馈表单](https://github.com/Starry-cz/ai-research-workflow/issues/new?template=beginner-first-use.yml)，只收集起始状态、实际结果、首次动作、首次卡点和帮助来源，不要求新手提出解决方案或外部依据；新增[零基础首次使用可用性观察](BEGINNER_USABILITY_OBSERVATION.md)，固定中性任务、提示边界、匿名记录、六种结果状态、四级问题处理和另一位陌生读者复查；同步首页、支持说明、贡献规范、指南索引、变更记录、自动检查和[带日期审计](../reports/BEGINNER_USABILITY_EVIDENCE_AUDIT_2026-08-11.md)。
+- **状态**：协议和入口已经建立，本地仓库质量检查通过；尚未录入真实参与者结果，当前只能表述为 `PROTOCOL_READY / HUMAN_EVIDENCE_PENDING`，不能表述为“已通过零基础用户验证”。
+
+## 2026-08-11：首次 PASS 渐进式演练审计
+
+### I-052：首页承诺最短路径，执行页却重复建环境并把完整协议设为第一次验收
+
+- **当前问题**：默认路径先在 L0 指南中于仓库根目录创建 `.venv`、运行 `debug.json` 并检查四项产物；进入演练页后又要求切换到子目录、创建第二个 `.venv`、重跑 debug，并在首次看到 `PASS` 前阅读任务授权、数据、评价和实验卡，再运行 baseline、candidate、多个 seed、结果审计、停止门、知识检索与无命中交接。每项要求在对应阶段都有价值，但组合后违背首页“一次工具检查—一次演练—一个可见产物”的承诺，也让新手无法判断哪些是当前必需、哪些是第二轮能力。
+- **经验对照**：
+  - [研0无科研经验快速入门的正确姿势](https://www.xiaohongshu.com/explore/68ac57b4000000001d028856)依次要求领域地图、三至五篇综述、网课、工具复用和模仿；评论仍出现“囤着以后看”、追问现在具体能做什么，以及长期启动困难。笔记来自已有导师课题的个人经历，只用于说明长清单可能推迟行动，不证明其中内容不重要；
+  - [计算机科研新手快速入门](https://www.xiaohongshu.com/explore/6a55f71400000000170282b1)的评论继续追问方向、baseline 和 Agent 代做后的学习缺失，提示步骤完成与能力形成需要分开验收；
+  - 知乎文章[科研入门通用手册（计算方向）](https://zhuanlan.zhihu.com/p/708077465)描述新手止步于系统搭建、软件摸索和文献阅读等前期环节，并明确经验来自特定计算方向；本仓库只吸收初期摩擦和情境边界；
+  - 知乎回答[本科生小白如何入门机器学习](https://www.zhihu.com/question/666314243/answer/1994435066227598413)建议用直观理解、CPU 小任务和动手实践起步；其中课程和服务推荐不作为仓库标准；
+  - 知乎回答[如何成为一个 AI Agent 工程师](https://www.zhihu.com/question/2012551138705167575/answer/2027143270413682435)把“收藏很多教程但没有跑起项目”列为痛点。该回答商业导向明显，只用于确认行为线索，不采用课程、就业或时长承诺。
+- **规范与项目对照**：
+  - [GitHub Skills Quickstart Guide](https://skills.github.com/quickstart)建议聚焦单一能力、使用三至五个递进小步骤，并指出学习者若几分钟内看不到进展容易放弃；这些时间观察来自 GitHub Skills，不是所有科研学习者的统一阈值；
+  - [Diátaxis Tutorials](https://diataxis.fr/tutorials/)要求教程尽早且频繁给出可见结果，围绕当前问题、动作和结果推进，并把解释、选项和旁支留到需要时；
+  - [ML for Beginners](https://github.com/microsoft/ML-For-Beginners)使用动手项目、频繁检查和逐渐增加复杂度的结构，并允许分段学习；[AI for Beginners](https://github.com/microsoft/AI-For-Beginners)又为完全新手提供快速动手示例。本仓库迁移分层和渐进产物，不把完整课程设为科研前置；
+  - [Python `venv`](https://docs.python.org/3/library/venv.html)说明虚拟环境有独立解释器且无需激活也能直接调用；默认路线因此复用根目录 `.venv`。真实项目若指定 conda、uv、Poetry 或容器，仍以其官方环境为准。
+- **适用边界**：首次单配置 `PASS` 只证明一条运行的配置、环境、指标和日志完整，不检查 baseline / candidate 公平性、多个 seed 的波动、真实数据、论文结果或方法优越性。根目录 `.venv` 是本仓库零依赖教学默认，不要求已有团队项目改用同一工具。分层不能成为跳过数据权利、评价冻结或结论边界的理由；这些要求在进入对应第二轮或真实项目时恢复。
+- **采取行动**：新增单配置 `verify_first_run.py`，复用原验收逻辑检查四项文件、seed、完成状态、汇总、环境、日志和边界；演练页改为“复用根目录环境—一次 debug—单目录 PASS—解释四项产物”，并明确可以停止；第二轮才运行 baseline / candidate 和原 `verify.py`。同步修正 L0 的交接、根 README 完成标志、常见失败、Windows / macOS/Linux 命令、CI、贡献指南、PR 检查、变更记录和仓库回归；完整证据见[带日期审计](../reports/FIRST_PASS_PROGRESSIVE_DRILL_AUDIT_2026-08-11.md)。
+- **状态**：本地新目录已实际完成一次 debug、baseline 和 candidate；单配置验收接受一 seed 调试运行并拒绝五 seed baseline，原三组公平比较、知识检索、无命中交接、跨平台特殊路径和仓库质量检查全部通过。仓库检查覆盖 89 份 Markdown、首次反馈与演练分层、两类索引和 51 个工具条目。远端三系统证据必须在未来提交推送后由各 job 实际产生；真人首次耗时与理解仍待 I-051 观察。
+
+## 2026-08-11：首次 Git 所有权与发布边界审计
+
+### I-053：第一次 commit 能成功，但默认顺序会把本地版本、远程所有权和 push 权限混在一起
+
+- **当前问题**：L0 指南原先在 clone 之前要求修改全局 Git 姓名、邮箱和默认分支，随后克隆 `Starry-cz/ai-research-workflow` 并直接停留在上游 `main` 完成第一次 commit。它没有要求查看 `origin` 所有者、建立个人练习分支，也没有解释“能在本地 commit”不等于“有权限向作者仓库 push”。宽范围的 `git add README.md .gitignore environment` 还会让新手难以判断自己究竟暂存了哪些改动。
+- **经验对照**：
+  - 小红书笔记[新手必看！代码传上 GitHub 竟然花了我 1 小时](https://www.xiaohongshu.com/explore/691c7015000000000d00df18)记录了换设备后同步代码、反复尝试 push，最后才意识到应先 clone 的真实摩擦；它是单人经验，只支持“同步顺序容易卡住”，不定义命令、认证或权限规则；
+  - 知乎问题[Why pull request not push request?](https://www.zhihu.com/en/answer/275753841)中的个人回答围绕“通常不能向他人仓库直接 push，应在自己的 fork / 分支提交并发起 PR”解释概念，说明 remote 所有权与 push 权限需要显式教学；具体流程以 GitHub 官方文档为准；
+  - 知乎文章[CS 系新生实用工具科普](https://zhuanlan.zhihu.com/p/1889106039556767985)专门区分 Git 与 GitHub，也侧面反映本地版本控制和远程托管常被合并理解；它属于个人教程，不作为安全规范。
+- **规范与项目对照**：
+  - [GitHub 设置用户名](https://docs.github.com/en/get-started/git-basics/setting-your-username-in-git)和[设置 commit 邮箱](https://docs.github.com/en/account-and-profile/how-tos/email-preferences/setting-your-commit-email-address)都提供单仓库配置方式，并说明它只覆盖当前仓库；邮箱文档还提供 `noreply` 隐私选项；
+  - [GitHub 克隆仓库](https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository)把 clone 定义为本地完整副本；[远程仓库说明](https://docs.github.com/en/get-started/git-basics/about-remote-repositories)区分本地提交与向远程发布；
+  - [GitHub 向项目贡献](https://docs.github.com/en/get-started/exploring-projects-on-github/contributing-to-a-project)明确无直接写权限时使用 fork、个人分支、push 和 Pull Request；[GitHub Skills: Introduction to GitHub](https://github.com/skills/introduction-to-github)也采用“分支—commit—PR—合并”的零基础练习顺序。
+- **适用边界**：`learning/first-run` 是教学分支名，不替代团队分支规范；仓库级身份用于隔离本次练习，不表示个人永远不能使用全局配置。第一次本地 commit 不测试账号登录、令牌、SSH、fork、push、分支保护或 PR；未来发布前仍须核对作者信息、敏感文件、目标 remote、仓库权限与任务授权。能获得团队写权限也不表示可以直接修改默认分支。
+- **采取行动**：将 L0 顺序改为“clone—`remote -v`—个人练习分支—当前仓库身份—环境与演练—精确暂存—本地 commit”；删除全局身份和默认分支修改；只暂存新建的 `environment/README.md`；明确不要向作者 `origin` 推送，并把公开项目、自有仓库和团队仓库的远程协作延后分流。同步首页、准备检查表、变更记录、仓库回归与[带日期审计](../reports/FIRST_GIT_OWNERSHIP_BOUNDARY_AUDIT_2026-08-11.md)。
+- **状态**：Windows 临时克隆已实际完成个人分支、单仓库身份、单文件暂存和本地 commit；`origin/main` 前后未变化，练习分支没有上游跟踪分支，全程未登录 GitHub 或执行 push。仓库质量检查覆盖 90 份 Markdown、L0 Git 边界与 51 个工具条目并通过；首次运行、三组比较、知识检索、无命中交接和特殊路径回归也通过。真人是否能独立解释 remote、branch、commit 与 push 的差异仍待 I-051 观察，不能以机器检查替代。
+
+## 2026-08-11：零基础默认路径术语审计
+
+### I-054：操作已经缩短，但高频术语仍要求新手离开当前任务自行搜索
+
+- **当前问题**：首页、L0 和首次演练在定义前反复使用 `commit`、`origin`、`seed`、`run_id`、`baseline`、`PASS`、配置快照和指标。仓库虽然在不同段落零散解释部分词，却没有统一入口；新手需要在执行命令、搜索通用解释和判断当前上下文之间来回切换。直接增加“科研黑话大全”又会扩大前置阅读，并把不同学科、平台与投稿制度混在一起。
+- **经验对照**：
+  - 小红书笔记[研0 暑期科研词汇扫盲](https://www.xiaohongshu.com/explore/68a42843000000001d001383)以入学前词汇扫盲组织内容，说明术语是新手主动寻找的帮助；当前只使用可见标题确认需求，不采用图片中的未核验定义；
+  - 小红书笔记[老师默认你知道的科研黑话](https://www.xiaohongshu.com/explore/6880ab74000000000d025d60)解释论文、检索、分区、DOI 与开放获取等词，同时包含对复杂制度的宽泛概括，提示个人词表可以识别卡点，却不能直接成为规范来源；
+  - 知乎问题[机器学习中的 baseline 是什么](https://www.zhihu.com/en/answer/1163052504)本身就是初学者对高频术语的直接追问，回答随课程和研究情景改变比较参照；它说明只翻译为“基线”不能完成行动判断；
+  - 知乎文章[Random Seed](https://www.zhihu.com/en/article/514821697)讨论固定随机种子与实验目的，说明 seed 需要可重复性边界；个人文章不替代框架和算法文档。
+- **规范与项目对照**：
+  - [Google Technical Writing：Words](https://developers.google.com/tech-writing/one/words)要求定义或链接陌生术语、保持名称一致，并在术语较多时使用 glossary；
+  - [GitHub Docs 内容模板](https://docs.github.com/en/contributing/writing-for-github-docs/templates)建议高频技术词进入 key terms，低频词在上下文解释，同时要求面向半技术读者使用简单语言并解释缩写；
+  - [Microsoft LangChain4j for Beginners Glossary](https://github.com/microsoft/LangChain4j-for-Beginners/blob/main/docs/GLOSSARY.md)按课程概念分组并回链模块。本仓库吸收按任务分组和集中速查，不引入默认路径未使用的 LLM 专题词；
+  - GitHub、Git、Python、MLflow、scikit-learn 与 PyTorch 原始文档分别用于核对版本控制、环境、运行 / 产物、随机性和训练循环定义，避免让社交平台或 AI 回答承担规范职责。
+- **适用边界**：速查只覆盖默认路径，不是 AI、数学或投稿制度百科；词条是当前仓库的操作性用法，不能覆盖目标论文、数据、venue 或团队规则。集中术语表不能替代首次出现处的必要解释，也不能证明真人理解；不收录只因流行而尚未影响当前行动的词。
+- **采取行动**：新增[零基础默认路径术语速查](BEGINNER_GLOSSARY.md)，按路线状态、Git、Python 环境和一次实验分组；每项固定写通俗含义、当前动作和不可推出项，并链接原始定义。首页目录前、L0、演练页和指南索引增加按需入口；首屏补充 baseline、commit 与 PASS 的中文解释；贡献规范采用“低频词原地解释、跨页面高频词进入速查”；仓库脚本增加可发现性、核心词、行动与边界回归。完整证据见[带日期审计](../reports/BEGINNER_TERMINOLOGY_AUDIT_2026-08-11.md)。
+- **状态**：26 个术语条目、按需入口和自动回归规则已建立。仓库质量检查覆盖 92 份 Markdown、术语可发现性、两类索引和 51 个工具条目并通过；负向测试移除一个行动字段后被准确拒绝，恢复后重新通过。首次运行、三组比较、知识检索、无命中交接和特殊路径回归均通过。真人能否不经提示把术语对应到当前命令、文件与边界仍待 I-051 观察。
+
+### I-055：资源已经按阶段分类，但语言、账号和算力门槛隐藏在链接之后
+
+- **当前问题**：GitHub 资源目录已经说明适用等级、可吸收内容和使用边界，`tools.yml` 也有阶段与最低产物；两处都没有统一暴露主要语言和最低进入要求。零基础读者可能点开后才发现材料以英文为主、练习需要 Python / Git / Notebook、skill 依赖特定 AI 客户端，或完整系统需要模型访问与额外算力。“链接可打开”因此仍可能成为选择死路。
+- **经验对照**：
+  - 小红书笔记[研0暑假入门深度学习的一些经验（含踩坑）](https://www.xiaohongshu.com/explore/6880d5480000000017035390)记录中文讲解、直接阅读 D2L 的门槛和个人电脑训练耗时等体验，说明语言、先修和算力应在选择前可见；个人顺序与耗时不推广为统一结论；
+  - 小红书笔记[研0看英文论文崩溃了](https://www.xiaohongshu.com/explore/6a54c18e000000001003cf25)及可见讨论呈现专业英语导致逐词停顿的卡点，支持把主要语言视为进入条件；评论中的工具推荐不作为规范依据；
+  - 知乎回答[对于机器学习零基础的人，有哪些好的学习路线或建议](https://www.zhihu.com/question/666314243/answer/1994435066227598413)建议避免同时铺开过多资源并通过小任务形成反馈，支持“一次一个主资源和一个产物”；个人经验不证明具体课程适合所有人。
+- **规范与项目对照**：OSSU 官方 README 将自身定位为完整 CS 教育并给出长期投入；ML for Beginners 提供多语言版本；Zero to Hero 绑定视频、Notebook 与主动练习；Made With ML 区分个人电脑和集群路径；Academic Research Skills、CCF-Figure 与 AutoResearchClaw 分别公开客户端、模型访问、出图或完整执行环境要求。这些原项目说明用于核对条目，不由社交平台推导技术门槛。
+- **适用边界**：进入成本是点开前的最低判断，不是难度评分、费用承诺或地区可用性保证；语言只描述主要入口，外部课程和论文可能不同；动态账号、价格、服务条款、依赖和算力应在使用当天回到官方页面复核。
+- **采取行动**：`tools.yml` 升级到 v7，为 22 个精选 GitHub 资源增加受控语言字段和进入要求，并补回 `Made With ML`；人读目录每项增加“进入成本—吸收与边界”；贡献规范禁止“永久免费”等永久承诺；仓库检查验证精选集合、字段格式、URL 和 22 条目录说明。完整证据见[带日期审计](../reports/GITHUB_RESOURCE_ENTRY_COST_AUDIT_2026-08-11.md)。
+- **状态**：仓库检查覆盖 93 份 Markdown、22 个精选 GitHub 资源进入成本和 52 个工具条目并通过；负向测试移除一个语言字段后被准确拒绝，恢复后重新通过。debug、baseline、candidate、第一次单配置、公平比较、知识检索、无命中交接和中文空格路径回归全部通过。真人是否能据此更快排除不合适资源仍待 I-051 陌生读者观察。
 
 ## 下一轮优先审计
 
 - 等待作者确认许可证、引用署名和首个版本号，再完成 `LICENSE`、`CITATION.cff` 与首个 GitHub Release。
 - 使用固定查询和抽样原文继续测试聚合论文平台的重复、遗漏、版本冲突与代码链接准确性；未形成对照样本前不发布覆盖度评分。
-- 设计一次真正的陌生读者可用性观察：在不提示正确文件的条件下记录任务成功、误用、求助点和卡住位置；没有真人证据前，不把自动脚本通过表述为“零基础用户已验证”。
-- 审计跨平台首次执行：使用 Windows PowerShell 与 Ubuntu 的全新目录分别完成 L0、第一条实验、无命中求助和结果定位，记录命令差异与首次卡点。
+- 开展首轮陌生读者可用性观察，逐次记录环境、首次动作、提示、卡点和最终状态；在取得真人证据前，不把协议就绪或自动脚本通过表述为“零基础用户已验证”。
