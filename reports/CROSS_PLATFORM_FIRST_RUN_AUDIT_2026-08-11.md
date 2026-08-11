@@ -49,5 +49,5 @@
 ## 6. 当前验证状态
 
 - 本地 Windows：特殊路径检查、三组实验验收、知识检索演练、无命中交接演练均已通过；仓库质量检查已检查 93 份 Markdown 和 52 个工具条目并通过；
-- GitHub Actions 首次矩阵：Ubuntu 与 macOS 通过，Windows 在知识检索步骤暴露 `train.py --help` 中文输出编码问题；修复提交的三个独立 job 结果见仓库 Actions，本节只有在新矩阵全部通过后才视为远端闭环；
+- GitHub Actions 首次矩阵：Ubuntu 与 macOS 通过，Windows 在知识检索步骤暴露 `train.py --help` 中文输出编码问题；修复提交 `a79df02` 的 [First workflow drill](https://github.com/Starry-cz/ai-research-workflow/actions/runs/31456892728)中 Windows、Ubuntu、macOS 三个 Python 3.11 job 及全部教学步骤均通过，远端矩阵闭环完成；
 - 真人可用性：尚未由未参与编写的零基础读者执行，不能表述为“零基础用户已验证”。

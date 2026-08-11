@@ -818,7 +818,7 @@
   - [The Turing Way：Reproducible Environments](https://book.the-turing-way.org/reproducible-research/renv/)说明操作系统、软件与版本共同构成环境；矩阵通过是证据增量，不是任意机器复现保证。
 - **适用边界**：矩阵只覆盖 GitHub 托管的 Windows、Ubuntu、macOS runner、Python 3.11 和当前标准库演练。它不覆盖 `cmd`、所有 PowerShell 策略、IDE / Notebook kernel、WSL、学校服务器、代理、挂载盘、conda / uv / Poetry、PyTorch、CUDA、GPU 驱动、编译器、真实数据和论文依赖，也不证明跨系统逐位一致。路径测试证明参数列表可携带中文和空格，不说明所有路径、权限和编码问题已解决。
 - **采取行动**：将首次演练 CI 改为 Windows、Ubuntu、macOS 矩阵并保留各 job 结果；移除 shell 专属续行写法；新增含中文与空格路径的真实子进程检查，核对四项产物、环境身份、完成状态与防覆盖；同步首页、L0 指南、教学 README、变更记录和[带日期审计](../reports/CROSS_PLATFORM_FIRST_RUN_AUDIT_2026-08-11.md)。
-- **状态**：首次远端矩阵中 Ubuntu 与 macOS 通过，Windows 在知识检索步骤暴露英文区域代码页无法输出中文 `train.py --help`；该失败证明仅有本地中文 Windows 证据不足。训练脚本与两个子进程验收现已统一 UTF-8，等待修复提交的三个远端 job 复核。自动检查不作为个人 IDE、GPU、服务器或陌生新手可用性证据。
+- **状态**：首次远端矩阵中 Ubuntu 与 macOS 通过，Windows 在知识检索步骤暴露英文区域代码页无法输出中文 `train.py --help`；该失败证明仅有本地中文 Windows 证据不足。训练脚本与两个子进程验收统一 UTF-8 后，修复提交 `a79df02` 的 [First workflow drill](https://github.com/Starry-cz/ai-research-workflow/actions/runs/31456892728)中 Windows、Ubuntu、macOS 三个 Python 3.11 job 及全部教学步骤均通过。自动检查不作为个人 IDE、GPU、服务器或陌生新手可用性证据。
 
 ## 2026-08-11：零基础首页入口审计
 
