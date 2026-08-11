@@ -13,6 +13,12 @@ import sys
 from pathlib import Path
 
 
+def configure_stdio() -> None:
+    """固定中文帮助与异常输出编码，避免 Windows 英文代码页写出失败。"""
+    sys.stdout.reconfigure(encoding="utf-8")
+    sys.stderr.reconfigure(encoding="utf-8")
+
+
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="运行零依赖二分类工作流演练")
     parser.add_argument("--config", type=Path, required=True)
@@ -196,4 +202,5 @@ def main() -> None:
 
 
 if __name__ == "__main__":
+    configure_stdio()
     main()

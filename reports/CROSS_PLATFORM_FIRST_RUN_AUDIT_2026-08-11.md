@@ -3,7 +3,7 @@
 - 审计日期：2026-08-11
 - 审计对象：`Starry-cz/ai-research-workflow`
 - 问题编号：I-049
-- 结论：原文分别给出 Windows 与 macOS/Linux 命令，但自动检查只运行在 Ubuntu，且验收命令使用 Bash 续行符，不能据此声称跨平台持续可用。本轮已改为 Windows、Ubuntu、macOS 矩阵，并新增含中文与空格路径的真实运行检查；CI 仍不能替代个人 IDE、GPU、服务器和论文依赖核验。
+- 结论：原文分别给出 Windows 与 macOS/Linux 命令，但自动检查只运行在 Ubuntu，且验收命令使用 Bash 续行符，不能据此声称跨平台持续可用。本轮改为 Windows、Ubuntu、macOS 矩阵并新增特殊路径检查；首次远端运行进一步发现 Windows 英文代码页无法输出中文 `--help`，统一 UTF-8 后重新验证。CI 仍不能替代个人 IDE、GPU、服务器和论文依赖核验。
 
 ## 1. 当前问题
 
@@ -33,13 +33,14 @@
 - 将 `First workflow drill` 从单一 `ubuntu-latest` 改为 `windows-latest`、`ubuntu-latest`、`macos-latest`，固定 Python 3.11，并设置 `fail-fast: false` 以保留各系统结果；
 - 将只适用于 Bash 的多行验收命令改成各 runner shell 都能直接执行的单行命令；
 - 新增 `verify_cross_platform.py`：使用当前解释器和参数列表，在含中文与空格的临时目录真实运行 `train.py`，核对四项产物、环境身份、完成状态和防覆盖异常；
+- 根据首次远端矩阵失败，将 `train.py` 的标准输出、标准错误以及知识检索 / 无命中脚本启动的子进程统一固定为 UTF-8，不再依赖 Windows runner 的区域代码页；
 - 在首页、L0 指南和演练 README 中分开写明“持续验证范围”与“不在验证范围内的本机因素”。
 
 ## 5. 验证边界
 
 本轮矩阵覆盖 GitHub 托管 runner 上的标准库脚本、Python 3.11、参数传递、特殊路径、产物生成和防覆盖行为。它不覆盖：
 
-- Windows `cmd`、所有 PowerShell 执行策略或任意终端编码；
+- Windows `cmd`、所有 PowerShell 执行策略或任意第三方终端编码；
 - IDE、Notebook kernel、conda、uv、Poetry 与多环境切换；
 - WSL、学校集群、容器、代理、私有网络和挂载盘权限；
 - PyTorch、CUDA、GPU 驱动、编译器、真实数据与论文仓库依赖；
@@ -47,6 +48,6 @@
 
 ## 6. 当前验证状态
 
-- 本地 Windows：特殊路径检查、三组实验验收、知识检索演练、无命中交接演练均已通过；仓库质量检查已检查 85 份 Markdown 和 51 个工具条目并通过；
-- GitHub Actions：矩阵配置已完成，必须在修改提交并推送后，以三个独立 job 的结果更新本节；
+- 本地 Windows：特殊路径检查、三组实验验收、知识检索演练、无命中交接演练均已通过；仓库质量检查已检查 93 份 Markdown 和 52 个工具条目并通过；
+- GitHub Actions 首次矩阵：Ubuntu 与 macOS 通过，Windows 在知识检索步骤暴露 `train.py --help` 中文输出编码问题；修复提交的三个独立 job 结果见仓库 Actions，本节只有在新矩阵全部通过后才视为远端闭环；
 - 真人可用性：尚未由未参与编写的零基础读者执行，不能表述为“零基础用户已验证”。

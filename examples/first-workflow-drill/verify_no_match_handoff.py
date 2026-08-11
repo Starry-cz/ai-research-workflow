@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-import locale
+import os
 import subprocess
 import sys
 import tempfile
@@ -38,13 +38,17 @@ def read_required(name: str) -> str:
 
 def run_command(arguments: list[str]) -> subprocess.CompletedProcess[str]:
     """在演练目录执行命令并保留退出码与文本输出。"""
+    environment = os.environ.copy()
+    # 子进程和捕获端统一使用 UTF-8，避免 Windows runner 的英文代码页破坏中文异常。
+    environment["PYTHONIOENCODING"] = "utf-8"
     return subprocess.run(
         arguments,
         cwd=ROOT,
         check=False,
         capture_output=True,
         text=True,
-        encoding=locale.getpreferredencoding(False),
+        encoding="utf-8",
+        env=environment,
     )
 
 
