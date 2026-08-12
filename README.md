@@ -4,6 +4,8 @@
 
 [开始默认路径](#第一次来默认从这里开始) · [按当前状态选择](#30-秒选择入口) · [查看全部指南](docs/README.md) · [浏览资源目录](docs/GITHUB_RESOURCE_CATALOG.md)
 
+**Codex Skill**：可安装目录位于 [`skills/ai-research-workflow/`](skills/ai-research-workflow/SKILL.md)。将该目录复制到个人 Codex Skills 目录后，使用 `$ai-research-workflow`，可让 Codex 根据当前材料选择研究阶段、生成最小产物并给出可验证的下一步。
+
 ---
 
 ## 先选一个入口
@@ -426,6 +428,8 @@ research-project/
 ## 工具与入口导航
 
 按当前任务选择一个主入口，完成表中产物后再决定是否扩展。更多课程和项目见[GitHub 科研入门资源目录](docs/GITHUB_RESOURCE_CATALOG.md)；该目录按阶段和用途组织，并在点开前说明主要语言、最低前置、账号或算力门槛，不按 Star 排名。
+
+需要由 AI 按研究阶段持续协作时，使用仓库内的 [`ai-research-workflow` Skill](skills/ai-research-workflow/SKILL.md)。它采用七阶段通用流程，并按需加载 LLM 评测、RAG、Agent/MCP 和多模态路线；首次记录可直接复用[六张轻量核心模板](skills/ai-research-workflow/assets/core-templates.md)。
 
 **最常用的六个入口**
 

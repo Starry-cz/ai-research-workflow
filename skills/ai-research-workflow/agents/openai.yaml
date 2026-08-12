@@ -1,0 +1,4 @@
+interface:
+  display_name: "AI 科研工作流"
+  short_description: "从科研问题到可复现结论的分阶段执行与核验 Skill"
+  default_prompt: "使用 $ai-research-workflow 根据我的当前材料选择研究阶段、生成最小产物并给出可验证的下一步。"

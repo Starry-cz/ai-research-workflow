@@ -64,6 +64,10 @@ CURATED_GITHUB_RESOURCE_IDS = {
     "tuning-playbook",
 }
 ALLOWED_PRIMARY_LANGUAGES = {"en", "multilingual", "zh"}
+SKILL_NAME = "ai-research-workflow"
+SKILL_NAME_PATTERN = re.compile(r"^[a-z0-9-]+$")
+MAX_SKILL_NAME_LENGTH = 64
+MAX_SKILL_DESCRIPTION_LENGTH = 1024
 
 
 class ValidationError(RuntimeError):
@@ -450,6 +454,94 @@ def validate_tools_catalog() -> int:
     return len(entries)
 
 
+def parse_simple_skill_frontmatter(path: Path) -> dict[str, str]:
+    """解析本仓库 Skill 仅含 name/description 的简单 YAML 头。"""
+    lines = path.read_text(encoding="utf-8").splitlines()
+    if not lines or lines[0] != "---":
+        raise ValidationError("Skill 缺少 YAML frontmatter 起始标记")
+    try:
+        end_index = lines.index("---", 1)
+    except ValueError as error:
+        raise ValidationError("Skill 缺少 YAML frontmatter 结束标记") from error
+
+    fields: dict[str, str] = {}
+    for line in lines[1:end_index]:
+        key, separator, value = line.partition(":")
+        if not separator or not key.strip() or not value.strip():
+            raise ValidationError(f"Skill frontmatter 行格式无效：{line}")
+        fields[key.strip()] = value.strip()
+    return fields
+
+
+def validate_skill_package() -> None:
+    """检查可安装 Skill 的结构、元数据、渐进加载和模板资产。"""
+    skill_dir = REPOSITORY_ROOT / "skills" / SKILL_NAME
+    skill_path = skill_dir / "SKILL.md"
+    if not skill_path.exists():
+        raise ValidationError(f"缺少可安装 Skill：skills/{SKILL_NAME}/SKILL.md")
+    if skill_dir.name != SKILL_NAME:
+        raise ValidationError("Skill 目录名必须与 name 一致")
+
+    fields = parse_simple_skill_frontmatter(skill_path)
+    if set(fields) != {"name", "description"}:
+        raise ValidationError("Skill frontmatter 只能包含 name 和 description")
+    if fields["name"] != SKILL_NAME:
+        raise ValidationError(f"Skill name 必须是 {SKILL_NAME}")
+    if (
+        not SKILL_NAME_PATTERN.fullmatch(fields["name"])
+        or fields["name"].startswith("-")
+        or fields["name"].endswith("-")
+        or "--" in fields["name"]
+        or len(fields["name"]) > MAX_SKILL_NAME_LENGTH
+    ):
+        raise ValidationError("Skill name 必须是长度不超过 64 的小写连字符格式")
+    description = fields["description"]
+    if len(description) < 80:
+        raise ValidationError("Skill description 过短，无法覆盖主要触发场景")
+    if len(description) > MAX_SKILL_DESCRIPTION_LENGTH or "<" in description or ">" in description:
+        raise ValidationError("Skill description 超长或包含不允许的尖括号")
+
+    required_files = [
+        skill_dir / "agents" / "openai.yaml",
+        skill_dir / "assets" / "core-templates.md",
+        skill_dir / "references" / "workflow-stages.md",
+        skill_dir / "references" / "research-tracks.md",
+        skill_dir / "references" / "evidence-and-ai.md",
+        skill_dir / "references" / "template-routing.md",
+    ]
+    missing_files = [
+        str(path.relative_to(REPOSITORY_ROOT)) for path in required_files if not path.exists()
+    ]
+    if missing_files:
+        raise ValidationError(f"Skill 缺少资源：{missing_files}")
+
+    skill_text = skill_path.read_text(encoding="utf-8")
+    required_links = [
+        "references/workflow-stages.md",
+        "references/research-tracks.md",
+        "references/evidence-and-ai.md",
+        "references/template-routing.md",
+        "assets/core-templates.md",
+    ]
+    missing_links = [link for link in required_links if link not in skill_text]
+    if missing_links:
+        raise ValidationError(f"Skill 未提供渐进加载入口：{missing_links}")
+    if len(skill_text.splitlines()) > 200:
+        raise ValidationError("SKILL.md 超过 200 行，应将细节下沉到 references")
+
+    agent_text = required_files[0].read_text(encoding="utf-8")
+    required_agent_fragments = [
+        'display_name: "AI 科研工作流"',
+        'short_description: "从科研问题到可复现结论的分阶段执行与核验 Skill"',
+        "$ai-research-workflow",
+    ]
+    missing_agent_fragments = [
+        fragment for fragment in required_agent_fragments if fragment not in agent_text
+    ]
+    if missing_agent_fragments:
+        raise ValidationError(f"Skill UI 元数据缺少：{missing_agent_fragments}")
+
+
 def main() -> None:
     markdown_files = sorted(REPOSITORY_ROOT.rglob("*.md"))
     validate_links(markdown_files)
@@ -467,10 +559,11 @@ def main() -> None:
     validate_index(REPOSITORY_ROOT / "docs" / "README.md", docs, "docs/README.md ")
     validate_index(REPOSITORY_ROOT / "templates" / "README.md", templates, "templates/README.md ")
     tool_count = validate_tools_catalog()
+    validate_skill_package()
 
     print(f"PASS：已检查 {len(markdown_files)} 个 Markdown 文件。")
     print(
-        f"相对链接与锚点、代码块、README 约束、首次使用反馈、演练分层、L0 Git 边界、零基础术语、GitHub 资源进入成本、两类索引和 {tool_count} 个工具条目均通过。"
+        f"相对链接与锚点、代码块、README 约束、首次使用反馈、演练分层、L0 Git 边界、零基础术语、可安装 Skill、GitHub 资源进入成本、两类索引和 {tool_count} 个工具条目均通过。"
     )
 
 

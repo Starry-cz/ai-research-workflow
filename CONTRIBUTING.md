@@ -95,6 +95,18 @@ Star 是动态信息，不能决定排序或推荐等级，也不进入 `tools.y
 - 说明为什么现有模板不能覆盖该需求，避免同义字段和重复台账持续增长；
 - 新模板加入后重新检查 L0–L3 的最短路径，不得默认要求新手一次填写全部模板。
 
+## Skill 贡献要求
+
+可安装 Skill 位于 `skills/ai-research-workflow/`。修改时应遵守：
+
+- `SKILL.md` 只保留触发条件、分流、执行循环和资料路由，详细协议下沉到 `references/`；
+- frontmatter 只包含 `name` 与 `description`，目录名必须与 `name` 一致；
+- 新增研究路线时先复用七阶段通用流程，不创建第二套阶段状态或重复台账；
+- 可复制的轻量产物放入 `assets/`，仓库内的详细模板仍以根目录 `templates/` 为唯一事实源；
+- 调整名称、触发范围或默认提示词时，同步更新 `agents/openai.yaml`；
+- Skill 独立安装后不得假设宿主项目存在本仓库的 `docs/`、`templates/`、`tools.yml` 或示例目录；
+- 修改后运行 `python scripts/validate_repository.py`，确认目录、元数据、渐进加载入口和 Markdown 链接全部通过。
+
 ## 示例贡献要求
 
 - 示例必须明确区分官方信息、实际运行观察、作者假设和待核验项；
@@ -143,6 +155,7 @@ python scripts/audit_external_urls.py --timeout 15
 - [ ] 动态信息包含核验日期
 - [ ] README.md 与 tools.yml 中的名称、链接和定位一致
 - [ ] 新增 Markdown 的标题、表格、相对链接和代码块可以正常渲染
+- [ ] 修改 Skill 时已同步核对 `SKILL.md`、`agents/openai.yaml`、所需 references/assets 与独立安装边界
 - [ ] 主 README 的表格不超过两列，且已检查手机窄屏排版
 - [ ] 新读者可以在一分钟内按当前能力找到起点和第一个可验证产物
 - [ ] 同一资源没有在首页的多个导航体系中重复出现，动态 Star 不承担学习排序功能
