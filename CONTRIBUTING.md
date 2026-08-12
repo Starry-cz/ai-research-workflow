@@ -107,6 +107,17 @@ Star 是动态信息，不能决定排序或推荐等级，也不进入 `tools.y
 - Skill 独立安装后不得假设宿主项目存在本仓库的 `docs/`、`templates/`、`tools.yml` 或示例目录；
 - 修改后运行 `python scripts/validate_repository.py`，确认目录、元数据、渐进加载入口和 Markdown 链接全部通过。
 
+## 知识库贡献要求
+
+任务型知识卡保存在 `knowledge-base.json`，人读入口为 `docs/BEGINNER_METHODS_AND_TOOLS_KB.md`。新增或修改时应遵守：
+
+- 每张卡只回答一个可识别的问题，并同时提供方法、最小产物、验证方式和边界；
+- `tool_ids` 只引用 `tools.yml` 已存在条目，不在知识卡复制工具功能、进入成本和动态状态；
+- `guide` 必须指向仓库内真实文件，外部依据放入 `source_urls` 并优先使用官方文档、原始论文或项目仓库；
+- 使用“立即、规模增长后、专项研究”控制启用时机，不把成熟团队工具设为零基础前置；
+- 新增卡前先确认现有卡不能通过补充覆盖，避免同义问题和第二套流程；
+- 同步更新人读知识库，并实际运行一条能命中新卡的查询命令。
+
 ## 示例贡献要求
 
 - 示例必须明确区分官方信息、实际运行观察、作者假设和待核验项；
@@ -155,6 +166,7 @@ python scripts/audit_external_urls.py --timeout 15
 - [ ] 动态信息包含核验日期
 - [ ] README.md 与 tools.yml 中的名称、链接和定位一致
 - [ ] 新增 Markdown 的标题、表格、相对链接和代码块可以正常渲染
+- [ ] 修改知识库时，JSON、人读入口、工具 ID、仓库指南和官方来源已经同步核对
 - [ ] 修改 Skill 时已同步核对 `SKILL.md`、`agents/openai.yaml`、所需 references/assets 与独立安装边界
 - [ ] 主 README 的表格不超过两列，且已检查手机窄屏排版
 - [ ] 新读者可以在一分钟内按当前能力找到起点和第一个可验证产物

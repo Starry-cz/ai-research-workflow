@@ -1,0 +1,194 @@
+{
+  "version": 1,
+  "last_verified": "2026-08-12",
+  "schema": "问题—方法—工具—最小产物—验证—边界",
+  "entries": [
+    {
+      "id": "first-github-loop",
+      "question": "不会 GitHub，怎样完成第一次可检查的协作闭环？",
+      "stage": "工具与协作",
+      "level": ["L0"],
+      "activation": "立即",
+      "method": "在练习仓库中依次创建分支、修改文件、提交、发起 Pull Request 并合并；本地 Git 命令另行练习。",
+      "minimum_output": "一个含 branch、commit、Pull Request 和 merge 历史的个人练习仓库。",
+      "verification": "能够从仓库历史指出每次修改、评审入口和合并结果，不只展示最终文件。",
+      "boundary": "GitHub 网页练习不等于掌握本地终端、远程仓库所有权或真实团队权限。",
+      "tool_ids": ["github-skills-intro", "github", "missing-semester"],
+      "guide": "docs/L0_TOOLCHAIN_START.md",
+      "source_urls": [
+        "https://github.com/skills/introduction-to-github",
+        "https://docs.github.com/en/get-started/start-your-journey/git-and-github-learning-resources"
+      ]
+    },
+    {
+      "id": "rebuildable-python-notebook",
+      "question": "Python 或 Notebook 在自己电脑能跑，怎样证明环境可以重建？",
+      "stage": "环境与首次运行",
+      "level": ["L0", "L1"],
+      "activation": "立即",
+      "method": "记录实际解释器，使用独立环境，保存直接依赖与锁定文件；清空状态后从头运行 Notebook，并保留命令和日志。",
+      "minimum_output": "解释器路径、环境文件或锁文件、可从头执行的 Notebook/脚本和一次干净运行日志。",
+      "verification": "在新建环境中按记录安装依赖，重启内核后 Run All，确认输入、输出与指标仍能对应。",
+      "boundary": "锁定依赖只能减少环境漂移，不能自动固定数据、GPU、随机性或外部 API。",
+      "tool_ids": ["jupyterlab", "uv"],
+      "guide": "docs/L0_TOOLCHAIN_START.md",
+      "source_urls": [
+        "https://docs.jupyter.org/en/stable/",
+        "https://docs.astral.sh/uv/"
+      ]
+    },
+    {
+      "id": "first-ml-baseline",
+      "question": "零基础怎样完成第一个能解释、能评价的机器学习 baseline？",
+      "stage": "机器学习基础",
+      "level": ["L0", "L1"],
+      "activation": "立即",
+      "method": "从小型表格任务开始，先理解样本、特征、标签和划分，再用预处理—模型 Pipeline 建立简单 baseline，最后解释指标与泄漏风险。",
+      "minimum_output": "一个包含数据审查、训练—验证—测试划分、baseline、主指标和错误样例的可运行 Notebook。",
+      "verification": "更换随机种子或交叉验证后结果可重算；预处理只在训练数据上拟合；指标与任务目标一致。",
+      "boundary": "完成课程示例只证明掌握入门闭环，不构成新方法、论文复现或真实场景泛化证据。",
+      "tool_ids": ["scikit-learn-mooc", "ml-for-beginners"],
+      "guide": "docs/ML_FIRST_LOOP.md",
+      "source_urls": [
+        "https://inria.github.io/scikit-learn-mooc/",
+        "https://github.com/INRIA/scikit-learn-mooc"
+      ]
+    },
+    {
+      "id": "literature-map-and-library",
+      "question": "怎样从搜索结果建立可回溯的领域文献地图，而不是收藏一堆链接？",
+      "stage": "文献发现与管理",
+      "level": ["L1", "L2"],
+      "activation": "立即",
+      "method": "用发现入口形成候选，用 DBLP、DOI 或 OpenAlex 核对书目和引用关系，再把选中的主记录、PDF、标签和阅读状态放入 Zotero。",
+      "minimum_output": "检索式、纳排记录、稳定标识、主记录、版本关系、核心论文列表和下一轮引用追踪方向。",
+      "verification": "随机抽查作者、标题、年份、venue、DOI/标识与实际原文；重复版本已合并但来源信息仍保留。",
+      "boundary": "开放索引存在覆盖、消歧和状态误差；聚合元数据不能替代论文原文、出版社或会议正式记录。",
+      "tool_ids": ["openalex", "dblp", "zotero", "arxiv"],
+      "guide": "docs/PAPER_DISCOVERY_FIRST_PASS.md",
+      "source_urls": [
+        "https://developers.openalex.org/api-reference/introduction",
+        "https://www.zotero.org/support/quick_start_guide",
+        "https://www.zotero.org/support/duplicate_detection"
+      ]
+    },
+    {
+      "id": "three-pass-paper-reading",
+      "question": "论文太多或太难，怎样决定读到什么深度？",
+      "stage": "论文阅读",
+      "level": ["L1", "L2", "L3"],
+      "activation": "立即",
+      "method": "第一遍判断类别、背景、可信度、贡献和清晰度；第二遍检查图表、证据和关键引用；只有核心论文才进入第三遍重建假设、方法和实现。",
+      "minimum_output": "带阅读层级、核心主张、证据位置、假设、疑问、代码映射和继续/停止决定的阅读卡。",
+      "verification": "能够不依赖摘要复述问题、方法、证据和限制，并指出至少一个需要回到原文或代码核验的点。",
+      "boundary": "三遍法用于分配阅读深度，不保证论文正确，也不要求每篇论文都读到第三遍。",
+      "tool_ids": ["how-to-search-and-read-a-paper", "zotero"],
+      "guide": "templates/02-paper-reading-card.md",
+      "source_urls": [
+        "https://web.stanford.edu/class/ee384m/Handouts/HowtoReadPaper.pdf"
+      ]
+    },
+    {
+      "id": "reproducible-project-design",
+      "question": "怎样从项目开始就保留可复现性，而不是投稿前补材料？",
+      "stage": "项目设计与复现",
+      "level": ["L1", "L2", "L3"],
+      "activation": "立即",
+      "method": "在研究问题确定时同时规划数据、分析、环境、版本、协作、伦理和发布边界；让图表与结论回到脚本和原始证据。",
+      "minimum_output": "Research Brief、数据与环境身份、运行入口、评价协议、权限边界和阶段性复跑记录。",
+      "verification": "另一位获授权者能从唯一入口找到输入、命令和结果，并按声明深度重新执行或核验。",
+      "boundary": "开放共享不是可复现性的唯一形式；受限数据仍可通过元数据、协议和获授权复查保留证据链。",
+      "tool_ids": ["the-turing-way", "cookiecutter-data-science", "releasing-research-code"],
+      "guide": "docs/CORE_RESEARCH_WORKFLOW.md",
+      "source_urls": [
+        "https://book.the-turing-way.org/",
+        "https://github.com/the-turing-way/the-turing-way"
+      ]
+    },
+    {
+      "id": "experiment-tracking-upgrade",
+      "question": "实验多到手工表格难以比较时，怎样升级追踪而不制造第二套事实源？",
+      "stage": "实验追踪",
+      "level": ["L2", "L3"],
+      "activation": "规模增长后",
+      "method": "先固定 commit、config、data revision、run_id 和结果关系；再用 MLflow 搜索参数、指标与 artifact，用 DVC 管理数据或流水线身份。",
+      "minimum_output": "每个 run 可回到代码、配置、数据、指标和 artifact，失败运行与选择规则也可查询。",
+      "verification": "从任一图表或结论反向定位 run，再从 run 定位原始文件并重算关键指标。",
+      "boundary": "追踪平台保存元数据，不会自动保证公平比较、数据合法、科学解释或长期备份。",
+      "tool_ids": ["mlflow", "dvc"],
+      "guide": "docs/EXPERIMENT_ARTIFACT_LIFECYCLE.md",
+      "source_urls": [
+        "https://mlflow.org/docs/latest/ml/tracking/",
+        "https://dvc.org/doc/start"
+      ]
+    },
+    {
+      "id": "llm-evaluation-protocol",
+      "question": "怎样把 LLM 或 Agent 的演示效果变成可复现评测？",
+      "stage": "LLM 与 Agent 评测",
+      "level": ["L2", "L3"],
+      "activation": "专项研究",
+      "method": "先冻结任务样本、模型/API 身份、prompt、解码参数、工具权限和 scorer；小样本检查解析与评分后，再运行基准、重复试验和人工校准。",
+      "minimum_output": "Eval Spec、任务配置、模型参数、原始响应/轨迹、评分结果、成本时延与错误分类。",
+      "verification": "固定配置可重放；随机抽样能由人工复核；框架升级、后端差异和 API 日期均有记录。",
+      "boundary": "公共 benchmark 不等于真实任务；LLM judge 不能未经校准成为唯一评分者；评测框架不能证明系统安全。",
+      "tool_ids": ["inspect-ai", "lm-evaluation-harness", "openai-evals"],
+      "guide": "skills/ai-research-workflow/references/research-tracks.md",
+      "source_urls": [
+        "https://inspect.aisi.org.uk/",
+        "https://github.com/EleutherAI/lm-evaluation-harness",
+        "https://github.com/EleutherAI/lm-evaluation-harness/blob/main/docs/task_guide.md"
+      ]
+    },
+    {
+      "id": "rag-diagnostic-evaluation",
+      "question": "RAG 回答不好时，怎样判断是检索失败还是生成失败？",
+      "stage": "RAG 评测",
+      "level": ["L2", "L3"],
+      "activation": "专项研究",
+      "method": "把流水线拆成解析、切分、召回、排序、上下文选择、生成和引用；先使用可解释的检索 baseline，再分别评测检索器和生成器。",
+      "minimum_output": "冻结问答集、语料版本、检索与生成配置、模块级指标、失败分类、样例证据和成本时延。",
+      "verification": "对代表性失败逐项重放，确认诊断指标能区分未召回、噪声上下文、未利用证据和幻觉。",
+      "boundary": "自动 claim-level 或 LLM 指标需要人工校准；无参考答案评测不能替代任务专家判断。",
+      "tool_ids": ["ragchecker"],
+      "guide": "skills/ai-research-workflow/references/research-tracks.md",
+      "source_urls": [
+        "https://github.com/amazon-science/RAGChecker",
+        "https://arxiv.org/abs/2408.08067"
+      ]
+    },
+    {
+      "id": "research-release-and-citation",
+      "question": "代码和结果准备公开时，怎样形成可引用、可归档的版本？",
+      "stage": "发布与归档",
+      "level": ["L2", "L3"],
+      "activation": "规模增长后",
+      "method": "先完成依赖、训练、评测、权重和命令检查，再由作者决定许可证与引用元数据；为冻结 release 建立归档和 DOI。",
+      "minimum_output": "可复跑 release、版本号、许可证决定、CITATION.cff、归档记录、版本 DOI 和已知限制。",
+      "verification": "在干净环境按 release 文档复跑；GitHub 引用信息、Zenodo 元数据、作者、版本和许可证一致。",
+      "boundary": "公开仓库不等于已授权复用；不能替作者选择许可证；DOI 归档前必须检查敏感数据和第三方材料。",
+      "tool_ids": ["zenodo", "releasing-research-code", "github"],
+      "guide": "docs/EXPERIMENT_ARTIFACT_LIFECYCLE.md",
+      "source_urls": [
+        "https://help.zenodo.org/docs/github/",
+        "https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-citation-files"
+      ]
+    },
+    {
+      "id": "tool-adoption-gate",
+      "question": "看到新的高 Star 工具或 AI 框架时，怎样判断是否值得加入项目？",
+      "stage": "工具选择与维护",
+      "level": ["L0", "L1", "L2", "L3"],
+      "activation": "立即",
+      "method": "先写当前阻塞、已有替代、最低入口、退出成本和可验收产物；只在现有流程无法低成本解决时做小规模试用。",
+      "minimum_output": "一张包含问题、候选、进入成本、最小试用、验证结果、边界和采用/拒绝决定的工具准入记录。",
+      "verification": "试用结果能回答原问题；移除工具后数据与核心证据仍可导出；没有因热度改变研究问题。",
+      "boundary": "Star、榜单、宣传案例和 AI 推荐只是发现信号，不代表质量、维护、合规或适配性。",
+      "tool_ids": ["the-turing-way", "github"],
+      "guide": "docs/GITHUB_RESOURCE_CATALOG.md",
+      "source_urls": [
+        "https://book.the-turing-way.org/project-design/pd-overview/pd-overview-methods/"
+      ]
+    }
+  ]
+}

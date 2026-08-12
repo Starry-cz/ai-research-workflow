@@ -927,6 +927,23 @@
 - **采取行动**：`tools.yml` 升级到 v7，为 22 个精选 GitHub 资源增加受控语言字段和进入要求，并补回 `Made With ML`；人读目录每项增加“进入成本—吸收与边界”；贡献规范禁止“永久免费”等永久承诺；仓库检查验证精选集合、字段格式、URL 和 22 条目录说明。完整证据见[带日期审计](../reports/GITHUB_RESOURCE_ENTRY_COST_AUDIT_2026-08-11.md)。
 - **状态**：仓库检查覆盖 93 份 Markdown、22 个精选 GitHub 资源进入成本和 52 个工具条目并通过；负向测试移除一个语言字段后被准确拒绝，恢复后重新通过。debug、baseline、candidate、第一次单配置、公平比较、知识检索、无命中交接和中文空格路径回归全部通过。真人是否能据此更快排除不合适资源仍待 I-051 陌生读者观察。
 
+## 2026-08-12：方法与工具知识库审计
+
+### I-056：工具目录能够浏览，但不能直接回答“当前问题该用什么方法、何时才需要工具”
+
+- **当前问题**：仓库已有阶段指南、工具条目和 GitHub 资源目录，但读者仍需在多个页面之间自行拼接“问题—方法—产物—验证—边界”。实验追踪、LLM 评测等成熟工具如果与基础课程并列展示，也容易被误当成零基础前置。
+- **规范与项目对照**：
+  - [GitHub Skills: Introduction to GitHub](https://github.com/skills/introduction-to-github)用真实 branch、commit、Pull Request 和 merge 构成短闭环，适合把“读 Git 教程”改成可检查产物；
+  - [scikit-learn MOOC](https://github.com/INRIA/scikit-learn-mooc)围绕表格数据、预处理、交叉验证和评价组织可执行练习，补足第一个经典 ML baseline 的官方课程入口；
+  - [The Turing Way](https://github.com/the-turing-way/the-turing-way)把可复现研究、项目设计、沟通、协作和伦理放入同一手册，支持从项目开始规划证据链，而不是发布前补材料；
+  - [OpenAlex API](https://developers.openalex.org/api-reference/introduction)与 [Zotero 官方指南](https://www.zotero.org/support/quick_start_guide)分别承担开放学术元数据查询和文献主记录管理，不能互相替代，也不能替代原文核验；
+  - [MLflow Tracking](https://mlflow.org/docs/latest/ml/tracking/)记录 run、参数、指标、代码版本与 artifact，适合手工记录失控后升级，不作为第一次实验前置；
+  - [Inspect](https://inspect.aisi.org.uk/)、[lm-evaluation-harness](https://github.com/EleutherAI/lm-evaluation-harness)与 [RAGChecker](https://github.com/amazon-science/RAGChecker)分别提供 LLM/Agent 评测结构、语言模型任务配置和 RAG 模块诊断；它们只在专项研究中启用，自动评分仍需任务人工校准；
+  - [Zenodo–GitHub 集成](https://help.zenodo.org/docs/github/)与 [GitHub CITATION 文件说明](https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-citation-files)用于正式 release 的归档和引用，不替作者决定许可证或公开权限。
+- **适用边界**：高 Star 只用于发现候选，不进入排序和质量结论。工具功能、安装、API、账号和费用会变化；当前核验日期不构成永久可用承诺。Jupyter、uv、MLflow、评测框架和归档服务分别解决不同层级的问题，不能用“统一工具栈”替代当前项目已有流程。
+- **采取行动**：新增机器可读 `knowledge-base.json`、人读[零基础方法与工具知识库](BEGINNER_METHODS_AND_TOOLS_KB.md)和零依赖查询脚本，以 11 张知识卡固定问题、方法、启用时机、最小产物、验证、边界、工具 ID、仓库指南和官方来源；`tools.yml` 升级到 v8 并新增 11 个工具条目；GitHub 资源目录增加 9 个按进入成本分层的项目；Skill 增加按需方法路由；仓库检查增加知识卡、工具引用、guide 路径和人读入口一致性验证。
+- **状态**：11 张知识卡、63 个工具条目和 32 个精选 GitHub 资源已通过离线结构检查；“文献”“L0 + 立即”“专项研究”三类实际查询均返回预期路径。独立 Skill 前向测试能够在“CPU、每周 6 小时、首次 RAG 研究”的约束下主动延后向量数据库、Agent 和复杂评测框架，选择 BM25 基线、冻结测试集与单变量实验；该结果只验证路由逻辑，不替代真实新手测试。动态 URL 审计检查 69 个入口，其中 43 个直接可达，26 个因同一客户端的 TLS EOF/超时归为网络错误；新增来源另通过浏览器访问和官方页面交叉核验，未据此把网络错误判定为链接失效。真人能否更快选出方法并排除过度工具化仍需陌生读者观察。
+
 ## 下一轮优先审计
 
 - 等待作者确认许可证、引用署名和首个版本号，再完成 `LICENSE`、`CITATION.cff` 与首个 GitHub Release。

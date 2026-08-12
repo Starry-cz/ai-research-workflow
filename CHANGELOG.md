@@ -6,6 +6,9 @@
 
 ### Added
 
+- 新增零基础 AI 科研方法与工具知识库，以 11 张任务型知识卡连接问题、方法、启用时机、最小产物、验证、边界和工具；
+- 新增零依赖知识库查询脚本，并补充 GitHub Skills、uv、JupyterLab、scikit-learn MOOC、The Turing Way、OpenAlex、MLflow、Inspect AI、lm-evaluation-harness、RAGChecker 与 Zenodo；
+- Skill 新增方法与工具渐进加载参考，仓库验证增加知识卡结构、工具引用、指南路径和人读入口一致性检查；
 - 新增可安装的 `ai-research-workflow` Codex Skill，包含精简触发说明、七阶段通用科研流程、LLM/RAG/Agent/多模态路线、证据与 AI 使用规范、模板路由和六张轻量核心模板；
 - 仓库离线验证新增 Skill 目录、frontmatter、UI 元数据、渐进加载入口和核心资源检查；
 - 面向 L0、L1、L2 和投稿阶段的首屏分流入口；

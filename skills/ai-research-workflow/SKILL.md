@@ -43,6 +43,7 @@ description: 面向 AI、计算机科学与数据驱动研究的可执行科研�
 - **阶段、输入、产物与通过条件**：读取 [workflow-stages.md](references/workflow-stages.md)。
 - **LLM / RAG / Agent / 多模态路线**：读取 [research-tracks.md](references/research-tracks.md)。
 - **引用、AI 使用、评测与主张边界**：读取 [evidence-and-ai.md](references/evidence-and-ai.md)。
+- **选择入门方法、课程或工具**：读取 [methods-and-tools.md](references/methods-and-tools.md)；先按问题与启用时机筛选，不按热度堆叠工具。
 - **需要填写记录时**：读取 [template-routing.md](references/template-routing.md)，首次使用从 [core-templates.md](assets/core-templates.md) 复制一张轻量模板。
 - **在本仓库内工作时**：可继续查询根目录 `tools.yml`、`docs/README.md`、`docs/GITHUB_RESOURCE_CATALOG.md`、`templates/` 和 `examples/first-workflow-drill/`；只读取当前任务需要的文件。
 - **Skill 独立安装时**：不要假设宿主项目存在本仓库文件；使用本 Skill 自带的 references 与 assets，外部资源每一步同一角色默认不超过 3 个。

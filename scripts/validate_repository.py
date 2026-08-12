@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import json
 import re
 import sys
 from pathlib import Path
@@ -26,6 +27,7 @@ LITERATURE_TOOL_IDS = {
     "google-scholar",
     "huggingface-trending-papers",
     "openreview",
+    "openalex",
     "paper-copilot",
 }
 ALLOWED_RESEARCH_ROLES = {
@@ -47,11 +49,16 @@ CURATED_GITHUB_RESOURCE_IDS = {
     "cookiecutter-data-science",
     "cs-self-learning",
     "d2l-zh",
+    "github-skills-intro",
     "how-to-search-and-read-a-paper",
+    "inspect-ai",
+    "jupyterlab",
     "learning-research",
     "lightning-hydra-template",
+    "lm-evaluation-harness",
     "made-with-ml",
     "mathematics-for-machine-learning",
+    "mlflow",
     "missing-semester",
     "ml-for-beginners",
     "nn-zero-to-hero",
@@ -59,9 +66,13 @@ CURATED_GITHUB_RESOURCE_IDS = {
     "papers-we-love",
     "pumpkin-book",
     "pytorch-deep-learning",
+    "ragchecker",
     "releasing-research-code",
+    "scikit-learn-mooc",
     "supervisor-skills",
+    "the-turing-way",
     "tuning-playbook",
+    "uv",
 }
 ALLOWED_PRIMARY_LANGUAGES = {"en", "multilingual", "zh"}
 SKILL_NAME = "ai-research-workflow"
@@ -346,7 +357,7 @@ def validate_index(index_path: Path, members: list[Path], label: str) -> None:
         raise ValidationError(f"{label}缺少条目：{missing}")
 
 
-def validate_tools_catalog() -> int:
+def validate_tools_catalog() -> tuple[int, set[str]]:
     """按 tools.yml 当前的受限目录结构检查条目，不引入 YAML 依赖。"""
     path = REPOSITORY_ROOT / "tools.yml"
     text = path.read_text(encoding="utf-8")
@@ -451,6 +462,94 @@ def validate_tools_catalog() -> int:
     ]
     if missing_catalog_urls:
         raise ValidationError(f"GitHub 资源目录缺少 tools.yml 条目：{missing_catalog_urls}")
+    return len(entries), ids
+
+
+def validate_knowledge_base(tool_ids: set[str]) -> int:
+    """检查任务型知识卡、工具引用、仓库指南和人读入口是否一致。"""
+    path = REPOSITORY_ROOT / "knowledge-base.json"
+    try:
+        data = json.loads(path.read_text(encoding="utf-8"))
+    except json.JSONDecodeError as error:
+        raise ValidationError(f"knowledge-base.json 无法解析：{error}") from error
+
+    if data.get("version") != 1:
+        raise ValidationError("knowledge-base.json version 必须是 1")
+    if not re.fullmatch(r"\d{4}-\d{2}-\d{2}", str(data.get("last_verified", ""))):
+        raise ValidationError("knowledge-base.json 缺少 YYYY-MM-DD 格式的 last_verified")
+    entries = data.get("entries")
+    if not isinstance(entries, list) or not entries:
+        raise ValidationError("knowledge-base.json 缺少非空 entries 列表")
+
+    required_fields = {
+        "id",
+        "question",
+        "stage",
+        "level",
+        "activation",
+        "method",
+        "minimum_output",
+        "verification",
+        "boundary",
+        "tool_ids",
+        "guide",
+        "source_urls",
+    }
+    allowed_activations = {"立即", "规模增长后", "专项研究"}
+    allowed_levels = {"L0", "L1", "L2", "L3"}
+    knowledge_ids: set[str] = set()
+    questions: set[str] = set()
+    human_text = (REPOSITORY_ROOT / "docs" / "BEGINNER_METHODS_AND_TOOLS_KB.md").read_text(
+        encoding="utf-8"
+    )
+
+    for entry in entries:
+        if not isinstance(entry, dict):
+            raise ValidationError("knowledge-base.json 的每个条目必须是对象")
+        missing = sorted(required_fields - set(entry))
+        if missing:
+            raise ValidationError(f"知识卡 {entry.get('id', '<unknown>')} 缺少字段：{missing}")
+        entry_id = entry["id"]
+        if not isinstance(entry_id, str) or not SKILL_NAME_PATTERN.fullmatch(entry_id):
+            raise ValidationError(f"知识卡 id 格式无效：{entry_id}")
+        if entry_id in knowledge_ids:
+            raise ValidationError(f"知识库出现重复 id：{entry_id}")
+        if entry["question"] in questions:
+            raise ValidationError(f"知识库出现重复问题：{entry['question']}")
+        if entry["activation"] not in allowed_activations:
+            raise ValidationError(f"知识卡 {entry_id} 的 activation 无效")
+        if not isinstance(entry["level"], list) or not entry["level"]:
+            raise ValidationError(f"知识卡 {entry_id} 缺少 level 列表")
+        unknown_levels = sorted(set(entry["level"]) - allowed_levels)
+        if unknown_levels:
+            raise ValidationError(f"知识卡 {entry_id} 使用未知等级：{unknown_levels}")
+        if not isinstance(entry["tool_ids"], list) or not entry["tool_ids"]:
+            raise ValidationError(f"知识卡 {entry_id} 缺少 tool_ids")
+        unknown_tools = sorted(set(entry["tool_ids"]) - tool_ids)
+        if unknown_tools:
+            raise ValidationError(f"知识卡 {entry_id} 引用了未知工具：{unknown_tools}")
+        if not isinstance(entry["source_urls"], list) or not entry["source_urls"]:
+            raise ValidationError(f"知识卡 {entry_id} 缺少官方来源")
+        invalid_urls = [url for url in entry["source_urls"] if not url.startswith("https://")]
+        if invalid_urls:
+            raise ValidationError(f"知识卡 {entry_id} 含非 HTTPS 来源：{invalid_urls}")
+
+        guide_path = (REPOSITORY_ROOT / entry["guide"]).resolve()
+        try:
+            guide_path.relative_to(REPOSITORY_ROOT.resolve())
+        except ValueError as error:
+            raise ValidationError(f"知识卡 {entry_id} 的 guide 超出仓库范围") from error
+        if not guide_path.is_file():
+            raise ValidationError(f"知识卡 {entry_id} 的 guide 不存在：{entry['guide']}")
+        if f"`{entry_id}`" not in human_text:
+            raise ValidationError(f"人读知识库缺少知识卡：{entry_id}")
+
+        knowledge_ids.add(entry_id)
+        questions.add(entry["question"])
+
+    query_script = REPOSITORY_ROOT / "scripts" / "query_knowledge_base.py"
+    if not query_script.is_file():
+        raise ValidationError("缺少知识库查询脚本 scripts/query_knowledge_base.py")
     return len(entries)
 
 
@@ -507,6 +606,7 @@ def validate_skill_package() -> None:
         skill_dir / "references" / "workflow-stages.md",
         skill_dir / "references" / "research-tracks.md",
         skill_dir / "references" / "evidence-and-ai.md",
+        skill_dir / "references" / "methods-and-tools.md",
         skill_dir / "references" / "template-routing.md",
     ]
     missing_files = [
@@ -520,6 +620,7 @@ def validate_skill_package() -> None:
         "references/workflow-stages.md",
         "references/research-tracks.md",
         "references/evidence-and-ai.md",
+        "references/methods-and-tools.md",
         "references/template-routing.md",
         "assets/core-templates.md",
     ]
@@ -558,12 +659,13 @@ def main() -> None:
     )
     validate_index(REPOSITORY_ROOT / "docs" / "README.md", docs, "docs/README.md ")
     validate_index(REPOSITORY_ROOT / "templates" / "README.md", templates, "templates/README.md ")
-    tool_count = validate_tools_catalog()
+    tool_count, tool_ids = validate_tools_catalog()
+    knowledge_count = validate_knowledge_base(tool_ids)
     validate_skill_package()
 
     print(f"PASS：已检查 {len(markdown_files)} 个 Markdown 文件。")
     print(
-        f"相对链接与锚点、代码块、README 约束、首次使用反馈、演练分层、L0 Git 边界、零基础术语、可安装 Skill、GitHub 资源进入成本、两类索引和 {tool_count} 个工具条目均通过。"
+        f"相对链接与锚点、代码块、README 约束、首次使用反馈、演练分层、L0 Git 边界、零基础术语、{knowledge_count} 张方法知识卡、可安装 Skill、GitHub 资源进入成本、两类索引和 {tool_count} 个工具条目均通过。"
     )
 
 

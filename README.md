@@ -2,7 +2,7 @@
 
 > 面向零基础学习者的 AI / 计算机科研入门库：从第一次可检查运行，到论文复现、实验改进与研究表达。
 
-[开始默认路径](#第一次来默认从这里开始) · [按当前状态选择](#30-秒选择入口) · [查看全部指南](docs/README.md) · [浏览资源目录](docs/GITHUB_RESOURCE_CATALOG.md)
+[开始默认路径](#第一次来默认从这里开始) · [按当前状态选择](#30-秒选择入口) · [查询方法与工具](docs/BEGINNER_METHODS_AND_TOOLS_KB.md) · [查看全部指南](docs/README.md) · [浏览资源目录](docs/GITHUB_RESOURCE_CATALOG.md)
 
 **Codex Skill**：可安装目录位于 [`skills/ai-research-workflow/`](skills/ai-research-workflow/SKILL.md)。将该目录复制到个人 Codex Skills 目录后，使用 `$ai-research-workflow`，可让 Codex 根据当前材料选择研究阶段、生成最小产物并给出可验证的下一步。
 
@@ -427,11 +427,11 @@ research-project/
 
 ## 工具与入口导航
 
-按当前任务选择一个主入口，完成表中产物后再决定是否扩展。更多课程和项目见[GitHub 科研入门资源目录](docs/GITHUB_RESOURCE_CATALOG.md)；该目录按阶段和用途组织，并在点开前说明主要语言、最低前置、账号或算力门槛，不按 Star 排名。
+按当前任务选择一个主入口，完成表中产物后再决定是否扩展。不确定该采用什么方法或何时引入工具时，先查[零基础 AI 科研方法与工具知识库](docs/BEGINNER_METHODS_AND_TOOLS_KB.md)；需要浏览完整外部项目时再进入[GitHub 科研入门资源目录](docs/GITHUB_RESOURCE_CATALOG.md)。两者都按任务与进入成本组织，不按 Star 排名。
 
 需要由 AI 按研究阶段持续协作时，使用仓库内的 [`ai-research-workflow` Skill](skills/ai-research-workflow/SKILL.md)。它采用七阶段通用流程，并按需加载 LLM 评测、RAG、Agent/MCP 和多模态路线；首次记录可直接复用[六张轻量核心模板](skills/ai-research-workflow/assets/core-templates.md)。
 
-**最常用的六个入口**
+**最常用的入口**
 
 - **第一次配置环境**：[L0 工具链最小起步指南](docs/L0_TOOLCHAIN_START.md)
 - **理解第一次训练、验证与测试**：[第一个机器学习闭环](docs/ML_FIRST_LOOP.md)
@@ -439,6 +439,7 @@ research-project/
 - **开始复现已有论文代码**：[真实代码库最小接入](docs/ADOPT_WORKFLOW_IN_EXISTING_PROJECT.md)
 - **遇到报错或重复失败**：[调试与求助卡](templates/10-debug-help-request.md)
 - **整理课程与外部项目**：[GitHub 科研入门资源目录](docs/GITHUB_RESOURCE_CATALOG.md)
+- **按当前问题选择方法和工具**：[零基础方法与工具知识库](docs/BEGINNER_METHODS_AND_TOOLS_KB.md)
 
 **基础与学习**
 

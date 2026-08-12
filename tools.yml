@@ -1,7 +1,7 @@
 # AI 科研工具库的机器可读目录。
 # README.md 面向人类阅读；本文件便于后续生成网页、筛选器或统计页面。
-version: 7
-last_verified: "2026-08-11"
+version: 8
+last_verified: "2026-08-12"
 tools:
   - id: ars
     name: Academic Research Skills
@@ -638,3 +638,143 @@ tools:
     summary: 提供 LLM 与 LLM 系统的评估框架和基准注册表。
     recommended_output: 建立任务特定的测试集、评分规则、基线、运行配置和误差分类。
     caveat: 评估数据和逻辑必须具备合法使用权，指标设计不能脱离实际任务目标。
+
+  - id: github-skills-intro
+    name: Introduction to GitHub
+    name_zh: GitHub 官方入门练习
+    stage: [Git, GitHub, 分支, 提交, Pull Request]
+    level: [L0]
+    type: github-course
+    url: https://github.com/skills/introduction-to-github
+    summary: 在真实 GitHub 仓库中练习分支、提交、Pull Request 和合并。
+    recommended_output: 留下一个含 branch、commit、Pull Request 与 merge 历史的个人练习仓库。
+    caveat: 主要教授 GitHub 网页协作流程，不替代本地 Git、终端、远程所有权和团队权限训练。
+    primary_language: [en]
+    entry_requirement: 需要 GitHub 账号和浏览器，不要求预先安装 Git；练习会复制模板仓库并使用 GitHub Actions，私有仓库需核对 Actions 配额。
+
+  - id: uv
+    name: uv
+    name_zh: Python 项目与依赖管理器
+    stage: [Python 环境, 依赖管理, 锁定, 跨平台复现]
+    level: [L0, L1, L2]
+    type: github-tool
+    url: https://github.com/astral-sh/uv
+    summary: 管理 Python 版本、虚拟环境、项目依赖、锁文件、脚本和命令行工具。
+    recommended_output: 保存项目声明、锁文件、实际解释器和一次在新环境中的同步与运行记录。
+    caveat: 已有稳定项目不应只因流行度迁移；锁文件不能自动固定数据、硬件、随机性和外部 API。
+    primary_language: [en]
+    entry_requirement: 支持 Windows、macOS 与 Linux；需安装 uv 可执行文件并理解项目目录，安装器可能修改 PATH，使用前应阅读当前官方安装说明。
+
+  - id: jupyterlab
+    name: JupyterLab
+    name_zh: 交互式计算与 Notebook 环境
+    stage: [Notebook, 数据探索, 原型, 教学]
+    level: [L0, L1, L2]
+    type: github-tool
+    url: https://github.com/jupyterlab/jupyterlab
+    summary: 在浏览器工作区中组合代码、文字、图表、文件和交互式计算。
+    recommended_output: 留下能在重启内核后从头执行的 Notebook、环境记录和导出的关键结果。
+    caveat: 单元格隐藏状态、执行顺序、未锁定依赖和大体积输出会破坏复现；成熟流程应把稳定逻辑下沉到脚本或模块。
+    primary_language: [en]
+    entry_requirement: 需 Python 环境并安装 JupyterLab；本地使用不要求 GPU，云端 Notebook 的账号、运行时和保留策略需另行核对。
+
+  - id: scikit-learn-mooc
+    name: Machine Learning in Python with scikit-learn
+    name_zh: scikit-learn 官方协作课程
+    stage: [机器学习基础, 数据探索, 预处理, 交叉验证, 模型评估]
+    level: [L0, L1]
+    type: github-course
+    url: https://github.com/INRIA/scikit-learn-mooc
+    summary: 以可执行 Notebook 讲解表格数据、预测建模 Pipeline、交叉验证和模型评价。
+    recommended_output: 完成一个含数据审查、预处理、baseline、交叉验证和误差解释的 Notebook。
+    caveat: 课程以经典机器学习和表格任务为主；跑通练习不等于论文复现或真实场景泛化。
+    primary_language: [en]
+    entry_requirement: 静态课程可直接在线阅读，运行练习需基础 Python 与 Notebook；可使用在线环境或按项目说明在本地安装依赖。
+
+  - id: the-turing-way
+    name: The Turing Way
+    name_zh: 可复现、伦理与协作式数据科研手册
+    stage: [项目设计, 可复现研究, 数据管理, 协作, 沟通, 伦理]
+    level: [L0, L1, L2, L3]
+    type: github-handbook
+    url: https://github.com/the-turing-way/the-turing-way
+    summary: 提供可复现研究、项目设计、沟通、协作和伦理研究的开放手册。
+    recommended_output: 按当前项目缺口形成数据、环境、版本、协作、伦理或发布检查，并链接实际证据。
+    caveat: 章节覆盖范围很广，应按问题读取；开放科学建议仍需服从数据权利、机构政策和研究对象同意。
+    primary_language: [multilingual]
+    entry_requirement: 在线手册可直接阅读并含中文 README；多数章节不要求安装工具，具体实践会分别涉及 Git、环境、数据管理或协作平台。
+
+  - id: openalex
+    name: OpenAlex
+    name_zh: 开放学术元数据与引用图谱
+    stage: [论文发现, 书目核验, 引用追踪, 科研元数据自动化]
+    level: [L1, L2, L3]
+    type: web-and-api
+    url: https://openalex.org/
+    research_role: [discovery, bibliographic-record, citation-tracing, version-history]
+    summary: 提供 works、authors、sources、institutions、topics 等开放学术实体和 API 查询。
+    recommended_output: 保存查询条件、OpenAlex/DOI 等稳定标识、候选关系和回到原文或正式书目的核验记录。
+    caveat: 覆盖、引用、作者消歧、版本和撤稿状态可能存在误差，不能作为关键书目与论文内容的唯一来源。
+
+  - id: mlflow
+    name: MLflow
+    name_zh: 实验追踪与 AI 工程平台
+    stage: [实验追踪, 参数指标, Artifact, 模型与 Agent 评估]
+    level: [L2, L3]
+    type: github-platform
+    url: https://github.com/mlflow/mlflow
+    summary: 记录和搜索 run 的参数、指标、代码版本、数据输入与输出 artifact，并支持模型和 AI 应用工作流。
+    recommended_output: 让每个图表与结论能反向定位 run，再由 run 定位代码、配置、数据、日志和 artifact。
+    caveat: 追踪平台不会自动保证实验公平、数据合规、科学解释或备份；首次小实验无需提前部署服务。
+    primary_language: [en]
+    entry_requirement: 本地追踪可从 Python 与本地存储开始；多人服务需数据库、artifact 存储、权限和运维，使用云端集成前核对成本与数据边界。
+
+  - id: inspect-ai
+    name: Inspect AI
+    name_zh: LLM 评测框架
+    stage: [LLM 评估, Agent 评估, 安全评估, 评测日志]
+    level: [L2, L3]
+    type: github-framework
+    url: https://github.com/UKGovernmentBEIS/inspect_ai
+    summary: 以 dataset、solver、scorer 和可审计日志组织 LLM 与 Agent 评测。
+    recommended_output: 固定任务、模型/API、prompt、工具权限和评分器，保存原始样本、轨迹、评分与运行日志。
+    caveat: 框架和预置 eval 不能证明模型安全；评测可能涉及模型费用、危险能力、敏感样本与 sandbox 权限。
+    primary_language: [en]
+    entry_requirement: 需 Python、模型或 API 访问和相应凭据；运行现成 eval 前仍需阅读任务、数据、评分和安全要求。
+
+  - id: lm-evaluation-harness
+    name: Language Model Evaluation Harness
+    name_zh: 语言模型基准评测框架
+    stage: [LLM 评估, 基准复现, 自定义任务, 多后端比较]
+    level: [L2, L3]
+    type: github-framework
+    url: https://github.com/EleutherAI/lm-evaluation-harness
+    summary: 在本地模型、推理服务和部分 API 后端上运行标准或 YAML 自定义语言模型任务。
+    recommended_output: 保存框架 commit、任务 YAML、模型参数、后端、样例输出、完整分数和错误分析。
+    caveat: 公共 benchmark 不等于真实任务；不同后端、提示模板、解析与版本可能改变结果，必须先做小样本核验。
+    primary_language: [en]
+    entry_requirement: 需 Python；不同后端另需 Torch、GPU、推理服务或 API 凭据，基础包不再默认安装全部模型后端。
+
+  - id: ragchecker
+    name: RAGChecker
+    name_zh: RAG 检索与生成细粒度诊断
+    stage: [RAG 评估, 检索诊断, 生成诊断, 错误分析]
+    level: [L2, L3]
+    type: github-framework
+    url: https://github.com/amazon-science/RAGChecker
+    summary: 使用 claim-level 指标分别诊断 RAG 的检索器、生成器和整体表现。
+    recommended_output: 保存冻结问答集、语料与配置、模块级指标、代表性失败样例和人工核验结果。
+    caveat: 自动指标依赖模型和数据假设，需要用任务人工小集校准；不能用一个综合分数替代失败定位。
+    primary_language: [multilingual]
+    entry_requirement: 提供英文与中文教程；运行需 Python、RAG 结果数据及框架支持的模型/凭据，开始前应先建立可解释检索 baseline。
+
+  - id: zenodo
+    name: Zenodo
+    name_zh: 科研成果归档与 DOI 服务
+    stage: [成果归档, 软件发布, 数据发布, DOI, 引用]
+    level: [L2, L3]
+    type: web-service
+    url: https://zenodo.org/
+    summary: 归档研究软件、数据和其他成果，并可与 GitHub release 集成生成可引用记录和 DOI。
+    recommended_output: 形成冻结 release、核验后的元数据、版本 DOI、许可证与引用说明。
+    caveat: 上传前必须确认公开权限、第三方材料、许可证和个人信息；归档后的正式记录不适合用覆盖方式修正历史。
